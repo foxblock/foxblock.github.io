@@ -1,7 +1,7 @@
 [
 {
 		"title": "Digital Garden Test",
-		"date":"Wed Apr 23 2025 11:29:52 GMT+0000 (Coordinated Universal Time)",
+		"date":"Wed Apr 23 2025 11:34:05 GMT+0000 (Coordinated Universal Time)",
 		"url":"/",
 		"content": "Heading 2\nTest 1234\nint main(int argc, char **argv) {\n\tprintf(&quot;Hello World!\\n&quot;);\n\treturn 0;\n}\n\n#tagtest #another\nHeading 3\n\n[!WARNING] Title\nfoobar\n\nLink: <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/writeups/communication-is-key/\">Communication is Key</a>\nBroken Link: <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Management and Vision</a>\nAnother Heading\nTest foobar2",
 		"tags": ["tagtest", "another", "note","gardenEntry"]
@@ -9,7 +9,7 @@
 
 {
 		"title": "Communication is Key",
-		"date":"Wed Apr 23 2025 11:29:52 GMT+0000 (Coordinated Universal Time)",
+		"date":"Wed Apr 23 2025 11:34:05 GMT+0000 (Coordinated Universal Time)",
 		"url":"/writeups/communication-is-key/",
 		"content": "Todo22",
 		"tags": [ "note","tagtest"]
