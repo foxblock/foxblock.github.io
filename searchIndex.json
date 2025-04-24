@@ -1,7 +1,7 @@
 [
 {
 		"title": "Home",
-		"date":"Thu Apr 24 2025 21:46:16 GMT+0000 (Coordinated Universal Time)",
+		"date":"Thu Apr 24 2025 21:48:45 GMT+0000 (Coordinated Universal Time)",
 		"url":"/",
 		"content": "Heading 2\nTest 1234\nint main(int argc, char **argv) {\n\tprintf(&quot;Hello World!\\n&quot;);\n\treturn 0;\n}\n\n#tagtest #another\nHeading 3\n\n[!WARNING] Title\nfoobar\n\nLink: <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/writeups/communication-is-key/\">Communication is Key</a>\nBroken Link: <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Management and Vision</a>\nAnother Heading\nTest foobar2",
 		"tags": ["tagtest", "another", "note","gardenEntry"]
@@ -9,15 +9,15 @@
 
 {
 		"title": "Project Showcase",
-		"date":"Thu Apr 24 2025 21:46:16 GMT+0000 (Coordinated Universal Time)",
+		"date":"Thu Apr 24 2025 21:48:45 GMT+0000 (Coordinated Universal Time)",
 		"url":"/projects/",
-		"content": "Programming\n\nGreyout\n\nIMG\nWandor World Editor\n\nCrank-it (Playdate)\n\nIMG\nPND Tools\n\nNetwork Visualizer\n\nElectronics\n\nIMG\nSoundbox\n\nGoodnightlamp\n\nWoodworking and Jewlery\n\nIMG\n\nIMG\nHolz-Regal\n\nBank\n\nOhrringe Merle\n\nKette Merle\n\nRing Merle",
+		"content": "Programming\n\nIMG\nWandor World Editor\n\nGreyout\n\nIMG\nPND Tools\n\nCrank-it (Playdate)\n\nNetwork Visualizer\n\nElectronics\n\nIMG\nSoundbox\n\nGoodnightlamp\n\nWoodworking and Jewlery\n\nIMG\nHolz-Regal\n\nBank\n\nOhrringe Merle\n\nKette Merle\n\nRing Merle",
 		"tags": [ "note"]
 },
 
 {
 		"title": "Communication is Key",
-		"date":"Thu Apr 24 2025 21:46:16 GMT+0000 (Coordinated Universal Time)",
+		"date":"Thu Apr 24 2025 21:48:45 GMT+0000 (Coordinated Universal Time)",
 		"url":"/writeups/communication-is-key/",
 		"content": "Todo22",
 		"tags": [ "note","tagtest"]
