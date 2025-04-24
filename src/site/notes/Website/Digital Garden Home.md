@@ -1,23 +1,10 @@
 ---
-{"dg-publish":true,"permalink":"/website/digital-garden-home/","title":"Home","tags":["gardenEntry"],"created":"2025-04-20T22:10:26.467+02:00","updated":"2025-04-24T23:00:43.955+02:00"}
+{"dg-publish":true,"permalink":"/website/digital-garden-home/","title":"janek.ing Home","tags":["gardenEntry"],"dgShowFileTree":"false","created":"2025-04-20T22:10:26.467+02:00","updated":"2025-04-25T00:09:10.459+02:00"}
 ---
 
-## Heading 2
-Test 1234
-```C
-int main(int argc, char **argv) {
-	printf("Hello World!\n");
-	return 0;
-}
-```
-#tagtest #another
-### Heading 3
-> [!WARNING] Title
-> foobar
+# Hi!
+I am Janek, an engineer from Cologne, Germany.
 
-Link: [[Writeups/Communication is Key\|Communication is Key]]
+This site contains some of my past and current projects, as well as my ["digital garden"](https://maggieappleton.com/garden-history/). It serves dual-purpose as a tool for myself to do some retrospective on projects and collect and reflect on topics I am learning.
 
-Broken Link: [[Writeups/Management and Vision\|Management and Vision]]
-
-## Another Heading
-Test foobar2
+I hope it is useful to you as well, be it as a source of knowledge or inspiration.
