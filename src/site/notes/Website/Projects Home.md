@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-permalink":"projects","permalink":"/projects/","hide":true,"created":"2025-04-24T22:32:44.563+02:00","updated":"2025-04-24T23:12:32.148+02:00"}
+{"dg-publish":true,"dg-permalink":"projects","permalink":"/projects/","hide":true,"dgShowInlineTitle":"false","created":"2025-04-24T22:32:44.563+02:00","updated":"2025-04-24T23:37:23.030+02:00"}
 ---
 
 ## Programming
