@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/website/digital-garden-home/","title":"janek.ing Home","hide":true,"tags":["gardenEntry"],"dgShowFileTree":"false","dgShowToc":"false","created":"2025-04-20T22:10:26.467+02:00","updated":"2025-04-25T00:23:26.651+02:00"}
+{"dg-publish":true,"dg-path":"Digital Garden Home.md","permalink":"/digital-garden-home/","title":"janek.ing Home","hide":true,"tags":["gardenEntry"],"dgShowFileTree":"false","dgShowToc":"false","created":"2025-04-20T22:10:26.467+02:00","updated":"2025-04-25T00:23:26.651+02:00"}
 ---
 
 # Hi!
