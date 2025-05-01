@@ -1,15 +1,15 @@
 [
 {
 		"title": "janek.ing - Home",
-		"date":"Thu May 01 2025 16:50:23 GMT+0000 (Coordinated Universal Time)",
+		"date":"Thu May 01 2025 16:52:06 GMT+0000 (Coordinated Universal Time)",
 		"url":"/",
 		"content": "Hi!\nI am Janek, an engineer from Cologne, Germany.\nThis site contains some of my past and current projects, as well as my &quot;digital garden&quot;. It serves dual-purpose as a tool for myself to do some retrospective on projects and collect and reflect on topics I am learning.\nI hope it is useful to you as well, be it as a source of knowledge or inspiration",
 		"tags": [ "note","gardenEntry"]
 },
 
 {
-		"title": "janek.ing - Digital Garden",
-		"date":"Thu May 01 2025 16:50:23 GMT+0000 (Coordinated Universal Time)",
+		"title": "Digital Garden",
+		"date":"Thu May 01 2025 16:52:06 GMT+0000 (Coordinated Universal Time)",
 		"url":"/garden/",
 		"content": "wip",
 		"tags": [ "note"]
@@ -17,7 +17,7 @@
 
 {
 		"title": "janek.ing - Project Showcase",
-		"date":"Thu May 01 2025 16:50:23 GMT+0000 (Coordinated Universal Time)",
+		"date":"Thu May 01 2025 16:52:06 GMT+0000 (Coordinated Universal Time)",
 		"url":"/projects/",
 		"content": "wip",
 		"tags": [ "note"]
@@ -25,7 +25,7 @@
 
 {
 		"title": "Communication is Key",
-		"date":"Thu May 01 2025 16:50:23 GMT+0000 (Coordinated Universal Time)",
+		"date":"Thu May 01 2025 16:52:06 GMT+0000 (Coordinated Universal Time)",
 		"url":"/work/communication-is-key/",
 		"content": "In my experience communication can make up 80% of your job. Any job. Even as a programmer this holds true. What I mean by that is not that you spend up to 80% of your time communicating, but that by not communicating or doing it badly, you give up 80% of your efficiency.\nLet me illustrate with a few examples:\n\nwhen you write tickets in Jira, you communicate your intent of a feature to the developers\nwhen you write code, you implicitly communicate your intent of how to implement a feature to the computer, but also other developers and yourself in the future\nwhen you document code, you explicitly communicate details about the current state of the code to other developers and yourself in the future\nwhen you design an UI, you communicate indirectly to your users about the job to be done\nwhen you design a physical product, you do the same\nwhen you write a wiki page, it's a form of communication to a person in the future\nThis is all on top of sending e-mails, talking in meetings, etc.\n\nBest practices\nThe right channel\nEvery medium has its pros and cons.\n\nE-mail is good for asynchronous communication and also for leaving a searchable paper trail.\nA message on teams is similar but worse, because the search function is worse than in many e-mail clients.\nA discord message is even worse, since message boards there are a black void out of which no information may be extracted.\nTickets can be assigned to persons and have a clear state (which communicates intent), but quickly lose value over time and should not store critical information (since they should be discarded after some time)\nThat means if your message is only valid in the moment (e.g. asking someone for help) Discord or Teams is fine, but if you need to rely on it later on (e.g. asking for a quote), it's probably best to chose a different medium.\nOTHER IDEA: consider your message across the following domains: importance over time, recipients (is it important for just one or multiple people), content-length, possible ambiguity/necessary precision,...\nEach channel nowadays allows for attaching not only text, but images and video. Images ans video are effective when communicating visual ideas (UI designs, bugs, etc.), but are generally not as searchable as text.\n\nUsing too many different channels can also be a challenge. Where did I send this message again, via mail or teams, did I put the data on Sharepoint, a local drive or Confluence, ...? Many of these channels overlap in their functionality. I have been on teams where two local drives, a Sharepoint, a Wiki and multiple Confluence spaces were in use at the same time. Until we get the magical search-everything-fast app, this is a huge pain.\nIt's a good idea to have (and to communicate) a clear and unique purpose for each of the tools and get rid of duplicate channels that do not.\nContent-length\nAs short as possible, as long as necessary.\nAssorted tips\n\ncreating a folder structure for documents a-priori is hard. In my experience it works best to let it form organically and have one designated person clean-up and restore order from time to time. If you have done multiple similar projects, a general pattern may be extracted and used as a starting template. This applies to local/cloud drives as well as Wikis.\nWiki and Confluence pages are most useful to the person that wrote them. Making them generally accessible and useful is hard and requires effort. If something is useful for multiple people, have them all work on it (not one designated person for documentation). Don't put ephemeral(?) information in there, since keeping it up to date will take a lot of effort. Wikis are good for stuff that is mostly set in stone, a place for permanent documentation.\nKeep communication close to the source of information, close together. Code &gt; Comments &gt; Wiki\n\nTeam size\nThough admittedly the smaller the team is, the easier communicating becomes.\nTODO\nHeading 2\nTest 1234\nint main(int argc, char **argv) {\n\tprintf(&quot;Hello World!\\n&quot;);\n\treturn 0;\n}\n\n#tagtest #another\nHeading 3\n\n[!WARNING] Title\nfoobar\n\nLink: <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/projects/\">Projects Home</a>\nBroken Link: <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Management and Vision</a>\nAnother Heading\nTest foobar2",
 		"tags": ["tagtest", "another", "note","opinion"]
