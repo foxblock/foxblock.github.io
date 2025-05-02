@@ -29,8 +29,15 @@
         // but are not correctly labeled as "legacy" in the community-css-themes.json, 
         // so the code in populateDropdown does not catch this and tries to load the wrong file
         // (some examples: Moonlight, Panic Mode, etc.)
-        const response = await fetch(selectedUrl, { method: 'HEAD' });
-        if (!response.ok) {
+        try {
+            const response = await fetch(selectedUrl, { method: 'HEAD' });
+            // when the theme file is not found the server generates a 404, which
+            // cannot be fetched due to CORS, so we don't need to check the response code
+            // but just in case this changes some day, we do it anyway
+            if (!response.ok) {
+                throw new Error();
+            }
+        } catch (error) {
             selectedUrl = selectedUrl.replace('theme.css', 'obsidian.css');
         }
         setStyle(selectedUrl);
@@ -52,7 +59,7 @@
         // see: https://medium.com/@twistblogg/how-to-use-github-for-hosting-css-javascript-and-other-files-311413924e69
         themes.forEach(theme => {
             const option = document.createElement('option');
-            option.value = `https://raw.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
+            option.value = `https://rawcdn.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
             option.textContent = theme.name;
             dropdown.appendChild(option);
         });
