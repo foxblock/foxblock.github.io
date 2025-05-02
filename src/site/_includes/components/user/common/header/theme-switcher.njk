@@ -40,7 +40,7 @@
         // using https://raw.githack.com/ to convert raw github files to proper served css files
         themes.forEach(theme => {
             const option = document.createElement('option');
-            option.value = `https://raw.githack.com/${x.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
+            option.value = `https://raw.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
             option.textContent = theme.name;
             dropdown.appendChild(option);
         });
@@ -51,16 +51,12 @@
     }
     // Get json file contents from the web
     async function fetchThemes(url, updateCall) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch ' + url + ' - Network response was not ok: ' + response.statusText);
-            }
-            const data = await response.json();
-            updateCall(data);
-        } catch (error) {
-            console.error('Failed to fetch ' + url + ' - There was a problem with the fetch operation:', error);
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Failed to fetch ' + url + ' - Network response was not ok: ' + response.statusText);
         }
+        const data = await response.json();
+        updateCall(data);
     }
 
     const themeLink = findThemeLink();
