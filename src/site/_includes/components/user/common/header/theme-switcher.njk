@@ -32,7 +32,7 @@
     function dropdownChange(event) {
         const selectedValue = event.target.value;
         // using https://raw.githack.com/ to convert raw github files to proper served css files
-        selectedValue.replace('raw.githubusercontent.com', 'rawcdn.githack.com');
+        selectedValue = selectedValue.replace('raw.githubusercontent.com', 'rawcdn.githack.com');
         setStyle(selectedValue);
     }
 
