@@ -22,7 +22,7 @@
 
         themeLink.href = themeUrl;
     }
-    function dropdownChange(event) {
+    async function dropdownChange(event) {
         let selectedUrl = event.target.value;
         // WORKAROUND: Check if theme file exists
         // This is necessary, because some themes only supply an obsidian.css and not a theme.css,
