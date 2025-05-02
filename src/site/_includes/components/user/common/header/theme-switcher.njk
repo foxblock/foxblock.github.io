@@ -1,5 +1,5 @@
-<label for="themeSwitcher">Choose theme:</label>
-<select id="themeSwitcher"></select>
+<label for="themeSwitcher">Theme:</label>
+<select id="themeSwitcher"><option value="">Loading...</option></select>
 
 <script type="text/javascript">
     // Find the tag linking the css theme
@@ -15,19 +15,6 @@
         }
 
         return null;
-    }
-    // Get json file contents from the web
-    async function fetchJson(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch ' + url + ' - Network response was not ok: ' + response.statusText);
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Failed to fetch ' + url + ' - There was a problem with the fetch operation:', error);
-        }
     }
     function setStyle(themeUrl) {
         if (!themeLink)
@@ -47,6 +34,7 @@
             return;
         }
 
+        // remove previous option elements
         dropdown.innerHTML = '';
 
         // using https://raw.githack.com/ to convert raw github files to proper served css files
@@ -61,6 +49,19 @@
         dropdown.removeEventListener('change', dropdownChange);
         dropdown.addEventListener('change', dropdownChange);
     }
+    // Get json file contents from the web
+    async function fetchThemes(url, updateCall) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Failed to fetch ' + url + ' - Network response was not ok: ' + response.statusText);
+            }
+            const data = await response.json();
+            updateCall(data);
+        } catch (error) {
+            console.error('Failed to fetch ' + url + ' - There was a problem with the fetch operation:', error);
+        }
+    }
 
     const themeLink = findThemeLink();
     if (!themeLink)
@@ -68,6 +69,5 @@
         console.error("Theme switcher could not find link-tag with theme file and will not work. Maybe something changed in the template? (theme-switcher.njk is looking for a link tag with a href value containing '_theme.')");
     }
 
-    const themes = fetchJson("https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-css-themes.json");
-    populateDropdown(themes);
+    fetchThemes("https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-css-themes.json", populateDropdown);
 </script>
