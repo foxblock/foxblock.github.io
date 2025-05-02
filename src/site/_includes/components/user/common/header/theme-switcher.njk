@@ -41,7 +41,7 @@
     }
     function populateDropdown(themes) {
         const dropdown = document.getElementById('themeSwitcher');
-        if (!dropdown || !themeList)
+        if (!dropdown)
         {
             console.error("Theme switcher could not find dropdown element to fill with themes. Should be at the top of theme-switcher.njk...");
             return;
