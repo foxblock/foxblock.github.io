@@ -59,7 +59,7 @@
         // see: https://medium.com/@twistblogg/how-to-use-github-for-hosting-css-javascript-and-other-files-311413924e69
         themes.forEach(theme => {
             const option = document.createElement('option');
-            option.value = `https://raw.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
+            option.value = `https://rawcdn.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
             option.textContent = theme.name;
             dropdown.appendChild(option);
         });
@@ -75,7 +75,7 @@
             throw new Error('Failed to fetch ' + url + ' - Network response was not ok: ' + response.statusText);
         }
         const data = await response.json();
-        data.sort((a,b) => a.name - b.name);
+        data.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
         updateCall(data);
     }
 
