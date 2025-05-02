@@ -23,8 +23,17 @@
         themeLink.href = themeUrl;
     }
     function dropdownChange(event) {
-        const selectedValue = event.target.value;
-        setStyle(selectedValue);
+        let selectedUrl = event.target.value;
+        // WORKAROUND: Check if theme file exists
+        // This is necessary, because some themes only supply an obsidian.css and not a theme.css,
+        // but are not correctly labeled as "legacy" in the community-css-themes.json, 
+        // so the code in populateDropdown does not catch this and tries to load the wrong file
+        // (some examples: Moonlight, Panic Mode, etc.)
+        const response = await fetch(selectedUrl, { method: 'HEAD' });
+        if (!response.ok) {
+            selectedUrl = selectedUrl.replace('theme.css', 'obsidian.css');
+        }
+        setStyle(selectedUrl);
     }
     function populateDropdown(themes) {
         const dropdown = document.getElementById('themeSwitcher');
@@ -38,9 +47,12 @@
         dropdown.innerHTML = '';
 
         // using https://raw.githack.com/ to convert raw github files to proper served css files
+        // this service serves files from raw.githubusercontent with proper content-type header
+        // if it goes down, you will need to look for a replacement (linking directly does not work!)
+        // see: https://medium.com/@twistblogg/how-to-use-github-for-hosting-css-javascript-and-other-files-311413924e69
         themes.forEach(theme => {
             const option = document.createElement('option');
-            option.value = `https://raw.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
+            option.value = `https://rawcdn.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
             option.textContent = theme.name;
             dropdown.appendChild(option);
         });
@@ -56,6 +68,7 @@
             throw new Error('Failed to fetch ' + url + ' - Network response was not ok: ' + response.statusText);
         }
         const data = await response.json();
+        data.sort((a,b) => a.name - b.name);
         updateCall(data);
     }
 
