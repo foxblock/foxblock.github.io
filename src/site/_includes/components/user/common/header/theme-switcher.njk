@@ -39,7 +39,7 @@
         const selectedValue = event.target.value;
         setStyle(selectedValue);
     }
-    function populateDropdown(options) {
+    function populateDropdown(themes) {
         const dropdown = document.getElementById('themeSwitcher');
         if (!dropdown || !themeList)
         {
@@ -49,8 +49,6 @@
 
         dropdown.innerHTML = '';
 
-        const themes = fetchJson("https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-css-themes.json");
-
         // using https://raw.githack.com/ to convert raw github files to proper served css files
         themes.forEach(theme => {
             const option = document.createElement('option');
@@ -58,7 +56,9 @@
             option.textContent = theme.name;
             dropdown.appendChild(option);
         });
-        
+
+        // remove previous listener if this is called multiple times (for example manually for testing)
+        dropdown.removeEventListener('change', dropdownChange);
         dropdown.addEventListener('change', dropdownChange);
     }
 
@@ -68,6 +68,6 @@
         console.error("Theme switcher could not find link-tag with theme file and will not work. Maybe something changed in the template? (theme-switcher.njk is looking for a link tag with a href value containing '_theme.')");
     }
 
-    // Calling it as a function, to not clutter global object list
-    populateDropdown(themeList);
+    const themes = fetchJson("https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-css-themes.json");
+    populateDropdown(themes);
 </script>
