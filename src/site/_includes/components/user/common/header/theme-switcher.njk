@@ -59,7 +59,7 @@
         // see: https://medium.com/@twistblogg/how-to-use-github-for-hosting-css-javascript-and-other-files-311413924e69
         themes.forEach(theme => {
             const option = document.createElement('option');
-            option.value = `https://rawcdn.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
+            option.value = `https://raw.githack.com/${theme.repo}/${theme.branch || "HEAD"}/${theme.legacy ? "obsidian.css" : "theme.css"}`;
             option.textContent = theme.name;
             dropdown.appendChild(option);
         });
