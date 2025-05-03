@@ -75,7 +75,7 @@
             throw new Error('Failed to fetch ' + url + ' - Network response was not ok: ' + response.statusText);
         }
         const data = await response.json();
-        data.sort((a,b) => a.localeCompare(b));
+        data.sort((a,b) => (a.name).localeCompare(b.name));
         updateCall(data);
     }
 
