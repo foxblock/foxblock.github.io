@@ -8,7 +8,7 @@
                 <div class="navbar-inner">
                     <a href="/" style="text-decoration: none;">
                         <!--<h1 style="margin: 15px !important;">{{meta.siteName}}</h1>-->
-                    <img src="/img/logo.svg" height="60px" style="margin: 12px 0; vertical-align: middle; border-radius: 0;">
+                        <img src="/img/logo.svg" style="height: 3.5em; margin: 12px 0; vertical-align: middle; border-radius: 0;">
                     </a>
                 </div>
                 <div class="navbar-inner">
@@ -29,11 +29,11 @@
         </div>
         <div x-show.important="!isDesktop" style="display: none;">
             <nav class="navbar">
-                <span style="font-size: 1.5rem; margin-right: 10px;" @click="showNavMobile=!showNavMobile"><i  icon-name="menu"></i></span>
+                <span style="font-size: 2rem; margin-right: 24px; color: var(--link-color)" @click="showNavMobile=!showNavMobile"><i icon-name="menu"></i></span>
                 <div class="navbar-inner" x-show.important="!showNavMobile" style="display: none;">
                     <a href="/" style="text-decoration: none;">
                         <!--<h1 style="margin: 15px !important;">{{meta.siteName}}</h1>-->
-                    <img src="/img/logo.svg" height="60px" style="margin: 12px 0; vertical-align: middle; border-radius: 0;">
+                        <img src="/img/logo.svg" style="height: 3.5em; margin: 12px 0; vertical-align: middle; border-radius: 0;">
                     </a>
                 </div>
                 {% if settings.dgEnableSearch === true%}
