@@ -1,7 +1,7 @@
 [
 {
 		"title": "janek.ing - Home",
-		"date":"Fri May 16 2025 12:51:38 GMT+0000 (Coordinated Universal Time)",
+		"date":"Fri May 16 2025 12:53:48 GMT+0000 (Coordinated Universal Time)",
 		"url":"/",
 		"content": "Hi!\nI am Janek, an engineer from Cologne, Germany.\nThis site contains some of mpy past and current projects, as well as my &quot;digital garden&quot;. It serves dual-purpose as a tool for myself to do some retrospective on projects and collect and reflect on topics I am learning.\nI hope it is useful to you as well, be it as a source of knowledge or inspiration",
 		"tags": [ "note","gardenEntry"]
@@ -9,7 +9,7 @@
 
 {
 		"title": "Digital Garden",
-		"date":"Fri May 16 2025 12:51:38 GMT+0000 (Coordinated Universal Time)",
+		"date":"Fri May 16 2025 12:53:48 GMT+0000 (Coordinated Universal Time)",
 		"url":"/garden/",
 		"content": "wip",
 		"tags": [ "note"]
@@ -17,7 +17,7 @@
 
 {
 		"title": "janek.ing - Project Showcase",
-		"date":"Fri May 16 2025 12:51:38 GMT+0000 (Coordinated Universal Time)",
+		"date":"Fri May 16 2025 12:53:48 GMT+0000 (Coordinated Universal Time)",
 		"url":"/projects/",
 		"content": "wip",
 		"tags": [ "note"]
@@ -25,7 +25,7 @@
 
 {
 		"title": "Communication is Key",
-		"date":"Fri May 16 2025 12:51:38 GMT+0000 (Coordinated Universal Time)",
+		"date":"Fri May 16 2025 12:53:48 GMT+0000 (Coordinated Universal Time)",
 		"url":"/work/communication-is-key/",
 		"content": "Heading 2\nTest 1234\nint main(int argc, char **argv) {\n\tprintf(&quot;Hello World!\\n&quot;);\n\treturn 0;\n}\n\n#tagtest #another\nHeading 3\n\n[!WARNING] Title\nfoobar\n\nLink: <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/projects/\">Projects Home</a>\nBroken Link: <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Management and Vision</a>\nAnother Heading\nTest foobar2",
 		"tags": ["tagtest", "another", "note","opinion"]
