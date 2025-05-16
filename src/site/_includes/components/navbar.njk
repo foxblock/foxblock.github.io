@@ -40,7 +40,7 @@
                     {% include "components/searchButton.njk" %}
                 {%endif%}
             </nav>
-            <div x-show="showNavMobile" @click="showFilesMobile = false" style="display:none;" class="fullpage-overlay"></div>
+            <div x-show="showNavMobile" @click="showNavMobile = false" style="display:none;" class="fullpage-overlay"></div>
             <nav class="filetree-sidebar" x-show.important="showNavMobile" style="display: none;">
                 <a href="/" style="text-decoration: none;">
                     <h2 style="margin: 15px !important;">About me</h2>
