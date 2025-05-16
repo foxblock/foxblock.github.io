@@ -36,21 +36,21 @@
                     <img src="/img/logo.svg" height="60px" style="margin: 12px 0; vertical-align: middle; border-radius: 0;">
                     </a>
                 </div>
-                <div x-show="showNavMobile" @click="showFilesMobile = false" style="display:none;" class="fullpage-overlay"></div>
-                <nav class="filetree-sidebar" x-show.important="showNavMobile" style="display: none;">
-                    <a href="/" style="text-decoration: none;">
-                        <h2 style="margin: 15px !important;">About me</h2>
-                    </a>
-                    <a href="/projects" style="text-decoration: none;">
-                        <h2 style="margin: 15px !important;">Projects</h2>
-                    </a>
-                    <a href="/garden" style="text-decoration: none;">
-                        <h2 style="margin: 15px !important;">Digital Garden</h2>
-                    </a>                    
-                </nav>
                 {% if settings.dgEnableSearch === true%}
                     {% include "components/searchButton.njk" %}
                 {%endif%}
+            </nav>
+            <div x-show="showNavMobile" @click="showFilesMobile = false" style="display:none;" class="fullpage-overlay"></div>
+            <nav class="filetree-sidebar" x-show.important="showNavMobile" style="display: none;">
+                <a href="/" style="text-decoration: none;">
+                    <h2 style="margin: 15px !important;">About me</h2>
+                </a>
+                <a href="/projects" style="text-decoration: none;">
+                    <h2 style="margin: 15px !important;">Projects</h2>
+                </a>
+                <a href="/garden" style="text-decoration: none;">
+                    <h2 style="margin: 15px !important;">Digital Garden</h2>
+                </a>                    
             </nav>
         </div>
     </div>
