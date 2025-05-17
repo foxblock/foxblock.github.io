@@ -1,7 +1,15 @@
 [
 {
+		"title": "Linux",
+		"date":"Sat May 17 2025 11:23:02 GMT+0000 (Coordinated Universal Time)",
+		"url":"/technik/linux/",
+		"content": "Folder structure\n/bin - essential binaries for all users (like cd, bash)\n/sbin - admin system binaries\n/boot - files for booting (like the kernel)\n/dev - device files (file-like access to (virtual) hardware)\n\t/dev/sda - first SATA drive\n\t/dev/random - random number generator\n\t/dev/null - no output, discard all input\n\t/dev/zero - infinite 0s\n/etc - configuration files for programs\n/home - home folders for each user (alias ~)\n\t/home/username - also contains userspace config files\n/lib - system library files (needed for programs in /bin)\n/lost+found - corrupted files after a crash will end here\n/media - removable media (USB-Drives, CDs, etc.)\n/mnt - manual mounting points (created by admins)\n/opt - optional software\n/proc - contains info about running processes\n/root - home folder for root user\n/tmp - temporary files (no guaranteed persistance)\n/usr - user binaries and program data\n\t/usr/bin - userspace /bin (contains most programs)\n\t/usr/sbin - admin programs\n\t/usr/lib - library files\n\t/usr/share - documentation\n\t/usr/include - include files for compiling\n/var - runtime information stored by programs (logs, cache)\n\t/var/log/wtmp - login history\n\nchmod\n\nNumber\nPermission\nSum\n\n0\n– – –\n0+0+0\n\n1\n– – x\n0+0+1\n\n2\n– w –\n0+2+0\n\n3\n– w x\n0+2+1\n\n4\nr – –\n4+0+0\n\n5\nr – x\n4+0+1\n\n6\nr w –\n4+2+0\n\n7\nr w x\n4+2+1\n\nThree groups:\n\nOne permission for the owner, the person who created the file or folder.\nOne permission for all of the people in the same primary group of the owner.\nOne permission for everyone else, which includes unauthenticated and anonymous users.\n\nTo change all directories under the current path to 755 (drwxr-xr-x), excluding dotfiles (recursive):\nfind . ! -path . ! -path '*/.*' -type d -exec chmod 755 '{}' \\;\n\nTo change all files in the current path to 644 (-rw-r--r--), excluding dotfiles (recursive):\nfind . ! -path '*/.*' -type f -exec chmod 644 '{}' \\;\n\nchown\nChown Command in Linux (File Ownership) | Linuxize\nchown -R USER:GROUP ./\n\nwhich\nFind out where binary lives\nwhich curl\n\nFind process\nps -aux | grep [keyword]\n\n-a: show all processes (including root, system, etc.), not just the ones belonging to current user\nu: show in &quot;user oriented format&quot;, i.e. table with more information\nx: show background processes and daemons without controlling terminal (tty)\n\nFind text in files\ngrep -HiRn [text] [files/folders]\n\n-H: print out filename of result\n-i: ignore case\n-R: recursive search in passed folders, follow symlinks\n-n: print line-number of result\n\nFind previous command\nhistory | grep [command]\n\nFind text or files starting with minus -\nPassing arguments which starts with a minus to a tool will be usually interpreted as an option. This creates a problem when you want to delete a filename or grep text starting with a minus.\nSolution: Pass -- to signify the end of the options.\nps --help | grep -- -a\nrm -- --somefile.txt\n\nSource: https://unix.stackexchange.com/a/87357\nCompress / extract zip files\ntar -czf [filename/folder]\ntar -xzf [filename]\n\n&quot;Compres Ze File&quot; / &quot;Xtract Ze File\n\n-c: compress\n-x: extract\n-z: use gzip\n-f: use file archive\n\nShow active network connections\nnetstat -tulpen\n\n-t: show TCP connections.\n-u: show UDP connections.\n-l: list only listening sockets.\n-p: show the PID and name of the program to which each socket belongs.\n-e: display extended information, including user ID and inode.\n-n: show numerical addresses instead of resolving hostnames.\n\nShow filesystems\ndf -Thal\n\n-T: show the file system type.\n-h: display sizes in a human-readable format (e.g., KB, MB, GB).\n-a: include all file systems, even those that are not currently mounted.\n-l: limit the output to local file systems only.\n\nShow disk usage\ndu -hs *\n\n-h: display sizes in a human-readable format (e.g., KB, MB, GB).\n-s: provide a summary of the disk usage for each specified file or directory, rather than listing the usage for each individual file within directories.\n\nShow files in current folder (detailed)\nls -lisah\n\n-l: Uses a long listing format, providing detailed information about each file and directory, such as permissions, number of links, owner, group, size, and modification date.\n-i: Shows the inode number for each file and directory.\n-s: Displays the size of each file in blocks.\n-a: Includes all files, even those that are hidden (files starting with a dot .).\n-h: Displays sizes in a human-readable format (e.g., KB, MB, GB).\n\nLogrotate\n\n[!WARNING]\nDoes not work properly on CentOS6, but seems to work as intended on Ubuntu 24.04\n\nhttps://linux.die.net/man/8/logrotate\nPut a file (usually named after the program/logfile you are rotating) in /etc/logrotate.d/. For example: /etc/logrotate.d/mosquitto\n/var/log/mosquitto/mosquitto.log {\nrotate 12\nmonthly\ncompress\ndelaycompress\nsize 100k\nnocreate\nmissingok\npostrotate\nif invoke-rc.d mosquitto status &gt; /dev/null 2&gt;&amp;1; then \\\ninvoke-rc.d mosquitto reload &gt; /dev/null 2&gt;&amp;1; \\\nfi;\nendscript\n}\n\nrotate 12: keeps at most 12 versions of the file specified at the very beginning\nmonthly: rotate on first run of the month (i.e. keep one file per month), can also be daily, weekly or yearly\ncompress, delaycompress: compress rotated files after 2 rotations (i.e. keep file for current and last month uncompressed)\nsize: rotate only if size is bigger than specified limit (100k = 100KiB, 100M = 100MiB, 100G = 100Gib)\nnocreate: logrotate does not create the new log file after rotating (the original program has to do it)\nmissingok: don't raise an error if file is missing\npostrotate: what to do after rotation - we just kept the script, which was generated by mosquitto on install",
+		"tags": [ "note","knowledge-base"]
+},
+
+{
 		"title": "janek.ing - Home",
-		"date":"Fri May 16 2025 21:15:45 GMT+0000 (Coordinated Universal Time)",
+		"date":"Sat May 17 2025 11:23:02 GMT+0000 (Coordinated Universal Time)",
 		"url":"/",
 		"content": "Hi!\nI am Janek, an engineer from Cologne, Germany.\nThis site contains some of mpy past and current projects, as well as my &quot;digital garden&quot;. It serves dual-purpose as a tool for myself to do some retrospective on projects and collect and reflect on topics I am learning.\nI hope it is useful to you as well, be it as a source of knowledge or inspiration",
 		"tags": [ "note","gardenEntry"]
@@ -9,7 +17,7 @@
 
 {
 		"title": "Digital Garden",
-		"date":"Fri May 16 2025 21:15:45 GMT+0000 (Coordinated Universal Time)",
+		"date":"Sat May 17 2025 11:23:02 GMT+0000 (Coordinated Universal Time)",
 		"url":"/garden/",
 		"content": "wip",
 		"tags": [ "note"]
@@ -17,7 +25,7 @@
 
 {
 		"title": "janek.ing - Project Showcase",
-		"date":"Fri May 16 2025 21:15:45 GMT+0000 (Coordinated Universal Time)",
+		"date":"Sat May 17 2025 11:23:02 GMT+0000 (Coordinated Universal Time)",
 		"url":"/projects/",
 		"content": "wip",
 		"tags": [ "note"]
@@ -25,7 +33,7 @@
 
 {
 		"title": "Communication is Key",
-		"date":"Fri May 16 2025 21:15:45 GMT+0000 (Coordinated Universal Time)",
+		"date":"Sat May 17 2025 11:23:02 GMT+0000 (Coordinated Universal Time)",
 		"url":"/work/communication-is-key/",
 		"content": "Heading 2\nTest 1234\nint main(int argc, char **argv) {\n\tprintf(&quot;Hello World!\\n&quot;);\n\treturn 0;\n}\n\n#tagtest #another\nHeading 3\n\n[!WARNING] Title\nfoobar\n\nLink: <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/projects/\">Projects Home</a>\nBroken Link: <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Management and Vision</a>\nAnother Heading\nTest foobar2",
 		"tags": ["tagtest", "another", "note","opinion"]
