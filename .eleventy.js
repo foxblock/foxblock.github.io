@@ -293,7 +293,7 @@ module.exports = function (eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function (match, precede, tag, offset, fullStr) {
-        console.log(match, fullStr.substring(0,20));
+        console.log("taggify", match, fullStr);
         return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag}">${tag}</a>`;
       })
     );
@@ -303,7 +303,7 @@ module.exports = function (eleventyConfig) {
     let tags;
     let match = str && str.match(tagRegex);
     if (match) {
-      console.log(match);
+      console.log("searchableTags", str.substring(0,10), match);
       tags = match
         .map((m) => {
           return `"${m.split("#")[1]}"`;
