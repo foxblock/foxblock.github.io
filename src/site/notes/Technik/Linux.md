@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/technik/linux/","tags":["knowledge-base"],"created":"2025-05-10T14:15:57.647+02:00","updated":"2025-05-17T13:22:49.705+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Linux.md","permalink":"/tech/linux/","tags":["knowledge-base"],"created":"2025-05-18T12:02:24.706+02:00","updated":"2025-05-20T20:20:17.876+02:00"}
 ---
 
 ## Folder structure
@@ -43,6 +43,7 @@
 | 5      | r – x      | 4+0+1 |
 | 6      | r w –      | 4+2+0 |
 | 7      | r w x      | 4+2+1 |
+
 Three groups:
 1. One permission for the _owner,_ the person who created the file or folder.
 2. One permission for all of the people in the same primary _group_ of the owner.

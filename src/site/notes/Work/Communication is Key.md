@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/work/communication-is-key/","tags":["opinion"],"created":"2025-04-29T20:46:28.305+02:00","updated":"2025-05-03T13:46:44.873+02:00"}
+{"dg-publish":true,"permalink":"/work/communication-is-key/","tags":["opinion","experience"],"created":"2025-05-11T17:42:31.700+02:00","updated":"2025-05-17T00:13:51.453+02:00"}
 ---
 
 
