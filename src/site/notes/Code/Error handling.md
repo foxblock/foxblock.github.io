@@ -1,0 +1,26 @@
+---
+{"dg-publish":true,"permalink":"/code/error-handling/","tags":["opinion"],"created":"2024-06-26T17:45:30.303+02:00","updated":"2025-05-23T15:07:08.858+02:00"}
+---
+
+- is error recoverable? -> if yes, do it!
+- should User know about error? -> return it / display it in the UI (ideally non-modal, but still not easily missable. Only do modal, if error is critical)
+- should developer know about error? -> return it / log it
+- Handle the error as close to the source as possible. Don't be lazy and just throw it up. By throwing you will lose context (or you have to go out of your way to include it with custom error types and whatnot) and the less you will be able to handle it or provide a meaningful error message.
+	- This is one reason why explicit error handling (e.g. in Go) is superior to implicit error handling (e.g. in Typescript). Sure the Go way is more verbose. You will write a lot of `if err != nil`, but the language forces you to think about every error. You will be more inclined to handle it and throwing will happen less involuntarily. In Java you sometimes don't even realize an error can happen until it is too late.
+	- And it's not like you can ignore most errors. 
+- handle error at correct Level 
+	- transmission error (e.g. bitflip) -> CRC, not app code
+	- user input error -> UI (but probably also database)
+		- do not change user input on the fly (see [[Design/UI - UX\|UI - UX]])
+- Think about the harm of silently changing values (i.e. some value is out of bounds -> clamping it)
+	- Will the user be confused by the value change?
+	- Will the change allow the program to continue to function (instead of crashing without the change)?
+	- This will obfuscate that an error even happened (and probably the source/cause of it) -> probably a good idea to at least log something
+	- This descision will always be a trade-off
+- Provide meaningful error messages (-> [[Design/UI - UX\|UI - UX]]). "Unexpected error" is not helpful for anybody!
+- user input
+	- always check for plausibility
+	- never trust anything 
+	- be as permissive as makes sense, if intention of user is clear, e.g.
+		- add/remove trailing slashes from paths
+		- but: do not change integer values out of range. Better to throw error (see above)

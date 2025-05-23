@@ -1,0 +1,65 @@
+---
+{"dg-publish":true,"permalink":"/design/ui-ux/","tags":["opinion"],"created":"2025-04-04T16:35:15.770+02:00","updated":"2025-05-23T15:09:43.098+02:00"}
+---
+
+- Error / Info messages > Disabled buttons > Hidden buttons
+	- hiding UI elements can be useful in complex environments to filter non-applicable items
+	- however keep in mind that making an element unavailable or unclickable always comes with the user asking himself "where is that button I used a minute ago?" or "why can't I click this now - I could before?"
+	- if you are hiding or disabling elements, it should be totally obvious to the user why that is the case (or you could tell him in a hover text)
+	- bad counter example: Photoshop disabling certain options when image uses indexed color mode
+- Provide (meaningful) error messages
+	- This does not help anyone: ![media_GMIPHd9aIAAM5nf.webp](/img/user/attachments/media_GMIPHd9aIAAM5nf.webp)
+	- Tell the user exactly what went wrong
+	- Ideally include a hint on how to fix the error
+	- Make the error message easily googleable (use descriptive keywords, make the text copyable - old Windows error dialog boxes copied the whole content to clipboard when the user pressed Ctrl + C)
+	- If you fear overly technical terms might scare the user, first reconsider the user as a competent individual, second if you are still unsure hide additional details "for nerds" behind a "more info" dropdown
+- Provide a search option, if your program has lots of options or settings
+- Provide feedback
+	- (see error messages above)
+	- Clicking a button should do *something*
+	- If the user does an action, there needs to be a response. If the computation takes longer, show a progress bar for example.
+- Don't overuse animations
+	- They can be handy to direct the users attention
+	- They can make an interface feel more smooth
+	- Be mindful: They increase complexity of the code, since you now have "intermediate" state and lerps you need to track. To keep things simple, just keep an "actual value" and an "animated value" - first one is for computing, second only for drawing.
+	- If you include them, make them fast and snappy. Don't waste the user's time. lerp with a high t value can be a good choice.
+- The user should always be in control
+	- Avoid modals
+	- Make long operations cancel-able
+	- Undo/redo
+	- Avoid waiting time (animations, etc.)
+	- Avoid editing things the user has entered (e.g. do a validation pass when the user has clicked submit on a form and highlight or correct errors then. Dont edit while the user is typing, show errors at maximum then)
+	- Config options, window customization
+- Treat the user as a intelligent individual with agency (see above)
+	- Give the power to do complex stuff
+	- don't oversimplify the interface, alternatively provide an "expert" mode (but be aware that this doubles the amount of work and code paths)
+	- Give background/developer information the user can use to diagnose problems (googleable). Maybe hide those in an optional text box, but never remove them
+- Make clickable elements obvious as such
+	- Text hyperlinks are for the web, not UIs
+- Use well known elements, don't re-invent the wheel
+	- create fancy new controls only if they provide a clear benefit and are absolutely necessary
+	- Users interact with tons of UI every day. They don't have time to learn something new
+- Provide meaningful defaults
+	- Config options are nice, but don't make them necessary
+- Consistency is key
+	- Keep a clear structure to your UI (main navigation, position of nested elements, etc.)
+	- Don't make one element do multiple things in different contexts (or make it very obvious, if it is totally necessary)
+- The less screens information is scattered on, the better
+	- Screens should not be overcluttered with buttons and information, but should not be too simple either as to require a lot of popups and screen changes
+	- Every screen change removes context and makes it harder to follow
+- whitespace
+	- less is more: make all meamingful content actually fit the screen. Dont require popups or scrolling
+	- cluttering: it takes a lot to be cluttered, just group elements together in a meaningful way and thinks keep being organized even with much on the screen
+	- add whitespace around elements only for touchscreens (different ui concept, different problemsl)
+## Concurrency
+https://www.youtube.com/watch?v=Tvms2DaG8UY
+- UI becomes 10x harder when the web or any server is involved
+- requests can get lost or delayed, so UI can become out of sync
+- Including updates state in POST request: can be inconsistent, when earlier request out of multiple is delayed and applies old state on return
+- updating after POST: adds another round trip to the server (lag), plus possible inconsistent updates/jitter in between muliple request (but at least good state at the end)
+- more problems when infrastructure is scaled (state needs to be synced between servers)
+- timestamps are also tricky, since you need to carefully design at what moment to take them
+- big problem: non idempotent changes like shopping checkout, which should only be handled once
+- possible solution: causal ordering. Include dependency on request 1 in data of request 2 and handle on server
+- generally: update UI locally to show immediate feedback, do not wait or block, update when corrected data arrives
+- generally: solution is trade off between solving state sync problems and managing concurrency with stateless sources
