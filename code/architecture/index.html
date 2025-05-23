@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Architecture</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdn.jsdelivr.net/npm/lucide@0.115.0/dist/umd/lucide.min.js"></script>
+<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("icon-name",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
+<script async src="https://fastly.jsdelivr.net/npm/force-graph@1.43.0/dist/force-graph.min.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js" async></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
+<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+<link href="/styles/digital-garden-base.css" rel="stylesheet">
+<link href="/styles/obsidian-base.css" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css" rel="stylesheet"><link href="/styles/user/layout-fixes.css" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style></style>
+</head>
+<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
+<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
+<div x-show.important="!isDesktop" style="display:none">
+<nav class="navbar">
+<div class="navbar-inner">
+<span style="font-size:2rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:12px 24px;vertical-align:middle;border-radius:0">
+</a>
+</div>
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</nav>
+</div>
+<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
+<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:15px auto;display:block;border-radius:0">
+</a>
+<div style="display:flex;justify-content:center">
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</div>
+<div class="folder" x-data="{isOpen: true}">
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Code</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code/Langauges')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Langauges</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Design')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Design</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Tech')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Tech</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Work')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Work</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/work/communication-is-key/">Communication is Key </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+</div>
+</nav>
+</div>
+<div class="search-container" id="globalsearch" onclick="toggleSearch()">
+<div class="search-box">
+<input type="search" id="term" placeholder="Start typing...">
+<div id="search-results"></div>
+<footer class="search-box-footer">
+<div class="navigation-hint">
+<span>Enter to select</span>
+</div>
+<div class="navigation-hint align-icon">
+<i icon-name="arrow-up" aria-hidden="true"></i>
+<i icon-name="arrow-down" aria-hidden="true"></i>
+<span>to navigate</span>
+</div>
+<div class="navigation-hint">
+<span>ESC to close</span>
+</div>
+</footer>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-05-23T13:17:55.842Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-05-23T13:17:55.842Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-05-23T13:17:55.842Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<main class="content cm-s-obsidian">
+<header>
+<h1 data-note-icon="">Architecture</h1>
+<div class="header-meta">
+<div class="header-tags">
+<a class="tag" onclick="toggleTagSearch(this)">
+#experience
+</a>
+<a class="tag" onclick="toggleTagSearch(this)">
+#opinion
+</a>
+<a class="tag" onclick="toggleTagSearch(this)">
+#german
+</a>
+<a class="tag" onclick="toggleTagSearch(this)">
+#knowledge-base
+</a>
+</div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2024-12-20T19:13:29.618+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-23T15:17:27.828+02:00"></span></div></div></div>
+</header>
+<h2 id="golden-rules" tabindex="-1">Golden Rules</h2>
+<ul>
+<li>Fight abstractions</li>
+<li>Understand the domain</li>
+<li>Follow Standards</li>
+<li>Know your Tech</li>
+<li>Refactor with caution<br>
+Quelle: <a href="https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=773" target="_blank" class="external-link">https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=773</a></li>
+</ul>
+<p>Eigener Ansatz:</p>
+<ol>
+<li>Prototyp bauen (max. 1-3 Monate) mit Fokus auf bekannte Anforderungen und Funktionen (nicht zu weit in die Zukunft schauen, zu viele Dinge annehmen. Abstraktionen minimal halten!)</li>
+<li>Währenddessen: Requirements und Annahmen prüfen und anpassen</li>
+<li>Prototyp wegwerfen</li>
+<li>Software komplett neu schreiben (mit Learnings aus Prototyp)</li>
+<li>Alle 2-3 Jahre (sofern aktiv an Software gearbeitet wird und sich Anforderungen ändern/hinzukommen): Technisches Brainstorming mit Senior Ingenieuren &quot;Greenfield Ansatz: Wie würden wir die Software nach heutigem Stand bauen&quot; -&gt; Mit Realität abgleichen und ggf. Refactoring einleiten</li>
+</ol>
+<h2 id="separation-of-concerns-vs-locality-of-behavior" tabindex="-1">Separation of Concerns VS Locality of Behavior</h2>
+<ul>
+<li>SoC: Trennung von Styling/Modell und Logik/Controller</li>
+<li>LoB: alle Teile von einem Element/Feature an einem Platz</li>
+<li>pro SoC: kein Mix von Arbeit aus unterschiedlichen Domänen (zb Backend und Frontend)</li>
+<li>pro LoB: alle Infos an einem Platz, einfacher in Gänze zu verstehen und zu debuggen</li>
+<li>ich bin pro LoB in vielen Fällen</li>
+<li>ich hasse code (meist oop im Endstadium) der eigentlich nichts macht, aber auf 100 dateien verteilt ist (Beispiel th-drivers-sdk, [Clean-Code](<a href="https://qntm.org/clean" target="_blank" class="external-link">It's probably time to stop recommending Clean Code @ Things Of Interest (qntm.org)</a>), [Video](<a href="https://www.youtube.com/watch?v=IqHaGd9J42s" target="_blank" class="external-link">Stop Recommending Clean Code (youtube.com)</a>))</li>
+<li><a href="https://youtu.be/LriHRa9t1fQ?feature=shared&amp;t=2803" target="_blank" class="external-link">https://youtu.be/LriHRa9t1fQ?feature=shared&amp;t=2803</a></li>
+<li><a href="https://htmx.org/essays/locality-of-behaviour/" target="_blank" class="external-link">https://htmx.org/essays/locality-of-behaviour/</a></li>
+</ul>
+<h2 id="globaler-state-nebeneffekte" tabindex="-1">Globaler State / Nebeneffekte</h2>
+<ul>
+<li>Funktionen mit Nebeneffekten sind oft eine Quelle von Bugs und Komplexität
+<ul>
+<li>state changes werden dadurch verdeckt und lassen sich schlecht nachvollziehen (wann wird welche variable verändert? Welche Funktionen lesen nur, welche schreiben?)</li>
+<li>Zustand der Applikation zu einem bestimmten Zeitpunkt wird unklarer (man muss sich mehr darum kümmern, dass ein sauberer init und cleanup des shared state passiert)</li>
+</ul>
+</li>
+<li>State eines Programms zu verstehen, ist essentiell um das Programm an sich zu verstehen -&gt; Zentraler Punkt in Architektur
+<ul>
+<li>Veränderungen des States müssen sichtbar und vorhersehbar sein</li>
+<li>State in einem struct bündeln hilft</li>
+<li>Globaler State und Nebeneffekte sind problematisch</li>
+</ul>
+</li>
+<li>Küchen Analogie: mehl bleibt an messbecher hängen und fällt einem entgegen wenn man Messbecher aus dem Schrank nimmt. Abhängigkeiten müssen immer im kopf behalten werden. Erzeugen Overhead oder probleme wenn man sie nicht bedenkt. Besser: Mehl und Messbecher können unabhängig voneinander entnommen werden.</li>
+</ul>
+<h2 id="duplikation-von-funktionalitaet" tabindex="-1">Duplikation von Funktionalität</h2>
+<ul>
+<li>Duplikation von Funktionalität (bspw. In backend und Frontend) ist quelle für bugs
+<ul>
+<li>alle solche Quellen müssen synhron gehalten werden</li>
+<li>bei einer Änderung des Datenformats müssen alle quellen verändert werden</li>
+<li>kein single source of truth</li>
+</ul>
+</li>
+</ul>
+<h2 id="kiss-abstraktionen" tabindex="-1">KISS / Abstraktionen</h2>
+<blockquote>
+<p>All Problems in computer science can be solved by another level of indirection, except for the problem of too many layers of indirection.</p>
+<ul>
+<li>David Wheeler</li>
+</ul>
+</blockquote>
+<p><a href="https://nitter.net/transmutrix/status/1750563200708309466#m" target="_blank" class="external-link">https://nitter.net/transmutrix/status/1750563200708309466#m</a></p>
+<ul>
+<li>Nicht mit Abstraktionen starten</li>
+<li>Wenn man nicht die einfachste single-file-procedural Lösung schreiben kann, wird man auch an der abstrahierten, generischen Lösung scheitern.</li>
+<li>Mit der konkreten Lösung des Problems anfangen und von dort aus weiter arbeiten.</li>
+<li>Die Ideen, welche Systeme man überhaupt braucht und welche Probleme man lösen will, kommen erst mit der Zeit, die man sich praktisch damit beschäftigt und Sachen umsetzt (nicht alleine mit dem theoretischen Gedanken darüber). Also einfach loslegen!</li>
+<li>&quot;Some people are paralyzed by fear of being &quot;wrong&quot;—which is poison if you want to do anything creative which requires iterative refinement&quot;</li>
+<li>&quot;Abstraction has value after you have a strong hold on what you need and want to do, not before. Students would often fall into this trap, trying to solve &quot;I don't know how to make noodles&quot; by attempting to build a noodle factory. It doesn't work that way&quot;</li>
+<li>&quot;Understanding why you might want some abstraction is required to reap its benefits&quot;</li>
+<li>&quot;Structure comes from doing the concrete, then noticing patterns and generalizing. Only w/ exp can you jump right to abstractions&quot;</li>
+<li>MVP!</li>
+<li>Code, den man wie eine Zeitung lesen kann, ist viel einfacher zu verstehen, als Code der über mehrere Dateien wild umher springt</li>
+<li>nur so viele abstraktionslayer wie notwenig, so wenig wie möglich
+<ul>
+<li>jeder layer ermöglicht ggf eine effizientere arbeit</li>
+<li>gleichzeitig ist jeder layer Quelle für bugs</li>
+<li>jeder layer verschlechtert Performance</li>
+<li>closed source layer (oder generell code den man nicht kennt) muss blind vertraut werden. Bugs in diesem layer zu debuggen wird nahezu unmöglich und extrem viel zeit in Anspruch nehmen. Die Quelle eines neuen Bugs ist immer unklar! Sie könnte in einem dieser layer sein!</li>
+</ul>
+</li>
+<li>&quot;Expect the unexpected&quot; -&gt; Abstraktionen eigenen sich nur begrenzt dafür, den Code agil zu halten. Per Definition wird man immer mal wieder falsch liegen und hat dann die falsche Abstraktion gebaut, da die gewünschte Änderung unerwartet war. Dann ist &quot;einfacher&quot;, linearer Code schneller geändert, als eine Abstraktionsebene umgeschrieben.
+<ul>
+<li>Lieber mit den Domäne-Experten reden und das Problem richtig verstehen. Dann PoC bauen, Feedback einholen.</li>
+<li><a href="https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=766" target="_blank" class="external-link">https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=766</a><br>
+<a href="https://grugbrain.dev/" target="_blank" class="external-link">https://grugbrain.dev/</a></li>
+</ul>
+</li>
+<li>&quot;grug know cut point when grug see cut point, just take time to build skill in seeing, patience&quot;</li>
+<li>Splitten von Code in mehrere Strukturen produziert in den meisten Fällen (Ausnahme: SOA vs AOS) keinen besseren Code für den Computer. Es ist eine Methode, um Bugs wie &quot;Zugriff auf die falschen Daten&quot; zur Compile-Time abzufangen. Wenn man nicht um diese Bugs besorgt ist und man im Anwendungscode diszipliniert ist diese zu verhindern, sollte man keine Abstraktionen einbauen. Jede Abstraktion, jedes Splitten erzeugt zusätzlichen Overhead, da die Schnittstellen synchron gehalten werden müssen, man zum Verständnis des Codes zwischen mehr Stellen springen muss, etc.
+<ul>
+<li>Man sollte einen guten Grund für jede Abstraktion/Separation von Code oder Daten haben (z.B. um mentalen Overhead reduzieren, wenn gut gekapselte Systeme wie Datenbank, Webserver-Requests, etc. abgespalten werden - oder um typische Bugs zu verhindern). Immer hinterfragen: Warum brauche ich die Abstraktion? Am besten sollte dieser Grund dann auch dokumentiert werden.</li>
+<li>Man kann nur selbst bewerten, ob sich der zeitliche Aufwand für eine Abstraktion durch Einsparungen an anderer Stelle auszahlt.</li>
+<li><a href="https://youtu.be/drCnFueS4og?feature=shared&amp;t=3012" target="_blank" class="external-link">https://youtu.be/drCnFueS4og?feature=shared&amp;t=3012</a> (bis ca. 1:00:00)</li>
+</ul>
+</li>
+<li>Immer mit möglichst wenig Abstraktion und Separation starten und Grenzen später einziehen. Es ist immer einfacher eine Abstraktion aufzubauen, als eine bereits genutzte wieder abzubauen. Dies betrifft insbesondere unerforschte Bereiche des Problems. Annahmen müssen erst validiert und Entscheidungen gff. revidiert werden. Daher nicht zu viel am Anfang starr designen (außer man weiß, was man tut und hat es schon 100x gemacht).
+<ul>
+<li>PoC Phase zum Lernen des Problems und dann rückwärts überlegen, welche Struktur angemessen ist, ist besser als anders herum.</li>
+<li>PoC muss so einfach und schnell wie möglich iteriert werden können.</li>
+<li>zu viel Struktur am Anfang schränkt Lösungsraum unnötig ein</li>
+<li>Go saying: dont opt into an interface, refactor to an interface</li>
+</ul>
+</li>
+<li>Küchen Analogie: gestapelte Töpfe. Man muss immer alle Töpfe entnehmen, um an den untersten zu kommen. Zusätzlicher Aufwand für Kapselung.</li>
+</ul>
+<h2 id="dry-vs-inline-code" tabindex="-1">DRY vs inline code</h2>
+<ul>
+<li>Don't DRY: Zu kurze Funktionen, die nur andere Funktionen aufrufen, die nur wieder eine andere Funktion aufrufen sind so schwierig nachzuvollziehen, weil man Kontext im Kopf aufbauen muss und viel hin- und herspringt. Eine größere Funktion, die die gesamte Arbeit erledigt, ist auf einen Blick zu erfassen oder lässt sich zumindest wie eine Zeitung von oben nach unten lesen.</li>
+<li>Martin Fowler: Refactor wenn man sich 3x wiederholt</li>
+<li>Small Focused Functions that don't do anything meaningful -&gt; man muss zu viel im Code springen, um zu verstehen, was er macht. Context fehlt.</li>
+<li>Every function should do something <strong>meaningful</strong></li>
+<li>Idee: Code sollte im Stile einer StackOverflow Antwort geschrieben sein. Macht etwas sinnvolles und beinhaltet allen notwendigen Kontext. (<a href="https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=1150" target="_blank" class="external-link">https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=1150</a>)<br>
+<a href="https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction" target="_blank" class="external-link">https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction</a></li>
+</ul>
+<ol>
+<li>Abstraktion wird eingeführt, um gleiche Funktion perfekt zu bündeln</li>
+<li>Neue Anforderung passt nur zu 90% in dieses Konzept</li>
+<li>Falsch: Anpassen der Abstraktion (mit zusätzlichen Parametern, if/else, etc.). -&gt; wird noch mehrere Male wiederholt und führt zu versteckter Komplexität und unklarem Code mit Überraschungen</li>
+<li>Besser: Abstraktion rückgängig machen (code inline kopieren), notwendige Änderungen für neue Funktion durchführen, anschließend schauen, ob neue Abstraktion abgeleitet werden kann. -&gt; sauber und nachhaltig</li>
+</ol>
+<p><a href="https://web.archive.org/web/20241125111520/https://number-none.com/blow/blog/programming/2014/09/26/carmack-on-inlined-code.html" target="_blank" class="external-link">John Carmack on Inlined Code</a>:</p>
+<blockquote>
+<p>If a function is only called from a single place, consider inlining it.</p>
+<p>If a function is called from multiple places, see if it is possible to arrange for the work to be done in a single place, perhaps with flags, and inline that.</p>
+<p>If there are multiple versions of a function, consider making a single function with more, possibly defaulted, parameters.</p>
+<p>If the work is close to purely functional, with few references to global state, try to make it completely functional.</p>
+<p>Try to use const on both parameters and functions when the function really must be used in multiple places.</p>
+<p>Minimize control flow complexity and “area under ifs”, favoring consistent execution paths and times over “optimally” avoiding unnecessary work.</p>
+</blockquote>
+<h2 id="api-design" tabindex="-1">API Design</h2>
+<p>Immer den Anwendungscode zuerst schreiben oder zumindest ein Mock-Up davon. Dies offenbart die notwendigen API Funktionen, ihre Parameter, Call-Order, etc.<br>
+Erst anschließend die Implementierung dieser Funktionen schreiben.<br>
+-&gt; Empfehlung von Casey Muratori<br>
+<a href="https://caseymuratori.com/blog_0024" target="_blank" class="external-link">https://caseymuratori.com/blog_0024</a></p>
+<p>Keine globalen Variablen in Library (mutable global state) -&gt; nicht thread-safe und re-entrant.<br>
+Besser: Kontext struct anlegen, welcher der API mitgegeben wird und von ihr mit dem aktuellen Zustand beschrieben wird.<br>
+Bei Callbacks: Thread Local Storage benutzen<br>
+<a href="https://nullprogram.com/blog/2014/10/12/" target="_blank" class="external-link">Global State: a Tale of Two Bad C APIs (nullprogram.com)</a><br>
+siehe auch (als ein Ansatz in C): <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#opaque-struct">C#Opaque struct</a></p>
+<p>Konstanten immer public definieren (entweder als enum oder define). -&gt; Keine magic values im user-code. Macht Code deutlich lesbarer und durchsuchbarer (Konstanten findet man einfach, eine &quot;1&quot; ist nicht eindeutig identifizierbar). Kann einfach geändert und erweitert werden ohne, dass user-code vorm nächsten Kompilieren geändert werden muss.<br>
+<a href="https://caseymuratori.com/blog_0025" target="_blank" class="external-link">https://caseymuratori.com/blog_0025</a></p>
+<p>(CLI) Tools sollten mit Input aus Datei oder stdin gleich funktionieren. So kann man sie einfacher in eine Pipeline integrieren. Auch das Testen wird einfacher.<br>
+<a href="https://youtu.be/isI1c0eGSZ0?feature=shared&amp;t=300" target="_blank" class="external-link">https://youtu.be/isI1c0eGSZ0?feature=shared&amp;t=300</a></p>
+<p>malloc()-Calls in Library vermeiden. Besser: Memory-Allokation vom Benutzer erledigen lassen. Dann kann der Anwender auswählen, ob er auf dem Stack oder Heap allokieren will oder sogar einen eigenen Allocator benutzen.</p>
+<pre><code class="language-C">prepped_alloc PrepThingeeForAlloc(parameters)
+{
+    prepped_alloc Prep = BeginAllocPrep();
+    //... bunch of macro calls here that describe all the allocations
+    //... and their internal pointers to itself
+    EndAllocPrep(Prep);
+}
+
+size_t GetSizeForThingee(parameters)
+{
+    prepped_alloc Prep = PrepThingeeForAlloc(parameters);
+    size_t Result = GetSize(Prep);
+    return(Result);
+}
+
+thingee *CreateThingee(void *Memory, parameters)
+{
+    prepped_alloc Prep = PrepThingeeForAlloc(parameters);
+    thingee *Result = (thingee *)PlaceAlloc(Prep, Memory);
+    return(Result);
+}
+</code></pre>
+<p><a href="https://hero.handmade.network/forums/code-discussion/t/763-stack_persistence_vs._api_simplicity#4335" target="_blank" class="external-link">https://hero.handmade.network/forums/code-discussion/t/763-stack_persistence_vs._api_simplicity#4335</a><br>
+<a href="https://stackoverflow.com/questions/59547761/should-functions-that-create-structs-return-the-struct-or-a-pointer" target="_blank" class="external-link">https://stackoverflow.com/questions/59547761/should-functions-that-create-structs-return-the-struct-or-a-pointer</a><br>
+Kleine Strukturen können auch direkt auf dem Stack erzeugt werden und als struct (nicht als Pointer) zurückgegeben werden.<br>
+siehe auch: <a class="internal-link is-unresolved" href="/404" target="">Stack vs. Heap</a></p>
+<h2 id="premature-optimization" tabindex="-1">Premature Optimization</h2>
+<blockquote>
+<p>The full version of the quote is &quot;We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil.&quot; and I agree with this. Its usually not worth spending a lot of time micro-optimizing code [i.e. counting cycles] before its obvious where the performance bottlenecks are. But, conversely, when designing software at a system level, performance issues should always be considered from the beginning. A good software developer will do this automatically, having developed a feel for where performance issues will cause problems. An inexperienced developer will not bother, misguidedly believing that a bit of fine tuning at a later stage will fix any problems.<br>
+-- Charles Cook</p>
+</blockquote>
+<blockquote>
+<p>Observation <a class="tag" onclick="toggleTagSearch(this)" data-content="#6">#6</a>: Software engineers have been led to believe that their time is more valuable than CPU time; therefore, wasting CPU cycles in order to reduce development time is always a win. They've forgotten, however, that the application users' time is more valuable than their time.</p>
+</blockquote>
+<p>Quelle: <a href="https://ubiquity.acm.org/article.cfm?id=1513451" target="_blank" class="external-link">The Fallacy of Premature Optimization (acm.org)</a></p>
+<p>Performance lässt sich nicht magisch am Ende der Entwicklung herbeiführen. Insbesondere bei komplexen Systemen sind die Bottlenecks über das System verteilt, voneinander abhängig und bedingen Änderungen an der Architektur, welche am Ende sehr kostspielig und aufwendig sind.<br>
+Cmuratori zu diesem Thema: <a href="https://youtu.be/drCnFueS4og?feature=shared&amp;t=5359" target="_blank" class="external-link">https://youtu.be/drCnFueS4og?feature=shared&amp;t=5359</a></p>
+<h2 id="parallelisierung" tabindex="-1">Parallelisierung</h2>
+<p>Mutex / Semaphore vermeiden! Insbesondere bei steigender Komplexität (und vielen Locks) kann nicht mehr gut abgeschätzt werden, wie häufig Threads in Mutex-locks laufen und wie viel wirklich parallel gearbeitet wird.<br>
+Besser: API Design, welche unabhängig von Parallelität ist. Beispiel: Schreiben einer Datei in parallelen chunks: Anstatt fertige Chunks in Array zu pushen oder in Datei zu schreiben (POSIX write(), Reihenfolge abhängig von Parallelität) -&gt; Thread mit offset Parameter starten und fertige Chunks mit Offset in bereits allokierten Speicher oder Datei schreiben (POSIX pwrite(), Reihenfolge unabhängig von Zeitpunkt der Fertigstellung)</p>
+<p>Quelle: <a href="https://nullprogram.com/blog/2017/03/01/" target="_blank" class="external-link">OpenMP and pwrite() (nullprogram.com)</a></p>
+<h2 id="protobufs-daten-zwischen-services-mit-typeninformationen-teilen" tabindex="-1">Protobufs: Daten zwischen Services mit Typeninformationen teilen</h2>
+<p>-&gt; Protobufs <a href="https://protobuf.dev/" target="_blank" class="external-link">Protocol Buffers Documentation (protobuf.dev)</a></p>
+<h2 id="binaerdaten" tabindex="-1">Binärdaten</h2>
+<p>Step 1: Platz für Versionsfeld reservieren<br>
+Dies gilt für alle Binärdaten, eigene Datenformate oder Protokolle (Learning von: Savegame in diversen Spielen, Goodnightlamp Update Protokoll)</p>
+<h2 id="funktionen" tabindex="-1">Funktionen</h2>
+<ul>
+<li>wenn user input verwertet wird: so permissive wie möglich/notwendig. Zudem alles auf Plausibilität prüfen
+<ul>
+<li>ist integer im erlaubten bereich?</li>
+<li>ist integer überhaupt ein integer (wenn String konvertieren wird)</li>
+<li>hat pfad ein trailing /</li>
+<li>hat Dateiname eine typendung</li>
+<li>etc.</li>
+</ul>
+</li>
+<li>ansonsten: so annehmen wie übergeben (möglichst wenig error handling)
+<ul>
+<li>caller ist für Input verantwortlich, Funktion für Output</li>
+</ul>
+</li>
+</ul>
+<h2 id="oop-vs-data-oriented" tabindex="-1">OOP vs Data-Oriented</h2>
+<ul>
+<li>v-tables und dynamic memory allocation machen das Programm langsamer, weil Objekte im Speicher verteilt liegen und viele cache misses erzeugen: <a href="https://x.com/ryanjfleury/status/1672722010399703041" target="_blank" class="external-link">Ryan Fleury auf X: „This illustrates why it has been helpful to me to eliminate v-tables and sum-types almost everywhere. It isn’t just about performance—it’s about strong predictive power over code, staying organized, non-pessimization, and architecture which is ready to optimize later if needed.“ / X</a></li>
+<li>![[attachments/memory-layout.mp4]]</li>
+<li>V-Tables sind &quot;[indirected function pointers](<a href="https://en.wikipedia.org/wiki/Function_pointer" target="_blank" class="external-link">Function pointer - Wikipedia</a>)&quot; und stellen eine harte Grenze für den Compiler dar. Switch statements können hingegen deutlich besser optimiert werden -&gt; <a class="internal-link is-unresolved" href="/404" target="">Stack vs. Heap</a></li>
+</ul>
+<p><a href="https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa.md" target="_blank" class="external-link">cmuratori-discussion/cleancodeqa.md at main · unclebob/cmuratori-discussion</a><br>
+<a href="https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa-2.md" target="_blank" class="external-link">cmuratori-discussion/cleancodeqa-2.md at main · unclebob/cmuratori-discussion</a><br>
+<a href="https://www.rfleury.com/p/programmers-are-users-bad-performance" target="_blank" class="external-link">https://www.rfleury.com/p/programmers-are-users-bad-performance</a><br>
+OOP Ansatz:</p>
+<pre><code class="language-C"><a class="tag" onclick="toggleTagSearch(this)" data-content="#include">#include</a> &quot;raw_device.h&quot;
+class new_device : public raw_device {
+public: 
+	virtual file* open(char* name);
+	virtual void close(file* f);
+	virtual void read(file* f, size_t n, char* buf);
+	virtual void write(file* f, size_t n, char* buf);
+	virtual void seek(file* f, int n);
+	virtual void get_name();
+}
+</code></pre>
+<p>Data-oriented Ansatz (Typenimplementierung siehe 2. Link oben):</p>
+<pre><code class="language-C">void raw_device::Handler(raw_device_request *Packet, raw_device_result *Result)
+{
+	switch(Packet-&gt;Op)
+	{
+		case RIO_read:
+		// etc.
+		
+		case RIO_write:
+		// etc.
+		
+		case RIO_get_name:
+		// etc.
+		
+		default:
+		// write error Result
+	}
+}
+</code></pre>
+<p>Vorteile des &quot;Data-oriented Ansatzes&quot;:</p>
+<ul>
+<li>Requests/Calls/Aufgaben können gepuffert werden (einfach Packet in einen Array packen und später abarbeiten). Dies erlaubt auch einfacheres Multi-threading -&gt; Soll dies für den OOP-Ansatz implementiert werden, schreibt man meist den Data-oriented Code um den OOP-Code (implementiert letztendlich beide Lösungen)</li>
+<li>Rückwärts-Kompatibilität: Wenn eine neue Funktion eingeführt wird, können alte Treiber einfach weiter funktionieren. Sie ignorieren den Op-Code (default im switch), während neue Geräte diesen implementieren. -&gt; beim OOP-Code muss die Parent-Class und damit alle Children angepasst werden</li>
+<li>Private Op-Codes, die nur von einzelnen Geräten implementiert werden sind trivial möglich.</li>
+<li>Keine V-Tables notwendig (schnellere Funktionsaufrufe, bessere Optimierbarkeit)</li>
+<li>Interne Struktur der structs und Funktionen kann sich komplett ändern. Solange die API gleich bleibt, ist user-code davon nicht betroffen. Noch besser (in C): wenn man pointer zu <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#opaque-struct">C#Opaque struct</a> an Funktion übergibt könnte man dies später sogar soweit ändern, dass pointer eigentlich ein index in einen internen cache ist.</li>
+<li>Ziel: den Pfad der Implementierung klein halten (Anzahl an Funktionen / Interfaces), bis man zur eigentlichen Implementierung kommt. Insbesondere wenn Daten/Funktionsaufrufe durch mehrere Stellen gehen und weitergegeben werden.</li>
+</ul>
+<pre><code>OOP
+f1 call ------ f1 handler ------ f1 code
+f2      ------ f2         ------ f2
+f3      ------ f3         ------ f3
+Data oriented
+f1 call \                       / f1 code
+f2      ------ fx handler ------- f2 code
+f3      /                       \ f3 code
+-&gt; the more handler/passthrough layers you have, the more code you have to write/maintin in the OOP case
+</code></pre>
+<p>DO NOT DO:</p>
+<pre><code class="language-C"><a class="tag" onclick="toggleTagSearch(this)" data-content="#include">#include</a> &quot;devids.h&quot;
+<a class="tag" onclick="toggleTagSearch(this)" data-content="#include">#include</a> &quot;console.h&quot;
+<a class="tag" onclick="toggleTagSearch(this)" data-content="#include">#include</a> &quot;paper_tape.h&quot;
+<a class="tag" onclick="toggleTagSearch(this)" data-content="#include">#include</a> &quot;...&quot;
+<a class="tag" onclick="toggleTagSearch(this)" data-content="#include">#include</a> &quot;...&quot;
+void read(file* f, char* buf, int n) {
+	switch(f-&gt;id) {
+		case CONSOLE: read_console(f, buf, n); break;
+		case PAPER_TAPE_READER: read_paper_tape(f, buf n);
+			break;
+		case...
+		case...
+	}
+}
+</code></pre>
+<h2 id="good-code-bad-code" tabindex="-1">Good code / bad code</h2>
+<ul>
+<li>bad code can't handle small changes in requirements</li>
+</ul>
+<h2 id="cost-of-dependencies" tabindex="-1">Cost of Dependencies</h2>
+<p><a href="https://nitter.tiekoetter.com/cmuratori/status/1426299131270615040#m" target="_blank" class="external-link">https://nitter.tiekoetter.com/cmuratori/status/1426299131270615040#m</a></p>
+<p><a href="https://nitter.tiekoetter.com/Jonathan_Blow/status/1923414922484232404#m" target="_blank" class="external-link">https://nitter.tiekoetter.com/Jonathan_Blow/status/1923414922484232404#m</a></p>
+<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
+</main>
+<aside>
+<div class="sidebar">
+<div class="sidebar-container">
+<div class="toc">
+<div class="toc-title-container">
+<div class="toc-title">
+On this page
+</div>
+</div>
+<div class="toc-container">
+<nav class="toc">
+<ol>
+<li><a href="#golden-rules">Golden Rules</a>
+</li>
+<li><a href="#separation-of-concerns-vs-locality-of-behavior">Separation of Concerns VS Locality of Behavior</a>
+</li>
+<li><a href="#globaler-state-nebeneffekte">Globaler State / Nebeneffekte</a>
+</li>
+<li><a href="#duplikation-von-funktionalitaet">Duplikation von Funktionalität</a>
+</li>
+<li><a href="#kiss-abstraktionen">KISS / Abstraktionen</a>
+</li>
+<li><a href="#dry-vs-inline-code">DRY vs inline code</a>
+</li>
+<li><a href="#api-design">API Design</a>
+</li>
+<li><a href="#premature-optimization">Premature Optimization</a>
+</li>
+<li><a href="#parallelisierung">Parallelisierung</a>
+</li>
+<li><a href="#protobufs-daten-zwischen-services-mit-typeninformationen-teilen">Protobufs: Daten zwischen Services mit Typeninformationen teilen</a>
+</li>
+<li><a href="#binaerdaten">Binärdaten</a>
+</li>
+<li><a href="#funktionen">Funktionen</a>
+</li>
+<li><a href="#oop-vs-data-oriented">OOP vs Data-Oriented</a>
+</li>
+<li><a href="#good-code-bad-code">Good code / bad code</a>
+</li>
+<li><a href="#cost-of-dependencies">Cost of Dependencies</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",(e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")}),!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach((function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}}))</script>
+<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
+<script defer="defer">TIMESTAMP_FORMAT="MMM dd, yyyy HH:mm",document.querySelectorAll(".human-date").forEach((function(e){date=e.getAttribute("data-date")||e.innerText,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTML(date)),e.innerHTML=parsed_date.toFormat(TIMESTAMP_FORMAT)}))</script>
+<script>lucide.createIcons({attrs:{class:["svg-icon"]}})</script>
+</body>
+</html>
