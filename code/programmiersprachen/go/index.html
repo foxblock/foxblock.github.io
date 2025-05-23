@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Go</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdn.jsdelivr.net/npm/lucide@0.115.0/dist/umd/lucide.min.js"></script>
+<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("icon-name",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
+<script async src="https://fastly.jsdelivr.net/npm/force-graph@1.43.0/dist/force-graph.min.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js" async></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
+<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+<link href="/styles/digital-garden-base.css" rel="stylesheet">
+<link href="/styles/obsidian-base.css" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css" rel="stylesheet"><link href="/styles/user/fix-filetree-searchbox-size.css" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style></style>
+</head>
+<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
+<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
+<div x-show.important="!isDesktop" style="display:none">
+<nav class="navbar">
+<div class="navbar-inner">
+<span style="font-size:2rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:12px 24px;vertical-align:middle;border-radius:0">
+</a>
+</div>
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</nav>
+</div>
+<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
+<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:15px auto;display:block;border-radius:0">
+</a>
+<div style="display:flex;justify-content:center">
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</div>
+<div class="folder" x-data="{isOpen: true}">
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Code</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code/Programmiersprachen')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Programmiersprachen</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/programmiersprachen/css/">CSS </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/programmiersprachen/go/">Go </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Tech')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Tech</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/datenbanken/">Databases </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Work')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Work</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/work/communication-is-key/">Communication is Key </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+</div>
+</nav>
+</div>
+<div class="search-container" id="globalsearch" onclick="toggleSearch()">
+<div class="search-box">
+<input type="search" id="term" placeholder="Start typing...">
+<div id="search-results"></div>
+<footer class="search-box-footer">
+<div class="navigation-hint">
+<span>Enter to select</span>
+</div>
+<div class="navigation-hint align-icon">
+<i icon-name="arrow-up" aria-hidden="true"></i>
+<i icon-name="arrow-down" aria-hidden="true"></i>
+<span>to navigate</span>
+</div>
+<div class="navigation-hint">
+<span>ESC to close</span>
+</div>
+</footer>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-05-23T12:20:17.015Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-05-23T12:20:17.015Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-05-23T12:20:17.015Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<main class="content cm-s-obsidian">
+<header>
+<h1 data-note-icon="">Go</h1>
+<div class="header-meta">
+<div class="header-tags">
+<a class="tag" onclick="toggleTagSearch(this)">
+#knowledge-base
+</a>
+</div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2024-12-20T19:13:29.618+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-23T14:05:03.439+02:00"></span></div></div></div>
+</header>
+<h2 id="cheatsheet" tabindex="-1">Cheatsheet</h2>
+<h3 id="types-and-zero-values" tabindex="-1">Types and Zero-Values</h3>
+<pre><code class="language-Go">bool - false
+string - &quot;&quot;
+int (int8..int64), uint (uint8..uint64) - 0
+float32, float64 - 0
+complex64, complex128 - 0
+uintptr, byte (uint8), rune (int32) - 0
+interface{} (any) - nil
+[slice, map, pointer] - nil
+[struct] - all members = their zero-value
+</code></pre>
+<h3 id="var-const" tabindex="-1">var, const</h3>
+<pre><code class="language-Go">var name string = &quot;val&quot; // = val optional
+name := &quot;val&quot; // implicit typing (name is string)
+intVal := int(true) // type conversion
+const Pi = 3.14 // no :=
+X, Y := 1, 2 // X=1, Y=2
+ptr := &amp;name // type is *string
+var any interface{}
+any = Pi
+any = &quot;hello&quot;
+name,ok := any.(string) // type assertion
+</code></pre>
+<h3 id="struct" tabindex="-1">struct</h3>
+<pre><code class="language-Go">type Vertex struct {
+	X, y float64 // X is public, y is private
+}
+p := Vertex{1, 3}
+p == Vertex{1, 3} // true (only shallow check!)
+var p2 = Vertex{X:3.14} // Y:0 is implicit
+pp := &amp;Vertex{} // type *Vertex, X,Y=0
+val := pp.X // access via dot (unlike C)
+</code></pre>
+<h3 id="array-slice" tabindex="-1">Array, slice</h3>
+<pre><code class="language-Go">var array [10]float32 // initialized, size is fixed
+array2 := [4]int{1,2,3,4}
+var slice []int = array2[0:2] // [start,end) -&gt; 1,2
+len, cap := len(slice), cap(slice) // 2, 4
+newSlice := make([]float32, 2, 3) // dynamic, len=2, cap=3 
+newSlice = append(newSlice, Pi, 42.13) // always re-assign!
+newSlice = append([]float32{1.0}, newSlice...) // prepend
+copy(destSlice, sourceSlice)
+var nilSlice []int = nil
+nilSlice = append(nilSlice, 10) // works
+</code></pre>
+<h3 id="map-operations" tabindex="-1">Map operations</h3>
+<pre><code class="language-Go">var m map[string]float32 // not initialized!
+m = make(map[string]float32)
+m2 := map[string]Vertex {
+	&quot;foo&quot;: {1,2},
+}
+delete(m2, &quot;foo&quot;)
+v, ok := m2[&quot;foo&quot;] // v={0,0} (zero value), ok=false
+clear(m2) // Go 1.21, also works on slices
+</code></pre>
+<h3 id="loops-switch" tabindex="-1">Loops, switch</h3>
+<pre><code class="language-Go">for i := 0; i &lt; len(str); i++ // all optional, for -&gt; while
+for i, value := range array // _,value or just i pssible
+for i := range 10 // 0..9
+switch os := runtime.GOOS; os { // condition optional
+	case &quot;linux&quot;:
+		fallthrough // implicit break, explicit fallthrough
+	case getWorstOs(): // not just static values
+	default:
+	case val == test(): // alt. if no condition
+}
+switch v := i.(type) { // type switch
+	case int: // v will int value
+}
+</code></pre>
+<h3 id="return-values-error-handling" tabindex="-1">Return values, error handling</h3>
+<pre><code class="language-Go">// ignore return values, if with statement, error handling
+if _, err := funcWithErr(); err != nil {
+	println(err) // print to stderr
+} else {
+	// do else, err still valid here
+}
+// err no longer valid here
+</code></pre>
+<h3 id="functions" tabindex="-1">Functions</h3>
+<pre><code class="language-Go">func add(x, y int) (int, error) { } // return val
+func sub(x, y int) (result int) { } // naked return
+func compute(worker func(int, int) int) int { }
+fn := func(x int) bool { }
+func varArgs(vals ...int) // for i,v := range vals
+type act func(index int) (res int)
+go anyFunction(1,2,&quot;foo&quot;) // leightweight thread
+// same address space, needs synchronization
+</code></pre>
+<h3 id="methods" tabindex="-1">Methods</h3>
+<pre><code class="language-Go">func (v Vertex) DotProduct(other Vertex) int {
+	return v.X * other.X + v.Y * other.Y
+}
+func (v *Vertex) Scale(f int) { 
+	v.X *= f
+	v.Y *= f
+} // = func Scale(v *Vertex,f int), Scale(&amp;p,4)
+angle := p.DotProduct(Vertex{3,4})
+p.Scale(4) // same operator for pointer and value
+</code></pre>
+<h3 id="interfaces" tabindex="-1">Interfaces</h3>
+<pre><code class="language-Go">type Abser interface { // define
+	Abs() float64
+}
+func (v *Vertex) Abs() float64 { // implement implicitly
+	if (v == nil) { return 0 } // need only for pointers
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+var a Abser
+val := a.Abs() // panic, since a does not hold a value
+v := Vertex{3,4}
+a = &amp;v // Vertex* implements Abser, so we can assign
+fmt.Printf(&quot;%v %v %T\n&quot;,a.Abs(),a,a) //5 &amp;{3 4} *main.Vertex
+var v2 *Vertex
+a = v2 // v2 is nil, can still call methods of it:
+fmt.Printf(&quot;%v %v %T\n&quot;,a.Abs(),a,a) //0 &lt;nil&gt; *main.Vertex
+</code></pre>
+<h3 id="channels" tabindex="-1">Channels</h3>
+<pre><code class="language-Go">c := make(chan int)
+c &lt;- 42 // send value to channel c (blocking)
+x := &lt;-c // receive value from channel c (blocking)
+fmt.Printf(&quot;%v %v\n&quot;, &lt;-c, &lt;-c)
+// buffered channel (blocks: send on full, receive on empty)
+cb := make(chan int, 100) // capacity of 100 values
+close(c) // close channel (only sender!, optional)
+v, ok := &lt;-c // ok is false if channel is empty and closed
+for i := range c // loop until channel is empty and closed
+select { // blocks until one case can be run (random if 2+)
+	case c &lt;- x: // same syntax as switch, no break needed
+	case &lt;-quit:
+	default: // run if nothing is ready
+}
+</code></pre>
+<h2 id="public-private" tabindex="-1">Public / Private</h2>
+<div class="callout" data-callout="important"><div class="callout-title"><div class="callout-title-inner"> Capitalization is access/scope management</div></div>
+<div class="callout-content">
+<p>
+<pre><code class="language-Go">type Example struct {
+    PublicField  string
+    privateField int // unexported field
+}
+func Add(val int) int { ... } // exported
+func subt(val int) int { ... } // not exported
+</code></pre>
+</p></div></div>
+<p>struct members and functions starting with a Capital letters are public/exported, those with lowercase letter are private/unexported (i.e. can only be accessed from the same module)</p>
+<h2 id="organizing-modules" tabindex="-1">Organizing Modules</h2>
+<p><a href="https://go.dev/doc/modules/layout" target="_blank" class="external-link">Organizing a Go module - The Go Programming Language</a><br>
+Unofficial (for big projects): <a href="https://github.com/golang-standards/project-layout" target="_blank" class="external-link">GitHub - golang-standards/project-layout: Standard Go Project Layout</a></p>
+<pre><code>go mod init &lt;modulename&gt;
+go get &lt;modulename&gt;
+</code></pre>
+<h3 id="program-with-main" tabindex="-1">Program with main</h3>
+<p>-&gt; standalone, will usually not be imported into other projects</p>
+<pre><code class="language-Go">//// go.mod file
+// module name needs to be unique in workspace
+// name can be anything, but url is preferred if public repo,
+// because this enables installation by:
+// go install github.com/someuser/modname@latest
+module github.com/someuser/modname
+
+go 1.22.1
+
+require (
+	// external packages (get added by go get)
+)
+</code></pre>
+<pre><code class="language-Go">//// main.go file
+// filename can be anything
+// package should be main
+package main
+
+func main() {
+	// ...
+}
+</code></pre>
+<h3 id="packages-libraries" tabindex="-1">Packages / Libraries</h3>
+<p>-&gt; might be imported into other projects</p>
+<pre><code class="language-Go">//// go.mod file
+// path to code repository, so it can be easily imported by
+// import &quot;github.com/someuser/modname&quot;
+module github.com/someuser/modname
+
+go 1.22.1
+
+require (
+	// external packages (get added by go get)
+)
+</code></pre>
+<div class="callout" data-callout="info"><div class="callout-title"><div class="callout-title-inner"> Exported Symbols<br></div></div>
+<div class="callout-content">
+<p>
+Symbols (e.g. types and functions) of a module that you want to export, need a name starting with an uppercase letter.</p>
+</div></div>
+<pre><code class="language-Go">//// modname.go file
+// package name = folder name of project (last component of module name)
+package modname
+
+func main() { // not exported
+	// ...
+}
+
+func Exported() {
+    // ...
+}
+</code></pre>
+<h3 id="multiple-files-folders" tabindex="-1">Multiple files / folders</h3>
+<ul>
+<li>Main program or library code should be in root directory (next to go.mod)</li>
+<li>All go files in the same directory declare the same package name</li>
+<li>Sub-packages should reside in their own directories. Their package name again should be the name of the directory (e.g. <code>hash/hash.go</code> -&gt; <code>package hash</code>)
+<ul>
+<li><code>import &quot;github.com/someuser/modname/hash&quot;</code> (assuming module name from example above)</li>
+<li>No separate go.mod file required</li>
+</ul>
+</li>
+<li>Go will not import packages placed in an <code>internal</code>folder from outside of the project (e.g. <code>internal/trace/trace.go</code> will only be available to its module)</li>
+<li>Mixing of program and libraries in same module/folder is possible</li>
+</ul>
+<pre><code>project-root-directory/
+  go.mod
+  modname.go          -&gt; main module
+  modname_test.go     -&gt; test code
+  auth/
+    auth.go           -&gt; public package auth
+    auth_test.go
+    token/
+      token.go        -&gt; public package auth/token
+      token_test.go
+  hash/
+    hash.go           -&gt; public package hash
+  internal/
+    trace/
+      trace.go        -&gt; private package trace
+  cmd/
+    prog1/
+      main.go         -&gt; test or helper program
+    prog2/
+      main.go         -&gt; another bundled command
+</code></pre>
+<h3 id="local-overrides" tabindex="-1">Local overrides</h3>
+<p>In <code>go.mod</code>:</p>
+<pre><code>replace domain.ext/path/lib =&gt; ../local/path
+</code></pre>
+<p>Will load library from local files, instead of external repo/cache. Good for testing changes in library modules.</p>
+<h2 id="update-modules" tabindex="-1">Update modules</h2>
+<pre><code>go get -u
+go mod tidy
+</code></pre>
+<h2 id="testing" tabindex="-1">Testing</h2>
+<ul>
+<li><a href="https://go.dev/doc/tutorial/add-a-test" target="_blank" class="external-link">Add a test - The Go Programming Language</a></li>
+<li>Package: <code>auth.go</code> -&gt; Test Code: <code>auth_test.go</code></li>
+<li>same package name</li>
+<li><code>import &quot;testing&quot;</code></li>
+<li><code>func TestSomething(t *testing.T) { }</code></li>
+<li><code>t.Fatalf(&quot;Some error occurred!&quot;)</code></li>
+<li><code>go test -v</code> to execute tests</li>
+</ul>
+<pre><code class="language-Go">package greetings
+
+import (
+    &quot;testing&quot;
+    &quot;regexp&quot;
+)
+
+// Hello() is external function under test
+func TestHelloName(t *testing.T) {
+    name := &quot;Gladys&quot;
+    want := regexp.MustCompile(`\b`+name+`\b`)
+    msg, err := Hello(&quot;Gladys&quot;)
+    if !want.MatchString(msg) || err != nil {
+        t.Fatalf(`Hello(&quot;Gladys&quot;) = %q, %v, want match for %#q, nil`, msg, err, want)
+    }
+}
+
+func TestHelloEmpty(t *testing.T) {
+    msg, err := Hello(&quot;&quot;)
+    if msg != &quot;&quot; || err == nil {
+        t.Fatalf(`Hello(&quot;&quot;) = %q, %v, want &quot;&quot;, error`, msg, err)
+    }
+}
+</code></pre>
+<h2 id="useful-modules" tabindex="-1">useful modules</h2>
+<pre><code>fmt
+strings
+strconv
+ioutil
+os
+flag
+json
+</code></pre>
+<h2 id="enum-iota" tabindex="-1">enum / iota</h2>
+<pre><code class="language-go">const (
+	c0 = iota  // c0 == 0
+	c1 = iota  // c1 == 1
+	c2 = iota  // c2 == 2
+)
+
+const (
+	a = 1 &lt;&lt; iota  // a == 1 (iota has been reset)
+	b = 1 &lt;&lt; iota  // b == 2
+	c = 1 &lt;&lt; iota  // c == 4
+)
+
+const (
+	u         = iota * 42  // u == 0     (untyped integer constant)
+	v float64 = iota * 42  // v == 42.0  (float64 constant)
+	w         = iota * 42  // w == 84    (untyped integer constant)
+)
+
+const x = iota  // x == 0 (iota has been reset)
+const y = iota  // y == 0 (iota has been reset)
+
+const (
+	bit0, mask0 = iota, 1&lt;&lt;iota - 1  // bit0 == 0, mask0 == 0
+	bit1, mask1                      // bit1 == 1, mask1 == 1
+	_, _                             // skips iota == 2
+	bit3, mask3                      // bit3 == 3, mask3 == 7
+)
+
+const (
+	c0 = -1
+	c1         // c1 == -1
+	c2 = iota  // c2 == 2
+)
+</code></pre>
+<h2 id="exported-names" tabindex="-1">Exported names</h2>
+<p>Namen mit Großbuchstaben am Anfang sind &quot;exported&quot;. Dies betrifft Variablen in Paketen (für import) und bspw. JSON Encoding/Decoding.</p>
+<pre><code class="language-Go">type Payload struct {
+	Index int
+	DeviceId string
+	test float32
+}
+var pl Payload
+bytes, err := json.Marshal(pl) 
+// result: {&quot;Index&quot;:0,&quot;DeviceId&quot;:&quot;&quot;}
+</code></pre>
+<h2 id="json" tabindex="-1">JSON</h2>
+<p>Use <code>`json:&quot;...&quot;`</code> strings to add compile time encoding information. First argument is the exported name of the member. <code>omitempty</code> can be used to remove null values from the export.</p>
+<div class="callout" data-callout="important"><div class="callout-title"><div class="callout-title-inner">Important</div></div>
+<div class="callout-content">
+<p>
+You need to rename fields, if you want to have lowercase starting letters for fields, since only exported fields are included in the marshalling process and exported fields need to start with a capital letter.</p>
+</div></div>
+<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> nil slices ≠ empty slices in JSON<br></div></div>
+<div class="callout-content">
+<p>
+Nil slices (unitialized slices) are exported as &quot;null&quot;, while empty slices (len=0, cap=0) are exported as empty array []. Other than that they behave mostly the same in Go. See <a href="https://stackoverflow.com/questions/44305170/nil-slices-vs-non-nil-slices-vs-empty-slices-in-go-language" target="_blank" class="external-link">null - nil slices vs non-nil slices vs empty slices in Go language - Stack Overflow</a></p>
+</div></div>
+<pre><code class="language-Go">type Payload struct {
+	Array []int `json:&quot;arr&quot;`
+	Array2 []int `json:&quot;other&quot;`
+	Array3 []int `json:&quot;three,omitempty`
+	foo int // not exported, not considered in json marshal/unmarshal
+}
+var s1 []int         // nil slice
+s2 := []int{}        // non-nil, empty slice
+s3 := make([]int, 0) // internally same as s2
+pl := Payload{s1,s2,s3}
+bytes, err := json.Marshal(pl) 
+// result: {&quot;arr&quot;:null,&quot;other&quot;:[]}
+</code></pre>
+<h3 id="marshal-unmarshal" tabindex="-1">Marshal/Unmarshal</h3>
+<p>Marshal = Encoding (<code>json.Marshal(var)</code> gibt json string als <code>[]byte</code> zurück)<br>
+Unmarshal = Decoding (<code>json.Unmarshal(byteArray, outVar)</code> dekodiert das json byte array in outVar)</p>
+<h2 id="embedded-struct" tabindex="-1">Embedded struct</h2>
+<pre><code class="language-Go">type Point struct {
+	X, Y float64
+}
+type Rect struct {
+	Point
+	W, H float64
+}
+// on init, have to go through embedded type explicitly
+r := Rect{Point: Point{0,2}, W:0, H:4}
+// on access we can use the sub-member names directly
+r.X = 1
+r.W = 3
+fmt.Println(r) // {{1 2} 3 4}
+</code></pre>
+<h2 id="closures" tabindex="-1">Closures</h2>
+<pre><code class="language-Go">func adder() func(int) int {
+	sum := 0
+	// return func has access to sum, which is bound to return func
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+func main() {
+	// each adder has own context and sum value
+	pos, neg := adder(), adder()
+	for i := 1; i &lt; 4; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+// 1 -2
+// 3 -6
+// 6 -12
+</code></pre>
+<h2 id="defer" tabindex="-1">Defer</h2>
+<pre><code class="language-Go">package main
+import &quot;fmt&quot;
+func main() {
+	fmt.Print(&quot;say: &quot;)
+	defer fmt.Println(&quot;!&quot;)
+	defer fmt.Print(&quot; world&quot;)
+	fmt.Print(&quot;hello&quot;)
+}
+// say: hello world!
+// useful for closing files, channels, etc.
+</code></pre>
+<h2 id="mutex" tabindex="-1">Mutex</h2>
+<pre><code class="language-Go">import &quot;sync&quot;
+var mu sync.Mutex
+mu.Lock()
+mu.Unlock()
+defer mu.Unlock() // useful to make sure mutex is unlocked
+</code></pre>
+<h2 id="nil-interfaces-expanded" tabindex="-1">Nil Interfaces (expanded)</h2>
+<pre><code class="language-Go">type I interface {
+	M()
+}
+type T struct {
+	S string
+}
+func (t *T) M() {
+	if t == nil {
+		fmt.Println(&quot;&lt;nil&gt;&quot;)
+		return
+	}
+	fmt.Println(t.S)
+}
+func main() {
+	var i I
+	var t *T // t is nil
+	i = t // i is nil
+	// calling interface methods of nil values is possible
+	i.M() // prints &lt;nil&gt;
+	
+	var i2 I // nil interface holds no value or type
+	i2.M() // runtime exception (panic) - Go does not know which method to call
+}
+</code></pre>
+<h2 id="channels-expanded" tabindex="-1">Channels (expanded)</h2>
+<p><a href="https://dave.cheney.net/2014/03/19/channel-axioms" target="_blank" class="external-link">Channel Axioms | Dave Cheney</a></p>
+<ul>
+<li>nil channels (default value) = BAD
+<ul>
+<li>send + receive on nil channels block forever</li>
+</ul>
+</li>
+<li>Caution with closed channels
+<ul>
+<li>send on a closed channel panics</li>
+<li>receive on a closed channel (with empty buffer) immediately returns with the zero value</li>
+</ul>
+</li>
+</ul>
+<h2 id="common-interfaces" tabindex="-1">Common interfaces</h2>
+<pre><code class="language-Go">// Stringer (e.g. for fmt.Println())
+import &quot;fmt&quot;
+type Person struct {
+	Name string
+	Age  int
+}
+func (p Person) String() string {
+	return fmt.Sprintf(&quot;%v (%v years)&quot;, p.Name, p.Age)
+}
+// Error (e.g. for returning error from func)
+type MyError struct {
+	When time.Time
+	What string
+}
+func (e *MyError) Error() string {
+	return fmt.Sprintf(&quot;at %v, %s&quot;,
+		e.When, e.What)
+}
+// Reader (implemented by files, network, compressors, etc.)
+import &quot;io&quot;
+// interface: func (T) Read(b []byte) (n int, err error)
+r := strings.NewReader(&quot;Hello, Reader!&quot;)
+b := make([]byte, 8)
+for {
+	n, err := r.Read(b)
+	fmt.Printf(&quot;n = %v err = %v b = %v\n&quot;, n, err, b)
+	fmt.Printf(&quot;b[:n] = %q\n&quot;, b[:n])
+	if err == io.EOF {
+		break
+	}
+}
+// n = 8 err = &lt;nil&gt; b = [72 101 108 108 111 44 32 82]
+// b[:n] = &quot;Hello, R&quot;
+// n = 6 err = &lt;nil&gt; b = [101 97 100 101 114 33 32 82]
+// b[:n] = &quot;eader!&quot;
+// n = 0 err = EOF b = [101 97 100 101 114 33 32 82]
+// b[:n] = &quot;&quot;
+</code></pre>
+<h2 id="generics" tabindex="-1">Generics</h2>
+<pre><code class="language-Go">// Index returns the index of x in s, or -1 if not found.
+// comparable is a special builtin interface for Generics
+func Index[T comparable](s []T, x T) int {
+	for i, v := range s {
+		// v and x are type T, which has the comparable
+		// constraint, so we can use == here.
+		if v == x {
+			return i
+		}
+	}
+	return -1
+}
+// Defining your own Generics interface
+type Number interface {
+	int | int32 | int64 | float32 | float64
+}
+func sum[T Number](nums []T) T {
+	var result T
+	for i := range nums {
+		result += numbers[i]
+	}
+	return result
+}
+// List represents a singly-linked list that holds values of any type.
+type List[T any] struct {
+	next *List[T]
+	val T
+}
+</code></pre>
+<h2 id="break-labels" tabindex="-1">Break Labels</h2>
+<pre><code class="language-go">    done := time.After(1 * time.Millisecond)
+    numbers := make(chan int)
+outer:
+    for {
+        select {
+        case &lt;-done:
+            break outer
+        case num := &lt;-numbers:
+            fmt.Println(num)
+        }
+    }
+</code></pre>
+<h2 id="format-time-string" tabindex="-1">Format time string</h2>
+<pre><code class="language-go">fmt.Println(time.Now().Format(&quot;20060102150405&quot;))
+
+const (
+    stdLongMonth      = &quot;January&quot;
+    stdMonth          = &quot;Jan&quot;
+    stdNumMonth       = &quot;1&quot;
+    stdZeroMonth      = &quot;01&quot;
+    stdLongWeekDay    = &quot;Monday&quot;
+    stdWeekDay        = &quot;Mon&quot;
+    stdDay            = &quot;2&quot;
+    stdUnderDay       = &quot;_2&quot;
+    stdZeroDay        = &quot;02&quot;
+    stdHour           = &quot;15&quot;
+    stdHour12         = &quot;3&quot;
+    stdZeroHour12     = &quot;03&quot;
+    stdMinute         = &quot;4&quot;
+    stdZeroMinute     = &quot;04&quot;
+    stdSecond         = &quot;5&quot;
+    stdZeroSecond     = &quot;05&quot;
+    stdLongYear       = &quot;2006&quot;
+    stdYear           = &quot;06&quot;
+    stdPM             = &quot;PM&quot;
+    stdpm             = &quot;pm&quot;
+    stdTZ             = &quot;MST&quot;
+    stdISO8601TZ      = &quot;Z0700&quot;  // prints Z for UTC
+    stdISO8601ColonTZ = &quot;Z07:00&quot; // prints Z for UTC
+    stdNumTZ          = &quot;-0700&quot;  // always numeric
+    stdNumShortTZ     = &quot;-07&quot;    // always numeric
+    stdNumColonTZ     = &quot;-07:00&quot; // always numeric
+    stdFracSecond0    = &quot;.0&quot;, &quot;.00&quot; // trailing zeros included
+    stdFracSecond9    = &quot;.9&quot;, &quot;.99&quot; // trailing zeros omitted
+)
+</code></pre>
+<h2 id="reading-a-file" tabindex="-1">Reading a file</h2>
+<pre><code class="language-Go">// full file into memory
+wholeFile, err := ioutil.ReadFile(&quot;file.txt&quot;)
+
+// line-by-line
+file, err := os.Open(&quot;file.txt&quot;)
+if err != nil { log.Fatal(err) }
+defer file.Close()
+scanner := bufio.NewScanner(file)
+for scanner.Scan() {
+	fmt.Println(scanner.Text())
+}
+if err := scanner.Err(); err != nil { log.Fatal(err) }
+// by words
+scanner := bufio.NewScanner(file)
+scanner.Split(bufio.ScanWords)
+for Scanner.Scan() {
+	fmt.Println(scanner.Text())
+}
+
+// in chunks
+file, err := os.Open(&quot;file.txt&quot;)
+if err != nil { log.Fatal(err) }
+defer file.Close()
+const chunkSize = 256
+buffer := make([]byte, chunkSize)
+for {
+	n, err := file.Read(buffer)
+	if err != nil &amp;&amp; err != io.EOF { log.Fatal(err) }
+	if err == io.EOF { break }
+	fmt.Println(string(buffer[:n]))
+	// print the data like in a hex editor
+	fmt.Printf(&quot;%s&quot;, hex.Dump(buffer))
+}
+file.Seek(0,0) // return to beginning
+file.Seek(6,0) // to byte 6 in file
+file.Seek(6,1) // to byte 6 from location (=12)
+offset, err := file.Seek(6,2) // to offset=length-6
+
+// File stats
+fileinfo, err := file.Stat()
+type FileInfo interface {
+	Name() string       // base name of the file
+	Size() int64        // length in bytes for regular files; system-dependent for others
+	Mode() FileMode     // file mode bits
+	ModTime() time.Time // modification time
+	IsDir() bool        // abbreviation for Mode().IsDir()
+	Sys() any           // underlying data source (can return nil)
+}
+</code></pre>
+<h2 id="command-line-arguments" tabindex="-1">Command Line Arguments</h2>
+<pre><code class="language-go">import (&quot;flag&quot;)
+
+// Return values are pointers (never nil!)
+brokerAddr := flag.String(&quot;broker&quot;, &quot;ssl://broker.hivemq.com:8883&quot;, &quot;Broker address including connection type and port&quot;)
+username := flag.String(&quot;user&quot;, &quot;&quot;, &quot;Username for the MQTT connection (optional)&quot;)
+intervalMs := flag.Int(&quot;interval&quot;, 1000, &quot;Send interval per instance in ms&quot;)
+// Use existing variables
+var decryptFlag bool
+flag.BoolVar(&amp;decryptFlag, &quot;d&quot;, false, &quot;decrypt the input&quot;) // shorthand
+flag.BoolVar(&amp;decryptFlag, &quot;decrypt&quot;, false, &quot;decrypt the input&quot;)
+
+flag.Usage = func() {
+	w := flag.CommandLine.Output()
+
+	fmt.Fprintf(w, &quot;Usage of %s:\n&quot;, os.Args[0])
+	fmt.Fprintln(w)
+	const usageStr = `Spawns a set number of clients, 
+which send messages with random values to a MQTT broker.`
+	fmt.Fprintln(w, usageStr)
+	fmt.Fprintln(w)
+
+	// Prints all flags and description text (last argument + default value)
+	flag.PrintDefaults()
+}
+
+// fills up the variables with data from args
+// variables will get their default values (second to last argument) when ommitted
+flag.Parse()
+
+// After parsing, any unparsed flags/positional arguments can be handled
+cnt := flag.NArg()
+arg := flag.Arg(i)
+for i,v := range flag.Args() {}
+</code></pre>
+<p>Usage</p>
+<ul>
+<li><code>-flag, -flag=x, --flag, --flag=x</code></li>
+<li><code>-flag x, --flag x</code> (non-boolean flags only)</li>
+</ul>
+<p>Positional arguments are not handled as expected! Flag stops parsing on the first positional argument / unhandled flag, so named flags have to come first (while order usually does not matter).<br>
+Workaround: <a href="https://stackoverflow.com/a/74146375" target="_blank" class="external-link">https://stackoverflow.com/a/74146375</a></p>
+<p>Shorthand: <a href="https://www.antoniojgutierrez.com/posts/2021-05-14-short-and-long-options-in-go-flags-pkg/" target="_blank" class="external-link">Short and Long Options with Go flag standard package (antoniojgutierrez.com)</a></p>
+<h2 id="printing-errors" tabindex="-1">Printing Errors</h2>
+<pre><code class="language-Go">log.Fatalf(&quot;ERROR: %q\n&quot;, err)
+// Prints: 2024/10/31 15:08:52 ERROR: &quot;error message&quot;
+fmt.Printf(&quot;ERROR: %q\n&quot;, err)
+os.Exit(1)
+// Prints: ERROR: &quot;error message&quot;
+panic(err)
+// Prints: panic: error message\n\n&lt;stacktrace&gt;
+// exit code 2
+</code></pre>
+<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
+</main>
+<aside>
+<div class="sidebar">
+<div class="sidebar-container">
+<div class="toc">
+<div class="toc-title-container">
+<div class="toc-title">
+On this page
+</div>
+</div>
+<div class="toc-container">
+<nav class="toc">
+<ol>
+<li><a href="#cheatsheet">Cheatsheet</a>
+<ol>
+<li><a href="#types-and-zero-values">Types and Zero-Values</a>
+</li>
+<li><a href="#var-const">var, const</a>
+</li>
+<li><a href="#struct">struct</a>
+</li>
+<li><a href="#array-slice">Array, slice</a>
+</li>
+<li><a href="#map-operations">Map operations</a>
+</li>
+<li><a href="#loops-switch">Loops, switch</a>
+</li>
+<li><a href="#return-values-error-handling">Return values, error handling</a>
+</li>
+<li><a href="#functions">Functions</a>
+</li>
+<li><a href="#methods">Methods</a>
+</li>
+<li><a href="#interfaces">Interfaces</a>
+</li>
+<li><a href="#channels">Channels</a>
+</li>
+</ol>
+</li>
+<li><a href="#public-private">Public / Private</a>
+</li>
+<li><a href="#organizing-modules">Organizing Modules</a>
+<ol>
+<li><a href="#program-with-main">Program with main</a>
+</li>
+<li><a href="#packages-libraries">Packages / Libraries</a>
+</li>
+<li><a href="#multiple-files-folders">Multiple files / folders</a>
+</li>
+<li><a href="#local-overrides">Local overrides</a>
+</li>
+</ol>
+</li>
+<li><a href="#update-modules">Update modules</a>
+</li>
+<li><a href="#testing">Testing</a>
+</li>
+<li><a href="#useful-modules">useful modules</a>
+</li>
+<li><a href="#enum-iota">enum / iota</a>
+</li>
+<li><a href="#exported-names">Exported names</a>
+</li>
+<li><a href="#json">JSON</a>
+<ol>
+<li><a href="#marshal-unmarshal">Marshal/Unmarshal</a>
+</li>
+</ol>
+</li>
+<li><a href="#embedded-struct">Embedded struct</a>
+</li>
+<li><a href="#closures">Closures</a>
+</li>
+<li><a href="#defer">Defer</a>
+</li>
+<li><a href="#mutex">Mutex</a>
+</li>
+<li><a href="#nil-interfaces-expanded">Nil Interfaces (expanded)</a>
+</li>
+<li><a href="#channels-expanded">Channels (expanded)</a>
+</li>
+<li><a href="#common-interfaces">Common interfaces</a>
+</li>
+<li><a href="#generics">Generics</a>
+</li>
+<li><a href="#break-labels">Break Labels</a>
+</li>
+<li><a href="#format-time-string">Format time string</a>
+</li>
+<li><a href="#reading-a-file">Reading a file</a>
+</li>
+<li><a href="#command-line-arguments">Command Line Arguments</a>
+</li>
+<li><a href="#printing-errors">Printing Errors</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",(e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")}),!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach((function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}}))</script>
+<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
+<script defer="defer">TIMESTAMP_FORMAT="MMM dd, yyyy HH:mm",document.querySelectorAll(".human-date").forEach((function(e){date=e.getAttribute("data-date")||e.innerText,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTML(date)),e.innerHTML=parsed_date.toFormat(TIMESTAMP_FORMAT)}))</script>
+<script>lucide.createIcons({attrs:{class:["svg-icon"]}})</script>
+</body>
+</html>
