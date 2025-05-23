@@ -16,5 +16,5 @@
 
 /* remove # before every toc element */
 .toc-container li::before {
-    content: none;
+    content: none !important;
 }
