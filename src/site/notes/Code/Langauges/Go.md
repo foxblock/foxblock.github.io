@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-23T14:05:03.439+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-23T14:58:40.690+02:00"}
 ---
 
 ## Cheatsheet
@@ -147,7 +147,7 @@ select { // blocks until one case can be run (random if 2+)
 	default: // run if nothing is ready
 }
 ```
-## Public / Private
+## Public / Private (exported names)
 
 > [!important] Capitalization is access/scope management
 > ```Go
@@ -159,7 +159,7 @@ select { // blocks until one case can be run (random if 2+)
 > func subt(val int) int { ... } // not exported
 > ```
 
-struct members and functions starting with a Capital letters are public/exported, those with lowercase letter are private/unexported (i.e. can only be accessed from the same module)
+struct members and functions starting with a Capital letter are public/exported, those with lowercase letters are private/unexported (i.e. can only be accessed from the same module and will not be used in marshalling)
 ## Organizing Modules
 [Organizing a Go module - The Go Programming Language](https://go.dev/doc/modules/layout)
 Unofficial (for big projects): [GitHub - golang-standards/project-layout: Standard Go Project Layout](https://github.com/golang-standards/project-layout)
@@ -346,23 +346,11 @@ const (
 	c2 = iota  // c2 == 2
 )
 ```
-## Exported names
-Namen mit Großbuchstaben am Anfang sind "exported". Dies betrifft Variablen in Paketen (für import) und bspw. JSON Encoding/Decoding.
-```Go
-type Payload struct {
-	Index int
-	DeviceId string
-	test float32
-}
-var pl Payload
-bytes, err := json.Marshal(pl) 
-// result: {"Index":0,"DeviceId":""}
-```
 ## JSON
 Use ``` `json:"..."` ```  strings to add compile time encoding information. First argument is the exported name of the member. `omitempty` can be used to remove null values from the export. 
 
 > [!IMPORTANT]
-> You need to rename fields, if you want to have lowercase starting letters for fields, since only exported fields are included in the marshalling process and exported fields need to start with a capital letter.
+> You need to rename fields, if you want to have lowercase starting letters for fields, since only [[#Public / Private (exported names)|exported fields]] are included in the marshalling process and exported fields need to start with a capital letter.
 
 > [!WARNING] nil slices ≠ empty slices in JSON
 > Nil slices (unitialized slices) are exported as "null", while empty slices (len=0, cap=0) are exported as empty array \[\]. Other than that they behave mostly the same in Go. See [null - nil slices vs non-nil slices vs empty slices in Go language - Stack Overflow](https://stackoverflow.com/questions/44305170/nil-slices-vs-non-nil-slices-vs-empty-slices-in-go-language)

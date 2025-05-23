@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/css/","tags":["knowledge-base"],"created":"2024-03-12T16:42:12.683+01:00","updated":"2025-05-23T14:04:20.139+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/css/","tags":["knowledge-base"],"created":"2024-03-12T16:42:12.683+01:00","updated":"2025-05-23T14:53:37.739+02:00"}
 ---
 
 ## Selectors
@@ -44,7 +44,7 @@ span, div /* apply same style to both span and div */
 ### Class nesting example
 [JSFiddle - Code Playground](https://jsfiddle.net/k6wxec39/)
 ![Pasted image 20240311124103.png](/img/user/attachments/Pasted%20image%2020240311124103.png)
-## em und rem
+## em, rem
 `em` is factor of font pixel-size in parent container
 `rem` works the same, but always references the root element `<html>`. Default `font-size` is 16px.
 ```html
