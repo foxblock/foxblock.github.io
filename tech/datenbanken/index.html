@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>janek.ing - Home</title>
+<title>Databases</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -23,44 +23,13 @@
 <style></style>
 </head>
 <body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
-<div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" x-data="{isDesktop: true, showNavMobile: false}">
-<div x-show.important="isDesktop" style="display:none">
-<nav class="navbar">
-<div class="navbar-inner">
-<a href="/" style="text-decoration:none">
-<img src="/img/logo.svg" style="height:3.5em;margin:12px 0;vertical-align:middle;border-radius:0">
-</a>
-</div>
-<div class="navbar-inner">
-<a href="/" style="text-decoration:none">
-<h2 style="margin:15px!important">About me</h2>
-</a>
-<a href="/projects" style="text-decoration:none">
-<h2 style="margin:15px!important">Projects</h2>
-</a>
-<a href="/garden" style="text-decoration:none">
-<h2 style="margin:15px!important">Digital Garden</h2>
-</a>
-</div>
-<div class="search-button align-icon" onclick="toggleSearch()">
-<span class="search-icon">
-<i icon-name="search"></i>
-</span>
-<span class="search-text">
-<span>Search</span>
-<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
-CTRL + K
-</span>
-</span>
-</div>
-</nav>
-</div>
+<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
 <div x-show.important="!isDesktop" style="display:none">
 <nav class="navbar">
-<span style="font-size:2rem;margin-right:24px;color:var(--link-color)" @click="showNavMobile=!showNavMobile"><i icon-name="menu"></i></span>
-<div class="navbar-inner" x-show.important="!showNavMobile" style="display:none">
+<div class="navbar-inner">
+<span style="font-size:2rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
 <a href="/" style="text-decoration:none">
-<img src="/img/logo.svg" style="height:3.5em;margin:12px 0;vertical-align:middle;border-radius:0">
+<img src="/img/logo.svg" style="height:3.5em;margin:12px 24px;vertical-align:middle;border-radius:0">
 </a>
 </div>
 <div class="search-button align-icon" onclick="toggleSearch()">
@@ -75,19 +44,75 @@ CTRL + K
 </span>
 </div>
 </nav>
-<div x-show="showNavMobile" @click="showNavMobile = false" style="display:none" class="fullpage-overlay"></div>
-<nav class="filetree-sidebar" x-show.important="showNavMobile" style="display:none">
-<a href="/" style="text-decoration:none">
-<h2 style="margin:15px!important">About me</h2>
-</a>
-<a href="/projects" style="text-decoration:none">
-<h2 style="margin:15px!important">Projects</h2>
-</a>
-<a href="/garden" style="text-decoration:none">
-<h2 style="margin:15px!important">Digital Garden</h2>
-</a>
-</nav>
 </div>
+<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
+<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:15px auto;display:block;border-radius:0">
+</a>
+<div style="display:flex;justify-content:center">
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</div>
+<div class="folder" x-data="{isOpen: true}">
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Tech')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Tech</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/datenbanken/">Databases </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Technik')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Technik</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/technik/linux/">Linux </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Work')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Work</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/work/communication-is-key/">Communication is Key </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+</div>
+</nav>
 </div>
 <div class="search-container" id="globalsearch" onclick="toggleSearch()">
 <div class="search-box">
@@ -112,18 +137,128 @@ CTRL + K
 <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-05-23T12:15:57.919Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-05-23T12:15:57.919Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-05-23T12:15:57.919Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
-<h1></h1>
+<h1 data-note-icon="">Databases</h1>
 <div class="header-meta">
 <div class="header-tags">
+<a class="tag" onclick="toggleTagSearch(this)">
+#knowledge-base
+</a>
 </div>
-</div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2024-08-09T07:54:46.863+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-23T14:15:27.873+02:00"></span></div></div></div>
 </header>
-<h1 id="hi" tabindex="-1">Hi!</h1>
-<p>I am Janek, programmer / engineer / tinkerer from Cologne, Germany.</p>
-<p>My passion is building software for humans that lasts, combining electronics and design into interactive pieces and creating games for various platforms. Examples for all of these are showcased on the <a class="internal-link" target="" data-note-icon="" href="/projects/">Projects page</a>.</p>
-<p>Growing up in the 90s and 2000s, naturally my first &quot;programming&quot; experience was building a website for myself (using plain HTML, CSS and PHP). It showcased photos I took, cool videos I found on the web and &quot;funny&quot; jokes only me and my friends laughed about (and of course it had a forum with 2 active users, including me). It was online for a couple of years until the free webhosting provider I used went out of business. Nowadays the web is different, but mostly full of ads. Reading about the idea of a <a href="https://maggieappleton.com/garden-history/" target="_blank" class="external-link">&quot;digital garden&quot;</a> reminded me of the old days where the web was mostly about sharing your ideas and experiences. A place of curiosity without the immediate drive to make money off everything.</p>
-<p>To participate in this idea, I publish some of my notes in my <a class="internal-link" target="" data-note-icon="" href="/garden/">Digital Garden</a>. If you find anything worthwhile or a mistake, consider leaving a comment.</p>
+<p><a href="https://www.youtube.com/watch?v=W2Z7fbCLSTw" target="_blank" class="external-link">7 Database Paradigms (youtube.com)</a></p>
+<h2 id="1-key-value" tabindex="-1">1. Key-Value</h2>
+<p>Example: Redis, Memcached</p>
+<ul>
+<li>Entries are just pairs of keys and values</li>
+<li>Database is usually stored in memory</li>
+<li>Very fast, but limited space (amount of RAM)</li>
+<li>No advanced queries (e.g. join, filter), just set and get<br>
+Good for: Caching, Pub/Sub, Highscores, unstructured data<br>
+Not: Main/persistent app data, complex relations</li>
+</ul>
+<h2 id="2-wide-column" tabindex="-1">2. Wide-column</h2>
+<p>Example: Cassandra, Hbase</p>
+<ul>
+<li>Fixed columns for values</li>
+<li>Key -&gt; row of values</li>
+<li>No schema (data types for columns is not fixed)</li>
+<li>Query language is like SQL, but simpler (no join)</li>
+<li>Scales well horizontally<br>
+Good for: Time-series, historical records, high-write to low-read ratio<br>
+Not: Primary app database</li>
+</ul>
+<h2 id="3-document" tabindex="-1">3. Document</h2>
+<p>Example: MongoDB, Firestore</p>
+<ul>
+<li>Data is collection of documents</li>
+<li>Collections and documents can have hierarchy</li>
+<li>Documents are key-value stores (unstructured, without schema)</li>
+<li>Very flexible in data modeling</li>
+<li>Quite complex on the inside</li>
+<li>SQL: group data by content-type (posts, comments, authors, etc.) &lt;-&gt; Mongo: group data by application</li>
+<li>Reads can be faster (get all data for blog post from one source), but writes can be complex (update author name needs to touch all documents by that author)</li>
+<li>No join, but data can be grouped into &quot;master&quot; document by references<br>
+Good for: it is very general purpose, unstructured data<br>
+Not: it is too general purpose, also graphs (needs join)</li>
+</ul>
+<h2 id="4-relational" tabindex="-1">4. Relational</h2>
+<p>Example: MySQL, Postgres</p>
+<ul>
+<li>Data is grouped by content-type (e.g. 3 tables for users, comments, posts)</li>
+<li>Each entry has its own unique key</li>
+<li>Entries can reference elements from other tables by these keys</li>
+<li>Join fetches the data from the referenced &quot;foreign&quot; tables into one</li>
+<li>Schema is required (column names and data-types are fixed)</li>
+<li>ACID complicant: atomicity, consistency, isolation, durability</li>
+<li>Difficult to scale<br>
+Good for: most data<br>
+Not: unstructured data</li>
+</ul>
+<h2 id="5-graph" tabindex="-1">5. Graph</h2>
+<p>Example: Neo4j, Dgraph</p>
+<ul>
+<li>Data is nodes, relationships are edges in a graph</li>
+<li>Custom query language</li>
+<li>No join required, queries can be more concise<br>
+Good for: graphs, recommendation engines<br>
+Not: not-graphs?</li>
+</ul>
+<h2 id="6-search-index" tabindex="-1">6. Search / Index</h2>
+<p>Example: Elasticsearch, Lucene, Solr, Meiliserach</p>
+<ul>
+<li>Similar to Document-type</li>
+<li>DB analyzes text in documents and creates index of searchable terms</li>
+<li>Can add algorithms for ranking, spell-checking, filtering, etc.</li>
+<li>Very fast for its main purpose (search only hits index, not all documents)</li>
+<li>Adds overhead, can be expensive at scale<br>
+Good for: Search</li>
+</ul>
+<h2 id="7-multi-model" tabindex="-1">7. Multi-model</h2>
+<p>Example: FaunaDB</p>
+<ul>
+<li>Frontend describes how it wants to access data in GraphQL schema</li>
+<li>Fauna creates collections and index from schema</li>
+<li>Uses multiple DB models in background</li>
+</ul>
+<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
+<aside>
+<div class="sidebar">
+<div class="sidebar-container">
+<div class="toc">
+<div class="toc-title-container">
+<div class="toc-title">
+On this page
+</div>
+</div>
+<div class="toc-container">
+<nav class="toc">
+<ol>
+<li><a href="#1-key-value">1. Key-Value</a>
+</li>
+<li><a href="#2-wide-column">2. Wide-column</a>
+</li>
+<li><a href="#3-document">3. Document</a>
+</li>
+<li><a href="#4-relational">4. Relational</a>
+</li>
+<li><a href="#5-graph">5. Graph</a>
+</li>
+<li><a href="#6-search-index">6. Search / Index</a>
+</li>
+<li><a href="#7-multi-model">7. Multi-model</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",(e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")}),!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach((function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}}))</script>
+<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
+<script defer="defer">TIMESTAMP_FORMAT="MMM dd, yyyy HH:mm",document.querySelectorAll(".human-date").forEach((function(e){date=e.getAttribute("data-date")||e.innerText,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTML(date)),e.innerHTML=parsed_date.toFormat(TIMESTAMP_FORMAT)}))</script>
 <script>lucide.createIcons({attrs:{class:["svg-icon"]}})</script>
 </body>
 </html>
