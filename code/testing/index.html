@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Linux</title>
+<title>Testing</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -133,7 +133,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
 </div>
 </div>
 </div>
@@ -163,7 +163,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
 </div>
 </div>
 </div>
@@ -217,223 +217,119 @@ CTRL + K
 <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-05-23T13:10:27.135Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-05-23T13:10:27.135Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-05-23T13:10:27.135Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
-<h1 data-note-icon="">Linux</h1>
+<h1 data-note-icon="">Testing</h1>
 <div class="header-meta">
 <div class="header-tags">
 <a class="tag" onclick="toggleTagSearch(this)">
-#knowledge-base
+#experience
+</a>
+<a class="tag" onclick="toggleTagSearch(this)">
+#opinion
+</a>
+<a class="tag" onclick="toggleTagSearch(this)">
+#german
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-05-18T12:02:24.706+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-20T20:20:17.876+02:00"></span></div></div></div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2024-08-16T15:14:54.945+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-23T15:09:18.718+02:00"></span></div></div></div>
 </header>
-<h2 id="folder-structure" tabindex="-1">Folder structure</h2>
-<pre><code>/bin - essential binaries for all users (like cd, bash)
-/sbin - admin system binaries
-/boot - files for booting (like the kernel)
-/dev - device files (file-like access to (virtual) hardware)
-	/dev/sda - first SATA drive
-	/dev/random - random number generator
-	/dev/null - no output, discard all input
-	/dev/zero - infinite 0s
-/etc - configuration files for programs
-/home - home folders for each user (alias ~)
-	/home/username - also contains userspace config files
-/lib - system library files (needed for programs in /bin)
-/lost+found - corrupted files after a crash will end here
-/media - removable media (USB-Drives, CDs, etc.)
-/mnt - manual mounting points (created by admins)
-/opt - optional software
-/proc - contains info about running processes
-/root - home folder for root user
-/tmp - temporary files (no guaranteed persistance)
-/usr - user binaries and program data
-	/usr/bin - userspace /bin (contains most programs)
-	/usr/sbin - admin programs
-	/usr/lib - library files
-	/usr/share - documentation
-	/usr/include - include files for compiling
-/var - runtime information stored by programs (logs, cache)
-	/var/log/wtmp - login history
-</code></pre>
-<h2 id="chmod" tabindex="-1">chmod</h2>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>Number</th>
-<th>Permission</th>
-<th>Sum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>– – –</td>
-<td>0+0+0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>– – x</td>
-<td>0+0+1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>– w –</td>
-<td>0+2+0</td>
-</tr>
-<tr>
-<td>3</td>
-<td>– w x</td>
-<td>0+2+1</td>
-</tr>
-<tr>
-<td>4</td>
-<td>r – –</td>
-<td>4+0+0</td>
-</tr>
-<tr>
-<td>5</td>
-<td>r – x</td>
-<td>4+0+1</td>
-</tr>
-<tr>
-<td>6</td>
-<td>r w –</td>
-<td>4+2+0</td>
-</tr>
-<tr>
-<td>7</td>
-<td>r w x</td>
-<td>4+2+1</td>
-</tr>
-</tbody>
-</table></div>
-<p>Three groups:</p>
-<ol>
-<li>One permission for the <em>owner,</em> the person who created the file or folder.</li>
-<li>One permission for all of the people in the same primary <em>group</em> of the owner.</li>
-<li>One permission for everyone else, which includes <em>unauthenticated and anonymous users</em>.</li>
-</ol>
-<p>To change all directories under the current path to 755 (<code>drwxr-xr-x</code>), excluding dotfiles (recursive):</p>
-<pre><code class="language-bash">find . ! -path . ! -path '*/.*' -type d -exec chmod 755 '{}' \;
-</code></pre>
-<p>To change all files in the current path to 644 (<code>-rw-r--r--</code>), excluding dotfiles (recursive):</p>
-<pre><code class="language-bash">find . ! -path '*/.*' -type f -exec chmod 644 '{}' \;
-</code></pre>
-<h2 id="chown" tabindex="-1">chown</h2>
-<p><a href="https://linuxize.com/post/linux-chown-command/" target="_blank" class="external-link">Chown Command in Linux (File Ownership) | Linuxize</a></p>
-<pre><code class="language-bash">chown -R USER:GROUP ./ 
-</code></pre>
-<h2 id="which" tabindex="-1">which</h2>
-<p>Find out where binary lives</p>
-<pre><code class="language-bash">which curl
-</code></pre>
-<h2 id="find-process" tabindex="-1">Find process</h2>
-<pre><code class="language-bash">ps -aux | grep [keyword]
-</code></pre>
+<p><a href="https://youtu.be/IqHaGd9J42s?feature=shared&amp;t=1511" target="_blank" class="external-link">https://youtu.be/IqHaGd9J42s?feature=shared&amp;t=1511</a><br>
+<a href="https://www.youtube.com/watch?v=isI1c0eGSZ0" target="_blank" class="external-link">https://www.youtube.com/watch?v=isI1c0eGSZ0</a><br>
+<a href="https://youtu.be/kJWsFWY25GA?feature=shared" target="_blank" class="external-link">https://youtu.be/kJWsFWY25GA?feature=shared</a><br>
+<a href="https://grugbrain.dev/" target="_blank" class="external-link">https://grugbrain.dev/</a><br>
+<a href="https://lightbrd.com/SebAaltonen/status/1924075241413705914#m" target="_blank" class="external-link">https://lightbrd.com/SebAaltonen/status/1924075241413705914#m</a></p>
+<h2 id="generell" tabindex="-1">Generell</h2>
 <ul>
-<li><code>-a</code>: show all processes (including root, system, etc.), not just the ones belonging to current user</li>
-<li><code>u</code>: show in &quot;user oriented format&quot;, i.e. table with more information</li>
-<li><code>x</code>: show background processes and daemons without controlling terminal (tty)</li>
+<li>100% Coverage ist Quatsch (trivialer Code muss nicht getestet werden und erzeugt nur Rattenschwanz an Mehraufwand). 100% sagt auch nichts darüber aus, ob wirklich alle Edge-Cases getroffen wurden (sondern nur, dass jede Zeile Code mindestens 1x von einem Test aufgerufen wird) - ist also kein Garant für Bug-freien Code.</li>
+<li>Tests sind Code und können auch Bugs enthalten (Wer testet die Tests?)</li>
+<li>Tests sollten so deklarativ wie möglich sein (doX; doY; doZ)</li>
+<li>Tests müssen ordentlich funktionieren. Wenn Tests zu viele false-positives liefern werden sie irgendwann ignoriert.
+<ul>
+<li>Ein fehlender Test ist besser als ein falscher Test!</li>
 </ul>
-<h2 id="find-text-in-files" tabindex="-1">Find text in files</h2>
-<pre><code class="language-bash">grep -HiRn [text] [files/folders]
-</code></pre>
+</li>
+<li>Test-Code muss von mindestens so erfahrenem Entwickler geschrieben werden, wie der zu testende Application Code
 <ul>
-<li><code>-H</code>: print out filename of result</li>
-<li><code>-i</code>: ignore case</li>
-<li><code>-R</code>: recursive search in passed folders, follow symlinks</li>
-<li><code>-n</code>: print line-number of result</li>
+<li>Es ist sehr schwierig alle Edge-Cases auf dem Schirm zu haben und zu testen. Aber hier liegt der wahre Wert von Tests.</li>
 </ul>
-<h2 id="find-previous-command" tabindex="-1">Find previous command</h2>
-<pre><code class="language-bash">history | grep [command]
-</code></pre>
-<h2 id="find-text-or-files-starting-with-minus" tabindex="-1">Find text or files starting with minus -</h2>
-<p>Passing arguments which starts with a minus to a tool will be usually interpreted as an option. This creates a problem when you want to delete a filename or grep text starting with a minus.<br>
-Solution: Pass <code>--</code> to signify the end of the options.</p>
-<pre><code class="language-bash">ps --help | grep -- -a
-rm -- --somefile.txt
-</code></pre>
-<p>Source: <a href="https://unix.stackexchange.com/a/87357" target="_blank" class="external-link">https://unix.stackexchange.com/a/87357</a></p>
-<h2 id="compress-extract-zip-files" tabindex="-1">Compress / extract zip files</h2>
-<pre><code class="language-bash">tar -czf [filename/folder]
-tar -xzf [filename]
-</code></pre>
-<p>&quot;Compres Ze File&quot; / &quot;Xtract Ze File</p>
-<ul>
-<li><code>-c</code>: compress</li>
-<li><code>-x</code>: extract</li>
-<li><code>-z</code>: use gzip</li>
-<li><code>-f</code>: use file archive</li>
+</li>
+<li>Generell gute Idee: Wenn man einen neuen Bug findet, einen Test für den Fix schreiben (welcher ohne Fix anschlägt), um Regressionen zu vermeiden. Insbesondere bei komplexen Bugs sehr zu empfehlen.</li>
+<li>Testcode sollten Bereiche testen, wo der Output relativ stabil ist. Wenn sich bei Änderung der Implementierung auch der Output ändert, müssen meist die Test-Cases angepasst werden und sind damit wertlos (bzw. erzeugen nur Mehraufwand). Den Scope des Tests (Unit vs. Integration vs. E2E vs. ...) richtig zu wählen, kann hier Arbeit ersparen (bspw. keine Unit Tests für eine Implementierung schreiben, welche sich täglich ändert, sondern lieber einen E2E Test wenn das Ergebnis immer gleich ist)</li>
 </ul>
-<h2 id="show-active-network-connections" tabindex="-1">Show active network connections</h2>
-<pre><code class="language-bash">netstat -tulpen
-</code></pre>
+<h2 id="test-driven-development-tdd" tabindex="-1">Test Driven Development (TDD)</h2>
 <ul>
-<li><code>-t</code>: show TCP connections.</li>
-<li><code>-u</code>: show UDP connections.</li>
-<li><code>-l</code>: list only listening sockets.</li>
-<li><code>-p</code>: show the PID and name of the program to which each socket belongs.</li>
-<li><code>-e</code>: display extended information, including user ID and inode.</li>
-<li><code>-n</code>: show numerical addresses instead of resolving hostnames.</li>
+<li>Kann sinnvoll sein, muss aber zielgerichtet eingesetzt werden</li>
+<li>Kann dazu führen, dass man Code schreibt, welcher sich zu sehr auf die vorher definierten Tests fokussiert und nicht auf den eigentlichen &quot;Job-to-be-done&quot; (also z.B. eine API welche die Tests super abdeckt, aber in der Praxis schwer zu benutzen ist)</li>
+<li>Test im vorhinein zu schreiben ist sehr schwierig, da das System oder die Aufgabe meist nicht klar definiert ist. Kann dazu führen, dass man während der Entwicklung viel Arbeit doppelt macht. Oftmals ist es einfacher ein System zu testen, sobald es sich stabilisiert hat.</li>
+<li>TDD scores können als Gamification-Element zur Erhöhung der Motivation beitragen (man will seinen Test-Score erhöhen und quält sich deswegen durch ein langweiliges Problem)</li>
 </ul>
-<h2 id="show-filesystems" tabindex="-1">Show filesystems</h2>
-<pre><code class="language-bash">df -Thal
-</code></pre>
+<h2 id="unit-tests" tabindex="-1">Unit Tests</h2>
+<p><em>Testen von einzelnen Code &quot;Units&quot;, also z.B. Funktionen, Datentypen, Modulen etc.</em></p>
 <ul>
-<li><code>-T</code>: show the file system type.</li>
-<li><code>-h</code>: display sizes in a human-readable format (e.g., KB, MB, GB).</li>
-<li><code>-a</code>: include all file systems, even those that are not currently mounted.</li>
-<li><code>-l</code>: limit the output to local file systems only.</li>
+<li>Keine Logik in Unit-Tests! (if..else) -&gt; macht debugging deutlich schwieriger und man kann sich nicht darauf verlassen, dass alle Pfade richtig getestet wurden</li>
+<li>Bei einem Refactoring müssen auch die meisten Unit Tests umgeschrieben werden
+<ul>
+<li>Zu umfangreiche Tests vermeiden</li>
+<li>Unit Tests für trivialen Code vermeiden</li>
+<li>Ggf. besser: Integrations-Tests in CI/CD-Pipeline</li>
+<li>Zu viele Tests erhöhen die Reibung bei einem notwendigen Rewrite und halten ggf. davon ab (man will keinen fertigen Code wegschmeißen)</li>
 </ul>
-<h2 id="show-disk-usage" tabindex="-1">Show disk usage</h2>
-<pre><code class="language-bash">du -hs *
-</code></pre>
+</li>
+<li>Empfohlen bei komplexen Code (wo man Code nicht auf Anhieb richtig hinbekommen hat)</li>
+<li>Bei Libraries empfohlen, sobald API einigermaßen fest ist
 <ul>
-<li><code>-h</code>: display sizes in a human-readable format (e.g., KB, MB, GB).</li>
-<li><code>-s</code>: provide a summary of the disk usage for each specified file or directory, rather than listing the usage for each individual file within directories.</li>
+<li>Tests können als eine Art Dokumentation einer API dienen, da man sieht wie Funktionen aufgerufen und welche Ergebnisse erwartet werden.</li>
+<li>Casey empfiehlt (-&gt;<a class="internal-link is-unresolved" href="/404" target="">Architecture#API Design</a>) den Anwendungscode zuerst zu schreiben. Dies kann auch in Form von Tests passieren, wenn diese nah an der realen Anwendung orientiert sind.</li>
 </ul>
-<h2 id="show-files-in-current-folder-detailed" tabindex="-1">Show files in current folder (detailed)</h2>
-<pre><code class="language-bash">ls -lisah
-</code></pre>
+</li>
+<li>Herausforderung: Testen von Verbindungen zu externen Quellen (Lesen/Schreiben von Dateien, Zugriff auf Datenbanken, HTTP, etc.)
 <ul>
-<li><code>-l</code>: Uses a long listing format, providing detailed information about each file and directory, such as permissions, number of links, owner, group, size, and modification date.</li>
-<li><code>-i</code>: Shows the inode number for each file and directory.</li>
-<li><code>-s</code>: Displays the size of each file in blocks.</li>
-<li><code>-a</code>: Includes all files, even those that are hidden (files starting with a dot <code>.</code>).</li>
-<li><code>-h</code>: Displays sizes in a human-readable format (e.g., KB, MB, GB).</li>
+<li>Mocking: Simulation externer Abhängigkeiten (z.B. Datei oder Datenbank) durch eigene &quot;Fake&quot;-Implementation. (z.B. indem Zugriff in abstrakten &quot;provider&quot; gewrappt ist). Achtung: Hierbei werden ggf. nicht die Fehlerfälle getestet, welche bei echtem Zugriff entstehen können. Erfolg hängt von Qualität des Mocks ab und ist ggf. mit hohem Aufwand verbunden.</li>
+<li>Besser: Split von Zugriff und Verarbeitung der Daten (zweite Funktion welche z.B. byte-Array als Input nimmt). Können separat getestet werden.</li>
+<li><a href="https://youtu.be/isI1c0eGSZ0?feature=shared&amp;t=540" target="_blank" class="external-link">https://youtu.be/isI1c0eGSZ0?feature=shared&amp;t=540</a></li>
 </ul>
-<h2 id="logrotate" tabindex="-1">Logrotate</h2>
-<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner">Warning</div></div>
-<div class="callout-content">
-<p>
-Does not work properly on CentOS6, but seems to work as intended on Ubuntu 24.04</p>
-</div></div>
-<p><a href="https://linux.die.net/man/8/logrotate" target="_blank" class="external-link">https://linux.die.net/man/8/logrotate</a><br>
-Put a file (usually named after the program/logfile you are rotating) in <code>/etc/logrotate.d/</code>. For example: <code>/etc/logrotate.d/mosquitto</code></p>
-<pre><code>/var/log/mosquitto/mosquitto.log {
-    rotate 12
-    monthly
-    compress
-    delaycompress
-    size 100k
-    nocreate
-    missingok
-    postrotate
-        if invoke-rc.d mosquitto status &gt; /dev/null 2&gt;&amp;1; then \
-            invoke-rc.d mosquitto reload &gt; /dev/null 2&gt;&amp;1; \
-        fi;
-    endscript
-}
-
-</code></pre>
+</li>
+<li>Gefahr, dass Code geschrieben wird, der zwar sehr &quot;testbar&quot; ist, aber die eigentliche Aufgabe nur schlecht erfüllt (zu langsam ist, schlechte API, zu viele Abstraktionen, etc.). Wird durch TDD zusätzlich erhöht, wenn Tests zuerst geschrieben werden und der Code danach nur auf die Tests ausgerichtet ist.</li>
+<li>Tests müssen schnell sein! Iterationsgeschwindigkeit ist key und Tests dürfen dem nicht im Wege stehen
 <ul>
-<li><code>rotate 12</code>: keeps at most 12 versions of the file specified at the very beginning</li>
-<li><code>monthly</code>: rotate on first run of the month (i.e. keep one file per month), can also be daily, weekly or yearly</li>
-<li><code>compress</code>, <code>delaycompress</code>: compress rotated files after 2 rotations (i.e. keep file for current and last month uncompressed)</li>
-<li><code>size</code>: rotate only if size is bigger than specified limit (100k = 100KiB, 100M = 100MiB, 100G = 100Gib)</li>
-<li><code>nocreate</code>: logrotate does not create the new log file after rotating (the original program has to do it)</li>
-<li><code>missingok</code>: don't raise an error if file is missing</li>
-<li><code>postrotate</code>: what to do after rotation - we just kept the script, which was generated by mosquitto on install</li>
+<li>Zugriff auf externe Systeme (Datenbanken, Dateisystem, Web!) vermeiden und lieber &quot;golden master&quot; Testdaten im Code ablegen.</li>
+</ul>
+</li>
+<li>Programmiersprachen mit striktem Typensystem haben gewisse Tests eingebaut (Test auf Kompatibilität der Datentypen, Test auf Verlust bei Konvertierung, Test auf Mutability, etc.). Wenn dies genutzt werden kann, ist dies immer besser als ein vergleichbarer Unit-Test (kein zusätzlicher Code, mit größerer Sicherheit Bug-frei, schneller/effizienter).</li>
+</ul>
+<h2 id="integration-tests" tabindex="-1">Integration Tests</h2>
+<p><em>Test des Zusammenspiels mehrerer Module (Klassen, Services, Funktionen, etc.)</em></p>
+<ul>
+<li>Gute Möglichkeit Wechselwirkung und Kommunikation zwischen mehreren Bereichen des Codes zu testen (z.B. Zugriff auf Datenbank + Verarbeitung der Daten oder Authentifizierung + Login)</li>
+<li>Umfang und Aufwand liegt zwischen Unit- und E2E-Tests</li>
+<li>Sollten erst geschrieben werden, wenn der Systemaufbau einigermaßen stabil ist. Ansonsten zu viel Arbeit zum Maintainen</li>
+</ul>
+<h2 id="end-to-end-tests" tabindex="-1">End-To-End Tests</h2>
+<p><em>Testen des gesamten Produktes anhand der Systemgrenzen (z.B. von User-Input bis GUI oder Eintreffen eines Datenpakets, über die Verarbeitung bis zum Versand einer Alert-E-Mail)</em></p>
+<ul>
+<li>Idealerweise in CI/CD-Pipeline integriert</li>
+<li>Testen idealerweise das gesamte System mit seinen Abhängigkeiten in einer &quot;realen&quot; Umgebung</li>
+<li>Fokus auf die wichtigsten (am häufigsten genutzten) Funktionen</li>
+<li>Sehr aufwändig zu implementieren und zu maintainen</li>
+<li>Müssen reproduzierbar sein, ansonsten wird debugging unmöglich</li>
+</ul>
+<h2 id="snapshot-tests" tabindex="-1">Snapshot Tests</h2>
+<ul>
+<li>Man nimmt einen Schnappschuss des Systems im &quot;known good&quot; Zustand auf (&quot;golden Master&quot;) und vergleicht im Folgenden damit (bspw. Zustand des Programms nachdem gewisser Input geliefert wurde)</li>
+<li>Abweichungen vom Schnappschuss führen zum Fehlschlagen des Tests und Diff kann dann näher zur Ursachenforschung untersucht werden</li>
+<li>Eine Form von Integration oder End-To-End Tests</li>
+<li>Aufwendig aufzubauen, aber sehr hilfreich bei großen Änderungen</li>
+<li>Hilft ungewollte Veränderung an global state zu erkennen</li>
+<li>Nur sinnvoll, wenn der Systemzustand konstant bleibt (also bspw. die Änderungen nur den Weg dahin beeinflussen, aber nicht den Zustand an sich)</li>
+</ul>
+<h2 id="test-framework-fuer-c" tabindex="-1">Test-Framework für C</h2>
+<ul>
+<li>assert, assertf</li>
+<li><a href="https://nemequ.github.io/munit/#miscellaneous" target="_blank" class="external-link">µnit — C Unit Testing Framework</a>
+<ul>
+<li>Vordefinierte assert Makros</li>
+<li>Definition von Test-Suites mit Performance-Benchmark und Statistik Output</li>
+</ul>
+</li>
 </ul>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
@@ -449,33 +345,19 @@ On this page
 <div class="toc-container">
 <nav class="toc">
 <ol>
-<li><a href="#folder-structure">Folder structure</a>
+<li><a href="#generell">Generell</a>
 </li>
-<li><a href="#chmod">chmod</a>
+<li><a href="#test-driven-development-tdd">Test Driven Development (TDD)</a>
 </li>
-<li><a href="#chown">chown</a>
+<li><a href="#unit-tests">Unit Tests</a>
 </li>
-<li><a href="#which">which</a>
+<li><a href="#integration-tests">Integration Tests</a>
 </li>
-<li><a href="#find-process">Find process</a>
+<li><a href="#end-to-end-tests">End-To-End Tests</a>
 </li>
-<li><a href="#find-text-in-files">Find text in files</a>
+<li><a href="#snapshot-tests">Snapshot Tests</a>
 </li>
-<li><a href="#find-previous-command">Find previous command</a>
-</li>
-<li><a href="#find-text-or-files-starting-with-minus">Find text or files starting with minus -</a>
-</li>
-<li><a href="#compress-extract-zip-files">Compress / extract zip files</a>
-</li>
-<li><a href="#show-active-network-connections">Show active network connections</a>
-</li>
-<li><a href="#show-filesystems">Show filesystems</a>
-</li>
-<li><a href="#show-disk-usage">Show disk usage</a>
-</li>
-<li><a href="#show-files-in-current-folder-detailed">Show files in current folder (detailed)</a>
-</li>
-<li><a href="#logrotate">Logrotate</a>
+<li><a href="#test-framework-fuer-c">Test-Framework für C</a>
 </li>
 </ol>
 </nav>

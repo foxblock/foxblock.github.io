@@ -3,52 +3,117 @@
     
         <url>
             <loc>/404.html</loc>
-            <lastmod>2025-05-23T12:59:02.380Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.829Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/collision-detection/</loc>
+            <lastmod>2025-05-23T13:10:18.894Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/data-structures-and-algorithms/</loc>
+            <lastmod>2025-05-23T13:10:18.894Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/error-handling/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/game-programming/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/langauges/batch/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/langauges/c/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
         </url>
     
         <url>
             <loc>/code/langauges/css/</loc>
-            <lastmod>2025-05-23T12:59:02.460Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
         </url>
     
         <url>
             <loc>/code/langauges/go/</loc>
-            <lastmod>2025-05-23T12:59:02.460Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/langauges/java-script/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/langauges/lua/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/langauges/powershell/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/rest-vs-websockets/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/rules-for-code-comments/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/code/testing/</loc>
+            <lastmod>2025-05-23T13:10:18.895Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>/design/ui-ux/</loc>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
         <url>
             <loc>/tech/database-types/</loc>
-            <lastmod>2025-05-23T12:59:02.460Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
         <url>
             <loc>/tech/linux/</loc>
-            <lastmod>2025-05-23T12:59:02.460Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
         <url>
             <loc>/</loc>
-            <lastmod>2025-05-23T12:59:02.460Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
         <url>
             <loc>/garden/</loc>
-            <lastmod>2025-05-23T12:59:02.461Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
         <url>
             <loc>/imprint/</loc>
-            <lastmod>2025-05-23T12:59:02.461Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
         <url>
             <loc>/projects/</loc>
-            <lastmod>2025-05-23T12:59:02.461Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
         <url>
             <loc>/work/communication-is-key/</loc>
-            <lastmod>2025-05-23T12:59:02.461Z</lastmod>
+            <lastmod>2025-05-23T13:10:18.896Z</lastmod>
         </url>
     
 </urlset>

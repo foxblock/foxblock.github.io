@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Linux</title>
+<title>Game Programming</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -121,7 +121,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
@@ -163,7 +163,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
 </div>
 </div>
 </div>
@@ -217,224 +217,320 @@ CTRL + K
 <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-05-23T13:10:27.135Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-05-23T13:10:27.135Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-05-23T13:10:27.135Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
-<h1 data-note-icon="">Linux</h1>
+<h1 data-note-icon="">Game Programming</h1>
 <div class="header-meta">
 <div class="header-tags">
 <a class="tag" onclick="toggleTagSearch(this)">
 #knowledge-base
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-05-18T12:02:24.706+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-20T20:20:17.876+02:00"></span></div></div></div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-04-04T16:35:15.777+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-23T15:07:53.252+02:00"></span></div></div></div>
 </header>
-<h2 id="folder-structure" tabindex="-1">Folder structure</h2>
-<pre><code>/bin - essential binaries for all users (like cd, bash)
-/sbin - admin system binaries
-/boot - files for booting (like the kernel)
-/dev - device files (file-like access to (virtual) hardware)
-	/dev/sda - first SATA drive
-	/dev/random - random number generator
-	/dev/null - no output, discard all input
-	/dev/zero - infinite 0s
-/etc - configuration files for programs
-/home - home folders for each user (alias ~)
-	/home/username - also contains userspace config files
-/lib - system library files (needed for programs in /bin)
-/lost+found - corrupted files after a crash will end here
-/media - removable media (USB-Drives, CDs, etc.)
-/mnt - manual mounting points (created by admins)
-/opt - optional software
-/proc - contains info about running processes
-/root - home folder for root user
-/tmp - temporary files (no guaranteed persistance)
-/usr - user binaries and program data
-	/usr/bin - userspace /bin (contains most programs)
-	/usr/sbin - admin programs
-	/usr/lib - library files
-	/usr/share - documentation
-	/usr/include - include files for compiling
-/var - runtime information stored by programs (logs, cache)
-	/var/log/wtmp - login history
+<h2 id="lerp-smoothing" tabindex="-1">Lerp Smoothing</h2>
+<p>Advantage: Nice smoothing of animations in-place, without having to know/store the start of an animation (like you need for easing functions).</p>
+<p>Standard version:</p>
+<pre><code class="language-C">// a - current pos
+// b - target pos
+// t - factor to move a towards b in each step (0..1)
+float lerp(float a,b,t) {
+	return (1-t)*a + t*b;
+}
+void update() {
+	a = lerp(a,b,0.01); // move a 1% closer to b each frame
+}
 </code></pre>
-<h2 id="chmod" tabindex="-1">chmod</h2>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>Number</th>
-<th>Permission</th>
-<th>Sum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>– – –</td>
-<td>0+0+0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>– – x</td>
-<td>0+0+1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>– w –</td>
-<td>0+2+0</td>
-</tr>
-<tr>
-<td>3</td>
-<td>– w x</td>
-<td>0+2+1</td>
-</tr>
-<tr>
-<td>4</td>
-<td>r – –</td>
-<td>4+0+0</td>
-</tr>
-<tr>
-<td>5</td>
-<td>r – x</td>
-<td>4+0+1</td>
-</tr>
-<tr>
-<td>6</td>
-<td>r w –</td>
-<td>4+2+0</td>
-</tr>
-<tr>
-<td>7</td>
-<td>r w x</td>
-<td>4+2+1</td>
-</tr>
-</tbody>
-</table></div>
-<p>Three groups:</p>
-<ol>
-<li>One permission for the <em>owner,</em> the person who created the file or folder.</li>
-<li>One permission for all of the people in the same primary <em>group</em> of the owner.</li>
-<li>One permission for everyone else, which includes <em>unauthenticated and anonymous users</em>.</li>
-</ol>
-<p>To change all directories under the current path to 755 (<code>drwxr-xr-x</code>), excluding dotfiles (recursive):</p>
-<pre><code class="language-bash">find . ! -path . ! -path '*/.*' -type d -exec chmod 755 '{}' \;
+<p>-&gt; This is framerate dependent and stops working when framerate is not constant.<br>
+-&gt; Cannot simply multiply t by dt, since <code>2*dt</code> is not the same as calling lerp 2 times (kinda works, but is unstable and can explode if <code>t*dt &gt; 1</code>)</p>
+<p>Continuous (non recursive) version:</p>
+<pre><code>// F = fraction to move after one frame
+// frame based version (n = frame counter)
+f(n) = (a-b)*(1-F)^n+b
+// time based version
+f(t) = (a-b)*(1-F)^(t/dt)+b
 </code></pre>
-<p>To change all files in the current path to 644 (<code>-rw-r--r--</code>), excluding dotfiles (recursive):</p>
-<pre><code class="language-bash">find . ! -path '*/.*' -type f -exec chmod 644 '{}' \;
-</code></pre>
-<h2 id="chown" tabindex="-1">chown</h2>
-<p><a href="https://linuxize.com/post/linux-chown-command/" target="_blank" class="external-link">Chown Command in Linux (File Ownership) | Linuxize</a></p>
-<pre><code class="language-bash">chown -R USER:GROUP ./ 
-</code></pre>
-<h2 id="which" tabindex="-1">which</h2>
-<p>Find out where binary lives</p>
-<pre><code class="language-bash">which curl
-</code></pre>
-<h2 id="find-process" tabindex="-1">Find process</h2>
-<pre><code class="language-bash">ps -aux | grep [keyword]
-</code></pre>
-<ul>
-<li><code>-a</code>: show all processes (including root, system, etc.), not just the ones belonging to current user</li>
-<li><code>u</code>: show in &quot;user oriented format&quot;, i.e. table with more information</li>
-<li><code>x</code>: show background processes and daemons without controlling terminal (tty)</li>
-</ul>
-<h2 id="find-text-in-files" tabindex="-1">Find text in files</h2>
-<pre><code class="language-bash">grep -HiRn [text] [files/folders]
-</code></pre>
-<ul>
-<li><code>-H</code>: print out filename of result</li>
-<li><code>-i</code>: ignore case</li>
-<li><code>-R</code>: recursive search in passed folders, follow symlinks</li>
-<li><code>-n</code>: print line-number of result</li>
-</ul>
-<h2 id="find-previous-command" tabindex="-1">Find previous command</h2>
-<pre><code class="language-bash">history | grep [command]
-</code></pre>
-<h2 id="find-text-or-files-starting-with-minus" tabindex="-1">Find text or files starting with minus -</h2>
-<p>Passing arguments which starts with a minus to a tool will be usually interpreted as an option. This creates a problem when you want to delete a filename or grep text starting with a minus.<br>
-Solution: Pass <code>--</code> to signify the end of the options.</p>
-<pre><code class="language-bash">ps --help | grep -- -a
-rm -- --somefile.txt
-</code></pre>
-<p>Source: <a href="https://unix.stackexchange.com/a/87357" target="_blank" class="external-link">https://unix.stackexchange.com/a/87357</a></p>
-<h2 id="compress-extract-zip-files" tabindex="-1">Compress / extract zip files</h2>
-<pre><code class="language-bash">tar -czf [filename/folder]
-tar -xzf [filename]
-</code></pre>
-<p>&quot;Compres Ze File&quot; / &quot;Xtract Ze File</p>
-<ul>
-<li><code>-c</code>: compress</li>
-<li><code>-x</code>: extract</li>
-<li><code>-z</code>: use gzip</li>
-<li><code>-f</code>: use file archive</li>
-</ul>
-<h2 id="show-active-network-connections" tabindex="-1">Show active network connections</h2>
-<pre><code class="language-bash">netstat -tulpen
-</code></pre>
-<ul>
-<li><code>-t</code>: show TCP connections.</li>
-<li><code>-u</code>: show UDP connections.</li>
-<li><code>-l</code>: list only listening sockets.</li>
-<li><code>-p</code>: show the PID and name of the program to which each socket belongs.</li>
-<li><code>-e</code>: display extended information, including user ID and inode.</li>
-<li><code>-n</code>: show numerical addresses instead of resolving hostnames.</li>
-</ul>
-<h2 id="show-filesystems" tabindex="-1">Show filesystems</h2>
-<pre><code class="language-bash">df -Thal
-</code></pre>
-<ul>
-<li><code>-T</code>: show the file system type.</li>
-<li><code>-h</code>: display sizes in a human-readable format (e.g., KB, MB, GB).</li>
-<li><code>-a</code>: include all file systems, even those that are not currently mounted.</li>
-<li><code>-l</code>: limit the output to local file systems only.</li>
-</ul>
-<h2 id="show-disk-usage" tabindex="-1">Show disk usage</h2>
-<pre><code class="language-bash">du -hs *
-</code></pre>
-<ul>
-<li><code>-h</code>: display sizes in a human-readable format (e.g., KB, MB, GB).</li>
-<li><code>-s</code>: provide a summary of the disk usage for each specified file or directory, rather than listing the usage for each individual file within directories.</li>
-</ul>
-<h2 id="show-files-in-current-folder-detailed" tabindex="-1">Show files in current folder (detailed)</h2>
-<pre><code class="language-bash">ls -lisah
-</code></pre>
-<ul>
-<li><code>-l</code>: Uses a long listing format, providing detailed information about each file and directory, such as permissions, number of links, owner, group, size, and modification date.</li>
-<li><code>-i</code>: Shows the inode number for each file and directory.</li>
-<li><code>-s</code>: Displays the size of each file in blocks.</li>
-<li><code>-a</code>: Includes all files, even those that are hidden (files starting with a dot <code>.</code>).</li>
-<li><code>-h</code>: Displays sizes in a human-readable format (e.g., KB, MB, GB).</li>
-</ul>
-<h2 id="logrotate" tabindex="-1">Logrotate</h2>
-<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner">Warning</div></div>
-<div class="callout-content">
-<p>
-Does not work properly on CentOS6, but seems to work as intended on Ubuntu 24.04</p>
-</div></div>
-<p><a href="https://linux.die.net/man/8/logrotate" target="_blank" class="external-link">https://linux.die.net/man/8/logrotate</a><br>
-Put a file (usually named after the program/logfile you are rotating) in <code>/etc/logrotate.d/</code>. For example: <code>/etc/logrotate.d/mosquitto</code></p>
-<pre><code>/var/log/mosquitto/mosquitto.log {
-    rotate 12
-    monthly
-    compress
-    delaycompress
-    size 100k
-    nocreate
-    missingok
-    postrotate
-        if invoke-rc.d mosquitto status &gt; /dev/null 2&gt;&amp;1; then \
-            invoke-rc.d mosquitto reload &gt; /dev/null 2&gt;&amp;1; \
-        fi;
-    endscript
+<p>-&gt; still framerate dependent</p>
+<p>Framerate independent version:</p>
+<pre><code class="language-C">// dt = delta time for last frame in s (Unity: Time.deltaTime)
+float lerp_r(float a,b,r,dt) { // r = remainder (in %) after dt
+	return b + (a-b)*pow(r,dt);
+	// NOTE: pow() is about 8x slower than exp()
+}
+float lerp_hl(float a,b,hl,dt) { // hl = half life time in s
+	return b + (a-b)*exp2(-dt/hl); // exp2(n) = 2^n
 }
 
+// Generally use this one (fastest, easy to use):
+float lerp_decay(float a,b,l,dt) { // l = decay constant
+	return b + (a-b)*exp(-l*dt);
+	// useful range for l: 1..25 (slow to fast decay)
+}
+</code></pre>
+<p>Source: <a href="https://www.youtube.com/watch?v=LSNQuFEDOyQ" target="_blank" class="external-link">https://www.youtube.com/watch?v=LSNQuFEDOyQ</a><br>
+Better article with detailed explanations (and also springs!): <a href="https://theorangeduck.com/page/spring-roll-call" target="_blank" class="external-link">https://theorangeduck.com/page/spring-roll-call</a></p>
+<h2 id="engine" tabindex="-1">Engine</h2>
+<p><a href="https://youtu.be/drCnFueS4og?feature=shared&amp;t=1740" target="_blank" class="external-link">https://youtu.be/drCnFueS4og?feature=shared&amp;t=1740</a></p>
+<ul>
+<li>For strategy/puzzle/simulation-type games (Chess, Sokoban):
+<ul>
+<li>Rules have to be executed exactly with reproducible results. Players have very precise expectations and the game has to satisfy them and communicate accordingly.</li>
+<li>Recommended: Isolate code that deals with the rules of the game and keep all of it in one place, so it is clear, condensed, easily understandable and debug-able.</li>
+</ul>
+</li>
+<li>For action games (Doom, C&amp;C):
+<ul>
+<li>There is some room of wiggle room, because players do not expect a very precise outcome (much more so in Doom than C&amp;C though)</li>
+</ul>
+</li>
+<li>Store game state and render state in the same structure for simplicity.
+<ul>
+<li>Basically follow the [[#Fat/Flat struct (behaviors)]] approach</li>
+<li>Maintain separate values for actual game state (e.g., health, ammo) and display state (e.g., display health, display ammo).</li>
+<li>Consider &quot;two-sided death&quot; for entities: logical removal from the game state and gradual removal through animation.</li>
+<li>DON'T: Have a lot separate classes and interfaces for this stuff. Game state and rendering is strongly linked. One has to be able to quickly add stuff to this, especially in the beginning prototype phase.</li>
+<li>DON'T: duplicate your data and logic everywhere (e.g. by introducing an event system or animation system to smoothly interpolate display health values). This will increase complexety and introduce bugs in having to sync all these systems.</li>
+</ul>
+</li>
+<li>Store game state after each frame for easy undo/playback/demo recording.
+<ul>
+<li>Can always compress it, if needed (e.g. XOR-RLE)</li>
+</ul>
+</li>
+<li>Keep all entities in a flat array and don't bother removing elements
+<ul>
+<li><a href="https://youtu.be/drCnFueS4og?t=4079&amp;feature=shared" target="_blank" class="external-link">https://youtu.be/drCnFueS4og?t=4079&amp;feature=shared</a></li>
+<li>on death, just mark as dead for gameplay, but keep data for display death Animation (see two-sided-death above)</li>
+<li>no null pointer dereferences, no access violation, no targeting the wrong entity (because the slot got refilled with new data)</li>
+<li>entity data is usually small (few Megabytes)</li>
+<li>can be compressed, if needed. E.g. by using ring buffer</li>
+<li>Alternative methods, like multiple lists, handles or a message system (to broadcast death events) are much more complicated to achieve the same goal</li>
+<li>This worked great and was very simple to implement in MathTD</li>
+</ul>
+</li>
+<li>Use stable IDs for entities (e.g., towers) to manage their state and animations effectively.
+<ul>
+<li>In MathTD we just used the tower array index, which would only increment (never decrement or rollover)</li>
+<li>A more robust approach would be to generate a random 32 or 64bit id for each new entity and store that in the entity struct. Reference entities by their ID. IDs reach into a hashmap, e.g. by using the bottom 8-12 bits (depending on how many entities can be alive at any point divided by max fill rate -&gt; see <a class="internal-link is-unresolved" href="/404" target="">Data Structures &amp; Algorithms#Hash Tables</a>) to get an index and then compare the requested ID to the ID of the entity in that slot. -&gt; see <a href="https://youtu.be/NW6PhVdq9R8?feature=shared&amp;t=1150" target="_blank" class="external-link">https://youtu.be/NW6PhVdq9R8?feature=shared&amp;t=1150</a> (4mins)</li>
+</ul>
+</li>
+<li>Separate game rules from display and animation logic for clarity (as represented by the data -&gt; see above)</li>
+<li>Ensure your code is flexible enough to incorporate changes and optimizations based on observed gameplay needs. First explore then decide on the correct structure. Don't add too much abstraction up front, because it might be wrong and will hinder exploration and iteration and is harder to change later.</li>
+<li>Use the prototyping phase not only to refine design and gameplay, but also to identify common operations and performance bottlenecks.
+<ul>
+<li><a href="https://youtu.be/drCnFueS4og?feature=shared&amp;t=5000" target="_blank" class="external-link">https://youtu.be/drCnFueS4og?feature=shared&amp;t=5000</a> (10min)</li>
+<li>Understand that performance requirements might evolve as the game design matures.</li>
+<li>Start with the simplest implementation. There will be a lot of changes in the beginning, code should be as simple as possible, because it needs to be changed frequently or thrown out. Speed of iteration matters most in the beginning.</li>
+<li>For example: for a small game (&lt;1000 entities), just loop over the array for collision checking (O(N^2)). Even 1M checks is easily doable for a modern PC. This method always works, is easy to implement and debug. Optimization can happen later, but will make the code more complex.</li>
+<li>NOTE: This only works for small games or an explicit prototyping phase. On large projects, once the architecture is in place it will be very hard to change and optimize, so you will need to test beforehand and plan ahead. (-&gt;<a class="internal-link is-unresolved" href="/404" target="">Architecture#Premature Optimization</a>)</li>
+</ul>
+</li>
+<li>For games with complex rules and a lot of dependencies between elements (e.g. Sokoban), a global event queue might be a good approach
+<ul>
+<li>Don't apply changes (take health, kill entity, change state, etc.) immediately, instead add these requests to a queue</li>
+<li>Can always inspect the queue during a frame to see what is going on</li>
+<li>Can re-order or filter the queue based on events that happened later</li>
+<li>Finally can apply queue to get new state for next frame</li>
+<li>This pattern also helped during development of the item ELFE (message queues)</li>
+</ul>
+</li>
+<li>Important for performance: Batching
+<ul>
+<li>TODO: Find more details</li>
+</ul>
+</li>
+</ul>
+<h2 id="entity-systems" tabindex="-1">Entity systems</h2>
+<p>General approaches to a unit/entity system.<br>
+Preferred way for moderately complex games: [[#Preferred Fat/Flat struct (behaviors)]]<br>
+For simple games this can also work well (MathTD): [[#Naive fat/flat struct (entity types)]]</p>
+<h3 id="oop" tabindex="-1">OOP</h3>
+<pre><code class="language-C++">class UnitBase {
+	Vec2 pos;
+	Vec2 vel;
+	int health;
+	virtual void simulate(float dt)=0;
+}
+class UnitGoblin : public UnitBase {
+	int damage;
+	void calcDmg();
+}
 </code></pre>
 <ul>
-<li><code>rotate 12</code>: keeps at most 12 versions of the file specified at the very beginning</li>
-<li><code>monthly</code>: rotate on first run of the month (i.e. keep one file per month), can also be daily, weekly or yearly</li>
-<li><code>compress</code>, <code>delaycompress</code>: compress rotated files after 2 rotations (i.e. keep file for current and last month uncompressed)</li>
-<li><code>size</code>: rotate only if size is bigger than specified limit (100k = 100KiB, 100M = 100MiB, 100G = 100Gib)</li>
-<li><code>nocreate</code>: logrotate does not create the new log file after rotating (the original program has to do it)</li>
-<li><code>missingok</code>: don't raise an error if file is missing</li>
-<li><code>postrotate</code>: what to do after rotation - we just kept the script, which was generated by mosquitto on install</li>
+<li>Base Class (has general properties like position, velocity, sprite - sometimes implements general behavior, otherwise functions are virtual or abstract) and child classes (which inherit Base Class, add properties and implement/overwrite behavior)</li>
+<li>Store all entities in one array, by storing a pointer to BaseClass* and type casting if specific stuff needs to be accessed</li>
+<li>Disadvantage: Additional layers of indirection through pointers and v-table indirections. Very cache unfriendly. Have to do type checks for each element (or add the same type enum as in the union approach) when processing.</li>
 </ul>
+<h3 id="discriminated-struct-union" tabindex="-1">Discriminated struct/union</h3>
+<pre><code class="language-C">// Approach 1:
+enum EntityType {
+	etNone=-1,
+	etPlayer,
+	etGoblin,
+	etChest,
+};
+struct PlayerData {
+	int holdingItemId;
+	int potionCount;
+};
+struct GoblinData {
+	int damage;
+};
+struct Entity {
+	EntityType type;
+	union {
+		struct PlayerData;
+		struct GoblinData;
+	};
+};
+// Approach 2:
+enum DataType {
+	dtNone=-1,
+	dtPosition,
+	dtHealthAndDamage,
+};
+struct PositionData {
+	int x,y;
+};
+struct HealthAndDamage {
+	int hp, dmg;
+};
+struct Data {
+	DataType type;
+	union {
+		struct PositionData;
+		struct HealthAndDamage;
+	}
+};
+struct Entity {
+	Data *data; // array
+	int size;
+};
+</code></pre>
+<ul>
+<li>struct with general data, a &quot;type&quot; flag and a union of structs for storing the data of the different types.</li>
+<li>Advantage: Can be stored in a flat array for quick and cache friendly iterating over all entities</li>
+<li>Disadvantage: a union is basically an if/else branch in the type, so you have to handle that type check everywhere (the correct type is hidden behind one layer of indirection, same as OOP approach). This can become confusing and very complex. Code amount multiplies by number of types, since you have to check each combination (at least to filter the correct ones). Problems arise when type checking is missed and wrong data is accessed/changed.</li>
+<li>Unions are a way to compress data. One has to ask: Is the compression worth it, what do we gain from it? Entity data usually is very small anyway.</li>
+</ul>
+<h3 id="naive-fat-flat-struct-entity-types" tabindex="-1">Naive fat/flat struct (entity types)</h3>
+<pre><code class="language-C">struct RenderSprite {
+	uint8_t *data;
+	int len;
+	int w, h;
+};
+struct ControlledByUser {
+	Input in;
+};
+struct Hostile {
+	int damage;
+	int aggroRange;
+};
+struct Player { 
+	struct RenderSprite, 
+	struct ControlledByUser, 
+	struct HasPhysicsShape,
+};
+struct Tree { 
+	struct RenderSprite, 
+	struct HasPhysicsShape, 
+	struct IsStatic, 
+};
+struct Jelly { 
+	struct RenderSprite, 
+	struct ChasePlayer, 
+	struct HasPhysicsShape, 
+	struct Hostile 
+};
+</code></pre>
+<ul>
+<li>Have data bundled by features in structs (without union), switch by type</li>
+<li>Advantage: No indirection for the type check. More transparent, code knows exactly what data it is getting. One array per type is very cache friendly for iterating (not so much when working across types).</li>
+<li>Disadvantage: No union compression. Combinatoric explosion for handler functions, if there are a lot of properties.</li>
+<li>This can still work for simple games with few distinct types (like MathTD)</li>
+</ul>
+<h3 id="fat-flat-struct-behaviors" tabindex="-1">Fat/Flat struct (behaviors)</h3>
+<pre><code class="language-C">// but instead of Player, Tree, etc.:
+enum EntityProperties {
+	epRenderSprite = 1&lt;&lt;0,
+	epControlledByPlayer = 1&lt;&lt;1,
+	epHasPhysicsShape = 1&lt;&lt;2,
+	epIsStatic = 1&lt;&lt;3,
+	// ...
+};
+struct Entity {
+	uint64_t props; // bitmask for active props
+	// Sprite
+	struct Texture sprite;
+	Vec2 pos;
+	// Movement
+	Vec2 vel;
+	Vec2 acc;
+	// Control
+	int controllerId;
+	int health;
+	int damage;
+	// etc.
+};
+// Helper functions for entity &quot;types&quot;:
+Entity *MakePlayer() {
+	Entity *entity = AllocateEntity();
+	SetEntProp(entity, epRenderSprite);
+	entity-&gt;sprite = ...;
+	SetEntProp(entity, epControlledByPlayer);
+	entity-&gt;controllerId = ...;
+	//...
+	return entity;
+}
+</code></pre>
+<ul>
+<li>Have all data for all functionality in one struct and a properties bitmask, which enables/disables part of the behavior.</li>
+<li>Advantage: No need for type checks, code is getting all the data. Switch by feature/property instead of entity type. Compared to the union, code branches become about the behavior (which is more important). No combinatoric explosion, you just handle properties in a flat/linear manner (O(N) mapping to code-paths).</li>
+<li>Disadvantage: struct can become fairly big (but still small in comparison to other data like textures, so does it even matter?)</li>
+<li>Fully orthogonal structs should be separated and handled differently.</li>
+<li>You may map struct data 1:1 to properties, but sometimes multiple (exclusive) properties can share the same data or properties can use no data at all. This style does not enforce any mapping. Be careful and explicit with sharing data though, else you can run into nasty side-effects.</li>
+<li>Similar to ECS (e.g. in Unity), but ECS has a 1:1 mapping between data and behavior and Unity also splits each into its own file (which you probably don't want, since it spreads behavior out a lot and makes it harder to debug).</li>
+<li>Nice approach for procedural games: You can easily create a 2^N feature space (by looping over the properties) and explore which combinations make sense and which one to disable.</li>
+<li>Alternative to bitmask when more than 64 features are required: <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#bitmask-with-more-than-64-entries">C#Bitmask with more than 64 entries</a></li>
+<li>Example: <a href="https://web.archive.org/web/20220121023442/https://hatebin.com/oykukwtnoo" target="_blank" class="external-link">hatebin - oykukwtnoo</a> with sort-of explanations here <a href="https://hero.handmade.network/forums/code-discussion/t/7896-why_don%2527t_use_discriminated_union_rather_than_sparse_system_for_entity_system#24630" target="_blank" class="external-link">Why don't use discriminated union rather than Sparse System for entity system? | Handmade Network</a> (read posts by Ryan Fleury). A little bit more background here: <a href="https://web.archive.org/web/20221126193541/https://media.handmade-seattle.com/metadesk/" target="_blank" class="external-link">The Yin and Yang of Data Formats</a></li>
+<li>Similar kinds of features can be packed into one struct (similar to a discriminated union):</li>
+</ul>
+<pre><code class="language-C">// Property: epTrigger
+enum TriggerKind { ... };
+struct Trigger
+{
+    TriggerKind kind;
+    Input input;
+    Shape shape;
+    EntityHandle source_entity;
+    // for type tkChest:
+    ItemKind collect_item_kind;
+    Item *collect_item;
+    // for type tkHazard:
+    f32 seconds_to_allow_source_entity;
+    AttackFlags attack_flags;
+    // can pack the variables associated with
+    // types into an union: more compression, but
+    // can only access data after type check
+};
+</code></pre>
+<ul>
+<li>You can also build a tree of Entities and assign certain behaviors only to parts:
+<ul>
+<li>e.g. PlayerBody -&gt; Hand -&gt; Weapon and only Weapon has &quot;do damage&quot; property, only PlayerBody has &quot;health&quot; and &quot;damage-able&quot; property</li>
+<li>or you can have per component health and the hand can be damaged separately from the body (all with the same system)</li>
+<li>If some data maps to multiple features you can have a combination by having multiple entities (instead of duplicating the data one each entity)</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-C">struct Entity
+{
+  Entity *first_child;
+  Entity *last_child;
+  Entity *next;
+  Entity *prev;
+  Entity *parent;
+  // other data ...
+};
+</code></pre>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
 <aside>
@@ -449,33 +545,21 @@ On this page
 <div class="toc-container">
 <nav class="toc">
 <ol>
-<li><a href="#folder-structure">Folder structure</a>
+<li><a href="#lerp-smoothing">Lerp Smoothing</a>
 </li>
-<li><a href="#chmod">chmod</a>
+<li><a href="#engine">Engine</a>
 </li>
-<li><a href="#chown">chown</a>
+<li><a href="#entity-systems">Entity systems</a>
+<ol>
+<li><a href="#oop">OOP</a>
 </li>
-<li><a href="#which">which</a>
+<li><a href="#discriminated-struct-union">Discriminated struct/union</a>
 </li>
-<li><a href="#find-process">Find process</a>
+<li><a href="#naive-fat-flat-struct-entity-types">Naive fat/flat struct (entity types)</a>
 </li>
-<li><a href="#find-text-in-files">Find text in files</a>
+<li><a href="#fat-flat-struct-behaviors">Fat/Flat struct (behaviors)</a>
 </li>
-<li><a href="#find-previous-command">Find previous command</a>
-</li>
-<li><a href="#find-text-or-files-starting-with-minus">Find text or files starting with minus -</a>
-</li>
-<li><a href="#compress-extract-zip-files">Compress / extract zip files</a>
-</li>
-<li><a href="#show-active-network-connections">Show active network connections</a>
-</li>
-<li><a href="#show-filesystems">Show filesystems</a>
-</li>
-<li><a href="#show-disk-usage">Show disk usage</a>
-</li>
-<li><a href="#show-files-in-current-folder-detailed">Show files in current folder (detailed)</a>
-</li>
-<li><a href="#logrotate">Logrotate</a>
+</ol>
 </li>
 </ol>
 </nav>
