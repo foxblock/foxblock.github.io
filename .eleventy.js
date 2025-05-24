@@ -91,7 +91,7 @@ function getAnchorAttributes(filePath, linkTitle) {
   }
 }
 
-const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.setLiquidOptions({
@@ -290,12 +290,16 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("taggify", function (str) {
-    console.log("taggify start", str.substring(0,200));
+    // NOTE: Markdown ist schon in HTML convertiert an diesem Punkt
+    // Code Blocks sind schon da, aber Inhalt noch nicht in einzelne tags konvertiert
+    // Komisch: Taggify schlägt an und sollte hier tags einfügen, tut es aber nicht
+    // (bzw. sie sind nicht im finalen Output)
+    console.log("---- taggify start", str.substring(0,200));
     return (
       str &&
       str.replace(tagRegex, function (match, precede, tag, whatev, offset, fullStr) {
         console.log("taggify", tag, offset, fullStr.substring(offset-20,offset+20));
-        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag}">${tag}</a>`;
+        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag.substring(1)}">${tag.substring(1)}</a>`;
       })
     );
   });
@@ -303,11 +307,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("searchableTags", function (str) {
     let tags;
     let match = str && str.match(tagRegex);
+    // TODO: Tags werden nicht auf Doppelungen gefiltert
+    // Regex produziert auch hier die falschen Ergebnisse, da Werte in Codeblock mitgeparst werden
     if (match) {
       console.log("searchableTags", str.substring(0,20), match);
       tags = match
         .map((m) => {
-          return `"${m.split("#")[1]}"`;
+          return `"${m.split("##")[1]}"`;
         })
         .join(", ");
     }
