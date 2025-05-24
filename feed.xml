@@ -3,38 +3,8 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-24T11:04:08Z</updated>
+    <updated>2025-05-24T11:04:47Z</updated>
     <id>https://janek.ing</id>
-        <entry>
-            <title>
-                Communication is Key
-                
-            </title>
-            <updated>2025-05-24T09:35:14.670Z</updated>
-            <id>https://janek.ing/work/communication-is-key/</id>
-            <content type="html">
-                &lt;h2 id=&quot;heading-2&quot; tabindex=&quot;-1&quot;&gt;Heading 2&lt;/h2&gt;
-&lt;p&gt;Test 1234&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;int main(int argc, char **argv) {
-	printf(&amp;quot;Hello World!&#92;n&amp;quot;);
-	return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;#tagtest #another&lt;/p&gt;
-&lt;h3 id=&quot;heading-3&quot; tabindex=&quot;-1&quot;&gt;Heading 3&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[!WARNING] Title&lt;br /&gt;
-foobar&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Link: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/projects/&quot;&gt;Projects Home&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Broken Link: &lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;Management and Vision&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;another-heading&quot; tabindex=&quot;-1&quot;&gt;Another Heading&lt;/h2&gt;
-&lt;p&gt;Test foobar2&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/g-schluessel.jpg&quot; alt=&quot;g-schluessel.jpg&quot; /&gt;&lt;/p&gt;
-
-            </content>
-            <link href="https://janek.ing/work/communication-is-key/" >
-        </entry>
         <entry>
             <title>
                 Agile
