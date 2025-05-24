@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-23T15:17:27.828+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-24T12:38:24.441+02:00"}
 ---
 
 ## Golden Rules
@@ -22,7 +22,7 @@ Eigener Ansatz:
 - pro SoC: kein Mix von Arbeit aus unterschiedlichen Domänen (zb Backend und Frontend)
 - pro LoB: alle Infos an einem Platz, einfacher in Gänze zu verstehen und zu debuggen
 - ich bin pro LoB in vielen Fällen 
-- ich hasse code (meist oop im Endstadium) der eigentlich nichts macht, aber auf 100 dateien verteilt ist (Beispiel th-drivers-sdk, [Clean-Code]([It's probably time to stop recommending Clean Code @ Things Of Interest (qntm.org)](https://qntm.org/clean)), [Video]([Stop Recommending Clean Code (youtube.com)](https://www.youtube.com/watch?v=IqHaGd9J42s)))
+- ich hasse code (meist oop im Endstadium) der eigentlich nichts macht, aber auf 100 dateien verteilt ist (Beispiel th-drivers-sdk, [Clean-Code](https://qntm.org/clean), [Video](https://www.youtube.com/watch?v=IqHaGd9J42s))
 - https://youtu.be/LriHRa9t1fQ?feature=shared&t=2803
 - https://htmx.org/essays/locality-of-behaviour/
 ## Globaler State / Nebeneffekte
@@ -178,7 +178,7 @@ Dies gilt für alle Binärdaten, eigene Datenformate oder Protokolle (Learning v
 ## OOP vs Data-Oriented
 - v-tables und dynamic memory allocation machen das Programm langsamer, weil Objekte im Speicher verteilt liegen und viele cache misses erzeugen: [Ryan Fleury auf X: „This illustrates why it has been helpful to me to eliminate v-tables and sum-types almost everywhere. It isn’t just about performance—it’s about strong predictive power over code, staying organized, non-pessimization, and architecture which is ready to optimize later if needed.“ / X](https://x.com/ryanjfleury/status/1672722010399703041)
 - ![[attachments/memory-layout.mp4]]
-- V-Tables sind "[indirected function pointers]([Function pointer - Wikipedia](https://en.wikipedia.org/wiki/Function_pointer))" und stellen eine harte Grenze für den Compiler dar. Switch statements können hingegen deutlich besser optimiert werden -> [[Code/Stack vs. Heap\|Stack vs. Heap]]
+- V-Tables sind "[indirected function pointers](https://en.wikipedia.org/wiki/Function_pointer)" und stellen eine harte Grenze für den Compiler dar. Switch statements können hingegen deutlich besser optimiert werden -> [[Code/Stack vs. Heap\|Stack vs. Heap]]
 
 [cmuratori-discussion/cleancodeqa.md at main · unclebob/cmuratori-discussion](https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa.md)
 [cmuratori-discussion/cleancodeqa-2.md at main · unclebob/cmuratori-discussion](https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa-2.md)
