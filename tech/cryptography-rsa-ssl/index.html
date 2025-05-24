@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Cryptography, RSA, SSL</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdn.jsdelivr.net/npm/lucide@0.115.0/dist/umd/lucide.min.js"></script>
+<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("icon-name",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
+<script async src="https://fastly.jsdelivr.net/npm/force-graph@1.43.0/dist/force-graph.min.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js" async></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
+<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+<link href="/styles/digital-garden-base.css" rel="stylesheet">
+<link href="/styles/obsidian-base.css" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css" rel="stylesheet"><link href="/styles/user/layout-fixes.css" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style></style>
+</head>
+<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
+<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
+<div x-show.important="!isDesktop" style="display:none">
+<nav class="navbar">
+<div class="navbar-inner">
+<span style="font-size:2rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:12px 24px;vertical-align:middle;border-radius:0">
+</a>
+</div>
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</nav>
+</div>
+<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
+<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:15px auto;display:block;border-radius:0">
+</a>
+<div style="display:flex;justify-content:center">
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</div>
+<div class="folder" x-data="{isOpen: true}">
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Code</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code/Langauges')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Langauges</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Design')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Design</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Life')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Life</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Tech')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Tech</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/hdd/">HDD </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Work')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Work</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/work/agile/">Agile </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/work/communication-is-key/">Communication is Key </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+</div>
+</nav>
+</div>
+<div class="search-container" id="globalsearch" onclick="toggleSearch()">
+<div class="search-box">
+<input type="search" id="term" placeholder="Start typing...">
+<div id="search-results"></div>
+<footer class="search-box-footer">
+<div class="navigation-hint">
+<span>Enter to select</span>
+</div>
+<div class="navigation-hint align-icon">
+<i icon-name="arrow-up" aria-hidden="true"></i>
+<i icon-name="arrow-down" aria-hidden="true"></i>
+<span>to navigate</span>
+</div>
+<div class="navigation-hint">
+<span>ESC to close</span>
+</div>
+</footer>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-05-24T11:04:08.012Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-05-24T11:04:08.012Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-05-24T11:04:08.012Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<main class="content cm-s-obsidian">
+<header>
+<h1 data-note-icon="">Cryptography, RSA, SSL</h1>
+<div class="header-meta">
+<div class="header-tags">
+<a class="tag" onclick="toggleTagSearch(this)">
+#knowledge-base
+</a>
+<a class="tag" onclick="toggleTagSearch(this)">
+#german
+</a>
+</div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2024-12-06T15:30:53.740+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-24T12:53:57.515+02:00"></span></div></div></div>
+</header>
+<h2 id="allgemeines" tabindex="-1">Allgemeines</h2>
+<ul>
+<li>Ein Zertifikat enthält den Public Key (und weitere Textinformationen über die Webseite, Ablaufdatum, etc.) und wurde mithilfe des Private Keys erstellt</li>
+<li>Trapdoor-Funktion: Mathematisch sehr &quot;einfach&quot; in eine Richtung zu lösen, aber nahezu unmöglich umzukehren</li>
+<li>Encryption: Nutzt den public key des Empfängers um Nachricht zu verschlüsseln</li>
+<li>Decryption: Empfänger nutzt seinen Private Key, um Nachricht zu entschlüsseln. Nur Empfänger hat Private Key und Inhalt der Nachricht ist so sicher.</li>
+<li>Sign: Nutzt eigenen Private Key, um Nachricht (bzw. Hash der Nachricht wegen Längenbeschränkungen) zu verschlüsseln</li>
+<li>Verify: Nutzt Public Key des Senders, um Nachricht=Hash zu entschlüsseln und vergleicht mit Hash der Nachricht. Jeder hat Zugang zum Public Key und kann so die Echtheit der Nachricht verifizieren.</li>
+<li>RSA / DSA / EC (Elliptic Curve): unterschiedliche Methoden zur Generierung der Schlüssel</li>
+<li>PKCS#8: Aktuelles Format für Private-Keys (in PEM erkennbar am Header <code>BEGIN PRIVATE KEY</code>)</li>
+<li>PKCS#1: Veraltetes Format für Keys (in PEM erkennbar am Header <code>BEGIN RSA PRIVATE KEY</code>)</li>
+<li>Das Zertifikat einer RootCA reicht aus, um allen untergeordneten Zertifikaten von dieser RootCA zu vertrauen (so validiert der Browser bspw. auch LetsEncrypt Zertifikate - er kann nicht die Zertifikate aller Webseiten kennen)<br>
+Mehr Info zu PKCS: <a href="https://crypto.stackexchange.com/a/103585" target="_blank" class="external-link">https://crypto.stackexchange.com/a/103585</a></li>
+</ul>
+<h2 id="dateitypen" tabindex="-1">Dateitypen</h2>
+<ul>
+<li><code>.pem</code> - Format für Keys / Zertifikate / CSR, Base64-kodiert. Standardformat von OpenSSL.</li>
+<li><code>.der</code> - binär-kodiertes Äquivalent zu .pem</li>
+<li><code>.key</code> - Meistens der Private-Key, kann auch der Public-Key sein. Meist im PEM-Format.</li>
+<li><code>.ppk</code> - Putty Private Key. Dateiformat, welches von Putty erzeugt wird.</li>
+<li><code>.pub</code> - Nicht standardisiert, wird oft für Public Keys verwendet. Meist PEM-Format.</li>
+<li><code>.csr</code> - Certificate Signing Request. Enthält Public Key und Name der Certificate Authority (CA). Wird mit Private Key erstellt und genutzt, um Zertifikat auszustellen.</li>
+<li><code>.crt</code> - Zertifikat, meistens X509, kann PEM- oder DER-kodiert sein.<br>
+Mehr Infos: <a href="https://crypto.stackexchange.com/a/43700" target="_blank" class="external-link">https://crypto.stackexchange.com/a/43700</a><br>
+Weitere Formate (wie PKCS#7): <a href="https://comodosslstore.com/resources/a-ssl-certificate-file-extension-explanation-pem-pkcs7-der-and-pkcs12/" target="_blank" class="external-link">A SSL Certificate File Extension Explanation: PEM, PKCS7, DER, and PKCS#12 - Comodo SSL Resources</a></li>
+</ul>
+<p>PEM:</p>
+<pre><code>-----BEGIN ENCRYPTED PRIVATE KEY-----
+...
+-----END ENCRYPTED PRIVATE KEY-----
+-----BEGIN PRIVATE KEY-----
+...
+-----END PRIVATE KEY-----
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE REQUEST-----
+...
+-----END CERTIFICATE REQUEST-----
+etc.
+</code></pre>
+<p>PPK:</p>
+<pre><code>TODO
+</code></pre>
+<p>DSR:</p>
+<pre><code>&lt;just a bunch of binary data&gt;
+</code></pre>
+<h2 id="one-way-tls-auth" tabindex="-1">One-way TLS auth</h2>
+<p><picture src="/img/user/attachments/I0612.jpg" alt="I0612.jpg"><source media="(max-width:480px)" srcset="/img/optimized/eO-EBR041t-500.webp" type="image/webp">
+<source media="(max-width:480px)" srcset="/img/optimized/eO-EBR041t-500.jpeg">
+<source media="(max-width:1920px)" srcset="/img/optimized/eO-EBR041t-600.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/eO-EBR041t-600.jpeg"><img class="" src="/img/user/attachments/I0612.jpg" alt="I0612.jpg" width=""></picture></p>
+<h2 id="two-way-tls-auth" tabindex="-1">Two-way TLS auth</h2>
+<p><picture src="/img/user/attachments/SGyYa.png" alt="SGyYa.png"><source media="(max-width:480px)" srcset="/img/optimized/Halx5pmqG3-500.webp" type="image/webp">
+<source media="(max-width:480px)" srcset="/img/optimized/Halx5pmqG3-500.jpeg">
+<source media="(max-width:1920px)" srcset="/img/optimized/Halx5pmqG3-624.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/Halx5pmqG3-624.jpeg"><img class="" src="/img/user/attachments/SGyYa.png" alt="SGyYa.png" width=""></picture></p>
+<h2 id="open-ssl-befehle" tabindex="-1">OpenSSL Befehle</h2>
+<p>OpenSSL kommt mit GitForWindows: <code>C:\Program Files\Git\usr\bin\openssl.exe</code><br>
+Getestet mit Version: <code>OpenSSL 3.2.3 3 Sep 2024 (Library: OpenSSL 3.2.3 3 Sep 2024)</code></p>
+<h3 id="key-pair-erzeugen-pem" tabindex="-1">Key-Pair erzeugen (PEM)</h3>
+<pre><code class="language-bash"># Will promt for password
+# Can also supply pw: -pass pass:very4secure%pass
+# -des3 instead of -aes-128-cbc is also okay
+openssl genpkey -algorithm RSA -out private.key -outpubkey public.pub -aes-128-cbc
+# Privte-Key ohne Verschlüsselung
+openssl genpkey -algorithm RSA -out private.key
+# Public-Key aus Private-Key erzeugen
+openssl rsa -in private.key -pubout &gt; public.pub
+</code></pre>
+<p>Unter Windows: private.key ist ggf. UTF-16 und muss noch zu UTF-8 konvertiert werden <a href="https://superuser.com/a/1778270" target="_blank" class="external-link">https://superuser.com/a/1778270</a> (PowerShell 5.1 utf-8 ist mit BOM, aber das funktioniert mit mbedtls trotzdem)</p>
+<pre><code class="language-bash">$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+</code></pre>
+<p>Alternativ zu <code>genpkey</code> kann auch <code>genrsa</code> genutzt werden:<br>
+<a href="https://stackoverflow.com/questions/65449771/difference-between-openssl-genrsa-and-openssl-genpkey-algorithm-rsa" target="_blank" class="external-link">ssl - Difference between <code>openssl genrsa</code> and <code>openssl genpkey -algorithm rsa</code>? - Stack Overflow</a><br>
+<a href="https://stackoverflow.com/questions/25459512/what-is-diffrent-between-rsa-and-rsa-des3" target="_blank" class="external-link">https://stackoverflow.com/questions/25459512/what-is-diffrent-between-rsa-and-rsa-des3</a></p>
+<h3 id="self-signed-root-ca-zertifikat-erzeugen" tabindex="-1">Self-Signed RootCA-Zertifikat erzeugen</h3>
+<p>Voraussetzung: Private Key</p>
+<pre><code class="language-bash"># CSR erzeugen. Man wird nach Infos zur CA gefragt
+# Challenge Passwort kann leer gelassen werden
+openssl req -new -key private.key -out csr.pem
+# X509v3 RootCA erzeugen
+# Gültigkeitsdauer wie gewünscht anpassen
+openssl req -x509 -days 365 -key private.key -in csr.pem -out root.crt
+# Ohne CSR
+openssl req -new -x509 -days 365 -key rootCA.key -out rootCA.crt
+</code></pre>
+<p>Man kann den Schritt mit dem CSR überspringen und den <code>-in</code> Parameter beim Erstellen des Zertifikats weglässt. Man muss dann in diesem Schritt die Infos eingeben.<br>
+Der CSR ist nützlich, wenn man ein Zertifikat erneuern möchte, ohne nochmal die ganzen Infos (Land, E-Mail, etc.) einzugeben. Wenn man das RootCA-Zertifikat nie erneuern möchte (lange Gültigkeitsdauer), kann man sich den CSR sparen.</p>
+<p>Infos zu &quot;Challenge Password&quot;: <a href="https://security.stackexchange.com/questions/77028/whats-the-use-of-challenge-password-in-build-key-server-and-build-key-from-easy/77082#77082" target="_blank" class="external-link">openssl - What's the use of challenge password in build-key-server and build-key from Easy-RSA? - Information Security Stack Exchange</a></p>
+<h3 id="self-signed-untergeordnetes-zertifikat-erzeugen" tabindex="-1">Self-Signed (untergeordnetes) Zertifikat erzeugen</h3>
+<p>Voraussetzungen: Private Key (idealerweise 2: für RootCA und neues Zertifikat) und RootCA-Zertifikat</p>
+<p>Konfigurationsdatei <code>subordinate.cnf</code> erstellen:</p>
+<pre><code class="language-ini">[ v3_ca ]
+basicConstraints = CA:FALSE
+authorityKeyIdentifier=keyid,issuer
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = yourdomain.com
+DNS.2 = www.yourdomain.com
+DNS.3 = 192.168.1.114
+</code></pre>
+<p><code>subjectAltName</code> und der <code>alt_names</code> Block sind optional.</p>
+<pre><code class="language-bash"># CSR
+openssl req -new -key subordinate.key -out subordinate.csr
+# Zertifikat mit Config
+# Gültigkeitsdauer wie gewünscht anpassen
+openssl x509 -req -days 3650 -in subordinate.csr -CA root.crt -CAkey root.key -CAcreateserial -out subordinate.crt -extfile subordinate.cnf -extensions v3_ca
+</code></pre>
+<p>Wenn man die Konfigurationsdatei nicht verwendet (und <code>-extensions</code> sowie <code>-extfile</code> weglässt), wird ein X509v1 Zertifikat erstellt. Dies ist ein veralteter Standard und kann Probleme mit neuen Rust-Libraries (siehe Links unten), sowie der Erkennung in Chrome machen.<br>
+Ggf. werden aber X509v3 Zertifikate aber von manchen MQTT-Brokern nicht erkannt (Aussage aus github Thread zu Rust-Thematik).</p>
+<p><strong>Mehr Info:</strong><br>
+<a href="https://stackoverflow.com/questions/18233835/creating-an-x509-v3-user-certificate-by-signing-csr" target="_blank" class="external-link">openssl - Creating an x509 v3 user certificate by signing CSR - Stack Overflow</a><br>
+<a href="https://docs.openssl.org/master/man5/x509v3_config/" target="_blank" class="external-link">x509v3_config - OpenSSL Documentation</a><br>
+Rust unterstützt nur noch v3: <a href="https://github.com/rustls/rustls/issues/1298" target="_blank" class="external-link">https://github.com/rustls/rustls/issues/1298</a><br>
+Erklärung der <code>keyUsage</code> Parameter in der Config: <a href="https://superuser.com/a/1248085" target="_blank" class="external-link">https://superuser.com/a/1248085</a></p>
+<h3 id="pkcs-1-in-pkcs-8-umwandeln" tabindex="-1">PKCS#1 in PKCS#8 umwandeln</h3>
+<pre><code class="language-bash">openssl rsa -in ~/.ssh/id_rsa -outform pem &gt; id_rsa.pem
+</code></pre>
+<p>Input: -----BEGIN RSA PRIVATE KEY----- (oder public)<br>
+Output: -----BEGIN PRIVATE KEY-----</p>
+<h2 id="links" tabindex="-1">Links</h2>
+<p>Erklärung zu RSA<br>
+<a href="https://security.stackexchange.com/questions/68822/trying-to-understand-rsa-and-its-terminology/68836#answer-68836" target="_blank" class="external-link">https://security.stackexchange.com/questions/68822/trying-to-understand-rsa-and-its-terminology/68836#answer-68836</a><br>
+<a href="https://security.stackexchange.com/questions/9260/sha-rsa-and-the-relation-between-them#answer-9265" target="_blank" class="external-link">https://security.stackexchange.com/questions/9260/sha-rsa-and-the-relation-between-them#answer-9265</a><br>
+OpenSSL Dokumentation<br>
+<a href="https://docs.openssl.org/3.3/man1/openssl-genpkey/" target="_blank" class="external-link">openssl-genpkey - OpenSSL Documentation</a><br>
+Noch mehr Befehle, Beispiele und Erklärungen<br>
+<a href="https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs" target="_blank" class="external-link">https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs</a></p>
+<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
+</main>
+<aside>
+<div class="sidebar">
+<div class="sidebar-container">
+<div class="toc">
+<div class="toc-title-container">
+<div class="toc-title">
+On this page
+</div>
+</div>
+<div class="toc-container">
+<nav class="toc">
+<ol>
+<li><a href="#allgemeines">Allgemeines</a>
+</li>
+<li><a href="#dateitypen">Dateitypen</a>
+</li>
+<li><a href="#one-way-tls-auth">One-way TLS auth</a>
+</li>
+<li><a href="#two-way-tls-auth">Two-way TLS auth</a>
+</li>
+<li><a href="#open-ssl-befehle">OpenSSL Befehle</a>
+<ol>
+<li><a href="#key-pair-erzeugen-pem">Key-Pair erzeugen (PEM)</a>
+</li>
+<li><a href="#self-signed-root-ca-zertifikat-erzeugen">Self-Signed RootCA-Zertifikat erzeugen</a>
+</li>
+<li><a href="#self-signed-untergeordnetes-zertifikat-erzeugen">Self-Signed (untergeordnetes) Zertifikat erzeugen</a>
+</li>
+<li><a href="#pkcs-1-in-pkcs-8-umwandeln">PKCS#1 in PKCS#8 umwandeln</a>
+</li>
+</ol>
+</li>
+<li><a href="#links">Links</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",(e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")}),!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach((function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}}))</script>
+<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
+<script defer="defer">TIMESTAMP_FORMAT="MMM dd, yyyy HH:mm",document.querySelectorAll(".human-date").forEach((function(e){date=e.getAttribute("data-date")||e.innerText,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTML(date)),e.innerHTML=parsed_date.toFormat(TIMESTAMP_FORMAT)}))</script>
+<script>lucide.createIcons({attrs:{class:["svg-icon"]}})</script>
+</body>
+</html>

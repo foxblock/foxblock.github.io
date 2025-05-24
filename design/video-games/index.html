@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Video Games</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdn.jsdelivr.net/npm/lucide@0.115.0/dist/umd/lucide.min.js"></script>
+<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("icon-name",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
+<script async src="https://fastly.jsdelivr.net/npm/force-graph@1.43.0/dist/force-graph.min.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js" async></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
+<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+<link href="/styles/digital-garden-base.css" rel="stylesheet">
+<link href="/styles/obsidian-base.css" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css" rel="stylesheet"><link href="/styles/user/layout-fixes.css" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style></style>
+</head>
+<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
+<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
+<div x-show.important="!isDesktop" style="display:none">
+<nav class="navbar">
+<div class="navbar-inner">
+<span style="font-size:2rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:12px 24px;vertical-align:middle;border-radius:0">
+</a>
+</div>
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</nav>
+</div>
+<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
+<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<a href="/" style="text-decoration:none">
+<img src="/img/logo.svg" style="height:3.5em;margin:15px auto;display:block;border-radius:0">
+</a>
+<div style="display:flex;justify-content:center">
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</div>
+<div class="folder" x-data="{isOpen: true}">
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Code</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code/Langauges')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Langauges</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Design')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Design</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Life')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Life</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Tech')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Tech</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/hdd/">HDD </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Work')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">Work</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/work/agile/">Agile </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/work/communication-is-key/">Communication is Key </a>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+<div x-show="isOpen" style="display:none" class="">
+</div>
+</div>
+</nav>
+</div>
+<div class="search-container" id="globalsearch" onclick="toggleSearch()">
+<div class="search-box">
+<input type="search" id="term" placeholder="Start typing...">
+<div id="search-results"></div>
+<footer class="search-box-footer">
+<div class="navigation-hint">
+<span>Enter to select</span>
+</div>
+<div class="navigation-hint align-icon">
+<i icon-name="arrow-up" aria-hidden="true"></i>
+<i icon-name="arrow-down" aria-hidden="true"></i>
+<span>to navigate</span>
+</div>
+<div class="navigation-hint">
+<span>ESC to close</span>
+</div>
+</footer>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-05-24T11:04:08.012Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-05-24T11:04:08.012Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-05-24T11:04:08.012Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<main class="content cm-s-obsidian">
+<header>
+<h1 data-note-icon="">Video Games</h1>
+<div class="header-meta">
+<div class="header-tags">
+<a class="tag" onclick="toggleTagSearch(this)">
+#knowledge-base
+</a>
+<a class="tag" onclick="toggleTagSearch(this)">
+#german
+</a>
+</div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-04-04T16:35:15.777+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-24T12:51:03.530+02:00"></span></div></div></div>
+</header>
+<h2 id="10-lessons-as-per-mark-brown" tabindex="-1">10 Lessons as per Mark Brown</h2>
+<p><a href="https://www.youtube.com/watch?v=Cm2_drGLGbc" target="_blank" class="external-link">https://www.youtube.com/watch?v=Cm2_drGLGbc</a></p>
+<ol>
+<li>If you want to understand why a game makes you feel a certain way, ask yourself: how do the mechanics contribute to the experience?</li>
+<li>There is no definitive right or wrong mechanic. The only way to judge a mechanic, is to ask whether or not it can contribute to the experience you are trying to forge.</li>
+<li>You have to decide who the game is for and tune your mechanics appropriately. (e.g. hard-code or casual, accessible or much to learn)</li>
+<li>Options and bonus content can be used to make a game appealing to those who are more (or less) hardcore than the target audience. (bonus levels in Mario as an example)</li>
+<li>Options, accessibility settings and easy modes don't have to pose a threat to your intended experience. (Assist mode in celeste as an example)</li>
+<li>Designers should think of genres in the loosest possible terms. (Don't put yourself in a box, before designing something)</li>
+<li>The best solution for a complex problem is whatever provides the most interesting experience to the player. (Iterate often, follow the fun)</li>
+<li>A game idea is worthless until you have proven its value through a prototype.</li>
+<li>Frequent playtesting should be used to make sure your design is effectively producing the results you desire. (use with caution, there is only once chance for a first impression)</li>
+<li>Always figure out for yourself if a game design lesson is true for your and for the type of games you want to make. (Trends change, play a lot of games)</li>
+</ol>
+<h2 id="what-is-fun" tabindex="-1">What is fun?</h2>
+<p><a href="https://www.youtube.com/watch?v=TbZ3HzvFEto&amp;t=940s" target="_blank" class="external-link">https://www.youtube.com/watch?v=TbZ3HzvFEto&amp;t=940s</a></p>
+<ul>
+<li>&quot;The degree to which the games recognizes and responds to the player's choices and actions&quot;
+<ul>
+<li>Behavioral science equivalent: What are the reinforcers? What is the reinforcement schedule?</li>
+</ul>
+</li>
+<li>If you do something, the game has to react to it. If you shoot a wall, there have to be decals (and a sound effect). If the wall is ignoring the player, it inflicts a &quot;narcissistic injury&quot;</li>
+<li>The game has to acknowledge back to the player that he is making choices and that he is progressing. Otherwise it loses any impact.</li>
+<li>If the player stands still, the world can be quiet. But as you walk forward, something has to happen every 3-5 seconds (even if it is just a little thing like an interesting sign or a sound). <a href="https://youtu.be/TbZ3HzvFEto?feature=shared&amp;t=670" target="_blank" class="external-link">https://youtu.be/TbZ3HzvFEto?feature=shared&amp;t=670</a><br>
+<a href="https://youtu.be/nCxU-OBoISk?feature=shared&amp;t=1057" target="_blank" class="external-link">https://youtu.be/nCxU-OBoISk?feature=shared&amp;t=1057</a></li>
+<li>There needs to be a response to the action. The more meaningful the action, the bigger the response</li>
+<li>Exaggerate a bit. Use sounds / animation / screen shake / etc.</li>
+<li>The core actions of the game should feel really awesome. Create an unique experience that matches the action</li>
+<li>These responses keep the player engaged</li>
+</ul>
+<h2 id="combinatorics" tabindex="-1">Combinatorics</h2>
+<ul>
+<li>In many cases you want combinatoric explosion (e.g. n*m instead of n+m), because it gives you a bigger solution space to work in
+<ul>
+<li><a href="https://youtu.be/nCxU-OBoISk?feature=shared&amp;t=831" target="_blank" class="external-link">https://youtu.be/nCxU-OBoISk?feature=shared&amp;t=831</a></li>
+</ul>
+</li>
+<li>Example: Draw/handle hats separately from characters, so you can put any hat on any character. Draw background for cards separately from emblem, so they can be animated individually (and don't require a spritesheet)</li>
+<li>Make behaviors orthogonal to each other so they can be combined in interesting ways (see <a class="internal-link" target="" data-note-icon="" href="/code/game-programming/#fat-flat-struct-behaviors">Game Programming#Fat/Flat struct (behaviors)</a>)</li>
+</ul>
+<h2 id="puzzle-games" tabindex="-1">Puzzle Games</h2>
+<ul>
+<li>Was ist das Kernthema des Spiels? (Braid: Zeit, VVVVVV: Flipping)
+<ul>
+<li>Alle Puzzle sollten eine Eigenschaft dieses Themas behandeln (On-Topic) und nicht über Off-Topic Eigenschaften lösbar sein (z.B. Timing bei Jumps)</li>
+<li>Alle interessanten Effekte und Eigenschaften des Themas sollten durchgespielt werden (siehe z.B. Braid). Wie verändert das Thema ein klassisches Spiel? Was passiert wenn man XYZ hinzufügt? Was passiert, wenn man es weglässt? Was passiert wenn man Parameter XYZ davon ändert? etc.</li>
+</ul>
+</li>
+<li>Die offensichtliche aber falsche Lösung sollte eindeutig falsch sein (ein Sprung sollte deutlich zu kurz sein, wenn das entscheidende Element fehlt und nicht nur ein bisschen zu kurz) -&gt; ansonsten denkt ein Spieler, dass es an seinen mangelnden Fähigkeiten liegt (Off-Topic Element))
+<ul>
+<li>Insbesondere gilt dies bei &quot;analogen&quot; Spielen/Mechaniken: Die richtige Lösung sollte sich deutlich von falschen abheben (hoher &quot;margin of error&quot; bei der richtigen Lösung)</li>
+<li>Bei präzisen Elementen kann man kleine visuelle Hinweise an der richtigen Stelle platzieren (darf nicht zu auffällig sein)</li>
+<li>Genauso sollte die finale Lösung einfach zu erzeugen sein, damit nach dem Aha-Moment des Spielers es nicht mehr an mechanischen Fähigkeiten scheitert (oder anderen Off-Topic Elementen)</li>
+</ul>
+</li>
+<li>Die Grundelemente des Spiels sollten sehr simpel und verständlich sein. Ansonsten wird das Spiel zu komplex, wenn Elemente des Kernthemas dazu kommen
+<ul>
+<li>Jedes dieser Elemente ist ein Werkzeug für den Spieler. Er muss dieses gut verstehen und von den anderen Werkzeugen unterscheiden können, um die richtige Auswahl beim Lösen eines Puzzles zu treffen.</li>
+<li>Dem Spieler Zeit geben die einzelnen Elemente einzeln und in Kombination zu lernen</li>
+<li>Sich Gedanken a-priori über diese Elemente machen ist sehr wichtig: z.B. wie groß soll Charakter sein (beeinflusst wie viel auf den Bildschirm passt), wie schnell (beeinflusst wie viel mechanische Fähigkeiten der Spieler haben muss und wie schnell sich das Spiel anfühlt), wie hoch soll Jump sein (beeinflusst Vertikalität und wie groß Level sein kann), etc.</li>
+<li>Konsistenz: Die Elemente sollten sich nicht groß verändern, sodass der Spieler keine Überraschung erlebt und sich immer auf die Kernfunktionen verlassen kann (sonst: Frustration, Unklarheit)</li>
+<li>Idealerweise gibt es keine Elemente, die nur einmal in Spezialsituationen verwendet werden. Ansonsten wird der Spieler diese auch an anderer Stelle suchen</li>
+</ul>
+</li>
+<li>Analoge Elemente sind schwieriger zu designen als diskrete
+<ul>
+<li>(s.o.) Bandbreite zwischen Lösungen ist kontinuierlich und ggf. klein</li>
+<li>Spieler muss viel mit den Variablen probieren um &quot;sweet spot&quot; zu finden (im Gegensatz zu einer richtigen Kombination von diskreten Einstellungen)</li>
+<li>Plattformer: Jump sollte vermutlich konstant sein (Länge wie Höhe). Ansonsten zu viele Variablen beim Gestalten von Puzzles (muss immer alle Variationen des Jumps testen) und zu viel Fokus auf mechanische Fähigkeiten des Spielers</li>
+</ul>
+</li>
+<li>Antithese: Manchmal bietet es sich an, einzelne dieser Regeln zu brechen, um den Spieler auf etwas zu stoßen, andere Elemente hervorzuheben oder das Spiel aufzulockern (Braid: Hunt Levels - drehen sich nicht strikt um Zeit, haben komisches Hud und besondere Tür)</li>
+<li>Puzzles sollten auf ihre Essenz destilliert werden: Nicht mehr Elemente als nötig enthalten (On-Topic wie Off-Topic)
+<ul>
+<li>Idealerweise entwickelt man ein Gefühl dafür, was ein spezielles Puzzle &quot;ausmacht&quot; und wie es sich von anderen Puzzles abhebt. Man sollte versuchen alle Elemente zu entfernen, die dafür nicht zwingend notwendig sind</li>
+<li>Hierbei ist die Balance des Schwierigkeitsgrad und wie viele implizite oder explizite Hinweise man gibt nicht immer einfach/offensichtlich -&gt; Playtesting</li>
+<li>Beispiel Braid Anniversary Edition: High Jump (ideal: nur 1 Monster mit Entanglement, schlechter: mit zusätzlicher Tür und Schlüssel oder Version, wo man mit der Nase auf Lösung gestoßen wird) -&gt; &quot;Can I find a more elegant way to build this puzzle?&quot;</li>
+<li>Viele Versionen eines Puzzles ausprobieren -&gt; guter Level Editor hilfreich, alternativ im Kopf oder auf Papier</li>
+</ul>
+</li>
+<li>Partielle Lösbarkeit
+<ul>
+<li>Um Frustration zu vermeiden und Erfolgsmomente auch bei schwierigen Puzzles zu erzeugen, kann man versuchen &quot;partielle&quot; Lösungen einzubauen. Dies sind Momente, wo der Spieler realisiert, dass er einen Teil des Problems richtig erfasst und gelöst hat und sich anschließend auf die weiteren Teile des Puzzles fokussieren kann.</li>
+<li>Dies kann auch helfen, dass der Spieler auf dem richtigen Weg bleibt und nicht vorzeitig abbricht, um eine andere (falsche) Lösung zu suchen.</li>
+</ul>
+</li>
+<li>Spieler sollten nicht per Zufall auf die richtige Lösung eines Puzzles stoßen (oftmals so in &quot;Antimatter&quot; - einfach rückwärts durch alles laufen löst gefühlt 10% der Puzzles). Nur wenn man über ein Problem nachdenkt und es bewusst löst, fühlt es sich gut an.</li>
+<li>Schwierigkeit sollte nicht von Größe oder Komplexität der Puzzles kommen. (siehe Notizen zu Destillat oben)</li>
+<li>Fokus auf die interessanten Elemente und Puzzles, kein &quot;Filler&quot; einbauen. Jedes Puzzle sollte eine (neue) Idee präsentieren oder weiter ausbauen.</li>
+<li>Magic Moment: &quot;Dieses Puzzle ist unmöglich!&quot; -&gt; &quot;Ah! Eureka!&quot; Die Erkenntnis, wie man das &quot;unmögliche&quot; schaffen kann.</li>
+<li>Es ist ein Videospiel -&gt; alles ist möglich. Der Spieler geht erstmal von den &quot;üblichen&quot; Regeln aus (sofern er diese kenn, je nachdem welches Vorwissen er hat - u.U. gar keins!). Das heißt aber jede Regel kann gebrochen werden und muss erklärt oder gezeigt werden. Nichts sollte als &quot;gegeben&quot; angenommen werden.</li>
+<li>Puzzles, wo Elemente eine &quot;natürlich&quot; Bedeutung haben, können interessant sein (z.B. weil man sie sowieso braucht, um einen bestimmten Ort zu erreichen, aber dann nochmal konkret im Kontext des Puzzles). Fühlt sich &quot;natürlich&quot; an, weil die Elemente nicht ausschließlich für das Puzzle existieren. (-&gt; Braid &quot;Elevator action&quot;, JBlow nennt es &quot;artful excuses&quot;). Vorsicht: Werden schnell zu &quot;red herrings&quot;, wenn sie zu sehr vom eigentlichen Puzzle ablenken oder nur die Lösung verschleiern.</li>
+<li>Flow of ideas: Grundidee eines Puzzles mit weniger Elementen, dann nach und nach Elemente hinzufügen, die das Puzzle interessanter machen oder einen &quot;Twist&quot; erzeugen (nicht einfach nur Schwierigkeit oder Unübersichtlichkeit erhöhen)</li>
+<li>Puzzles sollten sich idealerweise nicht groß überlappen, um Redundanz zu vermeiden (jedes Puzzles behandelt eine eigene interessante Idee / Interaktion zwischen den Elementen des Spiels)</li>
+<li>Designentscheidungen sollten davon geleitet sein, welche Variante mehr interessante Interaktionen und Puzzle zulässt</li>
+<li>Intrinsische vs. extrinsische Motivation:
+<ul>
+<li>Spieler will selbst etwas erreichen</li>
+<li>Spiel belohnt Spieler bei Erreichen von Meilenstein mit Grafik / Sound / Text, etc.</li>
+<li>Es ist immer etwas extrinsische Motivation da (weil man z.B. Elemente nicht sofort zugänglich macht oder Spieler diese nicht versteht), aber man kann gestalten wie viel</li>
+<li>Intrinsische Motivation kann z.B. durch Story-Bits oder ähnliche Rewards entstehen, die das Spiel nicht explizit trackt oder den Spieler darauf hinweist (das Spiel weiß nicht, dass der Spieler etwas erreicht hat und kann es nicht anpreisen -&gt; er tut es nur des Ergebnisses wegen, aus freien Stücken)</li>
+<li>Das Verknüpfen (im Kopf des Spielers) von Gameplay-Elementen und Story zur Interpretation eines größeren Ganzen (welche der Entwickler so geplant hat), kann auch intrinsische Motivation sein -&gt; zweite Ebene. Spielt trackt es nicht und weißt nicht explizit darauf hin -&gt; Kunst</li>
+</ul>
+</li>
+</ul>
+<h2 id="jon-blow-on-game-networking" tabindex="-1">Jon Blow on Game Networking</h2>
+<p><a href="https://nitter.space/Jonathan_Blow/status/1894511416088170716#m" target="_blank" class="external-link">https://nitter.space/Jonathan_Blow/status/1894511416088170716#m</a></p>
+<p>Okay, so, like, here's a very <em>high level</em> overview of the issues involved in doing a networked game at a decent level of quality.</p>
+<p>The first thing one discovers when doing this kind of system is that, even though web dudes love TCP, it is very bad for games if that's all you use, because the second there is any packet loss or delay in a TCP stream, it holds up everything else in the stream after, then you get all this data and it's now useless because it's late (who cares where the other player was 2 seconds ago). So in general one needs to develop a protocol on top of UDP that transmits ephemeral-data-that-may-be-lost, and then either implement a reliable protocol on top of that one to transmit data-that-cannot-be-lost, or use TCP there.</p>
+<p>So now you have reliable messages and unreliable messages, and you decide what is short-term data that is okay if it gets lost (positions, orientations, whatever) and what is long-term data that cannot be lost (one-time changes of rare variables, changes of communication phase, etc).</p>
+<p>But now one of the most common bugs in these systems is partitioning the logic cleanly between these two types of communication in a very complicated system -- there can be race conditions (maybe some unreliable data you didn't expect beats the reliable message that tells the client to prepare to receive that unreliable data), you get all kinds of weird softlocks etc unless this is very carefully designed.</p>
+<p>Then you have the problem that these games are being worked on by programmers and designers who are not doing networking at all. They are defining fields on entities and world state, and there will be some system for attempting to automatically sync these over the network. But in order for this system not to be totally dismal performance-wise, it has to be very carefully programmed, and the problem is that the more magical the system tries to be, the more prone to the above desync bugs it will be (see many Unreal engine games). But at the same time, on a big enough project it is just a reality that you need this system to exist and work. So there tends to be a two-phase approach where fields are defined but treated conservatively (reliable send always, no compression) and then get optimized later, with very careful consideration about how to get this to perform well.</p>
+<p>Because network messages only come sometimes, but players are running at maybe 240Hz, there is a system on the client side that does prediction of what the current game state is, based on extrapolation from previously known states. This gets very complicated because the naive things (linear extrapolation based on previous velocity) look very bad in the face of packet loss etc. You need to attempt to emulate complex behavior by running some gameplay code similar to what the server is doing, but it's never exactly the same, and factoring the code so that it can be used in both contexts, while being understandable and maintainable, but also not painfully slow, can be a big challenge.</p>
+<p>No matter how good a job you do on the client-side prediction, it's always desynced from the server, so you need to have a system that smoothly reconciles between the extrapolated state, and the new information received from the server, without snapping stuff to the target value (this looks bad and is very disorienting) but also without interpolating too slowly (since this adds too much latency). This tends to be specific to the type of any particular value.</p>
+<p>On the server there also tends to be a latency compensation component to help players deal with lag: Incoming packets arrive that represent user commands, and rather than applying those commands to the <em>current</em> world state, in which case they will always be late, one often tries to pull up a representation of prior world state and see what the command was doing in that context (like if the command is &quot;I am shooting from position X in direction K&quot;, you are almost always going to miss the target if the server naively applies the command 'late'). A famous example of handling this is Yahn Bernier's system for Counter-Strike that he presented at GDC a long time ago (though I don't exactly like the particular things his system does).</p>
+<p>The above system relies on having an accurate estimate of the latency from client to server and from server to client, which is a whole system itself.</p>
+<p>How do you represent the values inside the packets? You are sending a lot of information so you want to keep them small. If you have a typical floating-point value, for example, you don't want to send 32 bits. So you represent it in a different way. How? Do you linearly quantize as an integer? Nonlinearly quantize as an integer? Make some kind of smaller float format? How many bits do you need for this value, and is it enough? Do you need to dynamically vary how many bits are used to represent this value in different contexts, and have something in the protocol to indicate this? All of these have different trade-offs and a significant amount of math is brought to bear here to make the right decisions.</p>
+<p>What about vector quantities, 3D positions or directions? What about 4D stuff like quaternions for orientation representation, or homogeneous-coordinate transformation matrices? To make good decisions here requires fluid working knowledge of all the linear algebra involved in 3D rendering, plus then knowledge of vector quantization schemes or some equivalent. Just representing quaternions in a reasonable manner is a whole thing, and it depends on the nature of how the rotations look typically.</p>
+<p>You can put the data into the packet as full values, but one of the most general techniques used in data compression is to represent things as deltas from a known-previous-value rather than the full value. But deltas are only relevant straightforwardly for the reliable messages, because in unreliable messages the client may not have the previous value! (aka client and server may disagree on what that is). What do you do here? Do you negotiate a neighborhood for the value via reliable messages, that then gets used in the unreliable messages? How much bandwidth does this take, is it a win?</p>
+<p>You want to entropy-code the outgoing messages to make them smaller (basically applying generic stream compression on top of the data stream you have already been trying to make small), because you are sending a lot of world state, and this involves knowledge of general data compression, which is itself a huge topic (there are entire textbooks just on the <em>basics</em> of how to compress data), but it's tricky because good compression relies on context, and you only know that the receiver has context on the reliable (TCP-style) messages, not the unreliable (UDP-style) messages, so maybe those two things have different compression styles (the unreliable messages cannot use context outside the message for compression).</p>
+<p>You have a bandwidth and CPU usage cap on the server, so you want to decide which updates to send each frame. You don't want to oversaturate someone (if you just sent data last frame you don't want to push out more), but you do want people to get a lot of data in brief periods if a lot is happening.</p>
+<p>In a 3D space some players/objects/etc are a lot further from you and others are closer, and you can't send all the data all the time, so there is some heuristic that provides more fidelity for things that need more fidelity. You might even have occlusion detection running on the server to decide that some players should get almost no information about some things (if it's a closed room-based world for example), but if an event is big enough you still need to know about it.</p>
+<p>Because CPU is limited on the server and there are a lot of clients you want to <em>quickly</em> determine whose world state is the most erroneous and prioritize sending to those people (which will change every frame), and if you are randomly-accessing a ton of memory this will be too slow, so this involves knowledge of cache-coherent data structures and general code optimization.</p>
+<p>If you are trying to serve a lot of clients you realize that this horrendous model of doing a system call per network message send or receipt (Unix or Windows-style) is really bad, so you end up wanting to code for hardware that doesn't work this way, so you use a network card that has an API that lets you talk to it via userspace without going through the kernel, and you talk to that via an asynchronous command-buffer API, and this in itself is a different paradigm than most programmers have ever dealt with, that has its own challenges.</p>
+<p>I have surely forgotten a lot of things here. It's a quick tweet. Each of the above paragraphs would be at least several chapters in the hypothesized book on the topic. And of course when you go do stuff in practice you run into a lot of practical problems not considered by theory (&quot;hey all our designers are writing all this Blueprint code, how in the hell are we going to client-side-predict the results of this?&quot;)</p>
+<p>Oh, here's one I forgot: Getting UDP messages through peoples' NAT is a whole thing that is very difficult and annoying and may not work at all no matter what you try. There are some other UDP-based protocols that do their best at this if anyone is interested in what it entails.</p>
+<p>Have EXTRA fun if you want two clients to be able to send UDP to <em>each other</em> in a modern environment...</p>
+<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
+</main>
+<aside>
+<div class="sidebar">
+<div class="sidebar-container">
+<div class="toc">
+<div class="toc-title-container">
+<div class="toc-title">
+On this page
+</div>
+</div>
+<div class="toc-container">
+<nav class="toc">
+<ol>
+<li><a href="#10-lessons-as-per-mark-brown">10 Lessons as per Mark Brown</a>
+</li>
+<li><a href="#what-is-fun">What is fun?</a>
+</li>
+<li><a href="#combinatorics">Combinatorics</a>
+</li>
+<li><a href="#puzzle-games">Puzzle Games</a>
+</li>
+<li><a href="#jon-blow-on-game-networking">Jon Blow on Game Networking</a>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",(e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")}),!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach((function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}}))</script>
+<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
+<script defer="defer">TIMESTAMP_FORMAT="MMM dd, yyyy HH:mm",document.querySelectorAll(".human-date").forEach((function(e){date=e.getAttribute("data-date")||e.innerText,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTML(date)),e.innerHTML=parsed_date.toFormat(TIMESTAMP_FORMAT)}))</script>
+<script>lucide.createIcons({attrs:{class:["svg-icon"]}})</script>
+</body>
+</html>
