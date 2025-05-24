@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-03-26T17:03:09.291+01:00","updated":"2025-05-23T15:03:15.009+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-03-26T17:03:09.291+01:00","updated":"2025-05-24T11:38:37.908+02:00"}
 ---
 
 ## strncpy, strncat
@@ -29,8 +29,8 @@ strncpy füllt Buffer komplett mit 0 auf, wenn `strlen(source) < num`, daher bei
 ## Operator Precedence
 https://en.cppreference.com/w/c/language/operator_precedence
 > [!warning] warning
-> `a & b == c` wird als `a & (b == c)` evaluiert (gleiches gilt für die anderen bitwise Operatoren `^ |` und Vergleiche `< > <= >=`, aber nicht).
-> Evaluations Reihenfolge: (quasi alle operatoren) -> & AND -> ^ XOR -> | OR -> Logical -> tenary -> assignement
+> `a & b == c` wird als `a & (b == c)` evaluiert (gleiches gilt für die anderen bitwise Operatoren `^ |` und Vergleiche `< > <= >=`).
+> Evaluations Reihenfolge: (quasi alle Operatoren) -> & AND -> ^ XOR -> | OR -> Logical -> ternary -> assignment -> comma operator
 
 
 > [!warning]
