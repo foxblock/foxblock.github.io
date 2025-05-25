@@ -3,82 +3,8 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-25T19:26:47Z</updated>
+    <updated>2025-05-25T19:27:16Z</updated>
     <id>https://janek.ing</id>
-        <entry>
-            <title>
-                Agile
-                
-            </title>
-            <updated>2025-05-24T11:00:45.090Z</updated>
-            <id>https://janek.ing/work/agile/</id>
-            <content type="html">
-                &lt;h2 id=&quot;eigene-erfahrung&quot; tabindex=&quot;-1&quot;&gt;Eigene Erfahrung&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Alle&lt;/strong&gt; Scrum Meetings müssen von &lt;strong&gt;allen&lt;/strong&gt; Teilnehmern gut vorbereitet sein, sonst werden sie nahezu wertlos
-&lt;ul&gt;
-&lt;li&gt;Dies bedeutet einen nicht unerheblichen Aufwand für diese Vorbereitung&lt;/li&gt;
-&lt;li&gt;Ziel sollte es also nicht sein, die Zeit für das Meeting auszulasten, sondern das Ziel des Meetings so schnell wie möglich zu erreichen&lt;/li&gt;
-&lt;li&gt;Bei langen Meetings: Materialien vorher rumschicken&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Es dürfen nur die vorgegebenen Features entwickelt werden!
-&lt;ul&gt;
-&lt;li&gt;Unnötige Features sind wie Lagerhaltung im Lean, sie erzeugen Probleme in jedem Schritt des weiteren Prozesses: mehr Aufwand für Testing, mehr Quellen für Bugs, mehr Aufwand für Dokumentation, ein komplexeres System mit mehr Abhängigkeiten&lt;/li&gt;
-&lt;li&gt;Unnötige Features können Stück für Stück das Projekt lahm legen&lt;/li&gt;
-&lt;li&gt;Beispiel: ralf bei ioelemets&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Regelmäßige Testzyklen (mit echten Usern!) sind wichtig zum Nachsteuern
-&lt;ul&gt;
-&lt;li&gt;dementsprechend müssen Features Bug frei sein. Ansonsten: kein review und technical debt für nächsten Sprint&lt;/li&gt;
-&lt;li&gt;Tests mit echten Usern sind nicht zu ersetzen. Oftmals trifft man falsche Annahmen, was User wollen/brauchen und nur so findet man das heraus.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;je unklarer die Anforderungen zu Beginn des Projektes, desto schwieriger wird die Entwicklung und desto wichtiger sind PoCs. Lieber einen schnellen Test wegwerfen, als Jahre auf die falsche Technologie setzen.&lt;/li&gt;
-&lt;li&gt;generell wird die zweite Version eines Produktes oft besser: also schnell PoC bauen, wegwerfen und dann Gelerntes bei richtigem Produkt anwenden&lt;/li&gt;
-&lt;li&gt;niemals für die Probleme von morgen entwickeln, denn diese kennst du nicht (siehe unnötige Features oben)!&lt;/li&gt;
-&lt;li&gt;Wichtige Säule von Scrum: Transparenz. Gilt für alle Bereiche eines Unternehmens&lt;/li&gt;
-&lt;li&gt;scrum funktioniert am besten mit sehr selbständigen Entwicklern, die fokussiert arbeiten und notwendige aufgaben eigenständig entdecken, sich aber an die Regeln (feature liste) halten. Je mehr micro Management notwendig ist, desto schlechter funktioniert scrum.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;TODO: insert vorgehen walk the board&lt;/p&gt;
-&lt;h2 id=&quot;literatur&quot; tabindex=&quot;-1&quot;&gt;Literatur&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.craiglarman.com/wiki/downloads/misc/history-of-iterative-larman-and-basili-ieee-computer.pdf&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.craiglarman.com/wiki/downloads/misc/history-of-iterative-larman-and-basili-ieee-computer.pdf&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;agile/iterative Entwicklung (IID) gibt es schon seit den 70ern und länger&lt;/li&gt;
-&lt;li&gt;wasserfall war ursprünglich auch agile gedacht (&amp;quot;do the process twice&amp;quot;)&lt;/li&gt;
-&lt;li&gt;agile ist nur Wasserfall in wiederkehrenden, kleinen inkrementen&lt;/li&gt;
-&lt;li&gt;jeder Schritt enthält auch wieder eine Design, Test und Dokumentation phase&lt;/li&gt;
-&lt;li&gt;wichtig sind releaseable increments (bei Software)&lt;/li&gt;
-&lt;li&gt;Timeboxen reichen von 6m bis 0,5d&lt;/li&gt;
-&lt;li&gt;inspiration für scrum: japanischer IID Ansatz für Hardware bei Honda, Canon, Fujitsu: &amp;quot;shashimi&amp;quot; (slices)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“Evolution” is a technique for producing the appearance of stability. A complex system will be most successful if it is implemented in small steps and if each step has a clear measure of successful achievement as well as a “retreat” possibility to a previous successful step upon failure. You have the opportunity of receiving some feedback from the real world before throwing in all resources intended for a system, and you can correct possible design errors…&lt;br /&gt;
--- Tom Gilb&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Management does not require firm estimates of completion, time, and money for the entire project. Each (small iterative) step must meet one of the following criteria (priority order): either (a) give planned return on investment payback, or, if impossible, then (b) give breakeven (no loss); or, at least, (c) some positive user benefit measurably; or, at least (d) some user environment feedback and learning.&lt;br /&gt;
--- Tom Gilb&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The danger in the sequence (waterfall approach) is that the project moves from being grand to being grandiose, and exceeds our human intellectual capabilities for management and control.&lt;br /&gt;
--- Harlan Mills&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;probleme&quot; tabindex=&quot;-1&quot;&gt;Probleme&lt;/h2&gt;
-&lt;p&gt;Probleme mit Wasserfall nach David Parnas und Paul Clements:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A system’s users seldom know exactly what they want and cannot articulate all they know.&lt;/li&gt;
-&lt;li&gt;Even if we could state all requirements, there are many details that we can only discover once we are well into implementation.&lt;/li&gt;
-&lt;li&gt;Even if we knew all these details, as humans, we can master only so much complexity.&lt;/li&gt;
-&lt;li&gt;Even if we could master all this complexity, external forces lead to changes in requirements, some of which may invalidate earlier decisions&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Probleme mit Scrum:&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=Q25lwSfVwF8&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=Q25lwSfVwF8&lt;/a&gt;&lt;/p&gt;
-
-            </content>
-            <link href="https://janek.ing/work/agile/" >
-        </entry>
         <entry>
             <title>
                 Projects Home
