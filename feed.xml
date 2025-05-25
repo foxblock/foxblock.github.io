@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-24T11:04:47Z</updated>
+    <updated>2025-05-25T19:26:47Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -97,31 +97,31 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/2025-05-23%2012_21_03-Network%20Visualizer%20(v0.3.1-dev).png&quot; alt=&quot;2025-05-23 12_21_03-Network Visualizer (v0.3.1-dev).png&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/2025-05-23%2012_21_03-Network%20Visualizer%20(v0.3.1-dev).png&quot; alt=&quot;2025-05-23 12_21_03-Network Visualizer (v0.3.1-dev).png&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;Network Visualizer&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2024-2025 • C&lt;/em&gt;&lt;br /&gt;Software for working with large clouds of geospatial data. Developed for visualizing and analyzing the performance of a city-wide LoRaWAN network. The main goal was to handle 1M+ datapoints in real-time. Loads 1M datapoints (a 200MB csv file) in less than a second and displays them on top of a fully-featured OpenStreetMap renderer. Analytic tools like aggregations, displaying connections to gateway stations and more. All in real-time 60+ fps. Minimal dependencies (only curl and raylib).&lt;br /&gt;Currently available upon request.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/playdate-20240329-235626.gif&quot; alt=&quot;playdate-20240329-235626.gif&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/playdate-20240329-235626.gif&quot; alt=&quot;playdate-20240329-235626.gif&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;Crank-it&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2023-2024 • Lua&lt;/em&gt;&lt;br /&gt;Bop-it inspired game developed for the Playdate.&lt;br /&gt;&lt;a href=&quot;https://foxblock.itch.io/crank-it&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Available on itch.io&lt;/a&gt;&lt;br /&gt;&lt;a href=&quot;https://github.com/foxblock/playdate-crank-it&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Code on GitHub&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/IMG_20170809_151849548.jpg&quot; alt=&quot;IMG_20170809_151849548.jpg&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/IMG_20170809_151849548.jpg&quot; alt=&quot;IMG_20170809_151849548.jpg&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;CaBiS&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2017 • Typescript, HTML&lt;/em&gt;&lt;br /&gt;Candy Billing System for my work at the time. Using the general transponder used for building access as authentication and a RaspberryPi with Touchscreen for the interface. Ionic for the frontend, SQLite and node.js microservices for the backend. First time working with node, made a huge mess, but it worked at the end (so a typical Typescript project after all...?).&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/shot_20151103_213858.png&quot; alt=&quot;shot_20151103_213858.png&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/shot_20151103_213858.png&quot; alt=&quot;shot_20151103_213858.png&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;Greyout&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2011-2017 • C++&lt;/em&gt;&lt;br /&gt;2D side-scrolling puzzle game developed for the OpenPandora. Realizes the concept of &amp;quot;negative space&amp;quot;. You control 2 characters walking in the same world, but one experiencing it in a black-on-white and one in white-on-black way. Physics-based and logic puzzles with a custom engine based on SDL. Soundtrack by Nick May.&lt;br /&gt;&lt;a href=&quot;https://github.com/foxblock/greyout&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Code on GitHub&lt;/a&gt;&lt;br /&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=wiD3GaFthdo&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Video on YouTube&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/shot03.png&quot; alt=&quot;shot03.png&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/shot03.png&quot; alt=&quot;shot03.png&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;Schizophrenia&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2012-2013&lt;/em&gt;&lt;br /&gt;2D puzzle platformer where I did the art, most of the game and level design and &lt;a href=&quot;https://github.com/theZiz&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;theZiz&lt;/a&gt; did the code and built a whole 2D software renderer from scratch. Made for a GP2X game jam. &lt;br /&gt;You control a scientist that can make copies of certain entities in the world to solve puzzles. Kinda like Snapshot, although our first designs predate it.&lt;br /&gt;&lt;a href=&quot;https://github.com/foxblock/schizophrenia&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Code on GitHub&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/PNDTools%202025-05-23%2012_27_17-.png&quot; alt=&quot;PNDTools 2025-05-23 12_27_17-.png&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/PNDTools%202025-05-23%2012_27_17-.png&quot; alt=&quot;PNDTools 2025-05-23 12_27_17-.png&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;PND Tools&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2011-2015 • Delphi&lt;/em&gt;&lt;br /&gt;The most popular tool for creating pnd files on Windows. pnd is the container format used by the open-source handheld &lt;a href=&quot;https://en.wikipedia.org/wiki/Pandora_(computer)&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;OpenPandora&lt;/a&gt;.&lt;br /&gt;Multi-windowed GUI with drag-and-grop support for generating a file tree, editing the xml description data and bundling it together. Easy-configuration wizard with a step-by-step guide for beginners.&lt;br /&gt;&lt;a href=&quot;https://github.com/foxblock/PNDTools&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Code on GitHub&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/mapEditorScreen06.jpg&quot; alt=&quot;mapEditorScreen06.jpg&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/mapEditorScreen06.jpg&quot; alt=&quot;mapEditorScreen06.jpg&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;Wandor World Editor&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2009-2011 • Delphi&lt;/em&gt;&lt;br /&gt;Level editor for a never released tile-based 2D side-scrolling game. Multi-Window UI with docking. Support for multiple layers, parallax scrolling background, placing entities from a database, navigating via minimap. Export to a custom file-format which uses Unicode characters and indices into the tilemap.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -141,11 +141,11 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/DSC_2353.jpg&quot; alt=&quot;DSC_2353.jpg&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/DSC_2353.jpg&quot; alt=&quot;DSC_2353.jpg&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;Home Lamp&lt;/strong&gt;&lt;br /&gt;&lt;em&gt;2022 • C++, ESP32&lt;/em&gt;&lt;br /&gt;Re-creation of the wonderful &lt;a href=&quot;https://www.designswarm.com/good-night-lamp/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Good Night Lamp&lt;/a&gt; by Alexandra Deschamps-Sonsino. Multiple lamps are connected via the internet. When one is turned on, all turn on. Send a warm light meaning &amp;quot;good night&amp;quot;, &amp;quot;I just came home safe&amp;quot; or &amp;quot;hey, I am available to call&amp;quot; with the press of a button. Wood and acrylic housing, custom PCB, communication via MQTT, simple web-interface for configuration. My brother an I built this as a Christmas present for our mom. It is still working great after 2+ years.&lt;br /&gt;&lt;a href=&quot;https://youtu.be/uzuDoKGgP_o&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Video on YouTube&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/DSC_2698.jpg&quot; alt=&quot;DSC_2698.jpg&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/DSC_2698.jpg&quot; alt=&quot;DSC_2698.jpg&quot; /&gt;&lt;/td&gt;
 &lt;td&gt;&lt;strong&gt;Soundbox&lt;/strong&gt;&lt;br /&gt;2020-2023 • C++, ESP32&lt;br /&gt;Play popular meme sounds at the press of the button. Annoy or delight your co-workers. Let them join in on the fun via the built-in web-interface.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -153,12 +153,12 @@
 &lt;h2 id=&quot;woodworking-and-jewlery&quot; tabindex=&quot;-1&quot;&gt;Woodworking and Jewlery&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Wooden Cube Shelf&lt;/strong&gt;&lt;br /&gt;
 &lt;em&gt;2023 • Bamboo&lt;/em&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/DSC_2492.jpg&quot; alt=&quot;DSC_2492.jpg|355&quot; width=&quot;355px&quot; /&gt; &lt;img src=&quot;https://janek.ing/img/user/attachments/DSC_2922.jpg&quot; alt=&quot;DSC_2922.jpg|200&quot; width=&quot;200px&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/DSC_2492.jpg&quot; alt=&quot;DSC_2492.jpg|355&quot; width=&quot;355px&quot; /&gt; &lt;img src=&quot;https://janek.ing/img/user/_attachments/DSC_2922.jpg&quot; alt=&quot;DSC_2922.jpg|200&quot; width=&quot;200px&quot; /&gt;&lt;br /&gt;
 LED-Strips for indirect lighting. Some cubes are compatible to IKEA Expedit accessories for additional storage options.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;strong&gt;Terrace Bench&lt;/strong&gt;&lt;br /&gt;
 &lt;em&gt;2021 • OSB wood panels, douglas fir 2-by-4s&lt;/em&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/DSC_0443.jpg&quot; alt=&quot;DSC_0443.jpg&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/DSC_0443.jpg&quot; alt=&quot;DSC_0443.jpg&quot; /&gt;&lt;br /&gt;
 Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one of the side panels to create an area for a mattress.&lt;/p&gt;
 
             </content>
@@ -268,7 +268,7 @@ Deleting the source file/folder will invalidate all links. Deleting the link wil
 &lt;ul&gt;
 &lt;li&gt;Windows + Linke/Rechte Pfeiltaste (Verschiebt Fenster in linke/rechte Bildschirmhälfte)&lt;br /&gt;
 Manchmal hilft dies nicht, dann aber das Folgende:&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240405092616.png&quot; alt=&quot;Pasted image 20240405092616.png&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240405092616.png&quot; alt=&quot;Pasted image 20240405092616.png&quot; /&gt;&lt;/li&gt;
 &lt;li&gt;Maus eine kurze Zeit über Icon auf der Taskleiste halten -&amp;gt; Rechtsklick auf die Fenster-Vorschau (nicht das Icon in der Taskleiste)&lt;/li&gt;
 &lt;li&gt;Klick auf Verschieben&lt;/li&gt;
 &lt;li&gt;Eine Pfeiltaste drücken&lt;/li&gt;
@@ -408,10 +408,10 @@ v_o = &#92;frac{R_1 + R_2}{R_2} v_{IN}
 $$
 -&gt; Der Gain des Verstärkers hat keinen Einfluss
 ### Praktisches Beispiel
-![Pasted image 20240515105449.png](/img/user/attachments/Pasted%20image%2020240515105449.png)
+![Pasted image 20240515105449.png](/img/user/_attachments/Pasted%20image%2020240515105449.png)
 0..3V3 -&gt; 0..10V (D1 und R4 zur Visualisierung)
 ### Abwandlung: 4-20mA Output
-![Pasted image 20240515112511.png](/img/user/attachments/Pasted%20image%2020240515112511.png)
+![Pasted image 20240515112511.png](/img/user/_attachments/Pasted%20image%2020240515112511.png)
 [4-20mA Transmitter Explained using an Op Amp (youtube.com)](https://www.youtube.com/watch?v=ZqJxdBCpb6c)
 - Spannung an Eingängen ist gleich (im eingeschwungenen Zustand)
 - Strom wird durch V&lt;sub&gt;i&lt;/sub&gt; und R&lt;sub&gt;1&lt;/sub&gt; bestimmt (unabhängig von R&lt;sub&gt;L&lt;/sub&gt;!)
@@ -428,7 +428,7 @@ $$
 - Nur relevant, wenn das zu verstärkende Signal sehr schwach ist (z.B. bei Phono-Audio-Verstärkern).
 - Schaltungen müssen dabei sehr gleich sein (Toleranzen in Widerständen und Co beachten, ggf. einzeln einmessen).
 - [&quot;Input Offset Voltage&quot;](https://www.ti.com/lit/an/sloa059b/sloa059b.pdf?ts=1734505475015) (Spannungsdifferenz durch Fertigungsfehler zwischen Op-Amp Terminals) sollte deutlich kleiner als Amplitude von Signal sein -&gt; kann ausgemessen werden (siehe Videolink unten) 
-![Pasted image 20241218095447.png](/img/user/attachments/Pasted%20image%2020241218095447.png)
+![Pasted image 20241218095447.png](/img/user/_attachments/Pasted%20image%2020241218095447.png)
 [Mastergroove repair by Mend it Mark &amp; an honest message to Tom Evans audio - YouTube](https://youtu.be/6hVe_spuJQI?feature=shared&amp;t=1037)
 
             </content>
@@ -678,7 +678,7 @@ node.status({});   // to clear the status
 this.status({fill:&amp;quot;red&amp;quot;,shape:&amp;quot;ring&amp;quot;,text:&amp;quot;disconnected&amp;quot;});
 this.status({fill:&amp;quot;green&amp;quot;,shape:&amp;quot;dot&amp;quot;,text:&amp;quot;connected&amp;quot;});
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240621141018.png&quot; alt=&quot;Pasted image 20240621141018.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240621141018.png&quot; alt=&quot;Pasted image 20240621141018.png&quot; /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;nuetzliche-links&quot; tabindex=&quot;-1&quot;&gt;Nützliche Links&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://nodered.org/docs/user-guide/messages&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Working with messages : Node-RED (nodered.org)&lt;/a&gt;&lt;/p&gt;
 
@@ -924,7 +924,7 @@ Objekt -&amp;gt; Aussehen umwandeln löst den Effekt auf und erstellt einen Pfad
 &lt;h2 id=&quot;pfad-umkehren&quot; tabindex=&quot;-1&quot;&gt;Pfad umkehren&lt;/h2&gt;
 &lt;p&gt;Mit Zeichenstift Werkzeug einen Endpunkt des offenen Pfades anklicken.&lt;/p&gt;
 &lt;h2 id=&quot;bild-in-pfad-umwandeln-hintergrund-entfernen&quot; tabindex=&quot;-1&quot;&gt;Bild in Pfad umwandeln / Hintergrund entfernen&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020241218212512.png&quot; alt=&quot;Pasted image 20241218212512.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020241218212512.png&quot; alt=&quot;Pasted image 20241218212512.png&quot; /&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Einstellungen im Bildnachzeichner setzen&lt;/li&gt;
 &lt;li&gt;Objekt &amp;gt; Umwandeln
@@ -934,8 +934,8 @@ Objekt -&amp;gt; Aussehen umwandeln löst den Effekt auf und erstellt einen Pfad
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;objekt-lineares-muster&quot; tabindex=&quot;-1&quot;&gt;Objekt - lineares Muster&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020241218212226.png&quot; alt=&quot;Pasted image 20241218212226.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020241218212251.png&quot; alt=&quot;Pasted image 20241218212251.png&quot; /&gt;&lt;br /&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020241218212226.png&quot; alt=&quot;Pasted image 20241218212226.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020241218212251.png&quot; alt=&quot;Pasted image 20241218212251.png&quot; /&gt;&lt;br /&gt;
 &lt;a href=&quot;https://graphicdesign.stackexchange.com/questions/95167/how-to-have-multiple-instances-of-the-same-object-in-illustrator-cc-2015&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://graphicdesign.stackexchange.com/questions/95167/how-to-have-multiple-instances-of-the-same-object-in-illustrator-cc-2015&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;schnittmaske&quot; tabindex=&quot;-1&quot;&gt;Schnittmaske&lt;/h2&gt;
 &lt;ol&gt;
@@ -1139,9 +1139,9 @@ etc.
 &lt;pre&gt;&lt;code&gt;&amp;lt;just a bunch of binary data&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;one-way-tls-auth&quot; tabindex=&quot;-1&quot;&gt;One-way TLS auth&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/I0612.jpg&quot; alt=&quot;I0612.jpg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/I0612.jpg&quot; alt=&quot;I0612.jpg&quot; /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;two-way-tls-auth&quot; tabindex=&quot;-1&quot;&gt;Two-way TLS auth&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/SGyYa.png&quot; alt=&quot;SGyYa.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/SGyYa.png&quot; alt=&quot;SGyYa.png&quot; /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;open-ssl-befehle&quot; tabindex=&quot;-1&quot;&gt;OpenSSL Befehle&lt;/h2&gt;
 &lt;p&gt;OpenSSL kommt mit GitForWindows: &lt;code&gt;C:&#92;Program Files&#92;Git&#92;usr&#92;bin&#92;openssl.exe&lt;/code&gt;&lt;br /&gt;
 Getestet mit Version: &lt;code&gt;OpenSSL 3.2.3 3 Sep 2024 (Library: OpenSSL 3.2.3 3 Sep 2024)&lt;/code&gt;&lt;/p&gt;
@@ -1342,7 +1342,7 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
                 Schlaf
                 
             </title>
-            <updated>2025-05-24T10:50:41.149Z</updated>
+            <updated>2025-05-24T11:10:07.386Z</updated>
             <id>https://janek.ing/life/schlaf/</id>
             <content type="html">
                 &lt;p&gt;Einschlafen, 3 Schritte&lt;/p&gt;
@@ -1555,7 +1555,7 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
 &lt;/li&gt;
 &lt;li&gt;Provide (meaningful) error messages
 &lt;ul&gt;
-&lt;li&gt;This does not help anyone: &lt;img src=&quot;https://janek.ing/img/user/attachments/media_GMIPHd9aIAAM5nf.webp&quot; alt=&quot;media_GMIPHd9aIAAM5nf.webp&quot; /&gt;&lt;/li&gt;
+&lt;li&gt;This does not help anyone: &lt;img src=&quot;https://janek.ing/img/user/_attachments/media_GMIPHd9aIAAM5nf.webp&quot; alt=&quot;media_GMIPHd9aIAAM5nf.webp&quot; /&gt;&lt;/li&gt;
 &lt;li&gt;Tell the user exactly what went wrong&lt;/li&gt;
 &lt;li&gt;Ideally include a hint on how to fix the error&lt;/li&gt;
 &lt;li&gt;Make the error message easily googleable (use descriptive keywords, make the text copyable - old Windows error dialog boxes copied the whole content to clipboard when the user pressed Ctrl + C)&lt;/li&gt;
@@ -1659,7 +1659,7 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
             <content type="html">
                 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=HAWUhboLW-0&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=HAWUhboLW-0&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;vorgehen&quot; tabindex=&quot;-1&quot;&gt;Vorgehen&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329214230.png&quot; alt=&quot;Pasted image 20240329214230.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329214230.png&quot; alt=&quot;Pasted image 20240329214230.png&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Ungefähre Melodie spielen&lt;/li&gt;
 &lt;li&gt;&amp;quot;Rest points&amp;quot; identifizieren (Moment wo Melodie &amp;quot;anhält&amp;quot;)&lt;/li&gt;
@@ -1674,35 +1674,35 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
 &lt;li&gt;I, IV, V sind moll (III, VI dur) in C-moll -&amp;gt; negative Emotionen&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;tonleiter&quot; tabindex=&quot;-1&quot;&gt;Tonleiter&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329221948.png&quot; alt=&quot;Pasted image 20240329221948.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/g-schluessel.jpg&quot; alt=&quot;g-schluessel.jpg&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/piano-sheet-music-flats-and-sharps.jpg&quot; alt=&quot;piano-sheet-music-flats-and-sharps.jpg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329221948.png&quot; alt=&quot;Pasted image 20240329221948.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/g-schluessel.jpg&quot; alt=&quot;g-schluessel.jpg&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/piano-sheet-music-flats-and-sharps.jpg&quot; alt=&quot;piano-sheet-music-flats-and-sharps.jpg&quot; /&gt;&lt;/p&gt;
 &lt;h3 id=&quot;dur&quot; tabindex=&quot;-1&quot;&gt;Dur&lt;/h3&gt;
 &lt;p&gt;1 -&amp;gt; 1 -&amp;gt; 1/2 -&amp;gt; 1 -&amp;gt; 1 -&amp;gt; 1 -&amp;gt; 1/2&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329221755.png&quot; alt=&quot;Pasted image 20240329221755.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329221755.png&quot; alt=&quot;Pasted image 20240329221755.png&quot; /&gt;&lt;br /&gt;
 C-dur: C -&amp;gt; D -&amp;gt; E -&amp;gt; F -&amp;gt; G -&amp;gt; A -&amp;gt; B -&amp;gt; C&lt;/p&gt;
 &lt;h3 id=&quot;moll&quot; tabindex=&quot;-1&quot;&gt;Moll&lt;/h3&gt;
 &lt;p&gt;1 -&amp;gt; 1/2 -&amp;gt; 1 -&amp;gt; 1 -&amp;gt; 1/2 -&amp;gt; 1 -&amp;gt; 1&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329222047.png&quot; alt=&quot;Pasted image 20240329222047.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329222047.png&quot; alt=&quot;Pasted image 20240329222047.png&quot; /&gt;&lt;br /&gt;
 A-moll: A -&amp;gt; B -&amp;gt; C -&amp;gt; D -&amp;gt; E -&amp;gt; F -&amp;gt; G -&amp;gt; A&lt;/p&gt;
 &lt;h2 id=&quot;wichtigste-akkorde-c-dur&quot; tabindex=&quot;-1&quot;&gt;Wichtigste Akkorde (C-dur)&lt;/h2&gt;
 &lt;h3 id=&quot;dur-1&quot; tabindex=&quot;-1&quot;&gt;Dur&lt;/h3&gt;
 &lt;p&gt;Start -&amp;gt; 4 Halbtöne -&amp;gt; 3 Halbtöne&lt;br /&gt;
 I -&amp;gt; C E G&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329214745.png&quot; alt=&quot;Pasted image 20240329214745.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329214745.png&quot; alt=&quot;Pasted image 20240329214745.png&quot; /&gt;&lt;br /&gt;
 IV -&amp;gt; C F A&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329214908.png&quot; alt=&quot;Pasted image 20240329214908.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329214955.png&quot; alt=&quot;Pasted image 20240329214955.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329214908.png&quot; alt=&quot;Pasted image 20240329214908.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329214955.png&quot; alt=&quot;Pasted image 20240329214955.png&quot; /&gt;&lt;br /&gt;
 V -&amp;gt; G D B&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329215052.png&quot; alt=&quot;Pasted image 20240329215052.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329214649.png&quot; alt=&quot;Pasted image 20240329214649.png&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329215052.png&quot; alt=&quot;Pasted image 20240329215052.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329214649.png&quot; alt=&quot;Pasted image 20240329214649.png&quot; /&gt;&lt;/p&gt;
 &lt;h3 id=&quot;moll-1&quot; tabindex=&quot;-1&quot;&gt;Moll&lt;/h3&gt;
 &lt;p&gt;Start -&amp;gt; 3 Halbtöne -&amp;gt; 4 Halbtöne&lt;br /&gt;
 III -&amp;gt; E G B&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329215517.png&quot; alt=&quot;Pasted image 20240329215517.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329215517.png&quot; alt=&quot;Pasted image 20240329215517.png&quot; /&gt;&lt;br /&gt;
 VI -&amp;gt; A C E&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329215342.png&quot; alt=&quot;Pasted image 20240329215342.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240329215229.png&quot; alt=&quot;Pasted image 20240329215229.png&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329215342.png&quot; alt=&quot;Pasted image 20240329215342.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240329215229.png&quot; alt=&quot;Pasted image 20240329215229.png&quot; /&gt;&lt;/p&gt;
 
             </content>
             <link href="https://janek.ing/design/musiktheorie/" >
@@ -2547,8 +2547,8 @@ Bei kleinen Arrays (&amp;lt;1000 Elemente) macht dies in der Praxis keinen groß
 for..of ist ähnlich schnell wie for.&lt;br /&gt;
 Mikro-Optimierungen, wie z.B. das Cachen von &amp;quot;array.length&amp;quot; vor dem Loop bringen keine Verbesserung (macht der Compiler vermutlich eh).&lt;br /&gt;
 &lt;a href=&quot;https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Performance of JavaScript .forEach, .map and .reduce vs for and for..of (leanylabs.com)&lt;/a&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240301103722.png&quot; alt=&quot;Pasted image 20240301103722.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240301103739.png&quot; alt=&quot;Pasted image 20240301103739.png&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240301103722.png&quot; alt=&quot;Pasted image 20240301103722.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240301103739.png&quot; alt=&quot;Pasted image 20240301103739.png&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Eine pre-Allokation eines Ergebnis-Arrays ist deutlich schneller, als Elemente einzeln zu pushen (gilt in jeder Sprache)&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-JS&quot;&gt;// bad
@@ -3402,7 +3402,7 @@ span, div /* apply same style to both span and div */
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&quot;class-nesting-example&quot; tabindex=&quot;-1&quot;&gt;Class nesting example&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://jsfiddle.net/k6wxec39/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;JSFiddle - Code Playground&lt;/a&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/attachments/Pasted%20image%2020240311124103.png&quot; alt=&quot;Pasted image 20240311124103.png&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240311124103.png&quot; alt=&quot;Pasted image 20240311124103.png&quot; /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;em-rem&quot; tabindex=&quot;-1&quot;&gt;em, rem&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;em&lt;/code&gt; is factor of font pixel-size in parent container&lt;br /&gt;
 &lt;code&gt;rem&lt;/code&gt; works the same, but always references the root element &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;. Default &lt;code&gt;font-size&lt;/code&gt; is 16px.&lt;/p&gt;
@@ -4424,7 +4424,7 @@ struct Trigger
                 Data Structures &amp; Algorithms
                 
             </title>
-            <updated>2025-05-23T13:06:40.980Z</updated>
+            <updated>2025-05-24T11:06:16.203Z</updated>
             <id>https://janek.ing/code/data-structures-and-algorithms/</id>
             <content type="html">
                 &lt;h2 id=&quot;hash-tables&quot; tabindex=&quot;-1&quot;&gt;Hash Tables&lt;/h2&gt;
@@ -4465,7 +4465,7 @@ struct Trigger
 &lt;h2 id=&quot;linked-list-vs-array&quot; tabindex=&quot;-1&quot;&gt;Linked List vs Array&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://baptiste-wicht.com/posts/2012/11/cpp-benchmark-vector-vs-list.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;C++ benchmark - std::vector VS std::list | Blog blog(&amp;quot;Baptiste Wicht&amp;quot;); (baptiste-wicht.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.rfleury.com/p/in-defense-of-linked-lists&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.rfleury.com/p/in-defense-of-linked-lists&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;![[attachments/memory-layout.mp4]]&lt;/p&gt;
+&lt;p&gt;![[memory-layout.mp4]]&lt;/p&gt;
 &lt;h2 id=&quot;sorting&quot; tabindex=&quot;-1&quot;&gt;Sorting&lt;/h2&gt;
 &lt;p&gt;Vergleich mit Animation: &lt;a href=&quot;https://www.toptal.com/developers/sorting-algorithms&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Sorting Algorithms Animations | Toptal®&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;insertion-sort&quot; tabindex=&quot;-1&quot;&gt;Insertion Sort&lt;/h3&gt;
@@ -4624,7 +4624,7 @@ Also needs special attention if negative numbers are involved (additional sort o
                 Architecture
                 
             </title>
-            <updated>2025-05-24T10:38:24.441Z</updated>
+            <updated>2025-05-24T11:06:16.172Z</updated>
             <id>https://janek.ing/code/architecture/</id>
             <content type="html">
                 &lt;h2 id=&quot;golden-rules&quot; tabindex=&quot;-1&quot;&gt;Golden Rules&lt;/h2&gt;
@@ -4839,7 +4839,7 @@ Dies gilt für alle Binärdaten, eigene Datenformate oder Protokolle (Learning v
 &lt;h2 id=&quot;oop-vs-data-oriented&quot; tabindex=&quot;-1&quot;&gt;OOP vs Data-Oriented&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;v-tables und dynamic memory allocation machen das Programm langsamer, weil Objekte im Speicher verteilt liegen und viele cache misses erzeugen: &lt;a href=&quot;https://x.com/ryanjfleury/status/1672722010399703041&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Ryan Fleury auf X: „This illustrates why it has been helpful to me to eliminate v-tables and sum-types almost everywhere. It isn’t just about performance—it’s about strong predictive power over code, staying organized, non-pessimization, and architecture which is ready to optimize later if needed.“ / X&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;![[attachments/memory-layout.mp4]]&lt;/li&gt;
+&lt;li&gt;![[memory-layout.mp4]]&lt;/li&gt;
 &lt;li&gt;V-Tables sind &amp;quot;&lt;a href=&quot;https://en.wikipedia.org/wiki/Function_pointer&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;indirected function pointers&lt;/a&gt;&amp;quot; und stellen eine harte Grenze für den Compiler dar. Switch statements können hingegen deutlich besser optimiert werden -&amp;gt; &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/stack-vs-heap/&quot;&gt;Stack vs. Heap&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa.md&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;cmuratori-discussion/cleancodeqa.md at main · unclebob/cmuratori-discussion&lt;/a&gt;&lt;br /&gt;
@@ -4921,5 +4921,78 @@ void read(file* f, char* buf, int n) {
 
             </content>
             <link href="https://janek.ing/code/architecture/" >
+        </entry>
+        <entry>
+            <title>
+                Agile
+                
+            </title>
+            <updated>2025-05-25T19:25:54.213Z</updated>
+            <id>https://janek.ing/arbeit/agile/</id>
+            <content type="html">
+                &lt;h2 id=&quot;eigene-erfahrung&quot; tabindex=&quot;-1&quot;&gt;Eigene Erfahrung&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Alle&lt;/strong&gt; Scrum Meetings müssen von &lt;strong&gt;allen&lt;/strong&gt; Teilnehmern gut vorbereitet sein, sonst werden sie nahezu wertlos
+&lt;ul&gt;
+&lt;li&gt;Dies bedeutet einen nicht unerheblichen Aufwand für diese Vorbereitung&lt;/li&gt;
+&lt;li&gt;Ziel sollte es also nicht sein, die Zeit für das Meeting auszulasten, sondern das Ziel des Meetings so schnell wie möglich zu erreichen&lt;/li&gt;
+&lt;li&gt;Bei langen Meetings: Materialien vorher rumschicken&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Es dürfen nur die vorgegebenen Features entwickelt werden!
+&lt;ul&gt;
+&lt;li&gt;Unnötige Features sind wie Lagerhaltung im Lean, sie erzeugen Probleme in jedem Schritt des weiteren Prozesses: mehr Aufwand für Testing, mehr Quellen für Bugs, mehr Aufwand für Dokumentation, ein komplexeres System mit mehr Abhängigkeiten&lt;/li&gt;
+&lt;li&gt;Unnötige Features können Stück für Stück das Projekt lahm legen&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Regelmäßige Testzyklen (mit echten Usern!) sind wichtig zum Nachsteuern
+&lt;ul&gt;
+&lt;li&gt;dementsprechend müssen Features Bug frei sein. Ansonsten: kein review und technical debt für nächsten Sprint&lt;/li&gt;
+&lt;li&gt;Tests mit echten Usern sind nicht zu ersetzen. Oftmals trifft man falsche Annahmen, was User wollen/brauchen und nur so findet man das heraus.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;je unklarer die Anforderungen zu Beginn des Projektes, desto schwieriger wird die Entwicklung und desto wichtiger sind PoCs. Lieber einen schnellen Test wegwerfen, als Jahre auf die falsche Technologie setzen.&lt;/li&gt;
+&lt;li&gt;generell wird die zweite Version eines Produktes oft besser: also schnell PoC bauen, wegwerfen und dann Gelerntes bei richtigem Produkt anwenden&lt;/li&gt;
+&lt;li&gt;niemals für die Probleme von morgen entwickeln, denn diese kennst du nicht (siehe unnötige Features oben)!&lt;/li&gt;
+&lt;li&gt;Wichtige Säule von Scrum: Transparenz. Gilt für alle Bereiche eines Unternehmens&lt;/li&gt;
+&lt;li&gt;scrum funktioniert am besten mit sehr selbständigen Entwicklern, die fokussiert arbeiten und notwendige aufgaben eigenständig entdecken, sich aber an die Regeln (feature liste) halten. Je mehr micro Management notwendig ist, desto schlechter funktioniert scrum.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;TODO: insert vorgehen walk the board&lt;/p&gt;
+&lt;h2 id=&quot;literatur&quot; tabindex=&quot;-1&quot;&gt;Literatur&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.craiglarman.com/wiki/downloads/misc/history-of-iterative-larman-and-basili-ieee-computer.pdf&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.craiglarman.com/wiki/downloads/misc/history-of-iterative-larman-and-basili-ieee-computer.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;agile/iterative Entwicklung (IID) gibt es schon seit den 70ern und länger&lt;/li&gt;
+&lt;li&gt;wasserfall war ursprünglich auch agile gedacht (&amp;quot;do the process twice&amp;quot;)&lt;/li&gt;
+&lt;li&gt;agile ist nur Wasserfall in wiederkehrenden, kleinen inkrementen&lt;/li&gt;
+&lt;li&gt;jeder Schritt enthält auch wieder eine Design, Test und Dokumentation phase&lt;/li&gt;
+&lt;li&gt;wichtig sind releaseable increments (bei Software)&lt;/li&gt;
+&lt;li&gt;Timeboxen reichen von 6m bis 0,5d&lt;/li&gt;
+&lt;li&gt;inspiration für scrum: japanischer IID Ansatz für Hardware bei Honda, Canon, Fujitsu: &amp;quot;shashimi&amp;quot; (slices)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“Evolution” is a technique for producing the appearance of stability. A complex system will be most successful if it is implemented in small steps and if each step has a clear measure of successful achievement as well as a “retreat” possibility to a previous successful step upon failure. You have the opportunity of receiving some feedback from the real world before throwing in all resources intended for a system, and you can correct possible design errors…&lt;br /&gt;
+-- Tom Gilb&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Management does not require firm estimates of completion, time, and money for the entire project. Each (small iterative) step must meet one of the following criteria (priority order): either (a) give planned return on investment payback, or, if impossible, then (b) give breakeven (no loss); or, at least, (c) some positive user benefit measurably; or, at least (d) some user environment feedback and learning.&lt;br /&gt;
+-- Tom Gilb&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The danger in the sequence (waterfall approach) is that the project moves from being grand to being grandiose, and exceeds our human intellectual capabilities for management and control.&lt;br /&gt;
+-- Harlan Mills&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;probleme&quot; tabindex=&quot;-1&quot;&gt;Probleme&lt;/h2&gt;
+&lt;p&gt;Probleme mit Wasserfall nach David Parnas und Paul Clements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A system’s users seldom know exactly what they want and cannot articulate all they know.&lt;/li&gt;
+&lt;li&gt;Even if we could state all requirements, there are many details that we can only discover once we are well into implementation.&lt;/li&gt;
+&lt;li&gt;Even if we knew all these details, as humans, we can master only so much complexity.&lt;/li&gt;
+&lt;li&gt;Even if we could master all this complexity, external forces lead to changes in requirements, some of which may invalidate earlier decisions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Probleme mit Scrum:&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=Q25lwSfVwF8&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=Q25lwSfVwF8&lt;/a&gt;&lt;/p&gt;
+
+            </content>
+            <link href="https://janek.ing/arbeit/agile/" >
         </entry>
 </feed>
