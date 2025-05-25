@@ -27,10 +27,10 @@ v_o = \frac{R_1 + R_2}{R_2} v_{IN}
 $$
 -> Der Gain des Verstärkers hat keinen Einfluss
 ### Praktisches Beispiel
-![Pasted image 20240515105449.png](/img/user/attachments/Pasted%20image%2020240515105449.png)
+![Pasted image 20240515105449.png](/img/user/_attachments/Pasted%20image%2020240515105449.png)
 0..3V3 -> 0..10V (D1 und R4 zur Visualisierung)
 ### Abwandlung: 4-20mA Output
-![Pasted image 20240515112511.png](/img/user/attachments/Pasted%20image%2020240515112511.png)
+![Pasted image 20240515112511.png](/img/user/_attachments/Pasted%20image%2020240515112511.png)
 [4-20mA Transmitter Explained using an Op Amp (youtube.com)](https://www.youtube.com/watch?v=ZqJxdBCpb6c)
 - Spannung an Eingängen ist gleich (im eingeschwungenen Zustand)
 - Strom wird durch V<sub>i</sub> und R<sub>1</sub> bestimmt (unabhängig von R<sub>L</sub>!)
@@ -47,7 +47,7 @@ $$
 - Nur relevant, wenn das zu verstärkende Signal sehr schwach ist (z.B. bei Phono-Audio-Verstärkern).
 - Schaltungen müssen dabei sehr gleich sein (Toleranzen in Widerständen und Co beachten, ggf. einzeln einmessen).
 - ["Input Offset Voltage"](https://www.ti.com/lit/an/sloa059b/sloa059b.pdf?ts=1734505475015) (Spannungsdifferenz durch Fertigungsfehler zwischen Op-Amp Terminals) sollte deutlich kleiner als Amplitude von Signal sein -> kann ausgemessen werden (siehe Videolink unten) 
-![Pasted image 20241218095447.png](/img/user/attachments/Pasted%20image%2020241218095447.png)
+![Pasted image 20241218095447.png](/img/user/_attachments/Pasted%20image%2020241218095447.png)
 [Mastergroove repair by Mend it Mark & an honest message to Tom Evans audio - YouTube](https://youtu.be/6hVe_spuJQI?feature=shared&t=1037)
 
 

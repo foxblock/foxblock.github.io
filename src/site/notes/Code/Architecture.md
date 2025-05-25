@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-24T12:38:24.441+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-24T13:06:16.172+02:00"}
 ---
 
 ## Golden Rules
@@ -177,7 +177,7 @@ Dies gilt für alle Binärdaten, eigene Datenformate oder Protokolle (Learning v
 	- caller ist für Input verantwortlich, Funktion für Output 
 ## OOP vs Data-Oriented
 - v-tables und dynamic memory allocation machen das Programm langsamer, weil Objekte im Speicher verteilt liegen und viele cache misses erzeugen: [Ryan Fleury auf X: „This illustrates why it has been helpful to me to eliminate v-tables and sum-types almost everywhere. It isn’t just about performance—it’s about strong predictive power over code, staying organized, non-pessimization, and architecture which is ready to optimize later if needed.“ / X](https://x.com/ryanjfleury/status/1672722010399703041)
-- ![[attachments/memory-layout.mp4]]
+- ![[memory-layout.mp4]]
 - V-Tables sind "[indirected function pointers](https://en.wikipedia.org/wiki/Function_pointer)" und stellen eine harte Grenze für den Compiler dar. Switch statements können hingegen deutlich besser optimiert werden -> [[Code/Stack vs. Heap\|Stack vs. Heap]]
 
 [cmuratori-discussion/cleancodeqa.md at main · unclebob/cmuratori-discussion](https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa.md)

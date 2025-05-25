@@ -52,9 +52,9 @@ DSR:
 <just a bunch of binary data>
 ```
 ## One-way TLS auth
-![I0612.jpg](/img/user/attachments/I0612.jpg)
+![I0612.jpg](/img/user/_attachments/I0612.jpg)
 ## Two-way TLS auth
-![SGyYa.png](/img/user/attachments/SGyYa.png)
+![SGyYa.png](/img/user/_attachments/SGyYa.png)
 ## OpenSSL Befehle
 OpenSSL kommt mit GitForWindows: `C:\Program Files\Git\usr\bin\openssl.exe`
 Getestet mit Version: `OpenSSL 3.2.3 3 Sep 2024 (Library: OpenSSL 3.2.3 3 Sep 2024)`

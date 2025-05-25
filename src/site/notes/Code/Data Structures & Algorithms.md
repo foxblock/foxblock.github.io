@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-02-06T19:54:05.243+01:00","updated":"2025-05-23T15:06:40.980+02:00"}
+{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-02-06T19:54:05.243+01:00","updated":"2025-05-24T13:06:16.203+02:00"}
 ---
 
 ## Hash Tables
@@ -31,7 +31,7 @@ Guide: [How to implement a hash table (in C) (benhoyt.com)](https://benhoyt.com/
 
 https://www.rfleury.com/p/in-defense-of-linked-lists
 
-![[attachments/memory-layout.mp4]]
+![[memory-layout.mp4]]
 ## Sorting
 Vergleich mit Animation: [Sorting Algorithms Animations | Toptal®](https://www.toptal.com/developers/sorting-algorithms)
 ### Insertion Sort

@@ -44,7 +44,7 @@ https://www-tenforums-com.translate.goog/tutorials/131182-create-soft-hard-symbo
 ## Fenster off screen
 - Windows + Linke/Rechte Pfeiltaste (Verschiebt Fenster in linke/rechte Bildschirmhälfte)
 Manchmal hilft dies nicht, dann aber das Folgende:
-![Pasted image 20240405092616.png](/img/user/attachments/Pasted%20image%2020240405092616.png)
+![Pasted image 20240405092616.png](/img/user/_attachments/Pasted%20image%2020240405092616.png)
 - Maus eine kurze Zeit über Icon auf der Taskleiste halten -> Rechtsklick auf die Fenster-Vorschau (nicht das Icon in der Taskleiste)
 - Klick auf Verschieben
 - Eine Pfeiltaste drücken

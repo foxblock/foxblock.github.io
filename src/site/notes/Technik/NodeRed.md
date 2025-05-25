@@ -61,6 +61,6 @@ node.status({});   // to clear the status
 this.status({fill:"red",shape:"ring",text:"disconnected"});
 this.status({fill:"green",shape:"dot",text:"connected"});
 ```
-![Pasted image 20240621141018.png](/img/user/attachments/Pasted%20image%2020240621141018.png)
+![Pasted image 20240621141018.png](/img/user/_attachments/Pasted%20image%2020240621141018.png)
 ## Nützliche Links
 [Working with messages : Node-RED (nodered.org)](https://nodered.org/docs/user-guide/messages)

@@ -175,8 +175,8 @@ Bei kleinen Arrays (<1000 Elemente) macht dies in der Praxis keinen großen Unte
 for..of ist ähnlich schnell wie for.
 Mikro-Optimierungen, wie z.B. das Cachen von "array.length" vor dem Loop bringen keine Verbesserung (macht der Compiler vermutlich eh).
 [Performance of JavaScript .forEach, .map and .reduce vs for and for..of (leanylabs.com)](https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/)
-![Pasted image 20240301103722.png](/img/user/attachments/Pasted%20image%2020240301103722.png)
-![Pasted image 20240301103739.png](/img/user/attachments/Pasted%20image%2020240301103739.png)
+![Pasted image 20240301103722.png](/img/user/_attachments/Pasted%20image%2020240301103722.png)
+![Pasted image 20240301103739.png](/img/user/_attachments/Pasted%20image%2020240301103739.png)
 
 Eine pre-Allokation eines Ergebnis-Arrays ist deutlich schneller, als Elemente einzeln zu pushen (gilt in jeder Sprache)
 ```JS

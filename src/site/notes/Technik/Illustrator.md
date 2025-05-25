@@ -14,13 +14,13 @@ Objekt -> Aussehen umwandeln löst den Effekt auf und erstellt einen Pfad daraus
 ## Pfad umkehren
 Mit Zeichenstift Werkzeug einen Endpunkt des offenen Pfades anklicken.
 ## Bild in Pfad umwandeln / Hintergrund entfernen
-![Pasted image 20241218212512.png](/img/user/attachments/Pasted%20image%2020241218212512.png)
+![Pasted image 20241218212512.png](/img/user/_attachments/Pasted%20image%2020241218212512.png)
 1. Einstellungen im Bildnachzeichner setzen
 2. Objekt > Umwandeln
 	1. oder: Objekt > Bildnachzeichner > Umwandeln
 ## Objekt - lineares Muster
-![Pasted image 20241218212226.png](/img/user/attachments/Pasted%20image%2020241218212226.png)
-![Pasted image 20241218212251.png](/img/user/attachments/Pasted%20image%2020241218212251.png)
+![Pasted image 20241218212226.png](/img/user/_attachments/Pasted%20image%2020241218212226.png)
+![Pasted image 20241218212251.png](/img/user/_attachments/Pasted%20image%2020241218212251.png)
 https://graphicdesign.stackexchange.com/questions/95167/how-to-have-multiple-instances-of-the-same-object-in-illustrator-cc-2015
 ## Schnittmaske
 1. Objekt zur Schnittmaske auf selber Ebene muss oben liegen (Fenster > Ebenen)

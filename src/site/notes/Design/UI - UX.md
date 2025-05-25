@@ -8,7 +8,7 @@
 	- if you are hiding or disabling elements, it should be totally obvious to the user why that is the case (or you could tell him in a hover text)
 	- bad counter example: Photoshop disabling certain options when image uses indexed color mode
 - Provide (meaningful) error messages
-	- This does not help anyone: ![media_GMIPHd9aIAAM5nf.webp](/img/user/attachments/media_GMIPHd9aIAAM5nf.webp)
+	- This does not help anyone: ![media_GMIPHd9aIAAM5nf.webp](/img/user/_attachments/media_GMIPHd9aIAAM5nf.webp)
 	- Tell the user exactly what went wrong
 	- Ideally include a hint on how to fix the error
 	- Make the error message easily googleable (use descriptive keywords, make the text copyable - old Windows error dialog boxes copied the whole content to clipboard when the user pressed Ctrl + C)

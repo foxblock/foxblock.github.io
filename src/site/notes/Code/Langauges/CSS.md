@@ -43,7 +43,7 @@ span, div /* apply same style to both span and div */
 ```
 ### Class nesting example
 [JSFiddle - Code Playground](https://jsfiddle.net/k6wxec39/)
-![Pasted image 20240311124103.png](/img/user/attachments/Pasted%20image%2020240311124103.png)
+![Pasted image 20240311124103.png](/img/user/_attachments/Pasted%20image%2020240311124103.png)
 ## em, rem
 `em` is factor of font pixel-size in parent container
 `rem` works the same, but always references the root element `<html>`. Default `font-size` is 16px.

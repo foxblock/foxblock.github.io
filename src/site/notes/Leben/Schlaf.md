@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Life/Schlaf.md","permalink":"/life/schlaf/","tags":["knowledge-base","german"],"created":"2024-11-06T17:27:23.437+01:00","updated":"2025-05-24T12:50:41.149+02:00"}
+{"dg-publish":true,"dg-path":"Life/Schlaf.md","permalink":"/life/schlaf/","tags":["knowledge-base","german"],"created":"2024-11-06T17:27:23.437+01:00","updated":"2025-05-24T13:10:07.386+02:00"}
 ---
 
 Einschlafen, 3 Schritte 
