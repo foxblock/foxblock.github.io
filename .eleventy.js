@@ -72,7 +72,7 @@ function getAnchorAttributes(filePath, linkTitle) {
     } catch (error) {
       // NOTE (JS, 28.05.25): This will generate a few false-positives for any
       // text looking like a link inside a code-block. The link will not actually be generated though.
-      // this is called 2x by 11ty: once with just the raw text (no markdown) and once converted to html 
+      // the link filter is called 2x by 11ty: once with just the raw text (no markdown) and once converted to html 
       // (the first parse generates the false-positive message, but does not seem to matter)
       console.log(`DeadLink detection! filePath: ${filePath}, linkTitle: ${linkTitle}, error: ${error.message}`);
       deadLink = true;
@@ -286,11 +286,10 @@ module.exports = function (eleventyConfig) {
     return date && date.toISOString();
   });
 
+  // NOTE (JS, 28.05.25): This is called 4x:
+  // - 3x with rendered HTML content of the site (str starting after the header tag)
+  // - 1x with a raw text version of the content (no markdown)
   eleventyConfig.addFilter("link", function (str) {
-    if (str.includes("Daten lesen und speichern. Doku")) {
-      console.log("--- FILTER LINK: ");
-      console.log(str);
-    }
     // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested 
     // (otherwise turn isCodeBlock into an int)
     let isCodeBlock = false;
@@ -332,16 +331,9 @@ module.exports = function (eleventyConfig) {
   // NOTE (JS, 24.05.25): Edited taggify and searchableTags to only work with double-hashed
   // tags (e.g. ##tag-test) as a workaround. See comment on tagRegex above for more info
   eleventyConfig.addFilter("taggify", function (str) {
-    // NOTE: Markdown ist schon in HTML convertiert an diesem Punkt
-    // Code Blocks sind schon da, aber Inhalt noch nicht in einzelne tags konvertiert
-    // Komisch: Taggify schlägt an und sollte hier tags einfügen, tut es aber nicht
-    // (bzw. sie sind nicht im finalen Output)
-    // -> evtl. weil die Prism library separat eingebunden wird und die Codeblöcke wieder umschreibt
-    // console.log("---- taggify start", str.substring(0,200));
     return (
       str &&
       str.replace(tagRegex, function (match, precede, tag, whatev, offset, fullStr) {
-        // console.log("taggify", tag, offset, fullStr.substring(offset-20,offset+20));
         return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag.substring(1)}">${tag.substring(1)}</a>`;
       })
     );
@@ -350,10 +342,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("searchableTags", function (str) {
     let tags;
     let match = str && str.match(tagRegex);
-    // TODO: Tags werden nicht auf Doppelungen gefiltert
-    // Regex produziert auch hier die falschen Ergebnisse, da Werte in Codeblock mitgeparst werden
+    // TODO: Tags are not de-duplicated
     if (match) {
-      console.log("searchableTags", str.substring(0,20), match);
       tags = match
         .map((m) => {
           return `"${m.split("##")[1]}"`;
@@ -376,11 +366,11 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  // NOTE (JS, 28.05.25): This is called 3x (str contains full file content):
+  // - for each rendered html file
+  // - for the XML feed file 
+  // - for a json array of all posts (probably for the search)
   eleventyConfig.addTransform("dataview-js-links", function (str) {
-    if (str.includes("Daten lesen und speichern. Doku")) {
-      console.log("--- TRANSFORM DATAVIEW LINK: ");
-      console.log(str);
-    }
     const parsed = parse(str);
     for (const dataViewJsLink of parsed.querySelectorAll("a[data-href].internal-link")) {
       const notePath = dataViewJsLink.getAttribute("data-href");
