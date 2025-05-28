@@ -70,6 +70,10 @@ function getAnchorAttributes(filePath, linkTitle) {
         noteIcon = frontMatter.data.noteIcon;
       }
     } catch (error) {
+      // NOTE (JS, 28.05.25): This will generate a few false-positives for any
+      // text looking like a link inside a code-block. The link will not actually be generated though.
+      // this is called 2x by 11ty: once with just the raw text (no markdown) and once converted to html 
+      // (the first parse generates the false-positive message, but does not seem to matter)
       console.log(`DeadLink detection! filePath: ${filePath}, linkTitle: ${linkTitle}, error: ${error.message}`);
       deadLink = true;
     }
@@ -283,7 +287,12 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("link", function (str) {
-    // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested (otherwise turn isCodeBlock into an int)
+    if (str.includes("NodeRed")) {
+      console.log("--- FILTER LINK: ");
+      console.log(str);
+    }
+    // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested 
+    // (otherwise turn isCodeBlock into an int)
     let isCodeBlock = false;
     let result = "";
     let lastMatchPos = 0;
@@ -328,11 +337,11 @@ module.exports = function (eleventyConfig) {
     // Komisch: Taggify schlägt an und sollte hier tags einfügen, tut es aber nicht
     // (bzw. sie sind nicht im finalen Output)
     // -> evtl. weil die Prism library separat eingebunden wird und die Codeblöcke wieder umschreibt
-    console.log("---- taggify start", str.substring(0,200));
+    // console.log("---- taggify start", str.substring(0,200));
     return (
       str &&
       str.replace(tagRegex, function (match, precede, tag, whatev, offset, fullStr) {
-        console.log("taggify", tag, offset, fullStr.substring(offset-20,offset+20));
+        // console.log("taggify", tag, offset, fullStr.substring(offset-20,offset+20));
         return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag.substring(1)}">${tag.substring(1)}</a>`;
       })
     );
@@ -368,6 +377,10 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addTransform("dataview-js-links", function (str) {
+    if (str.includes("NodeRed")) {
+      console.log("--- TRANSFORM DATAVIEW LINK: ");
+      console.log(str);
+    }
     const parsed = parse(str);
     for (const dataViewJsLink of parsed.querySelectorAll("a[data-href].internal-link")) {
       const notePath = dataViewJsLink.getAttribute("data-href");
