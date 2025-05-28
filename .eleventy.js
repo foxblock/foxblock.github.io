@@ -284,6 +284,8 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("link", function (str) {
     // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested (otherwise turn isCodeBlock into an int)
+    console.log("--- FILTER: LINK ---");
+    console.trace();
     console.log(str);
     let isCodeBlock = false;
     let result = "";
