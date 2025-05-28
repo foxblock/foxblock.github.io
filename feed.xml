@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-28T14:13:34Z</updated>
+    <updated>2025-05-28T14:16:44Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -4065,7 +4065,7 @@ Better article with detailed explanations (and also springs!): &lt;a href=&quot;
 &lt;li&gt;Use stable IDs for entities (e.g., towers) to manage their state and animations effectively.
 &lt;ul&gt;
 &lt;li&gt;In MathTD we just used the tower array index, which would only increment (never decrement or rollover)&lt;/li&gt;
-&lt;li&gt;A more robust approach would be to generate a random 32 or 64bit id for each new entity and store that in the entity struct. Reference entities by their ID. IDs reach into a hashmap, e.g. by using the bottom 8-12 bits (depending on how many entities can be alive at any point divided by max fill rate -&amp;gt; see &lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;Data Structures &amp;amp; Algorithms#Hash Tables&lt;/a&gt;) to get an index and then compare the requested ID to the ID of the entity in that slot. -&amp;gt; see &lt;a href=&quot;https://youtu.be/NW6PhVdq9R8?feature=shared&amp;amp;t=1150&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/NW6PhVdq9R8?feature=shared&amp;amp;t=1150&lt;/a&gt; (4mins)&lt;/li&gt;
+&lt;li&gt;A more robust approach would be to generate a random 32 or 64bit id for each new entity and store that in the entity struct. Reference entities by their ID. IDs reach into a hashmap, e.g. by using the bottom 8-12 bits (depending on how many entities can be alive at any point divided by max fill rate -&amp;gt; see &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/data-structures-and-algorithms/#hash-tables&quot;&gt;Data Structures &amp;amp; Algorithms#Hash Tables&lt;/a&gt;) to get an index and then compare the requested ID to the ID of the entity in that slot. -&amp;gt; see &lt;a href=&quot;https://youtu.be/NW6PhVdq9R8?feature=shared&amp;amp;t=1150&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/NW6PhVdq9R8?feature=shared&amp;amp;t=1150&lt;/a&gt; (4mins)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Separate game rules from display and animation logic for clarity (as represented by the data -&amp;gt; see above)&lt;/li&gt;
