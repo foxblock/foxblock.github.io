@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-28T19:39:48Z</updated>
+    <updated>2025-05-28T19:45:16Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -555,7 +555,7 @@ return null;
 // Send array of messages to single output
 arr = new Array(10);
 return [arr];
-return &lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;msg1, msg2, msg3&lt;/a&gt;;
+return [[msg1, msg2, msg3]];
 // Send msg1 to output 1, msg2 to output 2, msg3 to output 3
 return [msg1, msg2, msg3];
 // Send msg only to second output (of 4)
