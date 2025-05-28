@@ -292,7 +292,7 @@ module.exports = function (eleventyConfig) {
         }
         const [fileLink, linkTitle] = p1.split("|");
         
-        if (fileLink.contains("Data Structures"))
+        if (fileLink.includes("Data Structures"))
         {
           console.log("DEBUG", str);
         }
