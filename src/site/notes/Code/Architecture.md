@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-24T13:06:16.172+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-05-26T18:48:58.822+02:00","updated":"2025-05-26T18:48:49.113+02:00"}
 ---
 
 ## Golden Rules
@@ -81,6 +81,16 @@ https://grugbrain.dev/
 - Small Focused Functions that don't do anything meaningful -> man muss zu viel im Code springen, um zu verstehen, was er macht. Context fehlt.
 - Every function should do something **meaningful**
 - Idee: Code sollte im Stile einer StackOverflow Antwort geschrieben sein. Macht etwas sinnvolles und beinhaltet allen notwendigen Kontext. (https://youtu.be/NiljDyzAOcI?feature=shared&t=1150)
+
+https://htmx.org/essays/codin-dirty/
+https://www.youtube.com/watch?v=hQJcGmWXDJw
+- There is no correlation between small functions and amount of bugs (no real empirical evidence)
+- Too many classes = too much clutter, too confusing, not coherent (same with too many small functions)
+- Long functions have the advantage of being visible. All long functions are important and do something meaningful. The result of a lot of small functions that call each other is not immediately apparent and can hide complex operations.
+- Many big successful projects (Chrome, Redis, etc.) have lots of long functions (100+ lines)
+- Function length should be determined by what the function does and not be an independent metric that drives code architecture.
+- Small functions complicate the call graph, because they (theoretically) can each be called independently. Without a debugger or an IDE it is very hard to detect who calls who in which order.
+
 https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction
 1. Abstraktion wird eingeführt, um gleiche Funktion perfekt zu bündeln 
 2. Neue Anforderung passt nur zu 90% in dieses Konzept 

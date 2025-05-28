@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-03-26T17:03:09.291+01:00","updated":"2025-05-24T11:38:37.908+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-03-26T17:03:09.291+01:00","updated":"2025-05-28T14:02:35.399+02:00"}
 ---
 
 ## strncpy, strncat
@@ -349,3 +349,24 @@ x > 0 ? debug_print("greater") : debug_print("smaller")
 ```C
 #define textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
 ```
+
+## MSVC Build Insights
+[Finding build bottlenecks with C++ Build Insights - C++ Team Blog](https://devblogs.microsoft.com/cppblog/finding-build-bottlenecks-with-cpp-build-insights/)
+
+Use the following to get insights into the build process of your C/C++ app. Find out which files are included way too often, which files take long to parse or compile.
+
+![Pasted image 20250528140213.png](/img/user/_attachments/Pasted%20image%2020250528140213.png)
+
+1. Download and install the latest [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/). (vcperf seems to also be included in the Visual Studio Build Tools 2022)
+2. Obtain WPA by downloading and installing the [latest Windows ADK](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install).
+3. NOTE: I do not remember doing the following two steps, so maybe they can be skipped as of 05/2025
+4. Copy the _perf_msvcbuildinsights.dll_ file from your Visual Studio 2019’s MSVC installation directory to your newly installed WPA directory. This file is the C++ Build Insights WPA add-in, which must be available to WPA for correctly displaying the C++ Build Insights events.
+    1. MSVC’s installation directory is typically: `C:\Program Files (x86)\Microsoft Visual Studio\2019\{Edition}\VC\Tools\MSVC\{Version}\bin\Hostx64\x64`.
+    2. WPA’s installation directory is typically: `C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit`.
+5. Open the _perfcore.ini_ file in your WPA installation directory and add an entry for the _perf_msvcbuildinsights.dll_ file. This tells WPA to load the C++ Build Insights add-in on startup.
+6. Open an elevated **_x64 Native Tools Command Prompt for VS 20XX_**.
+7. Obtain a trace of your build:
+    1. Run the following command: `vcperf /start MySessionName`.
+    2. Build your C++ project from anywhere, even from within Visual Studio (_vcperf_ collects events system-wide).
+    3. Run the following command: `vcperf /stop MySessionName outputFile.etl`. This command will stop the trace, analyze all events, and save everything in the _outputFile.etl_ trace file.
+8. Open the trace you just collected in WPA.

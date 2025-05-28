@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/testing/","tags":["experience","opinion","german"],"created":"2024-08-16T15:14:54.945+02:00","updated":"2025-05-23T15:09:18.718+02:00"}
+{"dg-publish":true,"permalink":"/code/testing/","tags":["experience","opinion","german"],"created":"2024-08-16T15:14:54.945+02:00","updated":"2025-05-26T19:30:38.114+02:00"}
 ---
 
 https://youtu.be/IqHaGd9J42s?feature=shared&t=1511
@@ -15,6 +15,7 @@ https://lightbrd.com/SebAaltonen/status/1924075241413705914#m
 	- Ein fehlender Test ist besser als ein falscher Test!
 - Test-Code muss von mindestens so erfahrenem Entwickler geschrieben werden, wie der zu testende Application Code
 	- Es ist sehr schwierig alle Edge-Cases auf dem Schirm zu haben und zu testen. Aber hier liegt der wahre Wert von Tests.
+	- Tests finden nur "bekannte" Bugs, die man vorher erwartet hat
 - Generell gute Idee: Wenn man einen neuen Bug findet, einen Test für den Fix schreiben (welcher ohne Fix anschlägt), um Regressionen zu vermeiden. Insbesondere bei komplexen Bugs sehr zu empfehlen.
 - Testcode sollten Bereiche testen, wo der Output relativ stabil ist. Wenn sich bei Änderung der Implementierung auch der Output ändert, müssen meist die Test-Cases angepasst werden und sind damit wertlos (bzw. erzeugen nur Mehraufwand). Den Scope des Tests (Unit vs. Integration vs. E2E vs. ...) richtig zu wählen, kann hier Arbeit ersparen (bspw. keine Unit Tests für eine Implementierung schreiben, welche sich täglich ändert, sondern lieber einen E2E Test wenn das Ergebnis immer gleich ist)
 ## Test Driven Development (TDD)
@@ -38,22 +39,23 @@ https://lightbrd.com/SebAaltonen/status/1924075241413705914#m
 	- Mocking: Simulation externer Abhängigkeiten (z.B. Datei oder Datenbank) durch eigene "Fake"-Implementation. (z.B. indem Zugriff in abstrakten "provider" gewrappt ist). Achtung: Hierbei werden ggf. nicht die Fehlerfälle getestet, welche bei echtem Zugriff entstehen können. Erfolg hängt von Qualität des Mocks ab und ist ggf. mit hohem Aufwand verbunden.
 	- Besser: Split von Zugriff und Verarbeitung der Daten (zweite Funktion welche z.B. byte-Array als Input nimmt). Können separat getestet werden.
 	- https://youtu.be/isI1c0eGSZ0?feature=shared&t=540
-- Gefahr, dass Code geschrieben wird, der zwar sehr "testbar" ist, aber die eigentliche Aufgabe nur schlecht erfüllt (zu langsam ist, schlechte API, zu viele Abstraktionen, etc.). Wird durch TDD zusätzlich erhöht, wenn Tests zuerst geschrieben werden und der Code danach nur auf die Tests ausgerichtet ist.
+- Die Unit Tests sollten niemals die Programm Architektur bestimmen: Gefahr, dass Code geschrieben wird, der zwar sehr "testbar" ist, aber die eigentliche Aufgabe nur schlecht erfüllt (zu langsam ist, schlechte API, zu viele Abstraktionen, etc.). Wird durch TDD zusätzlich erhöht, wenn Tests zuerst geschrieben werden und der Code danach nur auf die Tests ausgerichtet ist.
 - Tests müssen schnell sein! Iterationsgeschwindigkeit ist key und Tests dürfen dem nicht im Wege stehen
 	- Zugriff auf externe Systeme (Datenbanken, Dateisystem, Web!) vermeiden und lieber "golden master" Testdaten im Code ablegen.
 - Programmiersprachen mit striktem Typensystem haben gewisse Tests eingebaut (Test auf Kompatibilität der Datentypen, Test auf Verlust bei Konvertierung, Test auf Mutability, etc.). Wenn dies genutzt werden kann, ist dies immer besser als ein vergleichbarer Unit-Test (kein zusätzlicher Code, mit größerer Sicherheit Bug-frei, schneller/effizienter).
 ## Integration Tests
 *Test des Zusammenspiels mehrerer Module (Klassen, Services, Funktionen, etc.)*
 - Gute Möglichkeit Wechselwirkung und Kommunikation zwischen mehreren Bereichen des Codes zu testen (z.B. Zugriff auf Datenbank + Verarbeitung der Daten oder Authentifizierung + Login)
-- Umfang und Aufwand liegt zwischen Unit- und E2E-Tests
+- Umfang und Aufwand liegt zwischen Unit- und E2E-Tests. Oftmals guter Mittelweg.
 - Sollten erst geschrieben werden, wenn der Systemaufbau einigermaßen stabil ist. Ansonsten zu viel Arbeit zum Maintainen
 ## End-To-End Tests
 *Testen des gesamten Produktes anhand der Systemgrenzen (z.B. von User-Input bis GUI oder Eintreffen eines Datenpakets, über die Verarbeitung bis zum Versand einer Alert-E-Mail)*
 - Idealerweise in CI/CD-Pipeline integriert
-- Testen idealerweise das gesamte System mit seinen Abhängigkeiten in einer "realen" Umgebung
-- Fokus auf die wichtigsten (am häufigsten genutzten) Funktionen
-- Sehr aufwändig zu implementieren und zu maintainen
+- Testen das gesamte System mit seinen Abhängigkeiten in einer "realen" Umgebung
+- Sehr aufwändig zu implementieren und zu maintainen (müssen auch aktiv maintained werden, sonst versagen sie irgendwann und liefern false-positives)
 - Müssen reproduzierbar sein, ansonsten wird debugging unmöglich
+- Sehr wertvoll, aber auch aufwendig, daher: Fokus auf die wichtigsten (am häufigsten genutzten) Funktionen
+- Aufpassen, dass Tests nicht zu sehr den internen State beschreiben/festlegen und dadurch notwendige Änderungen blockieren
 ## Snapshot Tests
 - Man nimmt einen Schnappschuss des Systems im "known good" Zustand auf ("golden Master") und vergleicht im Folgenden damit (bspw. Zustand des Programms nachdem gewisser Input geliefert wurde)
 - Abweichungen vom Schnappschuss führen zum Fehlschlagen des Tests und Diff kann dann näher zur Ursachenforschung untersucht werden
