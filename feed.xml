@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-28T20:53:12Z</updated>
+    <updated>2025-05-28T21:09:19Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -365,7 +365,7 @@ $$
                 Obsidian
                 
             </title>
-            <updated>2025-05-28T19:39:07.265Z</updated>
+            <updated>2025-05-28T21:08:51.808Z</updated>
             <id>https://janek.ing/tech/obsidian/</id>
             <content type="html">
                 &lt;h2 id=&quot;callouts&quot; tabindex=&quot;-1&quot;&gt;Callouts&lt;/h2&gt;
@@ -496,8 +496,7 @@ int main(int argc, char **argv) { }
 &amp;gt; // Make sure every line begins with a &amp;gt; in markdown
 &amp;gt; // otherwise the callout will break
 &amp;gt; int main(int argc, char **argv) { }
-&amp;gt; // Remove the backslash below (since Obsidian does not like nested codeblocks)
-&amp;gt; &#92;```
+&amp;gt; ```
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;getting-rid-of-unused-properties&quot; tabindex=&quot;-1&quot;&gt;Getting rid of unused properties&lt;/h2&gt;
 &lt;p&gt;Once you used a property it will always show up in auto-complete. Very annoying if you misspelled it and corrected it later.&lt;br /&gt;
@@ -513,16 +512,22 @@ Styling with CSS: &lt;a href=&quot;https://help.obsidian.md/Extending+Obsidian/C
 Available variables and classes: &lt;a href=&quot;https://docs.obsidian.md/Themes/App+themes/Build+a+theme#Step%207%20Discover%20CSS%20variables%20in%20use&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Build a theme - Developer Documentation (obsidian.md)&lt;/a&gt;&lt;br /&gt;
 List of supported codeblock languages (Prism is the library used by Obsidian): &lt;a href=&quot;https://prismjs.com/#supported-languages&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://prismjs.com/#supported-languages&lt;/a&gt;&lt;br /&gt;
 Obsidian is rendering using a web-browser, so you can always &lt;code&gt;Ctrl + Shift + I&lt;/code&gt; in Obsidian to bring up the dev tools (including the inspector to check individual classes and styling options).&lt;/p&gt;
-&lt;h2 id=&quot;testing&quot; tabindex=&quot;-1&quot;&gt;Testing&lt;/h2&gt;
+&lt;h1 id=&quot;testing&quot; tabindex=&quot;-1&quot;&gt;Testing&lt;/h1&gt;
+&lt;p&gt;This section is for testing CSS styling and the publishing results of the digital garden plugin...&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;~~~
 foobar
 ~~~
 cat foo.bar | grep test
+[[Text that looks like a link]]
+[[another|link]]
 ```C
 int main() { return 0; }
 ```
 baz
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Link to heading: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#callouts&quot;&gt;#Callouts&lt;/a&gt;&lt;br /&gt;
+Link to document with &amp;amp;: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/data-structures-and-algorithms/&quot;&gt;Data Structures &amp;amp; Algorithms&lt;/a&gt;&lt;br /&gt;
+Link to document with &amp;amp; and heading: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/data-structures-and-algorithms/#hash-tables&quot;&gt;Data Structures &amp;amp; Algorithms#Hash Tables&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;heading-1&quot; tabindex=&quot;-1&quot;&gt;Heading 1&lt;/h1&gt;
 &lt;p&gt;Test&lt;/p&gt;
 &lt;h2 id=&quot;heading-2&quot; tabindex=&quot;-1&quot;&gt;Heading 2&lt;/h2&gt;
