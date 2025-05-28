@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/NodeRed.md","permalink":"/tech/node-red/","tags":["knowledge-base","german"],"created":"2024-06-21T19:10:23.893+02:00","updated":"2025-05-24T12:55:02.352+02:00"}
+{"dg-publish":true,"dg-path":"Tech/NodeRed.md","permalink":"/tech/node-red/","tags":["knowledge-base","german"],"created":"2025-05-26T18:08:10.481+02:00","updated":"2025-05-26T14:51:52.521+02:00"}
 ---
 
 ## Function node - Rückgabewert
@@ -62,5 +62,8 @@ this.status({fill:"red",shape:"ring",text:"disconnected"});
 this.status({fill:"green",shape:"dot",text:"connected"});
 ```
 ![Pasted image 20240621141018.png](/img/user/_attachments/Pasted%20image%2020240621141018.png)
+## URL Parameter
+TODO
+`{{{field of msg object}}}`
 ## Nützliche Links
 [Working with messages : Node-RED (nodered.org)](https://nodered.org/docs/user-guide/messages)
