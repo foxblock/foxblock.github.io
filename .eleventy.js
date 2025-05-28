@@ -57,7 +57,6 @@ function getAnchorAttributes(filePath, linkTitle) {
       const fullPath = fileName.endsWith(".md")
         ? `${startPath}${fileName}`
         : `${startPath}${fileName}.md`;
-      console.log("DEBUG:", fileName, fullPath);
       const file = fs.readFileSync(fullPath, "utf8");
       const frontMatter = matter(file);
       if (frontMatter.data.permalink) {
@@ -292,7 +291,11 @@ module.exports = function (eleventyConfig) {
           return match;
         }
         const [fileLink, linkTitle] = p1.split("|");
-
+        
+        if (fileLink.contains("Data Structures"))
+        {
+          console.log("DEBUG", str);
+        }
         return getAnchorLink(fileLink, linkTitle);
       })
     );
