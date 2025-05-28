@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Obsidian.md","permalink":"/tech/obsidian/","tags":["knowledge-base"],"created":"2025-04-26T13:30:21.505+02:00","updated":"2025-05-24T12:55:18.426+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Obsidian.md","permalink":"/tech/obsidian/","tags":["knowledge-base"],"created":"2025-04-26T13:30:21.505+02:00","updated":"2025-05-28T21:39:07.265+02:00"}
 ---
 
 ## Callouts
@@ -129,6 +129,20 @@ Styling with CSS: [CSS snippets - Obsidian Help](https://help.obsidian.md/Extend
 Available variables and classes: [Build a theme - Developer Documentation (obsidian.md)](https://docs.obsidian.md/Themes/App+themes/Build+a+theme#Step%207%20Discover%20CSS%20variables%20in%20use)
 List of supported codeblock languages (Prism is the library used by Obsidian): https://prismjs.com/#supported-languages
 Obsidian is rendering using a web-browser, so you can always `Ctrl + Shift + I` in Obsidian to bring up the dev tools (including the inspector to check individual classes and styling options).
+
+## Testing
+
+````shell
+~~~
+foobar
+~~~
+cat foo.bar | grep test
+```C
+int main() { return 0; }
+```
+baz
+````
+
 # Heading 1
 Test
 ## Heading 2
