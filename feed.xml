@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-28T14:16:44Z</updated>
+    <updated>2025-05-28T14:17:22Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -134,7 +134,7 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
                 About Main Home
                 
             </title>
-            <updated>2025-05-24T10:37:35.650Z</updated>
+            <updated>2025-05-28T13:42:11.858Z</updated>
             <id>https://janek.ing/</id>
             <content type="html">
                 &lt;h1 id=&quot;hi&quot; tabindex=&quot;-1&quot;&gt;Hi!&lt;/h1&gt;
@@ -534,7 +534,7 @@ Obsidian is rendering using a web-browser, so you can always &lt;code&gt;Ctrl + 
                 NodeRed
                 
             </title>
-            <updated>2025-05-24T10:55:02.352Z</updated>
+            <updated>2025-05-26T12:51:52.521Z</updated>
             <id>https://janek.ing/tech/node-red/</id>
             <content type="html">
                 &lt;h2 id=&quot;function-node-rueckgabewert&quot; tabindex=&quot;-1&quot;&gt;Function node - Rückgabewert&lt;/h2&gt;
@@ -605,6 +605,9 @@ this.status({fill:&amp;quot;red&amp;quot;,shape:&amp;quot;ring&amp;quot;,text:&a
 this.status({fill:&amp;quot;green&amp;quot;,shape:&amp;quot;dot&amp;quot;,text:&amp;quot;connected&amp;quot;});
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240621141018.png&quot; alt=&quot;Pasted image 20240621141018.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;url-parameter&quot; tabindex=&quot;-1&quot;&gt;URL Parameter&lt;/h2&gt;
+&lt;p&gt;TODO&lt;br /&gt;
+&lt;code&gt;{{{field of msg object}}}&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&quot;nuetzliche-links&quot; tabindex=&quot;-1&quot;&gt;Nützliche Links&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://nodered.org/docs/user-guide/messages&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Working with messages : Node-RED (nodered.org)&lt;/a&gt;&lt;/p&gt;
 
@@ -1638,7 +1641,7 @@ VI -&amp;gt; A C E&lt;br /&gt;
                 Testing
                 
             </title>
-            <updated>2025-05-23T13:09:18.718Z</updated>
+            <updated>2025-05-26T17:30:38.114Z</updated>
             <id>https://janek.ing/code/testing/</id>
             <content type="html">
                 &lt;p&gt;&lt;a href=&quot;https://youtu.be/IqHaGd9J42s?feature=shared&amp;amp;t=1511&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/IqHaGd9J42s?feature=shared&amp;amp;t=1511&lt;/a&gt;&lt;br /&gt;
@@ -1659,6 +1662,7 @@ VI -&amp;gt; A C E&lt;br /&gt;
 &lt;li&gt;Test-Code muss von mindestens so erfahrenem Entwickler geschrieben werden, wie der zu testende Application Code
 &lt;ul&gt;
 &lt;li&gt;Es ist sehr schwierig alle Edge-Cases auf dem Schirm zu haben und zu testen. Aber hier liegt der wahre Wert von Tests.&lt;/li&gt;
+&lt;li&gt;Tests finden nur &amp;quot;bekannte&amp;quot; Bugs, die man vorher erwartet hat&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Generell gute Idee: Wenn man einen neuen Bug findet, einen Test für den Fix schreiben (welcher ohne Fix anschlägt), um Regressionen zu vermeiden. Insbesondere bei komplexen Bugs sehr zu empfehlen.&lt;/li&gt;
@@ -1697,7 +1701,7 @@ VI -&amp;gt; A C E&lt;br /&gt;
 &lt;li&gt;&lt;a href=&quot;https://youtu.be/isI1c0eGSZ0?feature=shared&amp;amp;t=540&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/isI1c0eGSZ0?feature=shared&amp;amp;t=540&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;Gefahr, dass Code geschrieben wird, der zwar sehr &amp;quot;testbar&amp;quot; ist, aber die eigentliche Aufgabe nur schlecht erfüllt (zu langsam ist, schlechte API, zu viele Abstraktionen, etc.). Wird durch TDD zusätzlich erhöht, wenn Tests zuerst geschrieben werden und der Code danach nur auf die Tests ausgerichtet ist.&lt;/li&gt;
+&lt;li&gt;Die Unit Tests sollten niemals die Programm Architektur bestimmen: Gefahr, dass Code geschrieben wird, der zwar sehr &amp;quot;testbar&amp;quot; ist, aber die eigentliche Aufgabe nur schlecht erfüllt (zu langsam ist, schlechte API, zu viele Abstraktionen, etc.). Wird durch TDD zusätzlich erhöht, wenn Tests zuerst geschrieben werden und der Code danach nur auf die Tests ausgerichtet ist.&lt;/li&gt;
 &lt;li&gt;Tests müssen schnell sein! Iterationsgeschwindigkeit ist key und Tests dürfen dem nicht im Wege stehen
 &lt;ul&gt;
 &lt;li&gt;Zugriff auf externe Systeme (Datenbanken, Dateisystem, Web!) vermeiden und lieber &amp;quot;golden master&amp;quot; Testdaten im Code ablegen.&lt;/li&gt;
@@ -1709,17 +1713,18 @@ VI -&amp;gt; A C E&lt;br /&gt;
 &lt;p&gt;&lt;em&gt;Test des Zusammenspiels mehrerer Module (Klassen, Services, Funktionen, etc.)&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Gute Möglichkeit Wechselwirkung und Kommunikation zwischen mehreren Bereichen des Codes zu testen (z.B. Zugriff auf Datenbank + Verarbeitung der Daten oder Authentifizierung + Login)&lt;/li&gt;
-&lt;li&gt;Umfang und Aufwand liegt zwischen Unit- und E2E-Tests&lt;/li&gt;
+&lt;li&gt;Umfang und Aufwand liegt zwischen Unit- und E2E-Tests. Oftmals guter Mittelweg.&lt;/li&gt;
 &lt;li&gt;Sollten erst geschrieben werden, wenn der Systemaufbau einigermaßen stabil ist. Ansonsten zu viel Arbeit zum Maintainen&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;end-to-end-tests&quot; tabindex=&quot;-1&quot;&gt;End-To-End Tests&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Testen des gesamten Produktes anhand der Systemgrenzen (z.B. von User-Input bis GUI oder Eintreffen eines Datenpakets, über die Verarbeitung bis zum Versand einer Alert-E-Mail)&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Idealerweise in CI/CD-Pipeline integriert&lt;/li&gt;
-&lt;li&gt;Testen idealerweise das gesamte System mit seinen Abhängigkeiten in einer &amp;quot;realen&amp;quot; Umgebung&lt;/li&gt;
-&lt;li&gt;Fokus auf die wichtigsten (am häufigsten genutzten) Funktionen&lt;/li&gt;
-&lt;li&gt;Sehr aufwändig zu implementieren und zu maintainen&lt;/li&gt;
+&lt;li&gt;Testen das gesamte System mit seinen Abhängigkeiten in einer &amp;quot;realen&amp;quot; Umgebung&lt;/li&gt;
+&lt;li&gt;Sehr aufwändig zu implementieren und zu maintainen (müssen auch aktiv maintained werden, sonst versagen sie irgendwann und liefern false-positives)&lt;/li&gt;
 &lt;li&gt;Müssen reproduzierbar sein, ansonsten wird debugging unmöglich&lt;/li&gt;
+&lt;li&gt;Sehr wertvoll, aber auch aufwendig, daher: Fokus auf die wichtigsten (am häufigsten genutzten) Funktionen&lt;/li&gt;
+&lt;li&gt;Aufpassen, dass Tests nicht zu sehr den internen State beschreiben/festlegen und dadurch notwendige Änderungen blockieren&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;snapshot-tests&quot; tabindex=&quot;-1&quot;&gt;Snapshot Tests&lt;/h2&gt;
 &lt;ul&gt;
@@ -3358,7 +3363,7 @@ span, div /* apply same style to both span and div */
                 C
                 
             </title>
-            <updated>2025-05-24T09:38:37.908Z</updated>
+            <updated>2025-05-28T12:02:35.399Z</updated>
             <id>https://janek.ing/code/langauges/c/</id>
             <content type="html">
                 &lt;h2 id=&quot;strncpy-strncat&quot; tabindex=&quot;-1&quot;&gt;strncpy, strncat&lt;/h2&gt;
@@ -3724,6 +3729,31 @@ x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#define textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;msvc-build-insights&quot; tabindex=&quot;-1&quot;&gt;MSVC Build Insights&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://devblogs.microsoft.com/cppblog/finding-build-bottlenecks-with-cpp-build-insights/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Finding build bottlenecks with C++ Build Insights - C++ Team Blog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Use the following to get insights into the build process of your C/C++ app. Find out which files are included way too often, which files take long to parse or compile.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250528140213.png&quot; alt=&quot;Pasted image 20250528140213.png&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download and install the latest &lt;a href=&quot;https://visualstudio.microsoft.com/downloads/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Visual Studio 2019&lt;/a&gt;. (vcperf seems to also be included in the Visual Studio Build Tools 2022)&lt;/li&gt;
+&lt;li&gt;Obtain WPA by downloading and installing the &lt;a href=&quot;https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;latest Windows ADK&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;NOTE: I do not remember doing the following two steps, so maybe they can be skipped as of 05/2025&lt;/li&gt;
+&lt;li&gt;Copy the &lt;em&gt;perf_msvcbuildinsights.dll&lt;/em&gt; file from your Visual Studio 2019’s MSVC installation directory to your newly installed WPA directory. This file is the C++ Build Insights WPA add-in, which must be available to WPA for correctly displaying the C++ Build Insights events.
+&lt;ol&gt;
+&lt;li&gt;MSVC’s installation directory is typically: &lt;code&gt;C:&#92;Program Files (x86)&#92;Microsoft Visual Studio&#92;2019&#92;{Edition}&#92;VC&#92;Tools&#92;MSVC&#92;{Version}&#92;bin&#92;Hostx64&#92;x64&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;WPA’s installation directory is typically: &lt;code&gt;C:&#92;Program Files (x86)&#92;Windows Kits&#92;10&#92;Windows Performance Toolkit&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Open the &lt;em&gt;perfcore.ini&lt;/em&gt; file in your WPA installation directory and add an entry for the &lt;em&gt;perf_msvcbuildinsights.dll&lt;/em&gt; file. This tells WPA to load the C++ Build Insights add-in on startup.&lt;/li&gt;
+&lt;li&gt;Open an elevated &lt;strong&gt;&lt;em&gt;x64 Native Tools Command Prompt for VS 20XX&lt;/em&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Obtain a trace of your build:
+&lt;ol&gt;
+&lt;li&gt;Run the following command: &lt;code&gt;vcperf /start MySessionName&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Build your C++ project from anywhere, even from within Visual Studio (&lt;em&gt;vcperf&lt;/em&gt; collects events system-wide).&lt;/li&gt;
+&lt;li&gt;Run the following command: &lt;code&gt;vcperf /stop MySessionName outputFile.etl&lt;/code&gt;. This command will stop the trace, analyze all events, and save everything in the &lt;em&gt;outputFile.etl&lt;/em&gt; trace file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Open the trace you just collected in WPA.&lt;/li&gt;
+&lt;/ol&gt;
 
             </content>
             <link href="https://janek.ing/code/langauges/c/" >
@@ -4550,7 +4580,7 @@ Also needs special attention if negative numbers are involved (additional sort o
                 Architecture
                 
             </title>
-            <updated>2025-05-24T11:06:16.172Z</updated>
+            <updated>2025-05-26T16:48:49.113Z</updated>
             <id>https://janek.ing/code/architecture/</id>
             <content type="html">
                 &lt;h2 id=&quot;golden-rules&quot; tabindex=&quot;-1&quot;&gt;Golden Rules&lt;/h2&gt;
@@ -4666,9 +4696,19 @@ Quelle: &lt;a href=&quot;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=7
 &lt;li&gt;Martin Fowler: Refactor wenn man sich 3x wiederholt&lt;/li&gt;
 &lt;li&gt;Small Focused Functions that don&#39;t do anything meaningful -&amp;gt; man muss zu viel im Code springen, um zu verstehen, was er macht. Context fehlt.&lt;/li&gt;
 &lt;li&gt;Every function should do something &lt;strong&gt;meaningful&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Idee: Code sollte im Stile einer StackOverflow Antwort geschrieben sein. Macht etwas sinnvolles und beinhaltet allen notwendigen Kontext. (&lt;a href=&quot;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=1150&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=1150&lt;/a&gt;)&lt;br /&gt;
-&lt;a href=&quot;https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Idee: Code sollte im Stile einer StackOverflow Antwort geschrieben sein. Macht etwas sinnvolles und beinhaltet allen notwendigen Kontext. (&lt;a href=&quot;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=1150&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=1150&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://htmx.org/essays/codin-dirty/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://htmx.org/essays/codin-dirty/&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=hQJcGmWXDJw&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=hQJcGmWXDJw&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;There is no correlation between small functions and amount of bugs (no real empirical evidence)&lt;/li&gt;
+&lt;li&gt;Too many classes = too much clutter, too confusing, not coherent (same with too many small functions)&lt;/li&gt;
+&lt;li&gt;Long functions have the advantage of being visible. All long functions are important and do something meaningful. The result of a lot of small functions that call each other is not immediately apparent and can hide complex operations.&lt;/li&gt;
+&lt;li&gt;Many big successful projects (Chrome, Redis, etc.) have lots of long functions (100+ lines)&lt;/li&gt;
+&lt;li&gt;Function length should be determined by what the function does and not be an independent metric that drives code architecture.&lt;/li&gt;
+&lt;li&gt;Small functions complicate the call graph, because they (theoretically) can each be called independently. Without a debugger or an IDE it is very hard to detect who calls who in which order.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Abstraktion wird eingeführt, um gleiche Funktion perfekt zu bündeln&lt;/li&gt;
 &lt;li&gt;Neue Anforderung passt nur zu 90% in dieses Konzept&lt;/li&gt;
