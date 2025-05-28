@@ -284,29 +284,26 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("link", function (str) {
     // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested (otherwise turn isCodeBlock into an int)
-    console.log("--- FILTER: LINK ---");
-    console.trace();
-    console.log(str);
     let isCodeBlock = false;
     let result = "";
     let lastMatchPos = 0;
     for (let idx = 0; idx < str.length; ++idx) {
       if (str.substring(idx, idx+5) == "<code") {
-        // console.log("DEBUG Codeblock start at", idx, str.substring(idx-20, idx+20));
         isCodeBlock = true;
         idx += 5;
       }
       else if (str.substring(idx, idx+7) == "</code>") {
-        // console.log("DEBUG Codeblock end at", idx, str.substring(idx-20, idx+20));
         isCodeBlock = false;
         idx += 7;
       }
       else if (!isCodeBlock && str.substring(idx, idx+2) == "[[") {
-        // console.log("DEBUG Link creation at", idx, str.substring(idx-20, idx+20));
         const end = str.indexOf("]]",idx+2);
         if (end == -1)
           break; // generally should not happen, unless the markdown is broken
         const match = str.substring(idx+2, end);
+        // links may not contain line breaks
+        if (match.indexOf("\n") > -1)
+          continue;
         //Check if it is an embedded excalidraw drawing or mathjax javascript
         if (match.indexOf("],[") > -1 || match.indexOf('"$"') > -1)
           continue;
