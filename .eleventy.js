@@ -67,7 +67,7 @@ function getAnchorAttributes(filePath, linkTitle) {
       noteIcon = frontMatter.data.noteIcon;
     }
   } catch (error) {
-    console.log("getAnchorAttributes ERROR", error);
+    console.log(`DeadLink detection! filePath: ${filePath}, linkTitle: ${linkTitle}, error: ${error.message}`);
     deadLink = true;
   }
 
