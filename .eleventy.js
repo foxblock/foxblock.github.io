@@ -34,8 +34,19 @@ function getAnchorLink(filePath, linkTitle) {
   return `<a ${Object.keys(attributes).map(key => `${key}="${attributes[key]}"`).join(" ")}>${innerHTML}</a>`;
 }
 
+function encodeHTML(str) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return str.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
 function getAnchorAttributes(filePath, linkTitle) {
-  let fileName = filePath.replaceAll("&amp;", "&");
+  let fileName = filePath;
   let header = "";
   let headerLinkPath = "";
   if (filePath.includes("#")) {
@@ -45,30 +56,35 @@ function getAnchorAttributes(filePath, linkTitle) {
 
   let noteIcon = process.env.NOTE_ICON_DEFAULT;
   const title = linkTitle ? linkTitle : fileName;
-  let permalink = `/notes/${slugify(filePath)}`;
+  title = encodeHTML(title);
+  let permalink = "";
   let deadLink = false;
-  try {
-    const startPath = "./src/site/notes/";
-    const fullPath = fileName.endsWith(".md")
-      ? `${startPath}${fileName}`
-      : `${startPath}${fileName}.md`;
-    const file = fs.readFileSync(fullPath, "utf8");
-    const frontMatter = matter(file);
-    if (frontMatter.data.permalink) {
-      permalink = frontMatter.data.permalink;
+  // if fileName is empty we are only jumping to heading in this file
+  // NOTE: will not load the correct noteIcon in that case, since we don't have access to the filename
+  if (fileName.length > 0) 
+  {
+    try {
+      permalink = `/notes/${slugify(fileName)}`;
+      const startPath = "./src/site/notes/";
+      const fullPath = fileName.endsWith(".md")
+        ? `${startPath}${fileName}`
+        : `${startPath}${fileName}.md`;
+      const file = fs.readFileSync(fullPath, "utf8");
+      const frontMatter = matter(file);
+      if (frontMatter.data.permalink) {
+        permalink = frontMatter.data.permalink;
+      }
+      const isGardenHome = frontMatter.data.tags && frontMatter.data.tags.indexOf("gardenEntry") != -1;
+      if (isGardenHome) {
+        permalink = "/";
+      }
+      if (frontMatter.data.noteIcon) {
+        noteIcon = frontMatter.data.noteIcon;
+      }
+    } catch (error) {
+      console.log(`DeadLink detection! filePath: ${filePath}, linkTitle: ${linkTitle}, error: ${error.message}`);
+      deadLink = true;
     }
-    if (
-      frontMatter.data.tags &&
-      frontMatter.data.tags.indexOf("gardenEntry") != -1
-    ) {
-      permalink = "/";
-    }
-    if (frontMatter.data.noteIcon) {
-      noteIcon = frontMatter.data.noteIcon;
-    }
-  } catch (error) {
-    console.log(`DeadLink detection! filePath: ${filePath}, linkTitle: ${linkTitle}, error: ${error.message}`);
-    deadLink = true;
   }
 
   if (deadLink) {
@@ -92,6 +108,9 @@ function getAnchorAttributes(filePath, linkTitle) {
   }
 }
 
+// NOTE (JS, 24.05.25): Edited this to only match double hashes in the markdown file (e.g. ##test-tag)
+// This is a workaround for https://github.com/issues/created?issue=oleeskild%7Cdigitalgarden%7C315
+// Tags as properties are unaffected
 const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 module.exports = function (eleventyConfig) {
@@ -290,11 +309,14 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  // NOTE (JS, 24.05.25): Edited taggify and searchableTags to only work with double-hashed
+  // tags (e.g. ##tag-test) as a workaround. See comment on tagRegex above for more info
   eleventyConfig.addFilter("taggify", function (str) {
     // NOTE: Markdown ist schon in HTML convertiert an diesem Punkt
     // Code Blocks sind schon da, aber Inhalt noch nicht in einzelne tags konvertiert
     // Komisch: Taggify schlägt an und sollte hier tags einfügen, tut es aber nicht
     // (bzw. sie sind nicht im finalen Output)
+    // -> evtl. weil die Prism library separat eingebunden wird und die Codeblöcke wieder umschreibt
     console.log("---- taggify start", str.substring(0,200));
     return (
       str &&
