@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-28T14:30:19Z</updated>
+    <updated>2025-05-28T14:40:40Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -545,7 +545,7 @@ return null;
 // Send array of messages to single output
 arr = new Array(10);
 return [arr];
-return [[msg1, msg2, msg3]];
+return &lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;msg1, msg2, msg3&lt;/a&gt;;
 // Send msg1 to output 1, msg2 to output 2, msg3 to output 3
 return [msg1, msg2, msg3];
 // Send msg only to second output (of 4)
@@ -3770,9 +3770,9 @@ x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;@echo off&lt;/code&gt; (disable echo by default)&lt;/li&gt;
 &lt;li&gt;when setting variables surround whole statement with quotes &lt;code&gt;set &amp;quot;var=value&amp;quot;&lt;/code&gt; (this handles spaces and other special characters better)&lt;/li&gt;
-&lt;li&gt;Better not handle passwords, if you really need to see [[#Handle passwords]]&lt;/li&gt;
+&lt;li&gt;Better not handle passwords, if you really need to see &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#handle-passwords&quot;&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;surround whole script with &lt;code&gt;setlocal&lt;/code&gt; and &lt;code&gt;endlocal&lt;/code&gt; (to not pollute the variable space)&lt;/li&gt;
-&lt;li&gt;Use these instead of hard-coded paths: [[#Useful Windows variables]]&lt;/li&gt;
+&lt;li&gt;Use these instead of hard-coded paths: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#useful-windows-variables&quot;&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;for %%a in (%*) do (set &amp;quot;%%a=1&amp;quot;)&lt;/code&gt; is the simplest parser for flags&lt;/li&gt;
 &lt;li&gt;Keep conditions (if/else) to a minimum (many pitfalls: brackets may break comments, variables are expanded only once, code becomes less linear, etc. - goto avoids some of these, but makes the code even less linear)&lt;/li&gt;
 &lt;/ul&gt;
@@ -4069,7 +4069,7 @@ Better article with detailed explanations (and also springs!): &lt;a href=&quot;
 &lt;/li&gt;
 &lt;li&gt;Store game state and render state in the same structure for simplicity.
 &lt;ul&gt;
-&lt;li&gt;Basically follow the [[#Fat/Flat struct (behaviors)]] approach&lt;/li&gt;
+&lt;li&gt;Basically follow the &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#fat-flat-struct-behaviors&quot;&gt;&lt;/a&gt; approach&lt;/li&gt;
 &lt;li&gt;Maintain separate values for actual game state (e.g., health, ammo) and display state (e.g., display health, display ammo).&lt;/li&gt;
 &lt;li&gt;Consider &amp;quot;two-sided death&amp;quot; for entities: logical removal from the game state and gradual removal through animation.&lt;/li&gt;
 &lt;li&gt;DON&#39;T: Have a lot separate classes and interfaces for this stuff. Game state and rendering is strongly linked. One has to be able to quickly add stuff to this, especially in the beginning prototype phase.&lt;/li&gt;
@@ -4126,8 +4126,8 @@ Better article with detailed explanations (and also springs!): &lt;a href=&quot;
 &lt;/ul&gt;
 &lt;h2 id=&quot;entity-systems&quot; tabindex=&quot;-1&quot;&gt;Entity systems&lt;/h2&gt;
 &lt;p&gt;General approaches to a unit/entity system.&lt;br /&gt;
-Preferred way for moderately complex games: [[#Preferred Fat/Flat struct (behaviors)]]&lt;br /&gt;
-For simple games this can also work well (MathTD): [[#Naive fat/flat struct (entity types)]]&lt;/p&gt;
+Preferred way for moderately complex games: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#preferred-fat-flat-struct-behaviors&quot;&gt;&lt;/a&gt;&lt;br /&gt;
+For simple games this can also work well (MathTD): &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#naive-fat-flat-struct-entity-types&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;oop&quot; tabindex=&quot;-1&quot;&gt;OOP&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;class UnitBase {
 	Vec2 pos;
@@ -4421,7 +4421,7 @@ struct Trigger
 &lt;h2 id=&quot;linked-list-vs-array&quot; tabindex=&quot;-1&quot;&gt;Linked List vs Array&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://baptiste-wicht.com/posts/2012/11/cpp-benchmark-vector-vs-list.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;C++ benchmark - std::vector VS std::list | Blog blog(&amp;quot;Baptiste Wicht&amp;quot;); (baptiste-wicht.com)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.rfleury.com/p/in-defense-of-linked-lists&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.rfleury.com/p/in-defense-of-linked-lists&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;![[memory-layout.mp4]]&lt;/p&gt;
+&lt;p&gt;!&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;memory-layout.mp4&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;sorting&quot; tabindex=&quot;-1&quot;&gt;Sorting&lt;/h2&gt;
 &lt;p&gt;Vergleich mit Animation: &lt;a href=&quot;https://www.toptal.com/developers/sorting-algorithms&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Sorting Algorithms Animations | Toptal®&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;insertion-sort&quot; tabindex=&quot;-1&quot;&gt;Insertion Sort&lt;/h3&gt;
@@ -4805,7 +4805,7 @@ Dies gilt für alle Binärdaten, eigene Datenformate oder Protokolle (Learning v
 &lt;h2 id=&quot;oop-vs-data-oriented&quot; tabindex=&quot;-1&quot;&gt;OOP vs Data-Oriented&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;v-tables und dynamic memory allocation machen das Programm langsamer, weil Objekte im Speicher verteilt liegen und viele cache misses erzeugen: &lt;a href=&quot;https://x.com/ryanjfleury/status/1672722010399703041&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Ryan Fleury auf X: „This illustrates why it has been helpful to me to eliminate v-tables and sum-types almost everywhere. It isn’t just about performance—it’s about strong predictive power over code, staying organized, non-pessimization, and architecture which is ready to optimize later if needed.“ / X&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;![[memory-layout.mp4]]&lt;/li&gt;
+&lt;li&gt;!&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;memory-layout.mp4&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;V-Tables sind &amp;quot;&lt;a href=&quot;https://en.wikipedia.org/wiki/Function_pointer&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;indirected function pointers&lt;/a&gt;&amp;quot; und stellen eine harte Grenze für den Compiler dar. Switch statements können hingegen deutlich besser optimiert werden -&amp;gt; &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/stack-vs-heap/&quot;&gt;Stack vs. Heap&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa.md&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;cmuratori-discussion/cleancodeqa.md at main · unclebob/cmuratori-discussion&lt;/a&gt;&lt;br /&gt;
