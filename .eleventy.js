@@ -289,14 +289,17 @@ module.exports = function (eleventyConfig) {
     let lastMatchPos = 0;
     for (let idx = 0; idx < str.length; ++idx) {
       if (str.substring(idx, idx+5) == "<code") {
+        console.log("DEBUG Codeblock start at", idx);
         isCodeBlock = true;
         idx += 5;
       }
       else if (str.substring(idx, idx+7) == "</code>") {
+        console.log("DEBUG Codeblock end at", idx);
         isCodeBlock = false;
         idx += 7;
       }
       else if (!isCodeBlock && str.substring(idx, idx+2) == "[[") {
+        console.log("DEBUG Link creation at", idx);
         const end = str.indexOf("]]",idx+2);
         if (end == -1)
           break; // generally should not happen, unless the markdown is broken
@@ -305,7 +308,6 @@ module.exports = function (eleventyConfig) {
         if (match.indexOf("],[") > -1 || match.indexOf('"$"') > -1)
           continue;
         
-        console.log("DEBUG Creating link at context:", str.substring(idx-20, idx+20));
         const [fileLink, linkTitle] = match.split("|");
         const linkHTML = getAnchorLink(fileLink, linkTitle);
         result += str.substring(lastMatchPos, idx);
