@@ -283,18 +283,33 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("link", function (str) {
-    return (
-      str &&
-      str.replace(/\[\[(.*?)\]\]/g, function (match, p1) {
+    // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested (otherwise turn this into an int)
+    let isCodeBlock = false;
+    let result = "";
+    let lastMatchPos = 0;
+    for (let idx = 0; idx < str.length; ++idx) {
+      if (str.substring(idx, idx+5) == "<code")
+        isCodeBlock = true;
+      else if (str.substring(idx, idx+7) == "</code>")
+        isCodeBlock = false;
+      else if (!isCodeBlock && str.substring(idx, idx+2) == "[[") {
+        const end = str.indexOf("]]",idx+2);
+        if (end == -1)
+          break; // generally should not happen, unless the markdown is broken
+        const match = str.substring(idx+2, end);
         //Check if it is an embedded excalidraw drawing or mathjax javascript
-        if (p1.indexOf("],[") > -1 || p1.indexOf('"$"') > -1) {
-          return match;
-        }
-        const [fileLink, linkTitle] = p1.split("|");
+        if (match.indexOf("],[") > -1 || match.indexOf('"$"') > -1)
+          continue;
         
-        return getAnchorLink(fileLink, linkTitle);
-      })
-    );
+        const [fileLink, linkTitle] = match.split("|");
+        const linkHTML = getAnchorLink(fileLink, linkTitle);
+        result += str.substring(lastMatchPos, idx);
+        result += linkHTML;
+        lastMatchPos = end+2;
+      }
+    }
+    result += str.substring(lastMatchPos, str.length);
+    return result;
   });
 
   // NOTE (JS, 24.05.25): Edited taggify and searchableTags to only work with double-hashed
