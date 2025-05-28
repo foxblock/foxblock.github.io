@@ -287,7 +287,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("link", function (str) {
-    if (str.includes("NodeRed")) {
+    if (str.includes("Daten lesen und speichern. Doku")) {
       console.log("--- FILTER LINK: ");
       console.log(str);
     }
@@ -377,7 +377,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addTransform("dataview-js-links", function (str) {
-    if (str.includes("NodeRed")) {
+    if (str.includes("Daten lesen und speichern. Doku")) {
       console.log("--- TRANSFORM DATAVIEW LINK: ");
       console.log(str);
     }
