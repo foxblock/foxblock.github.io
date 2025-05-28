@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-28T14:40:40Z</updated>
+    <updated>2025-05-28T14:55:01Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -3770,9 +3770,9 @@ x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;@echo off&lt;/code&gt; (disable echo by default)&lt;/li&gt;
 &lt;li&gt;when setting variables surround whole statement with quotes &lt;code&gt;set &amp;quot;var=value&amp;quot;&lt;/code&gt; (this handles spaces and other special characters better)&lt;/li&gt;
-&lt;li&gt;Better not handle passwords, if you really need to see &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#handle-passwords&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Better not handle passwords, if you really need to see &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#handle-passwords&quot;&gt;#Handle passwords&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;surround whole script with &lt;code&gt;setlocal&lt;/code&gt; and &lt;code&gt;endlocal&lt;/code&gt; (to not pollute the variable space)&lt;/li&gt;
-&lt;li&gt;Use these instead of hard-coded paths: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#useful-windows-variables&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Use these instead of hard-coded paths: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#useful-windows-variables&quot;&gt;#Useful Windows variables&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;for %%a in (%*) do (set &amp;quot;%%a=1&amp;quot;)&lt;/code&gt; is the simplest parser for flags&lt;/li&gt;
 &lt;li&gt;Keep conditions (if/else) to a minimum (many pitfalls: brackets may break comments, variables are expanded only once, code becomes less linear, etc. - goto avoids some of these, but makes the code even less linear)&lt;/li&gt;
 &lt;/ul&gt;
@@ -4069,7 +4069,7 @@ Better article with detailed explanations (and also springs!): &lt;a href=&quot;
 &lt;/li&gt;
 &lt;li&gt;Store game state and render state in the same structure for simplicity.
 &lt;ul&gt;
-&lt;li&gt;Basically follow the &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#fat-flat-struct-behaviors&quot;&gt;&lt;/a&gt; approach&lt;/li&gt;
+&lt;li&gt;Basically follow the &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#fat-flat-struct-behaviors&quot;&gt;#Fat/Flat struct (behaviors)&lt;/a&gt; approach&lt;/li&gt;
 &lt;li&gt;Maintain separate values for actual game state (e.g., health, ammo) and display state (e.g., display health, display ammo).&lt;/li&gt;
 &lt;li&gt;Consider &amp;quot;two-sided death&amp;quot; for entities: logical removal from the game state and gradual removal through animation.&lt;/li&gt;
 &lt;li&gt;DON&#39;T: Have a lot separate classes and interfaces for this stuff. Game state and rendering is strongly linked. One has to be able to quickly add stuff to this, especially in the beginning prototype phase.&lt;/li&gt;
@@ -4126,8 +4126,8 @@ Better article with detailed explanations (and also springs!): &lt;a href=&quot;
 &lt;/ul&gt;
 &lt;h2 id=&quot;entity-systems&quot; tabindex=&quot;-1&quot;&gt;Entity systems&lt;/h2&gt;
 &lt;p&gt;General approaches to a unit/entity system.&lt;br /&gt;
-Preferred way for moderately complex games: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#preferred-fat-flat-struct-behaviors&quot;&gt;&lt;/a&gt;&lt;br /&gt;
-For simple games this can also work well (MathTD): &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#naive-fat-flat-struct-entity-types&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+Preferred way for moderately complex games: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#preferred-fat-flat-struct-behaviors&quot;&gt;#Preferred Fat/Flat struct (behaviors)&lt;/a&gt;&lt;br /&gt;
+For simple games this can also work well (MathTD): &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#naive-fat-flat-struct-entity-types&quot;&gt;#Naive fat/flat struct (entity types)&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;oop&quot; tabindex=&quot;-1&quot;&gt;OOP&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;class UnitBase {
 	Vec2 pos;
