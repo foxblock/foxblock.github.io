@@ -34,19 +34,8 @@ function getAnchorLink(filePath, linkTitle) {
   return `<a ${Object.keys(attributes).map(key => `${key}="${attributes[key]}"`).join(" ")}>${innerHTML}</a>`;
 }
 
-function encodeHTML(str) {
-  const map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
-  return str.replace(/[&<>"']/g, function(m) { return map[m]; });
-}
-
 function getAnchorAttributes(filePath, linkTitle) {
-  let fileName = filePath;
+  let fileName = filePath.replaceAll("&amp;", "&");
   let header = "";
   let headerLinkPath = "";
   if (filePath.includes("#")) {
@@ -55,7 +44,7 @@ function getAnchorAttributes(filePath, linkTitle) {
   }
 
   let noteIcon = process.env.NOTE_ICON_DEFAULT;
-  const title = encodeHTML(linkTitle ? linkTitle : fileName);
+  const title = linkTitle ? linkTitle : fileName;
   let permalink = "";
   let deadLink = false;
   // if fileName is empty we are only jumping to heading in this file
@@ -81,7 +70,7 @@ function getAnchorAttributes(filePath, linkTitle) {
         noteIcon = frontMatter.data.noteIcon;
       }
     } catch (error) {
-      console.log(`DeadLink detection! filePath: ${filePath}, linkTitle: ${linkTitle}, error: ${error.message}`);
+      console.log(`DeadLink detection! filePath: ${filePath}, linkTitle: ${linkTitle}, fullPath: ${fullPath}, error: ${error.message}`);
       deadLink = true;
     }
   }
