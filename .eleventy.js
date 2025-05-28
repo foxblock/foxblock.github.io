@@ -44,7 +44,7 @@ function getAnchorAttributes(filePath, linkTitle) {
   }
 
   let noteIcon = process.env.NOTE_ICON_DEFAULT;
-  const title = linkTitle ? linkTitle : fileName;
+  const title = linkTitle ? linkTitle : filePath;
   let permalink = "";
   let deadLink = false;
   // if fileName is empty we are only jumping to heading in this file
