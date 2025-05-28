@@ -283,15 +283,19 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("link", function (str) {
-    // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested (otherwise turn this into an int)
+    // NOTE (JS, 28.05.25): as far as I know code blocks cannot be nested (otherwise turn isCodeBlock into an int)
     let isCodeBlock = false;
     let result = "";
     let lastMatchPos = 0;
     for (let idx = 0; idx < str.length; ++idx) {
-      if (str.substring(idx, idx+5) == "<code")
+      if (str.substring(idx, idx+5) == "<code") {
         isCodeBlock = true;
-      else if (str.substring(idx, idx+7) == "</code>")
+        idx += 5;
+      }
+      else if (str.substring(idx, idx+7) == "</code>") {
         isCodeBlock = false;
+        idx += 7;
+      }
       else if (!isCodeBlock && str.substring(idx, idx+2) == "[[") {
         const end = str.indexOf("]]",idx+2);
         if (end == -1)
@@ -301,11 +305,13 @@ module.exports = function (eleventyConfig) {
         if (match.indexOf("],[") > -1 || match.indexOf('"$"') > -1)
           continue;
         
+        console.log("DEBUG Creating link at context:", str.substring(idx-20, idx+20));
         const [fileLink, linkTitle] = match.split("|");
         const linkHTML = getAnchorLink(fileLink, linkTitle);
         result += str.substring(lastMatchPos, idx);
         result += linkHTML;
         lastMatchPos = end+2;
+        idx = lastMatchPos;
       }
     }
     result += str.substring(lastMatchPos, str.length);
