@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-05-28T14:55:01Z</updated>
+    <updated>2025-05-28T19:39:48Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -365,7 +365,7 @@ $$
                 Obsidian
                 
             </title>
-            <updated>2025-05-24T10:55:18.426Z</updated>
+            <updated>2025-05-28T19:39:07.265Z</updated>
             <id>https://janek.ing/tech/obsidian/</id>
             <content type="html">
                 &lt;h2 id=&quot;callouts&quot; tabindex=&quot;-1&quot;&gt;Callouts&lt;/h2&gt;
@@ -513,6 +513,16 @@ Styling with CSS: &lt;a href=&quot;https://help.obsidian.md/Extending+Obsidian/C
 Available variables and classes: &lt;a href=&quot;https://docs.obsidian.md/Themes/App+themes/Build+a+theme#Step%207%20Discover%20CSS%20variables%20in%20use&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Build a theme - Developer Documentation (obsidian.md)&lt;/a&gt;&lt;br /&gt;
 List of supported codeblock languages (Prism is the library used by Obsidian): &lt;a href=&quot;https://prismjs.com/#supported-languages&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://prismjs.com/#supported-languages&lt;/a&gt;&lt;br /&gt;
 Obsidian is rendering using a web-browser, so you can always &lt;code&gt;Ctrl + Shift + I&lt;/code&gt; in Obsidian to bring up the dev tools (including the inspector to check individual classes and styling options).&lt;/p&gt;
+&lt;h2 id=&quot;testing&quot; tabindex=&quot;-1&quot;&gt;Testing&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;~~~
+foobar
+~~~
+cat foo.bar | grep test
+```C
+int main() { return 0; }
+```
+baz
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&quot;heading-1&quot; tabindex=&quot;-1&quot;&gt;Heading 1&lt;/h1&gt;
 &lt;p&gt;Test&lt;/p&gt;
 &lt;h2 id=&quot;heading-2&quot; tabindex=&quot;-1&quot;&gt;Heading 2&lt;/h2&gt;
