@@ -91,6 +91,8 @@ permalink: "notes/{{ page.fileSlug | slugify }}/"
     {% for imp in dynamics.notes.footer %}
       {% include imp %}
     {% endfor %}
-    {%include "components/lucideIcons.njk"%}
+    <!-- NOTE (JS, 29.05.25): Removed because it causes an error "lucide is not defined".
+         All it does is call lucide.createIcons, which is already done by some include in <head> -->
+    <!-- {%include "components/lucideIcons.njk"%} -->
   </body>
 </html>
