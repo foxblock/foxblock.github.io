@@ -1,3 +1,9 @@
+/* Increase width of content (default is 700px)
+   NOTE: Do not increase beyond 890px, because it will overlap garden sidebar on window width ~1400px) */
+.content {
+    max-width: 850px;
+}
+
 /* fix searchbox size in filetree, so it does not look weird when window is small */
 .filetree-sidebar .search-button {
     width: 150px;
