@@ -279,7 +279,7 @@ CTRL + K
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
-<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-07-22T16:16:00.019Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-07-22T16:16:00.019Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-07-22T16:16:00.019Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-07-22T21:50:16.810Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-07-22T21:50:16.810Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-07-22T21:50:16.810Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
 <h1 data-note-icon="">Architecture</h1>
@@ -298,7 +298,7 @@ CTRL + K
 #knowledge-base
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-05-26T18:48:58.822+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-26T18:48:49.113+02:00"></span></div></div></div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-06-17T19:43:07.688+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-06-16T14:36:10.402+02:00"></span></div></div></div>
 </header>
 <h2 id="golden-rules" tabindex="-1">Golden Rules</h2>
 <ul>
@@ -306,9 +306,9 @@ CTRL + K
 <li>Understand the domain</li>
 <li>Follow Standards</li>
 <li>Know your Tech</li>
-<li>Refactor with caution<br>
-Quelle: <a href="https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=773" target="_blank" class="external-link">https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=773</a></li>
+<li>Refactor with caution</li>
 </ul>
+<p>Quelle: <a href="https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=773" target="_blank" class="external-link">https://youtu.be/NiljDyzAOcI?feature=shared&amp;t=773</a></p>
 <p>Eigener Ansatz:</p>
 <ol>
 <li>Prototyp bauen (max. 1-3 Monate) mit Fokus auf bekannte Anforderungen und Funktionen (nicht zu weit in die Zukunft schauen, zu viele Dinge annehmen. Abstraktionen minimal halten!)</li>
@@ -599,8 +599,134 @@ void read(file* f, char* buf, int n) {
 <li>bad code can't handle small changes in requirements</li>
 </ul>
 <h2 id="cost-of-dependencies" tabindex="-1">Cost of Dependencies</h2>
-<p><a href="https://nitter.tiekoetter.com/cmuratori/status/1426299131270615040#m" target="_blank" class="external-link">https://nitter.tiekoetter.com/cmuratori/status/1426299131270615040#m</a></p>
-<p><a href="https://nitter.tiekoetter.com/Jonathan_Blow/status/1923414922484232404#m" target="_blank" class="external-link">https://nitter.tiekoetter.com/Jonathan_Blow/status/1923414922484232404#m</a></p>
+<p><a href="https://nitter.tiekoetter.com/cmuratori/status/1426299131270615040#m" target="_blank" class="external-link">https://nitter.tiekoetter.com/cmuratori/status/1426299131270615040#m</a><br>
+<a href="https://nitter.tiekoetter.com/Jonathan_Blow/status/1923414922484232404#m" target="_blank" class="external-link">https://nitter.tiekoetter.com/Jonathan_Blow/status/1923414922484232404#m</a></p>
+<ul>
+<li>Every dependency, every tool, every cog in the programming machine that is your codebase has a non-zero percentage chance of breaking after a while (because of external changes, because you triggered a bug, etc.)</li>
+<li>The reliability of the system is the product of the reliability of each component (since usually your program does not keep working if one component totally breaks)</li>
+<li>So with 10 components at 99% reliability each (~chance of the component still working after one year), this gives us only a ~90% chance the system will still work after one year
+<ul>
+<li>This becomes only 60% after 5 years</li>
+<li>or 36% after one year if 100 different components are involved</li>
+</ul>
+</li>
+<li>With npm and ecosystems like that 100 dependencies are quickly pulled in by just a handful of components you include directly</li>
+<li>99% reliability is very favorable if anything involving the web is included, since specs, URLs, external systems, frameworks, etc. change and break so quickly and often</li>
+<li>With such low reliability rates the amount of work spent on debugging and maintenance becomes unreasonable high</li>
+<li>To avoid this, keep dependencies and your surface to those dependencies to a minimum.</li>
+<li>JavaScript frameworks change, but math is forever.</li>
+</ul>
+<h2 id="tiger-style" tabindex="-1">TigerStyle</h2>
+<p><a href="https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md" target="_blank" class="external-link">tigerbeetle/docs/TIGER_STYLE.md at main · tigerbeetle/tigerbeetle · GitHub</a><br>
+<a href="https://tigerstyle.dev/" target="_blank" class="external-link">Tiger Style</a><br>
+<a href="https://www.youtube.com/watch?v=w3WYdYyjek4" target="_blank" class="external-link">https://www.youtube.com/watch?v=w3WYdYyjek4</a><br>
+Style developed for writing a database for financial transactions (where speed, robustness and correctness are absolutely paramount).</p>
+<ul>
+<li>See the whole picture
+<ul>
+<li>Time (total cost of ownership) = Design + Coding + Testing + Incidents</li>
+<li>Don't just speed up the coding phase (there is not too much gain in there - maybe more now with AI?)</li>
+<li>Design influences all following phases, so there is a lot of gain here</li>
+<li>Design is cheap, iterating on design is fast (before coding starts). Rewrites later are expensive</li>
+<li>Testing takes a lot of time and increases exponentially for complex systems (need to test all interactions, sometimes bugs are hard to reproduce)</li>
+</ul>
+</li>
+<li>Painters vs. Sculptors
+<ul>
+<li>Music analogy: Beatles (start with a blank sheet and an idea, slowly add instruments, rythm, etc.) vs. Bob Marley (starts with a wall of sound, takes away pieces and arrives at raggae)</li>
+<li>Some programmers are painters (like to do things themselves), some are sculptors (start with libraries)</li>
+<li>Only four &quot;colors&quot; are important in programming: Network, Disk, Memory, CPU</li>
+<li>Napkin calculations: latency + throughput (applies to all &quot;colors&quot;)</li>
+</ul>
+</li>
+<li>Define your fault models (consider what can go wrong and what your program should handle or not handle)</li>
+<li>Stateless is better than stateful (managing state is hard)</li>
+<li>Reduce surface area (less components, less functionality, less ports, etc.) - less complexity</li>
+<li>do it right the first time
+<ul>
+<li>if you know of a better way to do things while programming, restart and do the better way</li>
+<li>it will be more expensive (=time consuming) later on (right now you have all the context you need, later you will have forgotten things)</li>
+<li>will you even get a second chance?</li>
+</ul>
+</li>
+<li>walk &amp; talk (pick a design problem and walk while brainstorming solutions with other people, helps creativity)</li>
+<li>the program should run correctly or not run at all
+<ul>
+<li>use assertions everywhere, use assertions in production
+<ul>
+<li>start of function to check parameters</li>
+<li>end of functions to check return values</li>
+<li>check runtime of a loop (upper and lower bound)</li>
+<li>check cached data against the copy on disk</li>
+<li>etc.</li>
+</ul>
+</li>
+<li>asserts document your expectations (code documents the positive space, assertions the negative space i.e. what should not happen)</li>
+<li>assertions are to catch programming errors (bugs), not to handle operating errors (these you should catch and handle)
+<ul>
+<li>e.g. if a malloc fails on a server, don't crash but refuse new connections</li>
+</ul>
+</li>
+<li>put expected limits on your system (e.g. Tigerbeetle allocates all memory at startup), avoid while(true) loops
+<ul>
+<li>this also helps to get an idea of the size and boundaries of your system</li>
+<li>keeps the system lean</li>
+</ul>
+</li>
+<li>NASA Power of 10 rule for critical systems</li>
+<li>Zig: assert on arithmatic (e.g. integer overflow)</li>
+</ul>
+</li>
+<li>build a simulator for your program
+<ul>
+<li>simulate everything, including network and disk</li>
+<li>able to test much more quickly</li>
+<li>reproduce bugs with 100% accuracy</li>
+</ul>
+</li>
+</ul>
+<h2 id="practical-dod" tabindex="-1">Practical DOD</h2>
+<p><a href="https://vimeo.com/649009599" target="_blank" class="external-link">Andrew Kelley - Practical DOD auf Vimeo</a><br>
+<a href="https://www.youtube.com/watch?v=rX0ItVEVjHc" target="_blank" class="external-link">CppCon 2014: Mike Acton &quot;Data-Oriented Design and C++&quot;</a></p>
+<ul>
+<li>reading from cache is slower than doing math, reading from RAM is 10x slower, allocating on the heap might be 100x slower still
+<ul>
+<li>don't cache values that are very fast to compute (or rarely needed)</li>
+<li>avoid memory allocations (esp. on heap) on the hot path (inside of loops)</li>
+</ul>
+</li>
+<li>goal: identify where you have many things in memoryy and make the size of each thing smaller</li>
+<li>struct memory layout
+<ul>
+<li>alignment of struct: size of largest primitive member</li>
+<li>alignment of each (primitive) member: its own size</li>
+<li>will add padding bytes after each member to align them according to rules above</li>
+<li>size of struct has to be multiple of alignment of struct (incl. padding)</li>
+</ul>
+</li>
+<li>use indexes instead of pointers (indexes can be the size you want, pointers are always 8 bytes on a 64-bit system)
+<ul>
+<li><a href="https://floooh.github.io/2018/06/17/handles-vs-pointers.html" target="_blank" class="external-link">https://floooh.github.io/2018/06/17/handles-vs-pointers.html</a></li>
+<li>you lose some type safety</li>
+</ul>
+</li>
+<li>store elements of a struct out-of-band
+<ul>
+<li>example: instead of a bool flag, have two separate arrays for each type</li>
+<li>can speed up operation as well, since you probably do different things for each type and now you can batch these operations without having to check/switch on each object</li>
+<li>better cache behavior as well, since one type of object will not evict the other one while iterating</li>
+<li>example: move fields that are rarely populated into a hash map (so they are stored sparsely)</li>
+<li>example: use the Fat/Flat struct approach (use one common flags field and have extra data in an external list or map)</li>
+<li>take note of your actual use case and its memory usage and chose the layout of data accordingly</li>
+</ul>
+</li>
+<li>use SOA instead of AOS
+<ul>
+<li>uses no padding</li>
+<li>better cache behavior, if only certain fields are needed for computation</li>
+</ul>
+</li>
+</ul>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
 <aside>
@@ -644,6 +770,10 @@ On this page
 <li><a href="#good-code-bad-code">Good code / bad code</a>
 </li>
 <li><a href="#cost-of-dependencies">Cost of Dependencies</a>
+</li>
+<li><a href="#tiger-style">TigerStyle</a>
+</li>
+<li><a href="#practical-dod">Practical DOD</a>
 </li>
 </ol>
 </nav>
