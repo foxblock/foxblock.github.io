@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/batch/","tags":["knowledge-base"],"created":"2025-05-08T19:24:07.675+02:00","updated":"2025-05-23T15:02:55.271+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/batch/","tags":["knowledge-base"],"created":"2025-05-08T19:24:07.675+02:00","updated":"2025-07-14T08:54:15.883+02:00"}
 ---
 
 ## Best practices

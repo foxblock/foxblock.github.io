@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/design/video-games/","tags":["knowledge-base","german"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-05-24T12:51:03.530+02:00"}
+{"dg-publish":true,"permalink":"/design/video-games/","tags":["knowledge-base","german","opinion"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-06-05T12:42:31.065+02:00"}
 ---
 
 ## 10 Lessons as per Mark Brown
@@ -35,7 +35,7 @@ https://youtu.be/nCxU-OBoISk?feature=shared&t=1057
 - Was ist das Kernthema des Spiels? (Braid: Zeit, VVVVVV: Flipping)
 	- Alle Puzzle sollten eine Eigenschaft dieses Themas behandeln (On-Topic) und nicht über Off-Topic Eigenschaften lösbar sein (z.B. Timing bei Jumps)
 	- Alle interessanten Effekte und Eigenschaften des Themas sollten durchgespielt werden (siehe z.B. Braid). Wie verändert das Thema ein klassisches Spiel? Was passiert wenn man XYZ hinzufügt? Was passiert, wenn man es weglässt? Was passiert wenn man Parameter XYZ davon ändert? etc.
-- Die offensichtliche aber falsche Lösung sollte eindeutig falsch sein (ein Sprung sollte deutlich zu kurz sein, wenn das entscheidende Element fehlt und nicht nur ein bisschen zu kurz) -> ansonsten denkt ein Spieler, dass es an seinen mangelnden Fähigkeiten liegt (Off-Topic Element))
+- Die offensichtliche aber falsche Lösung sollte eindeutig falsch sein (ein Sprung sollte deutlich zu kurz sein, wenn das entscheidende Element fehlt und nicht nur ein bisschen zu kurz) -> ansonsten denkt ein Spieler, dass es an seinen mangelnden Fähigkeiten liegt (Off-Topic Element)
 	- Insbesondere gilt dies bei "analogen" Spielen/Mechaniken: Die richtige Lösung sollte sich deutlich von falschen abheben (hoher "margin of error" bei der richtigen Lösung)
 	- Bei präzisen Elementen kann man kleine visuelle Hinweise an der richtigen Stelle platzieren (darf nicht zu auffällig sein)
 	- Genauso sollte die finale Lösung einfach zu erzeugen sein, damit nach dem Aha-Moment des Spielers es nicht mehr an mechanischen Fähigkeiten scheitert (oder anderen Off-Topic Elementen)
@@ -65,7 +65,8 @@ https://youtu.be/nCxU-OBoISk?feature=shared&t=1057
 - Es ist ein Videospiel -> alles ist möglich. Der Spieler geht erstmal von den "üblichen" Regeln aus (sofern er diese kenn, je nachdem welches Vorwissen er hat - u.U. gar keins!). Das heißt aber jede Regel kann gebrochen werden und muss erklärt oder gezeigt werden. Nichts sollte als "gegeben" angenommen werden.
 - Puzzles, wo Elemente eine "natürlich" Bedeutung haben, können interessant sein (z.B. weil man sie sowieso braucht, um einen bestimmten Ort zu erreichen, aber dann nochmal konkret im Kontext des Puzzles). Fühlt sich "natürlich" an, weil die Elemente nicht ausschließlich für das Puzzle existieren. (-> Braid "Elevator action", JBlow nennt es "artful excuses"). Vorsicht: Werden schnell zu "red herrings", wenn sie zu sehr vom eigentlichen Puzzle ablenken oder nur die Lösung verschleiern.
 - Flow of ideas: Grundidee eines Puzzles mit weniger Elementen, dann nach und nach Elemente hinzufügen, die das Puzzle interessanter machen oder einen "Twist" erzeugen (nicht einfach nur Schwierigkeit oder Unübersichtlichkeit erhöhen)
-- Puzzles sollten sich idealerweise nicht groß überlappen, um Redundanz zu vermeiden (jedes Puzzles behandelt eine eigene interessante Idee / Interaktion zwischen den Elementen des Spiels)
+- Puzzles sollten sich idealerweise nicht groß überlappen, um Redundanz zu vermeiden (jedes Puzzles behandelt eine eigene interessante Idee / Interaktion zwischen den Elementen des Spiels) -> sonst zu viel "Filler"
+	- Auch so bei "Tutorial"-Puzzles: Jedes sollte mindestens eine Mechanik erklären (und nicht zu viele auf einmal)
 - Designentscheidungen sollten davon geleitet sein, welche Variante mehr interessante Interaktionen und Puzzle zulässt
 - Intrinsische vs. extrinsische Motivation:
 	- Spieler will selbst etwas erreichen
@@ -73,6 +74,26 @@ https://youtu.be/nCxU-OBoISk?feature=shared&t=1057
 	- Es ist immer etwas extrinsische Motivation da (weil man z.B. Elemente nicht sofort zugänglich macht oder Spieler diese nicht versteht), aber man kann gestalten wie viel
 	- Intrinsische Motivation kann z.B. durch Story-Bits oder ähnliche Rewards entstehen, die das Spiel nicht explizit trackt oder den Spieler darauf hinweist (das Spiel weiß nicht, dass der Spieler etwas erreicht hat und kann es nicht anpreisen -> er tut es nur des Ergebnisses wegen, aus freien Stücken)
 	- Das Verknüpfen (im Kopf des Spielers) von Gameplay-Elementen und Story zur Interpretation eines größeren Ganzen (welche der Entwickler so geplant hat), kann auch intrinsische Motivation sein -> zweite Ebene. Spielt trackt es nicht und weißt nicht explizit darauf hin -> Kunst
+- Knowledge Gates (Konzept aus The Witness)
+	- Bereiche des Spiels nicht durch Schlüssel, sondern durch Wissen verschließen
+	- Puzzle am Eingang eines Bereichs ist gerade schwer genug, dass es nicht per brute-force oder per Zufall gelöst werden kann, aber wenn der Spieler das notwendige Wissen (z.B. in einem anderen Bereich) erlangt hat, ist es nahezu trivial
+	- Elegantes Konzept, weil es alleine die Mechaniken des Spiels nutzt, um notwendiges Vorwissen für einen Bereich zu testen. Es kann Frustration beim Spieler vorgebeugt werden, indem Bereiche verschlossen bleiben, welche zu schwer sind oder weiteres Wissen erfordern. Sehr natürlich und direkt ("Schlüssel ist im Gehirn des Spielers").
+	- Gegenbeispiel Antichamber: Man findet die farbigen "Waffen" als explizite Schlüssel zu bestimmten Bereichen
+	- Achtung: Puzzle muss als "Gate" eindeutig erkennbar sein. Wenn der Spieler es brute-forcen kann oder es zum Lernen der Mechanik nutzt, wird dies zu Frustration führen.
+		- In The Witness sind bei Knowledge Gates bspw. die Fehler-Indikatoren deaktiviert (normalerweise blinken alle Elemente rot, welche eine Lösung nicht erfüllt)
+- Open-world vs. linear
+	- Linear ist viel einfacher zu designen
+	- Open world ist deutlich angenehmer für den Spieler, da er einzelne Puzzles überspringen kann (und nicht dauerhaft an einem Puzzle hängen bleibt oder gezwungen ist triviale Puzzle unterhalb seines Wissenstands zu machen) und die Reihenfolge bestimmen kann (mehr Interaktion, mehr Möglichkeiten für persönliche Erfahrung)
+	- Weiteres Problem von linearen Spielen: Orthogonale Ideen/Mechaniken müssen in eine (künstliche) lineare Reihenfolge gebracht werden
+	- Unterschiedliche Ansätze möglich
+		- Braid: Level sind je nach Mechanik gruppiert und werden jeweils linear durchlaufen. Gruppen werden nacheinander frei geschaltet. Die schwierigen Puzzle sind jedoch nicht auf dem "kritischen Pfad" und können übersprungen werden (man läuft einfach dran vorbei).
+		- The Witness: Komplett open world, aber mit "Knowledge Gates" (s.o.) vor schwierigeren Bereichen (meist wo mehrere Mechaniken kombiniert werden). Endgame ist mit expliziten Schlüsseln zu öffnen (man muss ans Ende der Bereiche vorher kommen), aber es gibt mehr Schlüssel als Schlösser (es ist also nicht 100% Lösung erforderlich)
+		- Stephen Sausage Roll: Open world, aber mit expliziten Schlüssel-Gates (man muss alle Puzzle eines Bereichs schaffen, um den nächsten freizuschalten)
+- Deduktive vs. Induktive Schlussfolgerung
+	- Deduktiv: Ich weiß, dass X wahr ist, also muss auch Y wahr sein (Detektiv-Spiele)
+	- Induktiv: Ich vermute, dass X wahr ist, also könnte auch Y wahr sein (Exploration der Mechaniken und Regeln)
+	- Spiele wie The Witness, Braid, Corrypt, Stephens Sausage Roll starten "induktiv" (Spieler lernt die Mechaniken über Beispiele und Experimente und zieht daraus Schlussfolgerungen auf die Regeln) und enden mehr "deduktiv" (Spieler hat die Regeln gelernt und wendet sie in immer komplizierteren Umgebungen an).
+	- Antichamber hat bei an manchen Stellen diesen Sprung nicht geschafft und fühlte sich daher "leer" an (kein echtes Verständnis, aber Puzzles trotzdem gelöst)
 ## Jon Blow on Game Networking
 https://nitter.space/Jonathan_Blow/status/1894511416088170716#m
 
@@ -115,3 +136,26 @@ I have surely forgotten a lot of things here. It's a quick tweet. Each of the ab
 Oh, here's one I forgot: Getting UDP messages through peoples' NAT is a whole thing that is very difficult and annoying and may not work at all no matter what you try. There are some other UDP-based protocols that do their best at this if anyone is interested in what it entails. 
 
 Have EXTRA fun if you want two clients to be able to send UDP to *each other* in a modern environment...
+## Games vs Film
+https://youtu.be/lLFCtg4DqrE?feature=shared&t=860
+
+| Plays      | Enhanced by Film                            | Unique to Film                                              |
+| ---------- | ------------------------------------------- | ----------------------------------------------------------- |
+| Characters | Musical accompaniment                       | Montage (how shots are cut together)                        |
+| Dialogue   | Acting                                      | Framing                                                     |
+| Plot       | Lighting                                    | Focus + Exposure                                            |
+| Scenes     | Pacing                                      | Lens Choice                                                 |
+| Costuming  | Staging (how actors move through the scene) | Blocking (moving the camera through the scene as it occurs) |
+| Makeup     |                                             | Sound mixing                                                |
+| Sets       |                                             |                                                             |
+
+| Existing in Film   | Enhanced by Games | Unique to Games                                                                           |
+| ------------------ | ----------------- | ----------------------------------------------------------------------------------------- |
+| Sound mixing       | Characters        | Simulation                                                                                |
+| Blocking           | Dialogue          | Emergent Behavior (get more out than you put in)                                          |
+| Focus and Exposure | Setting           | Dynamism (can be different for different players, or every time you play)                 |
+| Pacing             | Scenes            | Challenge                                                                                 |
+| Plot               |                   | Subjectivity                                                                              |
+| Framing            |                   | Player Expression / Creativity                                                            |
+| Acting             |                   | Affordance (the way the game expresses how you can interact with it)                      |
+| Montage            |                   | Gameplay Arc (the way gameplay changes over the course of a game, difficulty curve, etc.) |

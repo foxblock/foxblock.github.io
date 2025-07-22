@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"About Main Home.md","permalink":"/about-main-home/","title":"janek.ing - Home","hide":true,"tags":["gardenEntry"],"dgShowFileTree":"false","dgShowToc":"false","created":"2025-05-20T17:46:42.371+02:00","updated":"2025-05-28T15:42:11.858+02:00"}
+{"dg-publish":true,"dg-path":"About Main Home.md","permalink":"/about-main-home/","title":"janek.ing - Home","hide":true,"tags":["gardenEntry"],"dgShowFileTree":"false","dgShowToc":"false","created":"2025-06-04T17:07:46.649+02:00","updated":"2025-07-02T23:39:06.666+02:00"}
 ---
 
 # Hi!
@@ -12,4 +12,5 @@ I have been programming for 20 years and building software professionally for cl
 Growing up in the 90s and 2000s, naturally my first "programming" experience was building a website for myself (using plain HTML, CSS and PHP). It showcased photos I took, cool videos I found on the web and "funny" jokes only me and my friends laughed about (and of course it had a forum with 2 active users, including me). It was online for a couple of years until the free webhosting provider went out of business. Nowadays the web is different, but mostly full of ads. Reading about the idea of a ["digital garden"](https://maggieappleton.com/garden-history/) reminded me of the days where the web was mostly about sharing your ideas and experiences. A place of curiosity without the immediate drive to make money off everything.
 
 To participate in this idea, I publish some of my notes in my [[Website/Garden Home\|Digital Garden]]. If you find anything worthwhile or a mistake, consider leaving a comment.
+
 

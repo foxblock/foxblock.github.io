@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/game-programming/","tags":["knowledge-base"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-05-23T15:07:53.252+02:00"}
+{"dg-publish":true,"permalink":"/code/game-programming/","tags":["knowledge-base"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-05-28T16:57:26.066+02:00"}
 ---
 
 ## Lerp Smoothing
@@ -82,7 +82,7 @@ https://youtu.be/drCnFueS4og?feature=shared&t=1740
 	- Understand that performance requirements might evolve as the game design matures.
 	- Start with the simplest implementation. There will be a lot of changes in the beginning, code should be as simple as possible, because it needs to be changed frequently or thrown out. Speed of iteration matters most in the beginning.
 	- For example: for a small game (<1000 entities), just loop over the array for collision checking (O(N^2)). Even 1M checks is easily doable for a modern PC. This method always works, is easy to implement and debug. Optimization can happen later, but will make the code more complex. 
-	- NOTE: This only works for small games or an explicit prototyping phase. On large projects, once the architecture is in place it will be very hard to change and optimize, so you will need to test beforehand and plan ahead. (->[[Code/Architecture#Premature Optimization\|Architecture#Premature Optimization]])
+	- NOTE: This only works for small games or an explicit prototyping phase. On large projects, once the architecture is in place it will be very hard to change and optimize, so you will need to test beforehand and plan ahead. (see [[Code/Architecture#Premature Optimization\|Architecture#Premature Optimization]])
 - For games with complex rules and a lot of dependencies between elements (e.g. Sokoban), a global event queue might be a good approach
 	- Don't apply changes (take health, kill entity, change state, etc.) immediately, instead add these requests to a queue
 	- Can always inspect the queue during a frame to see what is going on
@@ -93,7 +93,7 @@ https://youtu.be/drCnFueS4og?feature=shared&t=1740
 	- TODO: Find more details
 ## Entity systems
 General approaches to a unit/entity system.
-Preferred way for moderately complex games: [[#Preferred Fat/Flat struct (behaviors)]]
+Preferred way for moderately complex games: [[#Fat/Flat struct (behaviors)]]
 For simple games this can also work well (MathTD): [[#Naive fat/flat struct (entity types)]]
 ### OOP
 ``` C++

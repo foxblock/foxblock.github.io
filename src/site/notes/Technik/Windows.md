@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-04-26T13:30:21.494+02:00","updated":"2025-05-24T12:58:41.301+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2025-06-08T12:59:58.023+02:00"}
 ---
 
 ## MD5, SHA berechnen
@@ -90,3 +90,12 @@ Wenn alte, längst deinstallierte Verknüpfungen und Programme in der Startmenü
 1. Indizierungsoptionen aufrufen
 2. Erweitert > Tab "Indexeinstellungen" > Gruppe "Problembehandlung" > Button "Neu erstellen" klicken
 3. Der Suchindex wird damit komplett gelöscht und neu erstellt (dies kann einige Minuten dauern).
+## Herausfinden, welches Programm Löschen oder Schließen verhindert
+
+Ressourcenmonitor > CPU Tab > Zugeordnete Handles nach Datei oder Pfad durchsuchen
+
+![GsjZsFKXEAAw9I1.jpg](/img/user/_attachments/GsjZsFKXEAAw9I1.jpg)
+## Alte Programme finden Schriftarten nicht
+- Schriftarten werden by default unter Windows 10/11 nur für den Benutzer unter `%userprofile%\AppData\Local\Microsoft\Windows\Fonts` installiert
+- Alte Programme listen nur Schriftarten auf, welche unter `C:\Windows\Fonts` installiert sind
+- Lösung: Rechtsklick auf Schriftart -> `Für alle Benutzer installieren`

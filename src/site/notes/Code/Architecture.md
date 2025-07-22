@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-05-26T18:48:58.822+02:00","updated":"2025-05-26T18:48:49.113+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-06-17T19:43:07.688+02:00","updated":"2025-06-16T14:36:10.402+02:00"}
 ---
 
 ## Golden Rules
@@ -8,6 +8,7 @@
 - Follow Standards
 - Know your Tech
 - Refactor with caution
+
 Quelle: https://youtu.be/NiljDyzAOcI?feature=shared&t=773
 
 Eigener Ansatz:
@@ -265,5 +266,83 @@ void read(file* f, char* buf, int n) {
 - bad code can't handle small changes in requirements
 ## Cost of Dependencies
 https://nitter.tiekoetter.com/cmuratori/status/1426299131270615040#m
-
 https://nitter.tiekoetter.com/Jonathan_Blow/status/1923414922484232404#m
+- Every dependency, every tool, every cog in the programming machine that is your codebase has a non-zero percentage chance of breaking after a while (because of external changes, because you triggered a bug, etc.)
+- The reliability of the system is the product of the reliability of each component (since usually your program does not keep working if one component totally breaks)
+- So with 10 components at 99% reliability each (~chance of the component still working after one year), this gives us  only a ~90% chance the system will still work after one year
+	- This becomes only 60% after 5 years
+	- or 36% after one year if 100 different components are involved
+- With npm and ecosystems like that 100 dependencies are quickly pulled in by just a handful of components you include directly
+- 99% reliability is very favorable if anything involving the web is included, since specs, URLs, external systems, frameworks, etc. change and break so quickly and often
+- With such low reliability rates the amount of work spent on debugging and maintenance becomes unreasonable high
+- To avoid this, keep dependencies and your surface to those dependencies to a minimum. 
+- JavaScript frameworks change, but math is forever.
+## TigerStyle
+[tigerbeetle/docs/TIGER_STYLE.md at main · tigerbeetle/tigerbeetle · GitHub](https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md)
+[Tiger Style](https://tigerstyle.dev/)
+https://www.youtube.com/watch?v=w3WYdYyjek4
+Style developed for writing a database for financial transactions (where speed, robustness and correctness are absolutely paramount).
+
+- See the whole picture
+	- Time (total cost of ownership) = Design + Coding + Testing + Incidents
+	- Don't just speed up the coding phase (there is not too much gain in there - maybe more now with AI?)
+	- Design influences all following phases, so there is a lot of gain here
+	- Design is cheap, iterating on design is fast (before coding starts). Rewrites later are expensive
+	- Testing takes a lot of time and increases exponentially for complex systems (need to test all interactions, sometimes bugs are hard to reproduce)
+- Painters vs. Sculptors
+	- Music analogy: Beatles (start with a blank sheet and an idea, slowly add instruments, rythm, etc.) vs. Bob Marley (starts with a wall of sound, takes away pieces and arrives at raggae)
+	- Some programmers are painters (like to do things themselves), some are sculptors (start with libraries)
+	- Only four "colors" are important in programming: Network, Disk, Memory, CPU
+	- Napkin calculations: latency + throughput (applies to all "colors")
+- Define your fault models (consider what can go wrong and what your program should handle or not handle)
+- Stateless is better than stateful (managing state is hard)
+- Reduce surface area (less components, less functionality, less ports, etc.) - less complexity
+- do it right the first time
+	- if you know of a better way to do things while programming, restart and do the better way
+	- it will be more expensive (=time consuming) later on (right now you have all the context you need, later you will have forgotten things)
+	- will you even get a second chance?
+- walk & talk (pick a design problem and walk while brainstorming solutions with other people, helps creativity)
+- the program should run correctly or not run at all
+	- use assertions everywhere, use assertions in production
+		- start of function to check parameters
+		- end of functions to check return values
+		- check runtime of a loop (upper and lower bound)
+		- check cached data against the copy on disk
+		- etc.
+	- asserts document your expectations (code documents the positive space, assertions the negative space i.e. what should not happen)
+	- assertions are to catch programming errors (bugs), not to handle operating errors (these you should catch and handle)
+		- e.g. if a malloc fails on a server, don't crash but refuse new connections
+	- put expected limits on your system (e.g. Tigerbeetle allocates all memory at startup), avoid while(true) loops
+		- this also helps to get an idea of the size and boundaries of your system
+		- keeps the system lean
+	- NASA Power of 10 rule for critical systems
+	- Zig: assert on arithmatic (e.g. integer overflow)
+- build a simulator for your program
+	- simulate everything, including network and disk
+	- able to test much more quickly
+	- reproduce bugs with 100% accuracy
+## Practical DOD
+[Andrew Kelley - Practical DOD auf Vimeo](https://vimeo.com/649009599)
+[CppCon 2014: Mike Acton "Data-Oriented Design and C++"](https://www.youtube.com/watch?v=rX0ItVEVjHc)
+- reading from cache is slower than doing math, reading from RAM is 10x slower, allocating on the heap might be 100x slower still
+	- don't cache values that are very fast to compute (or rarely needed)
+	- avoid memory allocations (esp. on heap) on the hot path (inside of loops)
+- goal: identify where you have many things in memoryy and make the size of each thing smaller
+- struct memory layout
+	- alignment of struct: size of largest primitive member
+	- alignment of each (primitive) member: its own size
+	- will add padding bytes after each member to align them according to rules above
+	- size of struct has to be multiple of alignment of struct (incl. padding)
+- use indexes instead of pointers (indexes can be the size you want, pointers are always 8 bytes on a 64-bit system)
+	- https://floooh.github.io/2018/06/17/handles-vs-pointers.html
+	- you lose some type safety
+- store elements of a struct out-of-band
+	- example: instead of a bool flag, have two separate arrays for each type
+	- can speed up operation as well, since you probably do different things for each type and now you can batch these operations without having to check/switch on each object
+	- better cache behavior as well, since one type of object will not evict the other one while iterating
+	- example: move fields that are rarely populated into a hash map (so they are stored sparsely)
+	- example: use the Fat/Flat struct approach (use one common flags field and have extra data in an external list or map)
+	- take note of your actual use case and its memory usage and chose the layout of data accordingly
+- use SOA instead of AOS
+	- uses no padding
+	- better cache behavior, if only certain fields are needed for computation

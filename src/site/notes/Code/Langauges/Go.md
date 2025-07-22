@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2024-12-20T19:13:29.618+01:00","updated":"2025-05-23T14:58:40.690+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2025-07-09T17:17:03.079+02:00","updated":"2025-07-09T11:22:07.305+02:00"}
 ---
 
 ## Cheatsheet
@@ -262,7 +262,7 @@ In `go.mod`:
 replace domain.ext/path/lib => ../local/path
 ```
 Will load library from local files, instead of external repo/cache. Good for testing changes in library modules.
-## Update modules
+### Update modules
 ```
 go get -u
 go mod tidy
@@ -419,11 +419,15 @@ package main
 import "fmt"
 func main() {
 	fmt.Print("say: ")
-	defer fmt.Println("!")
+	defer func() {
+		fmt.Println("!")
+	}()
 	defer fmt.Print(" world")
 	fmt.Print("hello")
 }
 // say: hello world!
+// defers are executed in LIFO order
+// defers with anonymous functions can access surrounding variables
 // useful for closing files, channels, etc.
 ```
 ## Mutex
