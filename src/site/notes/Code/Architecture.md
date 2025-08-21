@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-06-17T19:43:07.688+02:00","updated":"2025-06-16T14:36:10.402+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-08-05T17:11:36.398+02:00","updated":"2025-08-05T10:02:35.304+02:00"}
 ---
 
 ## Golden Rules
@@ -346,3 +346,19 @@ Style developed for writing a database for financial transactions (where speed, 
 - use SOA instead of AOS
 	- uses no padding
 	- better cache behavior, if only certain fields are needed for computation
+## Encapsulation boundaries
+
+> [!todo] TODO
+> Insert link to casey talk at Better Software Conference 2025
+
+> Compile-time hierarchy of encapsulation that matches the domain model (is a mistake).
+
+Encapsulation boundaries define what data is easy to access and what is hard to access. They make certain code easier or more difficult to write and dictate optimizations.
+One way to slice the architecture is between singular "entities" - either using a class hierarchy or using a [[Code/Game Programming#Fat/Flat struct (behaviors)\|fat struct]]. That way you have all data for one unit in one place, but systems (which only need a particular slice - for example position and velocity data) have to extract information one-by-one. This is usually done by modeling the code according to the "real-world" domain model (classic "OPP" approach).
+You can also draw the boundary between the different systems. Entities are only IDs into data arrays of the different systems (physics, animation, etc.). That way you can better optimize the systems which do the hard work. This is usually called Entity Component System (ECS).
+## Feature Creep
+- Nur Features entwickeln, die man wirklich braucht! Das Kundenproblem und die Domäne verstehen und darauf fokussieren.
+- jedes Feature erhöht Komplexität (in guten Codebases weniger, in schlechten mehr). Jedes Feature ist zusätzliches Rad in der Maschine. Abhängigkeiten erhöhen sich oft multiplikativ mit Anzahl Features.
+- jedes Feature bedeutet Potential für Bugs, Aufwand für Pflege, Aufwand für Dokumentation, etc. - der Zeitaufwand liegt größtenteils nicht in der Entwicklung 
+	- jedes Feature ist damit Entscheidung gegen andere Features ("no is no to one thing, yes is no to a lot of things")
+- MVP Ansatz fahren und dann sukzessive erweitern 

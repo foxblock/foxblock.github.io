@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2025-07-09T17:17:03.079+02:00","updated":"2025-07-09T11:22:07.305+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2025-08-12T19:49:27.936+02:00","updated":"2025-08-12T09:45:41.396+02:00"}
 ---
 
 ## Cheatsheet
@@ -31,7 +31,7 @@ name,ok := any.(string) // type assertion
 ### struct
 ```Go
 type Vertex struct {
-	X, y float64 // X is public, y is private
+	X, y float64 // first char lowercase = private (y)
 }
 p := Vertex{1, 3}
 p == Vertex{1, 3} // true (only shallow check!)
@@ -65,15 +65,19 @@ clear(m2) // Go 1.21, also works on slices
 ```
 ### Loops, switch
 ```Go
-for i := 0; i < len(str); i++ // all optional, for -> while
-for i, value := range array // _,value or just i pssible
+for i := 0; i < len(str); i++
+for true
+for i, v := range array // v and array are copies!
+for _, v := range array
 for i := range 10 // 0..9
-switch os := runtime.GOOS; os { // condition optional
+switch os := runtime.GOOS; os { // assignment optional
 	case "linux":
 		fallthrough // implicit break, explicit fallthrough
 	case getWorstOs(): // not just static values
 	default:
-	case val == test(): // alt. if no condition
+}
+switch { // no condition
+	case val == test():
 }
 switch v := i.(type) { // type switch
 	case int: // v will int value
