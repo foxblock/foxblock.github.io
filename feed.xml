@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-08-13T17:24:19Z</updated>
+    <updated>2025-08-21T09:10:34Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -2845,7 +2845,7 @@ Shift Operatoren konvertieren den Input in 32-bit signed int.&lt;/p&gt;
                 Go
                 
             </title>
-            <updated>2025-07-09T09:22:07.305Z</updated>
+            <updated>2025-08-12T07:45:41.396Z</updated>
             <id>https://janek.ing/code/langauges/go/</id>
             <content type="html">
                 &lt;h2 id=&quot;cheatsheet&quot; tabindex=&quot;-1&quot;&gt;Cheatsheet&lt;/h2&gt;
@@ -2874,7 +2874,7 @@ name,ok := any.(string) // type assertion
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&quot;struct&quot; tabindex=&quot;-1&quot;&gt;struct&lt;/h3&gt;
 &lt;pre&gt;&lt;code class=&quot;language-Go&quot;&gt;type Vertex struct {
-	X, y float64 // X is public, y is private
+	X, y float64 // first char lowercase = private (y)
 }
 p := Vertex{1, 3}
 p == Vertex{1, 3} // true (only shallow check!)
@@ -2905,15 +2905,19 @@ v, ok := m2[&amp;quot;foo&amp;quot;] // v={0,0} (zero value), ok=false
 clear(m2) // Go 1.21, also works on slices
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&quot;loops-switch&quot; tabindex=&quot;-1&quot;&gt;Loops, switch&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-Go&quot;&gt;for i := 0; i &amp;lt; len(str); i++ // all optional, for -&amp;gt; while
-for i, value := range array // _,value or just i pssible
+&lt;pre&gt;&lt;code class=&quot;language-Go&quot;&gt;for i := 0; i &amp;lt; len(str); i++
+for true
+for i, v := range array // v and array are copies!
+for _, v := range array
 for i := range 10 // 0..9
-switch os := runtime.GOOS; os { // condition optional
+switch os := runtime.GOOS; os { // assignment optional
 	case &amp;quot;linux&amp;quot;:
 		fallthrough // implicit break, explicit fallthrough
 	case getWorstOs(): // not just static values
 	default:
-	case val == test(): // alt. if no condition
+}
+switch { // no condition
+	case val == test():
 }
 switch v := i.(type) { // type switch
 	case int: // v will int value
@@ -4819,7 +4823,7 @@ Also needs special attention if negative numbers are involved (additional sort o
                 Architecture
                 
             </title>
-            <updated>2025-06-16T12:36:10.402Z</updated>
+            <updated>2025-08-05T08:02:35.304Z</updated>
             <id>https://janek.ing/code/architecture/</id>
             <content type="html">
                 &lt;h2 id=&quot;golden-rules&quot; tabindex=&quot;-1&quot;&gt;Golden Rules&lt;/h2&gt;
@@ -5249,6 +5253,28 @@ Style developed for writing a database for financial transactions (where speed, 
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;encapsulation-boundaries&quot; tabindex=&quot;-1&quot;&gt;Encapsulation boundaries&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!todo] TODO&lt;br /&gt;
+Insert link to casey talk at Better Software Conference 2025&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Compile-time hierarchy of encapsulation that matches the domain model (is a mistake).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Encapsulation boundaries define what data is easy to access and what is hard to access. They make certain code easier or more difficult to write and dictate optimizations.&lt;br /&gt;
+One way to slice the architecture is between singular &amp;quot;entities&amp;quot; - either using a class hierarchy or using a &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/game-programming/#fat-flat-struct-behaviors&quot;&gt;fat struct&lt;/a&gt;. That way you have all data for one unit in one place, but systems (which only need a particular slice - for example position and velocity data) have to extract information one-by-one. This is usually done by modeling the code according to the &amp;quot;real-world&amp;quot; domain model (classic &amp;quot;OPP&amp;quot; approach).&lt;br /&gt;
+You can also draw the boundary between the different systems. Entities are only IDs into data arrays of the different systems (physics, animation, etc.). That way you can better optimize the systems which do the hard work. This is usually called Entity Component System (ECS).&lt;/p&gt;
+&lt;h2 id=&quot;feature-creep&quot; tabindex=&quot;-1&quot;&gt;Feature Creep&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Nur Features entwickeln, die man wirklich braucht! Das Kundenproblem und die Domäne verstehen und darauf fokussieren.&lt;/li&gt;
+&lt;li&gt;jedes Feature erhöht Komplexität (in guten Codebases weniger, in schlechten mehr). Jedes Feature ist zusätzliches Rad in der Maschine. Abhängigkeiten erhöhen sich oft multiplikativ mit Anzahl Features.&lt;/li&gt;
+&lt;li&gt;jedes Feature bedeutet Potential für Bugs, Aufwand für Pflege, Aufwand für Dokumentation, etc. - der Zeitaufwand liegt größtenteils nicht in der Entwicklung
+&lt;ul&gt;
+&lt;li&gt;jedes Feature ist damit Entscheidung gegen andere Features (&amp;quot;no is no to one thing, yes is no to a lot of things&amp;quot;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;MVP Ansatz fahren und dann sukzessive erweitern&lt;/li&gt;
+&lt;/ul&gt;
 
             </content>
             <link href="https://janek.ing/code/architecture/" >
@@ -5259,7 +5285,7 @@ Style developed for writing a database for financial transactions (where speed, 
                 
             </title>
             <updated>2025-05-25T19:25:54.213Z</updated>
-            <id>https://janek.ing/arbeit/agile/</id>
+            <id>https://janek.ing/work/agile/</id>
             <content type="html">
                 &lt;h2 id=&quot;eigene-erfahrung&quot; tabindex=&quot;-1&quot;&gt;Eigene Erfahrung&lt;/h2&gt;
 &lt;ul&gt;
@@ -5324,6 +5350,6 @@ Style developed for writing a database for financial transactions (where speed, 
 &lt;a href=&quot;https://www.youtube.com/watch?v=Q25lwSfVwF8&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=Q25lwSfVwF8&lt;/a&gt;&lt;/p&gt;
 
             </content>
-            <link href="https://janek.ing/arbeit/agile/" >
+            <link href="https://janek.ing/work/agile/" >
         </entry>
 </feed>
