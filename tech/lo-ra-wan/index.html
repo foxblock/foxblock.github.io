@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Cryptography, RSA, SSL</title>
+<title>LoRaWAN</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -205,7 +205,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
@@ -225,7 +225,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
@@ -286,147 +286,157 @@ CTRL + K
 <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-08-23T11:57:20.313Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-08-23T11:57:20.313Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-08-23T11:57:20.313Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
-<h1 data-note-icon="">Cryptography, RSA, SSL</h1>
+<h1 data-note-icon="">LoRaWAN</h1>
 <div class="header-meta">
 <div class="header-tags">
 <a class="tag" onclick="toggleTagSearch(this)">
-#knowledge-base
+#experience
 </a>
 <a class="tag" onclick="toggleTagSearch(this)">
-#german
+#knowledge-base
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2024-12-06T15:30:53.740+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-24T12:53:57.515+02:00"></span></div></div></div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-08-22T22:09:49.885+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-08-22T15:16:49.734+02:00"></span></div></div></div>
 </header>
-<h2 id="allgemeines" tabindex="-1">Allgemeines</h2>
+<h2 id="sf-12-the-sweet-poison" tabindex="-1">SF12 the sweet poison</h2>
 <ul>
-<li>Ein Zertifikat enthält den Public Key (und weitere Textinformationen über die Webseite, Ablaufdatum, etc.) und wurde mithilfe des Private Keys erstellt</li>
-<li>Trapdoor-Funktion: Mathematisch sehr &quot;einfach&quot; in eine Richtung zu lösen, aber nahezu unmöglich umzukehren</li>
-<li>Encryption: Nutzt den public key des Empfängers um Nachricht zu verschlüsseln</li>
-<li>Decryption: Empfänger nutzt seinen Private Key, um Nachricht zu entschlüsseln. Nur Empfänger hat Private Key und Inhalt der Nachricht ist so sicher.</li>
-<li>Sign: Nutzt eigenen Private Key, um Nachricht (bzw. Hash der Nachricht wegen Längenbeschränkungen) zu verschlüsseln</li>
-<li>Verify: Nutzt Public Key des Senders, um Nachricht=Hash zu entschlüsseln und vergleicht mit Hash der Nachricht. Jeder hat Zugang zum Public Key und kann so die Echtheit der Nachricht verifizieren.</li>
-<li>RSA / DSA / EC (Elliptic Curve): unterschiedliche Methoden zur Generierung der Schlüssel</li>
-<li>PKCS#8: Aktuelles Format für Private-Keys (in PEM erkennbar am Header <code>BEGIN PRIVATE KEY</code>)</li>
-<li>PKCS#1: Veraltetes Format für Keys (in PEM erkennbar am Header <code>BEGIN RSA PRIVATE KEY</code>)</li>
-<li>Das Zertifikat einer RootCA reicht aus, um allen untergeordneten Zertifikaten von dieser RootCA zu vertrauen (so validiert der Browser bspw. auch LetsEncrypt Zertifikate - er kann nicht die Zertifikate aller Webseiten kennen)<br>
-Mehr Info zu PKCS: <a href="https://crypto.stackexchange.com/a/103585" target="_blank" class="external-link">https://crypto.stackexchange.com/a/103585</a></li>
-</ul>
-<h2 id="dateitypen" tabindex="-1">Dateitypen</h2>
+<li>should not use SF11 or SF12 usually</li>
+<li>SF9 with nbTrans = 3 can yield better results
 <ul>
-<li><code>.pem</code> - Format für Keys / Zertifikate / CSR, Base64-kodiert. Standardformat von OpenSSL.</li>
-<li><code>.der</code> - binär-kodiertes Äquivalent zu .pem</li>
-<li><code>.key</code> - Meistens der Private-Key, kann auch der Public-Key sein. Meist im PEM-Format.</li>
-<li><code>.ppk</code> - Putty Private Key. Dateiformat, welches von Putty erzeugt wird.</li>
-<li><code>.pub</code> - Nicht standardisiert, wird oft für Public Keys verwendet. Meist PEM-Format.</li>
-<li><code>.csr</code> - Certificate Signing Request. Enthält Public Key und Name der Certificate Authority (CA). Wird mit Private Key erstellt und genutzt, um Zertifikat auszustellen.</li>
-<li><code>.crt</code> - Zertifikat, meistens X509, kann PEM- oder DER-kodiert sein.<br>
-Mehr Infos: <a href="https://crypto.stackexchange.com/a/43700" target="_blank" class="external-link">https://crypto.stackexchange.com/a/43700</a><br>
-Weitere Formate (wie PKCS#7): <a href="https://comodosslstore.com/resources/a-ssl-certificate-file-extension-explanation-pem-pkcs7-der-and-pkcs12/" target="_blank" class="external-link">A SSL Certificate File Extension Explanation: PEM, PKCS7, DER, and PKCS#12 - Comodo SSL Resources</a></li>
+<li>3 total transmissions of the same packet, server will do de-duplication</li>
+<li>similar energy usage as one SF11 message</li>
+<li>similar time on air as one SF11 message</li>
 </ul>
-<p>PEM:</p>
-<pre><code>-----BEGIN ENCRYPTED PRIVATE KEY-----
-...
------END ENCRYPTED PRIVATE KEY-----
------BEGIN PRIVATE KEY-----
-...
------END PRIVATE KEY-----
------BEGIN CERTIFICATE-----
-...
------END CERTIFICATE-----
------BEGIN CERTIFICATE REQUEST-----
-...
------END CERTIFICATE REQUEST-----
-etc.
+</li>
+<li>SF12 is on the air for much longer (depending on data, 1s or longer), so much higher chance for collisions or interferance</li>
+<li>higher SF gives you more range and penetration in theory. In practice it's usually not the range that kills you but external disruptions</li>
+<li>in my testing, we reduced loss from 10% to &lt;2% by switching from SF10+ to SF7..9 with nbTrans=3
+<ul>
+<li>use case was parking sensors within 1km of the next gateway</li>
+</ul>
+</li>
+<li>you would be surprised how far you can get with SF7</li>
+</ul>
+<p>Talk from Semtech about nbTrans: <a href="https://www.youtube.com/watch?v=VmYuItA6q4I&amp;list=RDCMUCv85CXnZUXEKnlZpQapTAwQ&amp;start_radio=1&amp;t=450s" target="_blank" class="external-link">LoRaWAN and the IoT - Olivier Seller (Semtech)</a> (7:20 to 22:00)</p>
+<h2 id="adr" tabindex="-1">ADR</h2>
+<ul>
+<li>leave ADR on device side (never fix datarate/SF on the device)</li>
+<li>modern network servers will let you adjust SF for individual devices over the network, so configuration becomes much easier (not via device driver downlinks but standard LoRa <em>LinkADRReq</em> packages, so compatible with all devices)</li>
+</ul>
+<h2 id="confirmed-uplinks" tabindex="-1">Confirmed uplinks</h2>
+<ul>
+<li>don't use these, unless you really have to and understand the implications</li>
+<li>they use a downlink</li>
+<li>lora gateways are only half-duplex, so they cannot receive while transmitting and vice versa</li>
+<li>professional gateways have 16 uplink channels (consumer grade hardware: 8 or less), but only 1 channel for downlinks</li>
+<li>that means the downlink for a confirmed uplink blocks the whole gateway for a period of time, essentially slashing the throughput by up to 1/16x
+<ul>
+<li>though the downlink blocks only one gateway, while any uplink might block one channel of any gateway in range</li>
+</ul>
+</li>
+<li>also in my testing confirmed uplinks may be lost still, so you cannot even rely on this for 100% coverage</li>
+<li>it's a better idea to use nbTrans, if you just want to get as many messages as possible (see <a class="internal-link" target="" data-note-icon="" href="#sf-12-the-sweet-poison">#SF12 the sweet poison</a>)</li>
+<li>can use confirmed uplinks to test network access, record (approx) time of dropped connection (to retransmit dater later), and start join process again
+<ul>
+<li>transmit every 10th or 20th uplink as confirmed (ideally make this a setting based on count OR time)</li>
+<li>can also use <em>LinkCheckReq</em> network messages for this purpose</li>
+</ul>
+</li>
+</ul>
+<p>Meta study about confirmed traffic: <a href="https://ieeexplore.ieee.org/document/8952708" target="_blank" class="external-link">A Survey on the Viability of Confirmed Traffic in a LoRaWAN | IEEE Journals &amp; Magazine | IEEE Xplore</a></p>
+<h2 id="devices-sensors" tabindex="-1">Devices / Sensors</h2>
+<ul>
+<li>choose devices which let you configure everything via downlinks. It will make your life much easier, because you can configure them remotely. Getting every parameter right a-priori is hard. You will learn a lot while doing a use-case and will want to adjust.</li>
+<li>Chose a manufacturer that supplies their full payload description and ideally TTN driver. Look at the documentation carefully. Often it is not complete
+<ul>
+<li>avoid companies that make you pay for this</li>
+<li>Sensoterra is really bad (uplinks are encrypted forcing you to use their cloud services)</li>
+</ul>
+</li>
+<li>Having a way to locally configure the sensor is a big plus. Speeds up rollouts and early iterations (since you do not have to wait for the downlink response and downlinks might get lost). I like the NFC-based approaches (see Milesight and Elsys devices). USB is fine too, but usually more cumbersome.</li>
+<li>I can generally recommend devices by Milesight and Abeeway</li>
+<li>did not have good luck with RAK devices (hardware was unreliable)</li>
+</ul>
+<h2 id="drivers-firmware" tabindex="-1">Drivers / Firmware</h2>
+<ul>
+<li>my plea to vendors: for the love of god, just write simple driver code</li>
+<li>switch on type bytes and convert the data (Milesight drivers are a good reference here)</li>
+<li>don't do overly complicated map reduce shit, it will bite you in the ass later and make the driver much less readable, more complicated and way slower than it needs to</li>
+<li>don't convert anything to a hex string, just work with the raw bytes</li>
+<li>don't use .slice, just index into the byte array</li>
+<li>yes, JavaScript handles numbers in a weird way, but the rules are consistent. Just learn them.<br>
+Seriously, don't do this (actual code from an actual &quot;production-ready&quot; driver):</li>
+</ul>
+<pre><code class="language-JavaScript">    var i = bytesToInt(byte);
+    var bm = ('00000000' + Number(i).toString(2)).substr(-8).split('').map(Number).map(Boolean);
+    return ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+        .reduce(function (obj, pos, index) {
+            obj[pos] = bm[index];
+            return obj;
+        }, {});
 </code></pre>
-<p>PPK:</p>
-<pre><code>TODO
+<p>Just do this:</p>
+<pre><code class="language-JavaScript">    return {
+        &quot;a&quot;: (byte &amp; 0x80) &gt; 0,
+        &quot;b&quot;: (byte &amp; 0x40) &gt; 0,
+        &quot;c&quot;: (byte &amp; 0x20) &gt; 0,
+        &quot;d&quot;: (byte &amp; 0x10) &gt; 0,
+        &quot;e&quot;: (byte &amp; 0x08) &gt; 0,
+        &quot;f&quot;: (byte &amp; 0x04) &gt; 0,
+        &quot;g&quot;: (byte &amp; 0x02) &gt; 0,
+        &quot;h&quot;: (byte &amp; 0x01) &gt; 0,
+    };
 </code></pre>
-<p>DSR:</p>
-<pre><code>&lt;just a bunch of binary data&gt;
+<ul>
+<li>add a downlink that makes the device send its config in an uplink
+<ul>
+<li>if your LNS or application server does not track the current config, it is helpful to quickly get the state of a sensor</li>
+</ul>
+</li>
+<li>make everything configurable via downlink
+<ul>
+<li>no need for SF settings though, Lora can handle that by default (<a class="internal-link" target="" data-note-icon="" href="#adr">#ADR</a>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="installing-the-things-stack-on-an-raspberry-pi-in-2025" tabindex="-1">Installing The Things Stack on an RaspberryPi in 2025</h2>
+<p>Follow this guide:<br>
+<a href="https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network" target="_blank" class="external-link">https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network</a><br>
+I also used a RaspberryPi 4 with 8GB of RAM (though looking at <code>top</code> 4GB are more than enough for a small/test setup)</p>
+<p>We install the open-source version of TTS and skip all steps that say so (which it usually says after the step, so beware!).</p>
+<p>NOTE: Make the following changes (roughly in order as they appear in the guide)</p>
+<p>To add the docker apt repository run this instead (backslash removed):</p>
+<pre><code>echo \ &quot;deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
 </code></pre>
-<h2 id="one-way-tls-auth" tabindex="-1">One-way TLS auth</h2>
-<p><picture src="/img/user/_attachments/I0612.jpg" alt="I0612.jpg"><source media="(max-width:480px)" srcset="/img/optimized/eO-EBR041t-500.webp" type="image/webp">
-<source media="(max-width:480px)" srcset="/img/optimized/eO-EBR041t-500.jpeg">
-<source media="(max-width:1920px)" srcset="/img/optimized/eO-EBR041t-600.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/eO-EBR041t-600.jpeg"><img class="" src="/img/user/_attachments/I0612.jpg" alt="I0612.jpg" width=""></picture></p>
-<h2 id="two-way-tls-auth" tabindex="-1">Two-way TLS auth</h2>
-<p><picture src="/img/user/_attachments/SGyYa.png" alt="SGyYa.png"><source media="(max-width:480px)" srcset="/img/optimized/Halx5pmqG3-500.webp" type="image/webp">
-<source media="(max-width:480px)" srcset="/img/optimized/Halx5pmqG3-500.jpeg">
-<source media="(max-width:1920px)" srcset="/img/optimized/Halx5pmqG3-624.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/Halx5pmqG3-624.jpeg"><img class="" src="/img/user/_attachments/SGyYa.png" alt="SGyYa.png" width=""></picture></p>
-<h2 id="open-ssl-befehle" tabindex="-1">OpenSSL Befehle</h2>
-<p>OpenSSL kommt mit GitForWindows: <code>C:\Program Files\Git\usr\bin\openssl.exe</code><br>
-Getestet mit Version: <code>OpenSSL 3.2.3 3 Sep 2024 (Library: OpenSSL 3.2.3 3 Sep 2024)</code></p>
-<h3 id="key-pair-erzeugen-pem" tabindex="-1">Key-Pair erzeugen (PEM)</h3>
-<pre><code class="language-bash"># Will promt for password
-# Can also supply pw: -pass pass:very4secure%pass
-# -des3 instead of -aes-128-cbc is also okay
-openssl genpkey -algorithm RSA -out private.key -outpubkey public.pub -aes-128-cbc
-# Privte-Key ohne Verschlüsselung
-openssl genpkey -algorithm RSA -out private.key
-# Public-Key aus Private-Key erzeugen
-openssl rsa -in private.key -pubout &gt; public.pub
+<p>From the &quot;Next we'll install The Things Stack:&quot; chapter onwards they put multiple commands on one line separated by $ (likely just a HTML/layout error).<br>
+These will not work when just copy and pasted.<br>
+You will have to copy the commands one-by-one and run them individually (without the $).</p>
+<p>The URL to the docker-compose.yml has moved to:<br>
+<a href="https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml" target="_blank" class="external-link">https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml</a></p>
+<p>You do not need to change the docker-compose.yml. It seems to work fine with the default values (version 3.7, postgreSQL latest, etc.) as of 07/25.</p>
+<p>Don't forget to run <code>docker-compose pull</code> at the end of the install chapter (it is not marked as a command).</p>
+<p>Use the IP as HOSTNAME, &quot;thingsstack.local&quot; did not work and would result in OAuth errors after trying to log in (though you can still use it to open the webpage as a user).</p>
+<p>To use the stack.env file in docker compose, add <code>env_file: stack.env</code> to the stack block in docker-compose.yml<br>
+see <a href="https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute" target="_blank" class="external-link">https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute</a> for more info</p>
+<p>Skip the packet broker steps.</p>
+<p>Use <code>migrate</code> instead of <code>init</code> when initializing the database.</p>
+<p>For most of the commands in the &quot;initialize&quot; chapter, you will need to remove the backslashes \ from the commands.<br>
+They are to escape line breaks, but the commands render without line breaks, probably because someone fucked up the rendering of the page.</p>
+<pre><code>docker-compose run --rm stack is-db create-admin-user --id admin --email your@email.com
+docker-compose run --rm stack is-db create-oauth-client --id cli --name &quot;Command Line Interface&quot; --owner admin --no-secret --redirect-uri &quot;local-callback&quot; --redirect-uri &quot;code&quot;
+docker-compose run --rm stack is-db create-oauth-client --id console --name &quot;Console&quot; --owner admin --secret &quot;${CONSOLE_SECRET}&quot; --redirect-uri &quot;/console/oauth/callback&quot; --logout-redirect-uri &quot;/console&quot;
 </code></pre>
-<p>Unter Windows: private.key ist ggf. UTF-16 und muss noch zu UTF-8 konvertiert werden <a href="https://superuser.com/a/1778270" target="_blank" class="external-link">https://superuser.com/a/1778270</a> (PowerShell 5.1 utf-8 ist mit BOM, aber das funktioniert mit mbedtls trotzdem)</p>
-<pre><code class="language-bash">$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+<p>When creating the admin user, it seems like the password has to be entered rather quickly. Else you get a &quot;context deadline exceeded&quot; error and need to try again.</p>
+<p>To enable automatic startup of the stack at boot:</p>
+<pre><code>sudo systemctl enable docker
 </code></pre>
-<p>Alternativ zu <code>genpkey</code> kann auch <code>genrsa</code> genutzt werden:<br>
-<a href="https://stackoverflow.com/questions/65449771/difference-between-openssl-genrsa-and-openssl-genpkey-algorithm-rsa" target="_blank" class="external-link">ssl - Difference between <code>openssl genrsa</code> and <code>openssl genpkey -algorithm rsa</code>? - Stack Overflow</a><br>
-<a href="https://stackoverflow.com/questions/25459512/what-is-diffrent-between-rsa-and-rsa-des3" target="_blank" class="external-link">https://stackoverflow.com/questions/25459512/what-is-diffrent-between-rsa-and-rsa-des3</a></p>
-<h3 id="self-signed-root-ca-zertifikat-erzeugen" tabindex="-1">Self-Signed RootCA-Zertifikat erzeugen</h3>
-<p>Voraussetzung: Private Key</p>
-<pre><code class="language-bash"># CSR erzeugen. Man wird nach Infos zur CA gefragt
-# Challenge Passwort kann leer gelassen werden
-openssl req -new -key private.key -out csr.pem
-# X509v3 RootCA erzeugen
-# Gültigkeitsdauer wie gewünscht anpassen
-openssl req -x509 -days 365 -key private.key -in csr.pem -out root.crt
-# Ohne CSR
-openssl req -new -x509 -days 365 -key rootCA.key -out rootCA.crt
-</code></pre>
-<p>Man kann den Schritt mit dem CSR überspringen und den <code>-in</code> Parameter beim Erstellen des Zertifikats weglässt. Man muss dann in diesem Schritt die Infos eingeben.<br>
-Der CSR ist nützlich, wenn man ein Zertifikat erneuern möchte, ohne nochmal die ganzen Infos (Land, E-Mail, etc.) einzugeben. Wenn man das RootCA-Zertifikat nie erneuern möchte (lange Gültigkeitsdauer), kann man sich den CSR sparen.</p>
-<p>Infos zu &quot;Challenge Password&quot;: <a href="https://security.stackexchange.com/questions/77028/whats-the-use-of-challenge-password-in-build-key-server-and-build-key-from-easy/77082#77082" target="_blank" class="external-link">openssl - What's the use of challenge password in build-key-server and build-key from Easy-RSA? - Information Security Stack Exchange</a></p>
-<h3 id="self-signed-untergeordnetes-zertifikat-erzeugen" tabindex="-1">Self-Signed (untergeordnetes) Zertifikat erzeugen</h3>
-<p>Voraussetzungen: Private Key (idealerweise 2: für RootCA und neues Zertifikat) und RootCA-Zertifikat</p>
-<p>Konfigurationsdatei <code>subordinate.cnf</code> erstellen:</p>
-<pre><code class="language-ini">[ v3_ca ]
-basicConstraints = CA:FALSE
-authorityKeyIdentifier=keyid,issuer
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
-subjectAltName = @alt_names
-
-[ alt_names ]
-DNS.1 = yourdomain.com
-DNS.2 = www.yourdomain.com
-DNS.3 = 192.168.1.114
-</code></pre>
-<p><code>subjectAltName</code> und der <code>alt_names</code> Block sind optional.</p>
-<pre><code class="language-bash"># CSR
-openssl req -new -key subordinate.key -out subordinate.csr
-# Zertifikat mit Config
-# Gültigkeitsdauer wie gewünscht anpassen
-openssl x509 -req -days 3650 -in subordinate.csr -CA root.crt -CAkey root.key -CAcreateserial -out subordinate.crt -extfile subordinate.cnf -extensions v3_ca
-</code></pre>
-<p>Wenn man die Konfigurationsdatei nicht verwendet (und <code>-extensions</code> sowie <code>-extfile</code> weglässt), wird ein X509v1 Zertifikat erstellt. Dies ist ein veralteter Standard und kann Probleme mit neuen Rust-Libraries (siehe Links unten), sowie der Erkennung in Chrome machen.<br>
-Ggf. werden aber X509v3 Zertifikate aber von manchen MQTT-Brokern nicht erkannt (Aussage aus github Thread zu Rust-Thematik).</p>
-<p><strong>Mehr Info:</strong><br>
-<a href="https://stackoverflow.com/questions/18233835/creating-an-x509-v3-user-certificate-by-signing-csr" target="_blank" class="external-link">openssl - Creating an x509 v3 user certificate by signing CSR - Stack Overflow</a><br>
-<a href="https://docs.openssl.org/master/man5/x509v3_config/" target="_blank" class="external-link">x509v3_config - OpenSSL Documentation</a><br>
-Rust unterstützt nur noch v3: <a href="https://github.com/rustls/rustls/issues/1298" target="_blank" class="external-link">https://github.com/rustls/rustls/issues/1298</a><br>
-Erklärung der <code>keyUsage</code> Parameter in der Config: <a href="https://superuser.com/a/1248085" target="_blank" class="external-link">https://superuser.com/a/1248085</a></p>
-<h3 id="pkcs-1-in-pkcs-8-umwandeln" tabindex="-1">PKCS#1 in PKCS#8 umwandeln</h3>
-<pre><code class="language-bash">openssl rsa -in ~/.ssh/id_rsa -outform pem &gt; id_rsa.pem
-</code></pre>
-<p>Input: -----BEGIN RSA PRIVATE KEY----- (oder public)<br>
-Output: -----BEGIN PRIVATE KEY-----</p>
-<h2 id="links" tabindex="-1">Links</h2>
-<p>Erklärung zu RSA<br>
-<a href="https://security.stackexchange.com/questions/68822/trying-to-understand-rsa-and-its-terminology/68836#answer-68836" target="_blank" class="external-link">https://security.stackexchange.com/questions/68822/trying-to-understand-rsa-and-its-terminology/68836#answer-68836</a><br>
-<a href="https://security.stackexchange.com/questions/9260/sha-rsa-and-the-relation-between-them#answer-9265" target="_blank" class="external-link">https://security.stackexchange.com/questions/9260/sha-rsa-and-the-relation-between-them#answer-9265</a><br>
-OpenSSL Dokumentation<br>
-<a href="https://docs.openssl.org/3.3/man1/openssl-genpkey/" target="_blank" class="external-link">openssl-genpkey - OpenSSL Documentation</a><br>
-Noch mehr Befehle, Beispiele und Erklärungen<br>
-<a href="https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs" target="_blank" class="external-link">https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs</a></p>
+<p>The services in the docker compose file are set to <code>restart: unless-stopped</code>, so they will automatically boot-up when not manually shut down. i.e. if you just disconnected the power, they will boot up again. If you shut them down properly (<code>docker compose down -d stack</code>), they will not come back.<br>
+Change the setting to <code>restart: always</code>, if you want them to always come back.</p>
+<p>Use <code>docker compose up -d stack</code> instead of &quot;docker-compose up -d stack&quot;. The latter only worked like 3 times then spat out weird errors about &quot;ContainerConfig&quot;.<br>
+see: <a href="https://askubuntu.com/questions/1508129/docker-compose-giving-containerconfig-errors-after-update-today" target="_blank" class="external-link">https://askubuntu.com/questions/1508129/docker-compose-giving-containerconfig-errors-after-update-today</a><br>
+(have not tried to use it before this, but might be worth a try if previous docker-compose commands throw errors as well).</p>
+<p>I have skipped the CLI setup at the end for now.</p>
+<p>see <a href="https://www.thethingsindustries.com/docs/hardware/gateways/concepts/adding-gateways/" target="_blank" class="external-link">Adding Gateways | The Things Stack for LoRaWAN</a> and <a href="https://www.thethingsindustries.com/docs/hardware/gateways/concepts/lora-basics-station/" target="_blank" class="external-link">LoRa Basics™ Station | The Things Stack for LoRaWAN</a> for adding Gateways.</p>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
 <aside>
@@ -441,27 +451,17 @@ On this page
 <div class="toc-container">
 <nav class="toc">
 <ol>
-<li><a href="#allgemeines">Allgemeines</a>
+<li><a href="#sf-12-the-sweet-poison">SF12 the sweet poison</a>
 </li>
-<li><a href="#dateitypen">Dateitypen</a>
+<li><a href="#adr">ADR</a>
 </li>
-<li><a href="#one-way-tls-auth">One-way TLS auth</a>
+<li><a href="#confirmed-uplinks">Confirmed uplinks</a>
 </li>
-<li><a href="#two-way-tls-auth">Two-way TLS auth</a>
+<li><a href="#devices-sensors">Devices / Sensors</a>
 </li>
-<li><a href="#open-ssl-befehle">OpenSSL Befehle</a>
-<ol>
-<li><a href="#key-pair-erzeugen-pem">Key-Pair erzeugen (PEM)</a>
+<li><a href="#drivers-firmware">Drivers / Firmware</a>
 </li>
-<li><a href="#self-signed-root-ca-zertifikat-erzeugen">Self-Signed RootCA-Zertifikat erzeugen</a>
-</li>
-<li><a href="#self-signed-untergeordnetes-zertifikat-erzeugen">Self-Signed (untergeordnetes) Zertifikat erzeugen</a>
-</li>
-<li><a href="#pkcs-1-in-pkcs-8-umwandeln">PKCS#1 in PKCS#8 umwandeln</a>
-</li>
-</ol>
-</li>
-<li><a href="#links">Links</a>
+<li><a href="#installing-the-things-stack-on-an-raspberry-pi-in-2025">Installing The Things Stack on an RaspberryPi in 2025</a>
 </li>
 </ol>
 </nav>
