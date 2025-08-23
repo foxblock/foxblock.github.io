@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Work/Agile.md","permalink":"/work/agile/","tags":["experience","opinion","german"],"created":"2024-01-18T20:16:28.049+01:00","updated":"2025-05-25T21:25:54.213+02:00"}
+{"dg-publish":true,"permalink":"/arbeit/agile/","tags":["experience","opinion","german"],"created":"2024-01-18T20:16:28.049+01:00","updated":"2025-05-25T21:25:54.213+02:00"}
 ---
 
 ## Eigene Erfahrung

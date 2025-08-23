@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/testing/","tags":["experience","opinion","german"],"created":"2024-08-16T15:14:54.945+02:00","updated":"2025-05-26T19:30:38.114+02:00"}
+{"dg-publish":true,"permalink":"/code/testing/","tags":["experience","opinion","german"],"created":"2024-08-16T15:14:54.945+02:00","updated":"2025-08-22T13:35:41.649+02:00"}
 ---
 
 https://youtu.be/IqHaGd9J42s?feature=shared&t=1511

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-02-06T19:54:05.243+01:00","updated":"2025-05-24T13:06:16.203+02:00"}
+{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-08-22T22:09:49.908+02:00","updated":"2025-08-22T14:28:24.644+02:00"}
 ---
 
 ## Hash Tables
@@ -36,7 +36,7 @@ https://www.rfleury.com/p/in-defense-of-linked-lists
 Vergleich mit Animation: [Sorting Algorithms Animations | Toptal®](https://www.toptal.com/developers/sorting-algorithms)
 ### Insertion Sort
 Einer der besten Algorithmen, wenn Liste bereits fast sortiert ist. Ebenfalls gut, wenn Datenmenge klein ist. Wird daher oft in anderen Algorithmen verwendet, wenn Liste in kleinere Stücke geteilt wurde.
-Nicht gut geeignet wenn Liste invertiert ist.
+Sehr langsam wenn Liste invertiert ist.
 ```
 i ← 1
 while i < length(A)
@@ -117,3 +117,22 @@ Also needs special attention if negative numbers are involved (additional sort o
 Great set of posts: 
 [data structures - Efficient (and well explained) implementation of a Quadtree for 2D collision detection - Stack Overflow](https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det)
 [performance - What is a coarse and fine grid search? - Stack Overflow](https://stackoverflow.com/questions/59795569/what-is-a-coarse-and-fine-grid-search)
+## Multi-stage Tables
+[Two-stage tables for storing Unicode character properties - strchr.com](https://www.strchr.com/multi-stage_tables)
+![Pasted image 20250822142419.png](/img/user/_attachments/Pasted%20image%2020250822142419.png)
+- A form of compression
+- Take an array of data and split it into blocks/chunks of equal size (e.g. 256 bytes)
+- Now go through the blocks and every time you encounter a new unique byte sequence, add it to a list (the second stage table) and keep a reference to it in an array (the first stage table)
+- When looking for a specific byte, go to its position in the stage 1 table (which is the byte offset divided by the block size truncated down), follow the reference and then go to the byte offset in that block
+```C
+unsigned get_property(unsigned ch)
+{
+    const unsigned BLOCK_SIZE = 256;
+    unsigned block_offset = stage1[ch / BLOCK_SIZE] * BLOCK_SIZE;
+    return stage2[block_offset + ch % BLOCK_SIZE];
+}
+```
+- This essentially compresses the array down to the sum of all unique blocks plus overhead for the stage 1 table (which is number of blocks times sizeof reference type)
+	- The less unique byte sequences there are, the higher the compression ratio
+	- It's ideal for data with a lot of empty space or repeating patterns (in this example a lookup table for unicode character properties)
+- Somewhat similar to [Dictionary coder - Wikipedia](https://en.wikipedia.org/wiki/Dictionary_coder) used in LZMA (zip)

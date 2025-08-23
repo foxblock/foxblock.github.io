@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-03-26T17:03:09.291+01:00","updated":"2025-05-28T14:02:35.399+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-03-26T17:03:09.291+01:00","updated":"2025-08-22T22:30:32.343+02:00"}
 ---
 
 ## strncpy, strncat
@@ -370,3 +370,5 @@ Use the following to get insights into the build process of your C/C++ app. Find
     2. Build your C++ project from anywhere, even from within Visual Studio (_vcperf_ collects events system-wide).
     3. Run the following command: `vcperf /stop MySessionName outputFile.etl`. This command will stop the trace, analyze all events, and save everything in the _outputFile.etl_ trace file.
 8. Open the trace you just collected in WPA.
+## Clockwise Spiral Rule
+How to read complex type declarations: https://c-faq.com/decl/spiral.anderson.html
