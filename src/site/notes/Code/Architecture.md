@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-08-05T17:11:36.398+02:00","updated":"2025-08-05T10:02:35.304+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-09-11T18:23:36.950+02:00","updated":"2025-09-11T15:43:31.347+02:00"}
 ---
 
 ## Golden Rules
@@ -362,3 +362,21 @@ You can also draw the boundary between the different systems. Entities are only 
 - jedes Feature bedeutet Potential für Bugs, Aufwand für Pflege, Aufwand für Dokumentation, etc. - der Zeitaufwand liegt größtenteils nicht in der Entwicklung 
 	- jedes Feature ist damit Entscheidung gegen andere Features ("no is no to one thing, yes is no to a lot of things")
 - MVP Ansatz fahren und dann sukzessive erweitern 
+## Managing Coupling
+[bitsquid: development blog: Managing Coupling](https://bitsquid.blogspot.com/2011/01/managing-coupling.html)
+[bitsquid: development blog: Managing Coupling Part 2 — Polling, Callbacks and Events](https://bitsquid.blogspot.com/2011/02/managing-decoupling-part-2-polling.html)
+- Ideally every system/package should be completely isolated
+- Transfer of state and interaction between systems usually is necessary for more complex and interesting behavior
+- Too much coupling leads to changes being more work to implement than necessary. It reduces developer efficiency and might even keep you from doing changes at all!
+- Good test: If you want/need to test a new system in isolation (instead of integrated into your environment), this might be an indicator that there is too much coupling
+- Approaches for keeping coupling low:
+	1. Be wary of "frameworks", which introduce one mode of thinking to your whole codebase (e.g. serialization, RTTI, root classes, etc.). They force certain design decisions and impact all future code. Often these frameworks are introduced early in development, where not all future constraints and challenges are known (which might need different solutions).
+	2. Don't couple low level systems directly, instead use high level systems as mediators. In game dev: use a "messy gameplay" system to control the particles, materials, animations, etc.
+	3. Duplicating code is sometimes ok. Don't overly rely on "standard" libraries, if you only need a small subset of them. (Re-)using Standards leads to consistency, but it also leads to more coupling and does not always provide the best-fit solution for all problems.
+	4. Use IDs instead of pointers. Ideally ownership of data is unambiguous. Using pointers spreads the control over the ownership of data between systems (pointers have to be tracked for deletion, pointers allow direct access, etc.). IDs have to be passed to the origin system and can be checked there. In case of deletion you can return a "null" object. You can quickly lookup IDs in a hash table (slight overhead vs pointers) or just use them as an index into an array. Management of data is clearly organized. IDs are easily serialized and passed around.
+		1. See also: [Handles are the better pointers](https://floooh.github.io/2018/06/17/handles-vs-pointers.html)
+		2. Don't delete objects in the same time period as processing them. In game dev: for example defer deleting objects until the end of the frame (by adding them to a "deletion list")
+	5. How should a low-level system alert a higher-level system about an event? (in the interest of low-coupling the low-level system should never need to know or care about the higher-level system):
+		1. Polling: "wasteful" since CPU time is needed when nothing happens. Usually totally okay if the polling-rate or amount of data is low. Code is easier to write and read, since it is very linear.
+		2. Callbacks: Store a list of functions to call in the case of an event. It often is a good idea to not do callbacks immediately, but queue them for later, so that they happen at a predictable time. Doing them immediately can also trash your caches, due to context switching and you have to be aware of possible problems with multi-threading and out-of-order execution (don't delete an object in a callback, while you are iterating over a list with said object). Try to avoid too many boilerplate code when writing callbacks in C++. More often than not a simple C function pointer is enough.
+		3. Events: Very similar to callbacks, but using "event IDs" instead of function pointers. Events might work better when processed in bulk, since it can be just a raw array if IDs and data. The control flow is reversed compared to callbacks, since the low-level system collects the events and the high level system reads through the collected buffer (instead of the low-level system calling the registered callback of the higher-level system). Arduino uses a system like this for all "system events" (like Wifi connect, Wifi disconnect).

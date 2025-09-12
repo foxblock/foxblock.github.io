@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-03-26T17:03:09.291+01:00","updated":"2025-08-22T22:30:32.343+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-09-02T20:22:01.304+02:00","updated":"2025-09-02T11:40:58.205+02:00"}
 ---
 
 ## strncpy, strncat
@@ -333,6 +333,7 @@ baz(x);
 
 #define foo_fix(x) do { bar(x); baz(x); } while(0)
 ```
+
 - When a macro should not be defined in one case (e.g. debug builds), replace it with ((void)0) instead of leaving it blank
 - Rationale: This will still work if the macro is used with the comma expression or ternary operator
 ```C
@@ -345,7 +346,8 @@ baz(x);
 for (int idx = 0; idx < len; ++idx, debug_print("foo")) { ... }
 x > 0 ? debug_print("greater") : debug_print("smaller")
 ```
-- For macros that return a value, which is not needed, consider explicitly discarding that value to avoid compiler warnings and misuse
+
+- For macros that return a value, which is not needed, consider explicitly discarding that value to avoid compiler warnings and misuse:
 ```C
 #define textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
 ```
@@ -372,3 +374,7 @@ Use the following to get insights into the build process of your C/C++ app. Find
 8. Open the trace you just collected in WPA.
 ## Clockwise Spiral Rule
 How to read complex type declarations: https://c-faq.com/decl/spiral.anderson.html
+![Pasted image 20250902113417.png](/img/user/_attachments/Pasted%20image%2020250902113417.png)
+## Macro for optional function parameters
+![Pasted image 20250902113438.png](/img/user/_attachments/Pasted%20image%2020250902113438.png)
+NOTE: Might not be ideal for hot paths. Function arguments are usually put in registers, structs are put in memory (so the assembly has to work with memory addresses and offsets, which is slower).
