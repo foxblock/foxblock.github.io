@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-09-12T08:31:27Z</updated>
+    <updated>2025-09-12T08:40:59Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -3784,7 +3784,7 @@ span, div /* apply same style to both span and div */
                 C
                 
             </title>
-            <updated>2025-08-22T20:30:32.343Z</updated>
+            <updated>2025-09-02T09:40:58.205Z</updated>
             <id>https://janek.ing/code/langauges/c/</id>
             <content type="html">
                 &lt;h2 id=&quot;strncpy-strncat&quot; tabindex=&quot;-1&quot;&gt;strncpy, strncat&lt;/h2&gt;
@@ -4146,7 +4146,7 @@ for (int idx = 0; idx &amp;lt; len; ++idx, debug_print(&amp;quot;foo&amp;quot;))
 x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;smaller&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;For macros that return a value, which is not needed, consider explicitly discarding that value to avoid compiler warnings and misuse&lt;/li&gt;
+&lt;li&gt;For macros that return a value, which is not needed, consider explicitly discarding that value to avoid compiler warnings and misuse:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#define textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
 &lt;/code&gt;&lt;/pre&gt;
@@ -4176,7 +4176,11 @@ x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;
 &lt;li&gt;Open the trace you just collected in WPA.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;clockwise-spiral-rule&quot; tabindex=&quot;-1&quot;&gt;Clockwise Spiral Rule&lt;/h2&gt;
-&lt;p&gt;How to read complex type declarations: &lt;a href=&quot;https://c-faq.com/decl/spiral.anderson.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://c-faq.com/decl/spiral.anderson.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;How to read complex type declarations: &lt;a href=&quot;https://c-faq.com/decl/spiral.anderson.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://c-faq.com/decl/spiral.anderson.html&lt;/a&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250902113417.png&quot; alt=&quot;Pasted image 20250902113417.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;macro-for-optional-function-parameters&quot; tabindex=&quot;-1&quot;&gt;Macro for optional function parameters&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250902113438.png&quot; alt=&quot;Pasted image 20250902113438.png&quot; /&gt;&lt;br /&gt;
+NOTE: Might not be ideal for hot paths. Function arguments are usually put in registers, structs are put in memory (so the assembly has to work with memory addresses and offsets, which is slower).&lt;/p&gt;
 
             </content>
             <link href="https://janek.ing/code/langauges/c/" >
@@ -5028,7 +5032,7 @@ Also needs special attention if negative numbers are involved (additional sort o
                 Architecture
                 
             </title>
-            <updated>2025-08-05T08:02:35.304Z</updated>
+            <updated>2025-09-11T13:43:31.347Z</updated>
             <id>https://janek.ing/code/architecture/</id>
             <content type="html">
                 &lt;h2 id=&quot;golden-rules&quot; tabindex=&quot;-1&quot;&gt;Golden Rules&lt;/h2&gt;
@@ -5479,6 +5483,35 @@ You can also draw the boundary between the different systems. Entities are only 
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;MVP Ansatz fahren und dann sukzessive erweitern&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;managing-coupling&quot; tabindex=&quot;-1&quot;&gt;Managing Coupling&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://bitsquid.blogspot.com/2011/01/managing-coupling.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;bitsquid: development blog: Managing Coupling&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://bitsquid.blogspot.com/2011/02/managing-decoupling-part-2-polling.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;bitsquid: development blog: Managing Coupling Part 2 — Polling, Callbacks and Events&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ideally every system/package should be completely isolated&lt;/li&gt;
+&lt;li&gt;Transfer of state and interaction between systems usually is necessary for more complex and interesting behavior&lt;/li&gt;
+&lt;li&gt;Too much coupling leads to changes being more work to implement than necessary. It reduces developer efficiency and might even keep you from doing changes at all!&lt;/li&gt;
+&lt;li&gt;Good test: If you want/need to test a new system in isolation (instead of integrated into your environment), this might be an indicator that there is too much coupling&lt;/li&gt;
+&lt;li&gt;Approaches for keeping coupling low:
+&lt;ol&gt;
+&lt;li&gt;Be wary of &amp;quot;frameworks&amp;quot;, which introduce one mode of thinking to your whole codebase (e.g. serialization, RTTI, root classes, etc.). They force certain design decisions and impact all future code. Often these frameworks are introduced early in development, where not all future constraints and challenges are known (which might need different solutions).&lt;/li&gt;
+&lt;li&gt;Don&#39;t couple low level systems directly, instead use high level systems as mediators. In game dev: use a &amp;quot;messy gameplay&amp;quot; system to control the particles, materials, animations, etc.&lt;/li&gt;
+&lt;li&gt;Duplicating code is sometimes ok. Don&#39;t overly rely on &amp;quot;standard&amp;quot; libraries, if you only need a small subset of them. (Re-)using Standards leads to consistency, but it also leads to more coupling and does not always provide the best-fit solution for all problems.&lt;/li&gt;
+&lt;li&gt;Use IDs instead of pointers. Ideally ownership of data is unambiguous. Using pointers spreads the control over the ownership of data between systems (pointers have to be tracked for deletion, pointers allow direct access, etc.). IDs have to be passed to the origin system and can be checked there. In case of deletion you can return a &amp;quot;null&amp;quot; object. You can quickly lookup IDs in a hash table (slight overhead vs pointers) or just use them as an index into an array. Management of data is clearly organized. IDs are easily serialized and passed around.
+&lt;ol&gt;
+&lt;li&gt;See also: &lt;a href=&quot;https://floooh.github.io/2018/06/17/handles-vs-pointers.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Handles are the better pointers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Don&#39;t delete objects in the same time period as processing them. In game dev: for example defer deleting objects until the end of the frame (by adding them to a &amp;quot;deletion list&amp;quot;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;How should a low-level system alert a higher-level system about an event? (in the interest of low-coupling the low-level system should never need to know or care about the higher-level system):
+&lt;ol&gt;
+&lt;li&gt;Polling: &amp;quot;wasteful&amp;quot; since CPU time is needed when nothing happens. Usually totally okay if the polling-rate or amount of data is low. Code is easier to write and read, since it is very linear.&lt;/li&gt;
+&lt;li&gt;Callbacks: Store a list of functions to call in the case of an event. It often is a good idea to not do callbacks immediately, but queue them for later, so that they happen at a predictable time. Doing them immediately can also trash your caches, due to context switching and you have to be aware of possible problems with multi-threading and out-of-order execution (don&#39;t delete an object in a callback, while you are iterating over a list with said object). Try to avoid too many boilerplate code when writing callbacks in C++. More often than not a simple C function pointer is enough.&lt;/li&gt;
+&lt;li&gt;Events: Very similar to callbacks, but using &amp;quot;event IDs&amp;quot; instead of function pointers. Events might work better when processed in bulk, since it can be just a raw array if IDs and data. The control flow is reversed compared to callbacks, since the low-level system collects the events and the high level system reads through the collected buffer (instead of the low-level system calling the registered callback of the higher-level system). Arduino uses a system like this for all &amp;quot;system events&amp;quot; (like Wifi connect, Wifi disconnect).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 
             </content>
