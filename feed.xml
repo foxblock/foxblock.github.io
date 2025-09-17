@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-09-17T09:00:15Z</updated>
+    <updated>2025-09-17T17:46:55Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -3784,7 +3784,7 @@ span, div /* apply same style to both span and div */
                 C
                 
             </title>
-            <updated>2025-09-02T09:40:58.205Z</updated>
+            <updated>2025-09-16T13:55:13.376Z</updated>
             <id>https://janek.ing/code/langauges/c/</id>
             <content type="html">
                 &lt;h2 id=&quot;strncpy-strncat&quot; tabindex=&quot;-1&quot;&gt;strncpy, strncat&lt;/h2&gt;
@@ -3834,6 +3834,15 @@ struct someStruct var = {.member = 1, ...};
 struct someStruct var = {0};
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a href=&quot;https://felipec.wordpress.com/2024/03/03/c-skill-issue-how-the-white-house-is-wrong/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://felipec.wordpress.com/2024/03/03/c-skill-issue-how-the-white-house-is-wrong/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;malloc-calloc-realloc-pitfalls&quot; tabindex=&quot;-1&quot;&gt;malloc / calloc / realloc pitfalls&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;malloc and realloc take NUMBER OF BYTES as argument, calloc takes NUMBER OF ELEMENTS and ELEMENT SIZE&lt;/li&gt;
+&lt;li&gt;do not call realloc with size 0 instead of free. Behavior is implementation defined and not necessarily equivalent (&lt;a href=&quot;https://en.cppreference.com/w/c/memory/realloc.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;source&lt;/a&gt;) - in C23 it is even undefined behavior!&lt;/li&gt;
+&lt;li&gt;realloc is not guaranteed to re-use the existing block of memory (even if new size is smaller), so do not rely on it (e.g. you need to update pointers to this variable)&lt;/li&gt;
+&lt;li&gt;calloc 0-initializes the memory, malloc and realloc do NOT&lt;/li&gt;
+&lt;li&gt;it IS OK to call realloc with a nullptr argument, it behaves the same as malloc then&lt;/li&gt;
+&lt;li&gt;do NOT call free twice on the same pointr. It IS OK to call free on a nullptr.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&quot;offsetof-container-of-macro&quot; tabindex=&quot;-1&quot;&gt;offsetof, container_of macro&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://en.cppreference.com/w/c/types/offsetof&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;offsetof&lt;/a&gt; gets the byte offset for a member in a struct:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;// Check if order of memers in two structs are equal
@@ -4003,7 +4012,7 @@ printf(&amp;quot;%d %d&#92;n&amp;quot;, test &amp;lt;&amp;lt; 2, test &amp;gt;&a
 &lt;ul&gt;
 &lt;li&gt;(int)-cast not recommended for values that can be both positive and negative, since the range (-1,1) gets mapped to 0, basically introducing an off-by-one error whenever we cross 0 (e.g. when dealing with 2D/3D coordinates)&lt;/li&gt;
 &lt;li&gt;floorf and ceilf are more consistent and map the same amount of values to a single int across the whole range of float/double&lt;/li&gt;
-&lt;li&gt;roundf is also fine in that regard, one just has to deal with the fact, that the switch from one int to the next happens in the middle of it&lt;/li&gt;
+&lt;li&gt;roundf has the problem that both +0.5 and -0.5 get rounded away from zero and one has to deal with the fact, that the switch from one int to the next happens in the middle between two values&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#include &amp;lt;stdout.h&amp;gt;
 
