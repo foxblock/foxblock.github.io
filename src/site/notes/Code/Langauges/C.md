@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-09-02T20:22:01.304+02:00","updated":"2025-09-02T11:40:58.205+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-09-17T08:57:43.823+02:00","updated":"2025-09-16T15:55:13.376+02:00"}
 ---
 
 ## strncpy, strncat
@@ -52,6 +52,13 @@ struct someStruct var = {.member = 1, ...};
 struct someStruct var = {0};
 ```
 https://felipec.wordpress.com/2024/03/03/c-skill-issue-how-the-white-house-is-wrong/
+## malloc / calloc / realloc pitfalls
+- malloc and realloc take NUMBER OF BYTES as argument, calloc takes NUMBER OF ELEMENTS and ELEMENT SIZE
+- do not call realloc with size 0 instead of free. Behavior is implementation defined and not necessarily equivalent ([source](https://en.cppreference.com/w/c/memory/realloc.html)) - in C23 it is even undefined behavior!
+- realloc is not guaranteed to re-use the existing block of memory (even if new size is smaller), so do not rely on it (e.g. you need to update pointers to this variable)
+- calloc 0-initializes the memory, malloc and realloc do NOT
+- it IS OK to call realloc with a nullptr argument, it behaves the same as malloc then
+- do NOT call free twice on the same pointr. It IS OK to call free on a nullptr.
 ## offsetof, container_of macro
 [offsetof](https://en.cppreference.com/w/c/types/offsetof) gets the byte offset for a member in a struct:
 ```C
@@ -229,8 +236,7 @@ More info: https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E
 ```
 - (int)-cast not recommended for values that can be both positive and negative, since the range (-1,1) gets mapped to 0, basically introducing an off-by-one error whenever we cross 0 (e.g. when dealing with 2D/3D coordinates)
 - floorf and ceilf are more consistent and map the same amount of values to a single int across the whole range of float/double
-- roundf is also fine in that regard, one just has to deal with the fact, that the switch from one int to the next happens in the middle of it
-
+- roundf has the problem that both +0.5 and -0.5 get rounded away from zero and one has to deal with the fact, that the switch from one int to the next happens in the middle between two values
 ```C
 #include <stdout.h>
 
