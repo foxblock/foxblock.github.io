@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/CPU.md","permalink":"/tech/cpu/","tags":["knowledge-base","german"],"created":"2025-06-17T19:43:07.671+02:00","updated":"2025-07-11T16:01:28.658+02:00"}
+{"dg-publish":true,"dg-path":"Tech/CPU.md","permalink":"/tech/cpu/","tags":["knowledge-base","german"],"created":"2025-11-19T16:55:16.658+01:00","updated":"2025-11-19T16:17:40.680+01:00"}
 ---
 
 ## Cache
@@ -8,20 +8,28 @@
 	- L1-Cache oftmals unterteilt in "data" und "instruction cache"
 	- L1 oftmals pro Core
 	- L1: Größe bei aktuellen Prozessoren <100kB (pro Kern)
-		- 5700X: 32KB, 9950X3D: 80KB
+		- [5700X](https://www.techpowerup.com/cpu-specs/ryzen-7-5700x.c2755): 32KB (instruction) + 32KB (data)
+		- [9950X3D](https://www.techpowerup.com/review/amd-ryzen-9-9950x3d/2.html): 32KB (instruction) + 48KB (data)
+		- [Apple M5](https://theapplewiki.com/wiki/M5): P-Core: 192 KB (instruction) + 128 KB (data), E-Core: 128 + 64 KB
 	- L2-Cache wird unter Windows "unified cache" genannt
 	- L2 oftmals pro Core, manchmal geteilt mit mehreren Cores oder gesamter CPU
+		- bei x64: pro Core, Apple Silicon (mindestens bis M5): für gesamten Chip
 	- L2: Größe bei aktuellen Prozessoren < 1MB (pro Kern)
-		- 5700X: 512KB, 9950X3D: 1MB
+		- 5700X: 512KB
+		- 9950X3D: 1MB
+		- Apple M5: P-Cores: 16 MB (geteilt), E-Cores: 6 MB (geteilt)
 	- L3/L4 cache meist für gesamte CPU, Größe < 100MB
-		- 5700X: 32MB, 9950X3D: 128MB
-- Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache
+		- 5700X: 32MB
+		- 9950X3D: 128MB
+		- Apple M5: nicht vorhanden
+- Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache (bei modernen x64 CPUs)
 	- ESP32: 32 Bytes
 	- ARM Cortex M0..4: kein Cache
 	- ARM Cortex M7+: 32 Bytes
 - Cache Miss: Programm fordert Daten an, welche nicht im L1+L2-Cache sind und daher aus dem RAM geladen werden müssen
 - Viele Operationen sind schneller, als das Laden aus dem RAM -> Performance wird von Nutzung des Caches dominiert
 	- [Gallery of Processor Cache Effects (igoro.com)](https://igoro.com/archive/gallery-of-processor-cache-effects/)
+		- Graphen welche den Effekt von CPU Cache, Cache Lines, Cache Aufbau, etc. verdeutlichen
 	- [Zen 1 timings](https://www.7-cpu.com/cpu/Zen.html)
 		- L1 Cache: 4-5 cycles (1ns)
 		- L2 Cache: 17 cycles (4-5ns)
@@ -51,6 +59,11 @@
 	- Zen 5: 12-way = 48KByte
 	- Beispiel Apple M1/M2: 12-way Set, jedes Set hat also 12 Plätze je 128 Bytes (eine L2-Cache Line) = 1,5KB pro Set = ~10.900 Sets bei 16MB Cache
 	- Apple M-chips haben größere pages (64K)
+
+> [!tip] Block sizes in code
+> When choosing a block size in your code (i.e. when reading a file in chunks), make it smaller than the L2 or L3 cache. This way the block will more likely stay in cache while you do operations on it. If you make the block too big, the CPU will need to continuously swap parts of it between the CPU cache and RAM making things *much* slower.
+> Keep in mind other stuff will be in the cache, too (like the stack of your program). 10% of smallest cache size of the target machines probably will be fine.
+> The best size can be determined by testing (measure performance with increasing blocks sizes), there will be a big drop once swap starts. 
 ## Pointers
 - mindestens top 8 bits bei Intel und ARM Prozessoren sind nicht Teil der Speicheradresse (da unrealistisch großer Speicher benötigt werden würde), sondern können für andere Zwecke wie GC-flags genutzt werden. Meist werden nur 48bit für Speicheradresse genutzt 
 	- https://youtu.be/uZEBkOrfUzM?feature=shared&t=908
@@ -72,6 +85,38 @@ https://godbolt.org/
 -> Modulus mit zur Compile-Zeit unbekanntem Divisor ist für CPU sehr aufwändig, da diese Operation nicht umgewandelt werden kann
 
 ## Napkin Math
+
+|                                                                     | Throughput     |
+| ------------------------------------------------------------------- | -------------- |
+| DDR4 RAM Read/Write (2133 MHz)                                      | 17 GiB/s       |
+| DDR4 RAM Read/Write (3200 MHz, 2020 Standard)                       | 25.6 GiB/s     |
+| DDR5 RAM Read/Write (5500 MHz, 2025 Standard)                       | 45 GiB/s       |
+| DDR5 RAM Read/Write (8800 MHz)                                      | 70 GiB/s       |
+| SSD Sequential Read/Write (PCI Gen. 3 - 2020 Standard)              | 3 GiB/s        |
+| SSD Sequential Read/Write (PCI Gen. 4/5 - 2025 Standard)            | 6 GiB/s        |
+| SSD Sequential Read/Write on SATA III                               | 600 MiB/s      |
+| SSD Random Read/Write (depends on file size)                        | 50 - 500 MiB/s |
+| HDD Sequential Read                                                 | 250 MiB/s      |
+| HDD Sequential Write                                                | 200 MiB/s      |
+| HDD Random Read                                                     | <20 MiB/s      |
+| HDD Random Write                                                    | 1 MiB/s        |
+| SD Card (UHS I) Sequential Read/Write                               | 150 MiB/s      |
+| SD Card (UHS I) Random Read/Write                                   | <5 MiB/s       |
+| USB Stick (USB 3.0) Sequential Read/Write                           | 150 MiB/s      |
+| USB Stick (USB 3.0) Random Read/Write                               | <5 MiB/s       |
+| USB 2.0 Peak Read/Write                                             | 50 MiB/s       |
+| USB 3.0 Peak Read/Write                                             | 330 MiB/s      |
+| USB 3.1 Gen 2 / 3.2 Gen 1x2 / 3.2 Gen 2x1 Peak Read/Write (10 Gbps) | 800 MiB/s      |
+| Home Network (1 GBit/s)                                             | 100 MiB/s      |
+| Fiber Internet (100 - 1000 MBit/s)                                  | 20 - 100 MiB/s |
+Notes:
+- Sequential throughput means one big file (>100 MiB or multiple GiB)
+- Random throughput means many small files (each much less than 1 MiB). Random read or write throughput is highly dependent on file size: the smaller the files, the lower the speed. HDDs have to physically move the disk head, SSDs lose speed when you read files smaller than the page size (usually 4 KiB) due to overhead. It is also generally bad for caching behavior of the disk and OS.
+- For USB the real peak throughput (values above) is about 2/3 of the raw max data rate
+- For NVMe SSDs speed is limited by PCI lanes (the more the better), although most modules are optimized for 4x PCI Gen. 3/4 or 2x PCI Gen. 5
+- HDDs usually have a RAM cache (often 256MB) for often/last used files, which is much faster
+- The OS might cache often/last accessed files on RAM
+
 Cost of CPU operations: [Infographics: Operation Costs in CPU Clock Cycles - IT Hare on Soft.ware](http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/)
 
 GitHub repo with programming related "ballpark" numbers: [GitHub - sirupsen/napkin-math: Techniques and numbers for estimating system's performance from first-principles](https://github.com/sirupsen/napkin-math)

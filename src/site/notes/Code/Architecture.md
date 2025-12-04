@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-09-11T18:23:36.950+02:00","updated":"2025-09-11T15:43:31.347+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-09-11T18:23:36.950+02:00","updated":"2025-09-25T16:43:21.059+02:00"}
 ---
 
 ## Golden Rules
@@ -79,9 +79,10 @@ https://grugbrain.dev/
 ## DRY vs inline code
 - Don't DRY: Zu kurze Funktionen, die nur andere Funktionen aufrufen, die nur wieder eine andere Funktion aufrufen sind so schwierig nachzuvollziehen, weil man Kontext im Kopf aufbauen muss und viel hin- und herspringt. Eine größere Funktion, die die gesamte Arbeit erledigt, ist auf einen Blick zu erfassen oder lässt sich zumindest wie eine Zeitung von oben nach unten lesen.
 - Martin Fowler: Refactor wenn man sich 3x wiederholt
-- Small Focused Functions that don't do anything meaningful -> man muss zu viel im Code springen, um zu verstehen, was er macht. Context fehlt.
+- Small Focused Functions that don't do anything meaningful -> man muss zu viel im Code springen, um zu verstehen, was er macht. Context fehlt. Zu viel context switching overhead.
 - Every function should do something **meaningful**
 - Idee: Code sollte im Stile einer StackOverflow Antwort geschrieben sein. Macht etwas sinnvolles und beinhaltet allen notwendigen Kontext. (https://youtu.be/NiljDyzAOcI?feature=shared&t=1150)
+- https://read.engineerscodex.com/p/how-to-not-write-garbage-code-by
 
 https://htmx.org/essays/codin-dirty/
 https://www.youtube.com/watch?v=hQJcGmWXDJw
