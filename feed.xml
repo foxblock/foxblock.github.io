@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-12-04T20:48:41Z</updated>
+    <updated>2025-12-04T20:49:25Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -1417,46 +1417,6 @@ Objekt -&amp;gt; Aussehen umwandeln löst den Effekt auf und erstellt einen Pfad
 
             </content>
             <link href="https://janek.ing/tech/illustrator/" >
-        </entry>
-        <entry>
-            <title>
-                HDD
-                
-            </title>
-            <updated>2025-05-24T10:54:44.262Z</updated>
-            <id>https://janek.ing/tech/hdd/</id>
-            <content type="html">
-                &lt;h2 id=&quot;smr-vs-cmr-pmr&quot; tabindex=&quot;-1&quot;&gt;SMR vs CMR/PMR&lt;/h2&gt;
-&lt;p&gt;Bei SMR werden die Daten leicht überlappend geschrieben. Dadurch wird eine höhere Speicherdichte erreicht, aber die Schreibraten leiden bei langen Schreibprozessen. Außerdem gibt es Erfahrungsberichte, wo SMR Platten nicht so lange halten und Datenverlust auftritt.&lt;br /&gt;
-SMR ist stromsparender und oft günstiger (bei gleicher Speichergröße).&lt;br /&gt;
-NAS Laufwerke sind meist CMR/PMR. Günstige Consumer Laufwerke oft SMR. Aber Achtung: WD hat zwischen 2 Modellgenerationen von CMR zu SMR gewechselt (WD Red). Das Datenblatt gibt hier meist mehr Auskunft (entweder direkt oder über eine Speicherdichte &amp;gt;1000GB/in²).&lt;br /&gt;
-Generell sollte man zu CMR/PMR greifen, da die Vorteile überwiegen.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.reichelt.de/magazin/ratgeber/smr-cmr-welche-festplatte-eignet-sich-am-besten-fuer-welchen-zweck/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;SMR? CMR? Welche Festplatte eignet sich am besten für welchen Zweck? - reichelt Magazin&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.hardwareluxx.de/index.php/artikel/hardware/storage/51244-cmr-smr-der-hdd-guide-zu-den-verschiedenen-aufnahmemethoden.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;CMR/SMR: Der HDD-Guide zu den verschiedenen Aufnahmemethoden - Hardwareluxx&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;u-min&quot; tabindex=&quot;-1&quot;&gt;U/min&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Mehr = schneller (lesen/schreiben), aber lauter und stromhungriger&lt;/li&gt;
-&lt;li&gt;Gaming/Performance: 7200+&lt;/li&gt;
-&lt;li&gt;NAS/Archiv: 5400&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;cache&quot; tabindex=&quot;-1&quot;&gt;Cache&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Generell: Mehr = besser&lt;/li&gt;
-&lt;li&gt;Cache ist meist SSD-Technik und deutlich schneller als Platten&lt;/li&gt;
-&lt;li&gt;je größer, desto eher passen ganze Dateien in Cache, was kleine Lese- oder Schreibvorgänge beschleunigt&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;festplatten-arten&quot; tabindex=&quot;-1&quot;&gt;Festplatten Arten&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;z.B. WD Black/Blue/Red&lt;/li&gt;
-&lt;li&gt;Am besten auf der Hersteller-Webseite gucken, für welchen Anwendungsfall die Bauart gedacht ist und sich an diese Angabe halten.&lt;/li&gt;
-&lt;li&gt;Unterschiede sind Bauart (Anzahl Platten), U/min, SMR vs. CMR, Firmware, etc.&lt;/li&gt;
-&lt;li&gt;NAS Festplatten sind bspw. darauf ausgelegt dauerhaft zu laufen und verkraften evtl. nicht so viele Spindowns und -ups&lt;/li&gt;
-&lt;/ul&gt;
-
-            </content>
-            <link href="https://janek.ing/tech/hdd/" >
         </entry>
         <entry>
             <title>
