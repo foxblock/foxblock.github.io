@@ -213,6 +213,10 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
 <div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/hdd/">HDD </a>
 </div>
 </div>
@@ -283,7 +287,7 @@ CTRL + K
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
-<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-10-06T20:44:19.953Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-10-06T20:44:19.953Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-10-06T20:44:19.953Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-12-04T20:48:40.868Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-12-04T20:48:40.868Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-12-04T20:48:40.868Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
 <h1 data-note-icon="">LoRaWAN</h1>
@@ -296,11 +300,11 @@ CTRL + K
 #knowledge-base
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-08-22T22:09:49.885+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-08-22T15:16:49.734+02:00"></span></div></div></div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-12-04T19:17:13.863+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-12-04T14:51:58.940+01:00"></span></div></div></div>
 </header>
 <h2 id="sf-12-the-sweet-poison" tabindex="-1">SF12 the sweet poison</h2>
 <ul>
-<li>should not use SF11 or SF12 usually</li>
+<li>you should not use SF11 or SF12 usually</li>
 <li>SF9 with nbTrans = 3 can yield better results
 <ul>
 <li>3 total transmissions of the same packet, server will do de-duplication</li>
@@ -312,7 +316,7 @@ CTRL + K
 <li>higher SF gives you more range and penetration in theory. In practice it's usually not the range that kills you but external disruptions</li>
 <li>in my testing, we reduced loss from 10% to &lt;2% by switching from SF10+ to SF7..9 with nbTrans=3
 <ul>
-<li>use case was parking sensors within 1km of the next gateway</li>
+<li>use case was parking sensors within 1-2km of the next gateway</li>
 </ul>
 </li>
 <li>you would be surprised how far you can get with SF7</li>
@@ -320,12 +324,13 @@ CTRL + K
 <p>Talk from Semtech about nbTrans: <a href="https://www.youtube.com/watch?v=VmYuItA6q4I&amp;list=RDCMUCv85CXnZUXEKnlZpQapTAwQ&amp;start_radio=1&amp;t=450s" target="_blank" class="external-link">LoRaWAN and the IoT - Olivier Seller (Semtech)</a> (7:20 to 22:00)</p>
 <h2 id="adr" tabindex="-1">ADR</h2>
 <ul>
-<li>leave ADR on device side (never fix datarate/SF on the device)</li>
-<li>modern network servers will let you adjust SF for individual devices over the network, so configuration becomes much easier (not via device driver downlinks but standard LoRa <em>LinkADRReq</em> packages, so compatible with all devices)</li>
+<li>leave ADR on device side on (never fix datarate/SF in the device config)</li>
+<li>modern network servers will let you adjust SF for individual devices over the network, which allows remote configuration (not via device driver downlinks but standard LoRa <code>LinkADRReq</code> MAC commands, so compatible with all devices)</li>
 </ul>
 <h2 id="confirmed-uplinks" tabindex="-1">Confirmed uplinks</h2>
 <ul>
-<li>don't use these, unless you really have to and understand the implications</li>
+<li>don't use these, unless you really have to and understand the implications
+<ul>
 <li>they use a downlink</li>
 <li>lora gateways are only half-duplex, so they cannot receive while transmitting and vice versa</li>
 <li>professional gateways have 16 uplink channels (consumer grade hardware: 8 or less), but only 1 channel for downlinks</li>
@@ -334,20 +339,27 @@ CTRL + K
 <li>though the downlink blocks only one gateway, while any uplink might block one channel of any gateway in range</li>
 </ul>
 </li>
-<li>also in my testing confirmed uplinks may be lost still, so you cannot even rely on this for 100% coverage</li>
-<li>it's a better idea to use nbTrans, if you just want to get as many messages as possible (see <a class="internal-link" target="" data-note-icon="" href="#sf-12-the-sweet-poison">#SF12 the sweet poison</a>)</li>
-<li>can use confirmed uplinks to test network access, record (approx) time of dropped connection (to retransmit dater later), and start join process again
+</ul>
+</li>
+<li>in my testing, confirmed uplinks may be lost still, so you cannot even rely on this for 100% coverage</li>
+<li>it's a better idea to use <code>nbTrans</code>, if you just want to reduce loss (see <a class="internal-link" target="" data-note-icon="" href="#sf-12-the-sweet-poison">#SF12 the sweet poison</a>)</li>
+<li>can use confirmed uplinks to test network access, record (approx.) time of dropped connection (to retransmit dater later), and start join process again
 <ul>
-<li>transmit every 10th or 20th uplink as confirmed (ideally make this a setting based on count OR time)</li>
-<li>can also use <em>LinkCheckReq</em> network messages for this purpose</li>
+<li>transmit every 10th or 20th uplink as confirmed (ideally make this available as a setting based on uplink count OR time - count works well with periodic uplinks, time works well with sporadic events)</li>
+<li>can also use <a href="https://learn.semtech.com/mod/book/view.php?id=172&amp;chapterid=108" target="_blank" class="external-link">LinkCheckReq</a> network messages for this purpose, which are more lightweight (but they also incur a downlink!)</li>
+</ul>
+</li>
+<li>especially do not send <em>every</em> uplink as confirmed or send <code>LinkCheckReq</code> after every uplink!
+<ul>
+<li>if you really need to make sure every message is received, LoRaWAN is the wrong technology to use!</li>
 </ul>
 </li>
 </ul>
 <p>Meta study about confirmed traffic: <a href="https://ieeexplore.ieee.org/document/8952708" target="_blank" class="external-link">A Survey on the Viability of Confirmed Traffic in a LoRaWAN | IEEE Journals &amp; Magazine | IEEE Xplore</a></p>
 <h2 id="devices-sensors" tabindex="-1">Devices / Sensors</h2>
 <ul>
-<li>choose devices which let you configure everything via downlinks. It will make your life much easier, because you can configure them remotely. Getting every parameter right a-priori is hard. You will learn a lot while doing a use-case and will want to adjust.</li>
-<li>Chose a manufacturer that supplies their full payload description and ideally TTN driver. Look at the documentation carefully. Often it is not complete
+<li>choose devices which let you configure everything via downlinks. It will make your life much easier, because you can configure them remotely. Getting every parameter right a-priori is hard. You will learn a lot while doing a use-case and will want to adjust on the fly</li>
+<li>Chose a manufacturer that supplies their full payload description and ideally a TTN driver. Look at the documentation carefully. Often it is not complete
 <ul>
 <li>avoid companies that make you pay for this</li>
 <li>Sensoterra is really bad (uplinks are encrypted forcing you to use their cloud services)</li>
@@ -356,37 +368,10 @@ CTRL + K
 <li>Having a way to locally configure the sensor is a big plus. Speeds up rollouts and early iterations (since you do not have to wait for the downlink response and downlinks might get lost). I like the NFC-based approaches (see Milesight and Elsys devices). USB is fine too, but usually more cumbersome.</li>
 <li>I can generally recommend devices by Milesight and Abeeway</li>
 <li>did not have good luck with RAK devices (hardware was unreliable)</li>
+<li>Kerlink Wanesy Wave was also a failure. The device would often forget it's configuration parameters and only send one join request per startup, so it would get stuck offline if that one join request was lost.</li>
 </ul>
-<h2 id="drivers-firmware" tabindex="-1">Drivers / Firmware</h2>
-<ul>
-<li>my plea to vendors: for the love of god, just write simple driver code</li>
-<li>switch on type bytes and convert the data (Milesight drivers are a good reference here)</li>
-<li>don't do overly complicated map reduce shit, it will bite you in the ass later and make the driver much less readable, more complicated and way slower than it needs to</li>
-<li>don't convert anything to a hex string, just work with the raw bytes</li>
-<li>don't use .slice, just index into the byte array</li>
-<li>yes, JavaScript handles numbers in a weird way, but the rules are consistent. Just learn them.<br>
-Seriously, don't do this (actual code from an actual &quot;production-ready&quot; driver):</li>
-</ul>
-<pre><code class="language-JavaScript">    var i = bytesToInt(byte);
-    var bm = ('00000000' + Number(i).toString(2)).substr(-8).split('').map(Number).map(Boolean);
-    return ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-        .reduce(function (obj, pos, index) {
-            obj[pos] = bm[index];
-            return obj;
-        }, {});
-</code></pre>
-<p>Just do this:</p>
-<pre><code class="language-JavaScript">    return {
-        &quot;a&quot;: (byte &amp; 0x80) &gt; 0,
-        &quot;b&quot;: (byte &amp; 0x40) &gt; 0,
-        &quot;c&quot;: (byte &amp; 0x20) &gt; 0,
-        &quot;d&quot;: (byte &amp; 0x10) &gt; 0,
-        &quot;e&quot;: (byte &amp; 0x08) &gt; 0,
-        &quot;f&quot;: (byte &amp; 0x04) &gt; 0,
-        &quot;g&quot;: (byte &amp; 0x02) &gt; 0,
-        &quot;h&quot;: (byte &amp; 0x01) &gt; 0,
-    };
-</code></pre>
+<h2 id="decoders-and-firmware" tabindex="-1">Decoders and Firmware</h2>
+<p>My wishlist for a device firmware:</p>
 <ul>
 <li>add a downlink that makes the device send its config in an uplink
 <ul>
@@ -395,48 +380,415 @@ Seriously, don't do this (actual code from an actual &quot;production-ready&quot
 </li>
 <li>make everything configurable via downlink
 <ul>
-<li>no need for SF settings though, Lora can handle that by default (<a class="internal-link" target="" data-note-icon="" href="#adr">#ADR</a>)</li>
+<li>especially the periodic update interval</li>
+<li>no need for SF settings though, Lora can handle that with MAC commands (<a class="internal-link" target="" data-note-icon="" href="#adr">#ADR</a>)</li>
+</ul>
+</li>
+<li>make the sensor confirm each configuration by sending the new values back</li>
+<li>keep the configuration simple. It will make the operators and decoder developers job much easier.
+<ul>
+<li>again Milesight is doing a good job in this regard</li>
+<li>Watteco ino devices are particularly bad example. Their configuration is ridiculously complex for no reason inherit whatsoever.</li>
+</ul>
+</li>
+<li>Ideally make it possible to configure individual values without having to send the current values of parameters you don't want to change</li>
+<li>keep packages as small as possible
+<ul>
+<li>only transmit necessary information</li>
+<li>use sensible data types (e.g. ambient temperature can be compressed down to an int8 with 0,2 precision and limited range)</li>
+<li>work with standard data types (int8/uint16/etc.). Most of the time, using special types to reduce size by a few bits (or splitting them over parts of a byte to fill unused bits of other fields) is not worth the cost of added complexity</li>
+<li>use the port! It is transmitted every time, so you essentially get one uint8 for free (or rather pay the cost anyway if you don't use it)</li>
+</ul>
+</li>
+<li>properly implement all the system messages (MAC commands): <a href="https://learn.semtech.com/mod/book/view.php?id=173&amp;chapterid=138" target="_blank" class="external-link">3 - Receiving Messages: Handling MAC Commands | Semtech Learning Center</a>
+<ul>
+<li>there is a quite a bit important functionality there, that you will not have to implement in custom parameters</li>
+<li><code>LinkADRReq</code>: change ADR and nbTrans as requested by the server. Makes it possible to set SF/DR values from the server. nbTrans is also very useful to decrease loss (see <a class="internal-link" target="" data-note-icon="" href="#sf-12-the-sweet-poison">#SF12 the sweet poison</a>)</li>
+<li><code>DeviceTimeAns</code>: Get UTC time from the server</li>
+<li><code>DevStatusReq</code>: Transmit battery and network info, so it can be displayed on the server (countless devices implement this wrong, leading to all kinds of horrible workarounds)</li>
+<li><code>LinkCheckAns</code>: Get link margin and number of gateways in reach from server. Useful to adjust SF/DR when ADR is on.</li>
+</ul>
+</li>
+<li>for parking devices in particular (or any device recording a binary change):
+<ul>
+<li>include a timestamp of the last change in the periodic uplink. This enables you to reconstruct some data, if the uplink at the time of change was lost</li>
+</ul>
+</li>
+<li>generally keep in mind that packages will get lost, so provide means to mitigate this
+<ul>
+<li>record data locally and send them again if requested by a downlink</li>
+<li>send change event uplinks, but also periodic uplinks with all of the current values</li>
+</ul>
+</li>
+<li>provide documentation with examples! Examples help understanding and can serve as a first test case for your own implementation.</li>
+</ul>
+<p>My plea to vendors for driver code:</p>
+<ul>
+<li>for the love of god, just write simple driver code</li>
+<li>switch on type bytes, then convert the data (Milesight drivers are a good reference here)</li>
+<li>don't do overly complicated map reduce shit, it will bite you in the ass later and make the driver much less readable, more complicated and way slower than it needs to</li>
+<li>don't convert uplink data to a hex or binary string, just work with the raw bytes</li>
+<li>don't use .slice, just index into the byte array</li>
+<li>yes, JavaScript handles numbers in a weird way, but the rules are consistent. Just learn them.</li>
+</ul>
+<h3 id="wall-of-shame" tabindex="-1">Wall of shame</h3>
+<p>Seriously, don't do this (actual code from an actual professional &quot;production-ready&quot; driver):</p>
+<pre><code class="language-JavaScript">var i = bytesToInt(byte);
+var bm = ('00000000' + Number(i).toString(2)).substr(-8).split('').map(Number).map(Boolean);
+return ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+	.reduce(function (obj, pos, index) {
+		obj[pos] = bm[index];
+		return obj;
+	}, {});
+</code></pre>
+<p>Just do this:</p>
+<pre><code class="language-JavaScript">return {
+	&quot;a&quot;: (byte &amp; 0x80) &gt; 0,
+	&quot;b&quot;: (byte &amp; 0x40) &gt; 0,
+	&quot;c&quot;: (byte &amp; 0x20) &gt; 0,
+	&quot;d&quot;: (byte &amp; 0x10) &gt; 0,
+	&quot;e&quot;: (byte &amp; 0x08) &gt; 0,
+	&quot;f&quot;: (byte &amp; 0x04) &gt; 0,
+	&quot;g&quot;: (byte &amp; 0x02) &gt; 0,
+	&quot;h&quot;: (byte &amp; 0x01) &gt; 0,
+};
+// you can even use binary literals (i.e. 0b01000000 insead of 0x40, etc.)
+// if your environment supports ES6
+</code></pre>
+<p>The following is also pretty bad (I have removed some parts for brevity):</p>
+<pre><code class="language-JavaScript">var sensorEuiLowBytes
+var sensorEuiHighBytes
+var realDataValue = isSpecialDataId(dataID) ? ttnDataSpecialFormat(dataID, dataValue) : ttnDataFormat(dataValue)
+
+...
+      switch (dataID) {
+...
+        case 2:
+          // sensor eui, low bytes
+          sensorEuiLowBytes = realDataValue
+          break
+        case 3:
+          // sensor eui, high bytes
+          sensorEuiHighBytes = realDataValue
+          break
+...
+      }
+...
+
+  // if the complete id received, as &quot;upload_sensor_id&quot;
+  if (sensorEuiHighBytes &amp;&amp; sensorEuiLowBytes) {
+    decoded.messages.unshift({
+      type: 'upload_sensor_id', channel: 1, sensorId: (sensorEuiHighBytes + sensorEuiLowBytes).toUpperCase()
+    })
+  }
+
+...
+
+function ttnDataFormat (str) {
+  var strReverse = littleEndianTransform(str)
+  var str2 = toBinary(strReverse)
+  if (str2.substring(0, 1) === '1') {
+    var arr = str2.split('')
+    var reverseArr = []
+    for (var forArr = 0; forArr &lt; arr.length; forArr++) {
+      var item = arr[forArr]
+      if (parseInt(item) === 1) {
+        reverseArr.push(0)
+      } else {
+        reverseArr.push(1)
+      }
+    }
+    var num = parseInt(reverseArr.join(''), 2) + 1
+    return parseFloat('-' + num / 1000)
+  }
+  return parseInt(str2, 2) / 1000
+}
+
+// configurable
+function ttnDataSpecialFormat (dataId, str) {
+  var strReverse = littleEndianTransform(str)
+  if (dataId === 2 || dataId === 3) {
+    return strReverse.join('')
+  }
+
+  // handle unsigned number
+  var str2 = toBinary(strReverse)
+  var dataArray = []
+  switch (dataId) {
+...
+    case 7:
+      // battery &amp;&amp; interval
+      return {
+        interval: parseInt(str2.substr(0, 16), 2), power: parseInt(str2.substr(-16, 16), 2)
+      }
+    case 9:
+      let dataValue = {
+        detectionType: parseInt(str2.substring(0, 8), 2),
+        modelId: parseInt(str2.substring(8, 16), 2),
+        modelVer: parseInt(str2.substring(16, 24), 2)
+      }
+      // 01010000
+      return dataValue
+  }
+}
+</code></pre>
+<p>You have <code>realDataValue</code>, which can either be a Number, a string or two different types of structs! <code>realDataValue</code> is then copied to two other variables. So everywhere you want to work with any of these 3 vars, you would have to check which type you are working with! Which the code does not do: <code>(sensorEuiHighBytes + sensorEuiLowBytes).toUpperCase()</code>. At the moment this might be okay, since this codepath is only called with strings. But that is dangerous implicit knowledge with a high potential to explode at some point.<br>
+Don't merge codepaths that do different things! Instead of working with a mystery object, explicitly parse the data at the point where you know which data to expect (switch on type bytes, then do the conversion from bytes to whatever data you need).<br>
+Then there is also this gem:</p>
+<pre><code class="language-JavaScript">var num = parseInt(reverseArr.join(''), 2) + 1
+return parseFloat('-' + num / 1000)
+</code></pre>
+<p>Converting a string to an int, to convert it back to a string to negate it, to be converted into a float (which ironically can become NaN if num is already negative). A better solution is left as an exercise to the reader.</p>
+<h2 id="installing-the-things-stack-on-an-raspberry-pi-in-2025" tabindex="-1">Installing The Things Stack on an RaspberryPi in 2025</h2>
+<p>This basically is an updated version of this &quot;official&quot; guide: <a href="https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network" target="_blank" class="external-link">Deploy The Things Stack  in your local network</a></p>
+<h3 id="what-do-you-need" tabindex="-1">What do you need?</h3>
+<ul>
+<li>Raspberry Pi with MicroSD card
+<ul>
+<li>I used a RaspberryPi 4 with 8GB of RAM (though looking at <code>top</code> with tts running, 4GB are more than enough for a small/test setup)</li>
+</ul>
+</li>
+<li>A Local Network (WiFi, but Ethernet can also be used)
+<ul>
+<li>DHCP Server (that assigns a static IP address to your Raspeberry Pi)</li>
+<li>DNS Records or DNS Server in your local network (optional)</li>
 </ul>
 </li>
 </ul>
-<h2 id="installing-the-things-stack-on-an-raspberry-pi-in-2025" tabindex="-1">Installing The Things Stack on an RaspberryPi in 2025</h2>
-<p>Follow this guide:<br>
-<a href="https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network" target="_blank" class="external-link">https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network</a><br>
-I also used a RaspberryPi 4 with 8GB of RAM (though looking at <code>top</code> 4GB are more than enough for a small/test setup)</p>
-<p>We install the open-source version of TTS and skip all steps that say so (which it usually says after the step, so beware!).</p>
-<p>NOTE: Make the following changes (roughly in order as they appear in the guide)</p>
-<p>To add the docker apt repository run this instead (backslash removed):</p>
+<h3 id="end-result" tabindex="-1">End result</h3>
+<p>In the end you will get a working open source installation of The Things Stack on your Raspberry Pi with a gateway connected to it for sending and receiving data. Everything is connected locally through WiFi or Ethernet and without TLS (so http only). You can use this as a private LoRaWAN setup (e.g. for testing).<br>
+This guide will focus on the open-source version.</p>
+<h3 id="setting-up-the-pi" tabindex="-1">Setting up the Pi</h3>
+<p><strong>Install the Raspberry Pi Operating System:</strong> <a href="https://www.raspberrypi.org/software" target="_blank" class="external-link">https://www.raspberrypi.org/software</a></p>
+<ul>
+<li>Download the Raspberry Pi Imager.</li>
+<li>Start the Raspberry Pi Imager, select Raspberry Pi OS (Other) &gt; Raspberry Pi OS Lite (64-bit)</li>
+<li>Select the SD card.</li>
+<li>Click Write (you may have to enter your password)</li>
+<li>When promted if you want to apply or change settings, click &quot;Change settings&quot;</li>
+<li>Here you can set the mDNS address (I chose <code>thingsstack.local</code>), configure your username and password, configure WiFi and enable SSH. You should do all of these steps, since it saves you from connecting a monitor and keyboard to the Pi. You then can do the rest of the installation via SSH.</li>
+<li>When it's finished, take the SD card and slide it into your Raspberry Pi. The first time you power on your Raspberry Pi it may restart a couple of times, but eventually you'll see the login prompt or are able connect via SSH.</li>
+</ul>
+<p><strong>If you missed setting up WiFi or SSH in the imager:</strong></p>
+<ul>
+<li>Connect a monitor and keyboard to the Pi</li>
+<li>Login with your username and password (default is <code>pi</code> and <code>raspberry</code>)</li>
+<li>Run <code>sudo raspi-config</code> from the shell for the general configuration tool</li>
+<li>More info here: <a href="https://www.raspberrypi.com/documentation/computers/configuration.html" target="_blank" class="external-link">Configuration - Raspberry Pi Documentation</a></li>
+</ul>
+<p><strong>Find out the IP of your Pi and connect to it via SSH</strong></p>
+<ul>
+<li>If a monitor is connected, you can find it in the login promt or during boot (&quot;My IP address is:&quot;)</li>
+<li>Else check the DHCP leases in your router or do an IP scan</li>
+<li>On your PC run <code>ssh username@ip</code> with the username you setup for the pi (default <code>pi</code>) and the IP you just looked up</li>
+</ul>
+<h3 id="installation" tabindex="-1">Installation</h3>
+<p><strong>Update packages</strong></p>
+<ul>
+<li>Run <code>sudo apt-get update</code> and afterwards <code>apt-get upgrade</code>, which will update all packages to their latest versions</li>
+</ul>
+<p><strong>Install docker</strong></p>
+<ul>
+<li>download Docker's GPG key</li>
+</ul>
+<pre><code>curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</code></pre>
+<ul>
+<li>add their apt repository</li>
+</ul>
 <pre><code>echo \ &quot;deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
 </code></pre>
-<p>From the &quot;Next we'll install The Things Stack:&quot; chapter onwards they put multiple commands on one line separated by $ (likely just a HTML/layout error).<br>
-These will not work when just copy and pasted.<br>
-You will have to copy the commands one-by-one and run them individually (without the $).</p>
-<p>The URL to the docker-compose.yml has moved to:<br>
-<a href="https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml" target="_blank" class="external-link">https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml</a></p>
-<p>You do not need to change the docker-compose.yml. It seems to work fine with the default values (version 3.7, postgreSQL latest, etc.) as of 07/25.</p>
-<p>Don't forget to run <code>docker-compose pull</code> at the end of the install chapter (it is not marked as a command).</p>
-<p>Use the IP as HOSTNAME, &quot;thingsstack.local&quot; did not work and would result in OAuth errors after trying to log in (though you can still use it to open the webpage as a user).</p>
-<p>To use the stack.env file in docker compose, add <code>env_file: stack.env</code> to the stack block in docker-compose.yml<br>
-see <a href="https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute" target="_blank" class="external-link">https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute</a> for more info</p>
-<p>Skip the packet broker steps.</p>
-<p>Use <code>migrate</code> instead of <code>init</code> when initializing the database.</p>
-<p>For most of the commands in the &quot;initialize&quot; chapter, you will need to remove the backslashes \ from the commands.<br>
-They are to escape line breaks, but the commands render without line breaks, probably because someone fucked up the rendering of the page.</p>
-<pre><code>docker-compose run --rm stack is-db create-admin-user --id admin --email your@email.com
-docker-compose run --rm stack is-db create-oauth-client --id cli --name &quot;Command Line Interface&quot; --owner admin --no-secret --redirect-uri &quot;local-callback&quot; --redirect-uri &quot;code&quot;
-docker-compose run --rm stack is-db create-oauth-client --id console --name &quot;Console&quot; --owner admin --secret &quot;${CONSOLE_SECRET}&quot; --redirect-uri &quot;/console/oauth/callback&quot; --logout-redirect-uri &quot;/console&quot;
+<ul>
+<li>Run <code>sudo apt-get update</code> again and then install docker and its tools using the following</li>
+</ul>
+<pre><code>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 </code></pre>
-<p>When creating the admin user, it seems like the password has to be entered rather quickly. Else you get a &quot;context deadline exceeded&quot; error and need to try again.</p>
-<p>To enable automatic startup of the stack at boot:</p>
+<p>If anything fails during this step, check the official guide: <a href="https://docs.docker.com/engine/install/debian" target="_blank" class="external-link">Debian | Docker Docs</a></p>
+<p><strong>Setup docker</strong></p>
+<ul>
+<li>Add a docker group: <code>sudo groupadd docker</code></li>
+<li>Add the current user: <code>sudo usermod -aG docker $USER</code></li>
+<li>Load the group: <code>newgrp docker</code></li>
+<li>Now docker should work without errors. To try run <code>docker ps</code><br>
+If anything fails during this step, check the official guide: <a href="https://docs.docker.com/engine/install/linux-postinstall" target="_blank" class="external-link">Post-installation steps | Docker Docs</a></li>
+</ul>
+<p><strong>Next, we'll install The Things Stack</strong></p>
+<ul>
+<li>Setup a folder for the installation and assign it to your user (which you chose when setting up the image, default is <code>pi</code>). The folder can be something different, if you like:</li>
+</ul>
+<pre><code>sudo mkdir -p /app/the-things-stack
+
+sudo chown username:username /app/the-things-stack 
+
+cd /app/the-things-stack
+</code></pre>
+<ul>
+<li>Download the example docker-compose file from the TTI website</li>
+</ul>
+<pre><code>curl -sSL -o docker-compose.yml https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml
+</code></pre>
+<ul>
+<li>There is no need to change the versions in the docker-compose.yml. As of 07/25 everything works well with the latest versions (version 3.7, postgreSQL latest, things-stack latest, etc.)</li>
+<li>At the time of writing it is using the following versions (you may fix these, if it stops working any time in the future)
+<ul>
+<li>postgres: 17.5-1.pgdg120+1</li>
+<li>redis: 8.0.3</li>
+<li>stack: 3.34.1.e22b9512d</li>
+</ul>
+</li>
+<li>Install everything by running <code>docker compose pull</code></li>
+</ul>
+<p><strong>Time to configure The Things Stack</strong></p>
+<ul>
+<li>At this point you have to chose, whether to address the Pi via IP or a domain (if you did setup DNS previously). IP will always work without further setup, but comes with some <a class="internal-link" target="" data-note-icon="" href="#changing-the-ip">caveats</a> (i.e. I strongly recommend setting a static IP for the Raspberry Pi). If you have a domain to use, that is probably preferrable.</li>
+<li>NOTE: The mDNS address (xyz.local) will not work here! Logging in would result in OAuth errors for me.</li>
+<li>Enter one of the following to set an environment variable, we are going to use later:</li>
+</ul>
+<pre><code>HOSTNAME=192.168.178.43
+
+HOSTNAME=demo.thethingsconference.com
+</code></pre>
+<ul>
+<li>Set up some random secrets for the Console</li>
+</ul>
+<pre><code>CONSOLE_SECRET=$(openssl rand -hex 16)
+</code></pre>
+<ul class="task-list">
+<li class="task-list-item">
+<p><input type="checkbox" id="cbx_0" disabled="true"><label for="cbx_0"> TODO: Check ttn-lw-stack-docker.yml file</label></p>
+</li>
+<li>
+<p>We'll first have The Things Stack write a full list of environment variables to a file, and then I'll create an empty file so that we can cherry-pick the environment variables we want to override.</p>
+</li>
+</ul>
+<pre><code>docker compose run --rm stack config --env &gt; stack.default.env
+
+touch stack.env
+</code></pre>
+<ul>
+<li>Disable TLS listeners (since we will not be using https)</li>
+</ul>
+<pre><code>grep LISTEN_TLS stack.default.env | sed -e &quot;s/:888[0-9]//&quot; &gt;&gt; stack.env
+
+grep PUBLIC_TLS_ADDRESS stack.default.env | sed -e &quot;s/localhost:888[0-9]//&quot; &gt;&gt; stack.env
+</code></pre>
+<ul>
+<li>Change every instance of <code>localhost</code> to the hostname we set earlier (this includes MQTT ports 1881..1883)</li>
+</ul>
+<pre><code>grep localhost:188[123] stack.default.env | sed -e &quot;s/localhost/$HOSTNAME/&quot; &gt;&gt; stack.env
+</code></pre>
+<ul>
+<li>Remove port 1885 (not needed for http only)</li>
+</ul>
+<pre><code>grep localhost:1885 stack.default.env | sed -e &quot;s/localhost:1885/$HOSTNAME/&quot; &gt;&gt; stack.env
+</code></pre>
+<ul>
+<li>Change every instance of https, wss, mqtts to their insecure variants</li>
+</ul>
+<pre><code>grep 's://localhost:888' stack.default.env | sed -e &quot;s|s://localhost:888|://$HOSTNAME:188|&quot; &gt;&gt; stack.env
+</code></pre>
+<ul>
+<li>Write secret to file</li>
+</ul>
+<pre><code>echo TTN_LW_CONSOLE_OAUTH_CLIENT_SECRET=$CONSOLE_SECRET &gt;&gt; stack.env
+</code></pre>
+<ul>
+<li>For HTTP cookie secrets, just write some random values</li>
+</ul>
+<pre><code>echo TTN_LW_HTTP_COOKIE_BLOCK_KEY=$(openssl rand -hex 32) &gt;&gt; stack.env
+
+echo TTN_LW_HTTP_COOKIE_HASH_KEY=$(openssl rand -hex 64) &gt;&gt; stack.env
+</code></pre>
+<ul>
+<li>Remove quotes (docker compose does not like these)</li>
+</ul>
+<pre><code>sed -i'' -e 's/&quot;//g' stack.env
+</code></pre>
+<ul>
+<li>Check if the file looks good: <code>cat stack.env</code></li>
+<li>To set the environment file, edit <code>docker-compose.yml</code> and add <code>env_file: stack.env</code> to the <code>stack</code> block at the bottom.
+<ul>
+<li>see <a href="https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute" target="_blank" class="external-link">https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute</a> for more info</li>
+</ul>
+</li>
+</ul>
+<p><strong>Now let's initialize The Things Stack</strong></p>
+<ul>
+<li>Initialize the database</li>
+</ul>
+<pre><code>docker compose run --rm stack is-db migrate
+</code></pre>
+<ul>
+<li>Create the admin user (change e-mail). Enter the password fairly quickly, else you will get a &quot;context deadline exceeded&quot; error and need to try again</li>
+</ul>
+<pre><code>docker compose run --rm stack is-db create-admin-user --id admin --email your@email.com
+</code></pre>
+<ul>
+<li>Setup OAuth</li>
+</ul>
+<pre><code>docker compose run --rm stack is-db create-oauth-client --id cli --name &quot;Command Line Interface&quot; --owner admin --no-secret --redirect-uri &quot;local-callback&quot; --redirect-uri &quot;code&quot;
+
+docker compose run --rm stack is-db create-oauth-client --id console --name &quot;Console&quot; --owner admin --secret &quot;${CONSOLE_SECRET}&quot; --redirect-uri &quot;/console/oauth/callback&quot; --logout-redirect-uri &quot;/console&quot;
+</code></pre>
+<p><strong>Time to start The Things Stack</strong></p>
+<ul>
+<li>Start everything up</li>
+</ul>
+<pre><code>docker compose up -d stack
+</code></pre>
+<ul>
+<li>Watch the logs</li>
+</ul>
+<pre><code>docker compose logs -f stack
+</code></pre>
+<ul>
+<li>If you setup mDNS during Raspberry Pi image creation you can go to that domain in your browser (xyz.local), else enter the IP address of the PI to open up the GUI</li>
+<li>Login using the admin credentials you just created</li>
+<li>Enable automatic startup of the thingsstack at boot
+<ul>
+<li>services in the docker compose file are set to <code>restart: unless-stopped</code>, so they will automatically boot-up when not manually shut down. i.e. if you just disconnected the power, they will boot up again. If you shut them down properly (<code>docker compose down -d stack</code>), they will not come back.</li>
+<li>Change the setting to <code>restart: always</code>, if you want them to always come back.</li>
+</ul>
+</li>
+</ul>
 <pre><code>sudo systemctl enable docker
 </code></pre>
-<p>The services in the docker compose file are set to <code>restart: unless-stopped</code>, so they will automatically boot-up when not manually shut down. i.e. if you just disconnected the power, they will boot up again. If you shut them down properly (<code>docker compose down -d stack</code>), they will not come back.<br>
-Change the setting to <code>restart: always</code>, if you want them to always come back.</p>
-<p>Use <code>docker compose up -d stack</code> instead of &quot;docker-compose up -d stack&quot;. The latter only worked like 3 times then spat out weird errors about &quot;ContainerConfig&quot;.<br>
-see: <a href="https://askubuntu.com/questions/1508129/docker-compose-giving-containerconfig-errors-after-update-today" target="_blank" class="external-link">https://askubuntu.com/questions/1508129/docker-compose-giving-containerconfig-errors-after-update-today</a><br>
-(have not tried to use it before this, but might be worth a try if previous docker-compose commands throw errors as well).</p>
-<p>I have skipped the CLI setup at the end for now.</p>
+<p><strong>Setup the CLI</strong></p>
+<ul>
+<li>Install the CLI tool on your laptop (not the raspberryPi): <a href="https://www.thethingsindustries.com/docs/concepts/features/cli/installing-cli/" target="_blank" class="external-link">Installing the CLI | The Things Stack for LoRaWAN</a></li>
+<li>Here replace <code>YOUR_DOMAIN_OR_IP</code> with the address you use to access the Raspberry Pi</li>
+</ul>
+<pre><code>ttn-lw-cli use YOUR_DOMAIN_OR_IP --grpc-port 1884
+</code></pre>
+<ul>
+<li>A config file should be created next to the cli tool called <code>.ttn-lw-cli.yml</code>, open it for editing</li>
+<li>Change every instance of HTTPS to HTTP</li>
+<li>Set <code>insecure</code> to true</li>
+<li>You should be able to login using <code>tti-lw-cli login</code> (or <code>.\tti-lw-cli.exe login</code> on Windows). It will open your web browser to get an access token, login there if you are not already.</li>
+</ul>
+<h3 id="gateway-installation" tabindex="-1">Gateway Installation</h3>
 <p>see <a href="https://www.thethingsindustries.com/docs/hardware/gateways/concepts/adding-gateways/" target="_blank" class="external-link">Adding Gateways | The Things Stack for LoRaWAN</a> and <a href="https://www.thethingsindustries.com/docs/hardware/gateways/concepts/lora-basics-station/" target="_blank" class="external-link">LoRa Basics™ Station | The Things Stack for LoRaWAN</a> for adding Gateways.</p>
+<p>Using <a href="https://www.thethingsindustries.com/docs/hardware/gateways/concepts/lora-basics-station/" target="_blank" class="external-link">Basic Station</a> did not work with <a href="https://knowledgehub.tektelic.com/basic-station-interface-for-ttnv3" target="_blank" class="external-link">Tektelik Micro Gateways</a>. There were TLS errors (probably because the connection to the PI is not secured) - even though TLS was disabled in the configuration on the gateway (maybe it's a gateway bug?).</p>
+<p>Installation of the <a href="https://knowledgehub.tektelic.com/connecting-kona-gateways-to-3rd-party-network-servers" target="_blank" class="external-link">UDP Package Forwarders</a> worked instead (Tektelik calls is &quot;Kona Package Forwarder&quot;, installation instructions for TTN further down the page linked above). To setup you will need the KonaFT tool. Chose the &quot;SNMP V2c&quot; protocol. Username and password can be found on the &quot;KONA Test Summary Certificate&quot; which comes with the gateway.</p>
+<h3 id="troubleshooting" tabindex="-1">Troubleshooting</h3>
+<p>If you are getting &quot;OAuth&quot; errors when trying to login to the ThingsStack GUI, there probably is a mismatch between the IP you are accessing the GUI on and the one setup for the auth-service in the <code>stack.env</code> file.<br>
+Solution: Confirm the IP of the Raspberry Pi is the same as the one in <code>stack.env</code>, change it if necessary and restart the docker container. See <a class="internal-link" target="" data-note-icon="" href="#changing-the-ip">below</a> for caveats.</p>
+<h3 id="changing-the-ip" tabindex="-1">Changing the IP</h3>
+<p>If the IP of the RaspberryPi ever changes, you need to change the IPs in the <code>stack.env</code> file, close the application with <code>docker compose down</code> (if it is running) and restart it with <code>docker compose up -d stack</code> (<code>docker compose restart</code> did not work for me).</p>
+<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> IP changes<br></div></div>
+<div class="callout-content">
+<p>
+You should only do this while you have not registered any device yet. This is also why using a domain is preferred.</p>
+</div></div>
+<p>Applications and Devices are registered on a &quot;cluster&quot;, which is determined by the IP of the Server (i.e. the RaspberryPi) at the time of creation. If the IP changes, you will need to change the &quot;cluster&quot; of the application using the CLI:</p>
+<pre><code>ttn-lw-cli applications set APP_ID --network-server-address NEW_IP --application-server-address NEW_IP --join-server-address NEW_IP
+</code></pre>
+<p>see for more info: <a href="https://www.thethingsindustries.com/docs/ttn-lw-cli/ttn-lw-cli_applications_set/" target="_blank" class="external-link">ttn-lw-cli applications set | The Things Stack for LoRaWAN</a></p>
+<div class="callout" data-callout="fail"><div class="callout-title"><div class="callout-title-inner"> Updating device cluster<br></div></div>
+<div class="callout-content">
+<p>
+Devices will also need to be updated. However I have not found a way to do this. Running equivalent commands only results in errors like <code>Registered Network Server address of end device &quot;xyz&quot; does not match CLI configuration</code>. I was also unable to delete the device. So beware!</p>
+</div></div>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
 <aside>
@@ -459,9 +811,29 @@ On this page
 </li>
 <li><a href="#devices-sensors">Devices / Sensors</a>
 </li>
-<li><a href="#drivers-firmware">Drivers / Firmware</a>
+<li><a href="#decoders-and-firmware">Decoders and Firmware</a>
+<ol>
+<li><a href="#wall-of-shame">Wall of shame</a>
+</li>
+</ol>
 </li>
 <li><a href="#installing-the-things-stack-on-an-raspberry-pi-in-2025">Installing The Things Stack on an RaspberryPi in 2025</a>
+<ol>
+<li><a href="#what-do-you-need">What do you need?</a>
+</li>
+<li><a href="#end-result">End result</a>
+</li>
+<li><a href="#setting-up-the-pi">Setting up the Pi</a>
+</li>
+<li><a href="#installation">Installation</a>
+</li>
+<li><a href="#gateway-installation">Gateway Installation</a>
+</li>
+<li><a href="#troubleshooting">Troubleshooting</a>
+</li>
+<li><a href="#changing-the-ip">Changing the IP</a>
+</li>
+</ol>
 </li>
 </ol>
 </nav>

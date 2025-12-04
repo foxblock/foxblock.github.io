@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-10-06T20:44:20Z</updated>
+    <updated>2025-12-04T20:48:41Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -383,7 +383,7 @@ $$
                 Obsidian
                 
             </title>
-            <updated>2025-05-28T21:08:51.808Z</updated>
+            <updated>2025-10-29T15:05:21.586Z</updated>
             <id>https://janek.ing/tech/obsidian/</id>
             <content type="html">
                 &lt;h2 id=&quot;callouts&quot; tabindex=&quot;-1&quot;&gt;Callouts&lt;/h2&gt;
@@ -516,6 +516,9 @@ int main(int argc, char **argv) { }
 &amp;gt; int main(int argc, char **argv) { }
 &amp;gt; ```
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;links-to-page-or-heading-with-custom-text&quot; tabindex=&quot;-1&quot;&gt;Links to page or heading with custom text&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#callouts&quot;&gt;Like this&lt;/a&gt;&lt;br /&gt;
+&lt;code&gt;[[#Callouts|Like this]]&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&quot;getting-rid-of-unused-properties&quot; tabindex=&quot;-1&quot;&gt;Getting rid of unused properties&lt;/h2&gt;
 &lt;p&gt;Once you used a property it will always show up in auto-complete. Very annoying if you misspelled it and corrected it later.&lt;br /&gt;
 Open &lt;code&gt;[path to your vault]/.obsidian/types.json&lt;/code&gt; and remove the unneeded properties. You can also just adjust property type there.&lt;br /&gt;
@@ -652,12 +655,12 @@ this.status({fill:&amp;quot;green&amp;quot;,shape:&amp;quot;dot&amp;quot;,text:&
                 LoRaWAN
                 
             </title>
-            <updated>2025-08-22T13:16:49.734Z</updated>
+            <updated>2025-12-04T13:51:58.940Z</updated>
             <id>https://janek.ing/tech/lo-ra-wan/</id>
             <content type="html">
                 &lt;h2 id=&quot;sf-12-the-sweet-poison&quot; tabindex=&quot;-1&quot;&gt;SF12 the sweet poison&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;should not use SF11 or SF12 usually&lt;/li&gt;
+&lt;li&gt;you should not use SF11 or SF12 usually&lt;/li&gt;
 &lt;li&gt;SF9 with nbTrans = 3 can yield better results
 &lt;ul&gt;
 &lt;li&gt;3 total transmissions of the same packet, server will do de-duplication&lt;/li&gt;
@@ -669,7 +672,7 @@ this.status({fill:&amp;quot;green&amp;quot;,shape:&amp;quot;dot&amp;quot;,text:&
 &lt;li&gt;higher SF gives you more range and penetration in theory. In practice it&#39;s usually not the range that kills you but external disruptions&lt;/li&gt;
 &lt;li&gt;in my testing, we reduced loss from 10% to &amp;lt;2% by switching from SF10+ to SF7..9 with nbTrans=3
 &lt;ul&gt;
-&lt;li&gt;use case was parking sensors within 1km of the next gateway&lt;/li&gt;
+&lt;li&gt;use case was parking sensors within 1-2km of the next gateway&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;you would be surprised how far you can get with SF7&lt;/li&gt;
@@ -677,12 +680,13 @@ this.status({fill:&amp;quot;green&amp;quot;,shape:&amp;quot;dot&amp;quot;,text:&
 &lt;p&gt;Talk from Semtech about nbTrans: &lt;a href=&quot;https://www.youtube.com/watch?v=VmYuItA6q4I&amp;amp;list=RDCMUCv85CXnZUXEKnlZpQapTAwQ&amp;amp;start_radio=1&amp;amp;t=450s&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;LoRaWAN and the IoT - Olivier Seller (Semtech)&lt;/a&gt; (7:20 to 22:00)&lt;/p&gt;
 &lt;h2 id=&quot;adr&quot; tabindex=&quot;-1&quot;&gt;ADR&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;leave ADR on device side (never fix datarate/SF on the device)&lt;/li&gt;
-&lt;li&gt;modern network servers will let you adjust SF for individual devices over the network, so configuration becomes much easier (not via device driver downlinks but standard LoRa &lt;em&gt;LinkADRReq&lt;/em&gt; packages, so compatible with all devices)&lt;/li&gt;
+&lt;li&gt;leave ADR on device side on (never fix datarate/SF in the device config)&lt;/li&gt;
+&lt;li&gt;modern network servers will let you adjust SF for individual devices over the network, which allows remote configuration (not via device driver downlinks but standard LoRa &lt;code&gt;LinkADRReq&lt;/code&gt; MAC commands, so compatible with all devices)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;confirmed-uplinks&quot; tabindex=&quot;-1&quot;&gt;Confirmed uplinks&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;don&#39;t use these, unless you really have to and understand the implications&lt;/li&gt;
+&lt;li&gt;don&#39;t use these, unless you really have to and understand the implications
+&lt;ul&gt;
 &lt;li&gt;they use a downlink&lt;/li&gt;
 &lt;li&gt;lora gateways are only half-duplex, so they cannot receive while transmitting and vice versa&lt;/li&gt;
 &lt;li&gt;professional gateways have 16 uplink channels (consumer grade hardware: 8 or less), but only 1 channel for downlinks&lt;/li&gt;
@@ -691,20 +695,27 @@ this.status({fill:&amp;quot;green&amp;quot;,shape:&amp;quot;dot&amp;quot;,text:&
 &lt;li&gt;though the downlink blocks only one gateway, while any uplink might block one channel of any gateway in range&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;also in my testing confirmed uplinks may be lost still, so you cannot even rely on this for 100% coverage&lt;/li&gt;
-&lt;li&gt;it&#39;s a better idea to use nbTrans, if you just want to get as many messages as possible (see &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#sf-12-the-sweet-poison&quot;&gt;#SF12 the sweet poison&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;can use confirmed uplinks to test network access, record (approx) time of dropped connection (to retransmit dater later), and start join process again
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;in my testing, confirmed uplinks may be lost still, so you cannot even rely on this for 100% coverage&lt;/li&gt;
+&lt;li&gt;it&#39;s a better idea to use &lt;code&gt;nbTrans&lt;/code&gt;, if you just want to reduce loss (see &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#sf-12-the-sweet-poison&quot;&gt;#SF12 the sweet poison&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;can use confirmed uplinks to test network access, record (approx.) time of dropped connection (to retransmit dater later), and start join process again
 &lt;ul&gt;
-&lt;li&gt;transmit every 10th or 20th uplink as confirmed (ideally make this a setting based on count OR time)&lt;/li&gt;
-&lt;li&gt;can also use &lt;em&gt;LinkCheckReq&lt;/em&gt; network messages for this purpose&lt;/li&gt;
+&lt;li&gt;transmit every 10th or 20th uplink as confirmed (ideally make this available as a setting based on uplink count OR time - count works well with periodic uplinks, time works well with sporadic events)&lt;/li&gt;
+&lt;li&gt;can also use &lt;a href=&quot;https://learn.semtech.com/mod/book/view.php?id=172&amp;amp;chapterid=108&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;LinkCheckReq&lt;/a&gt; network messages for this purpose, which are more lightweight (but they also incur a downlink!)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;especially do not send &lt;em&gt;every&lt;/em&gt; uplink as confirmed or send &lt;code&gt;LinkCheckReq&lt;/code&gt; after every uplink!
+&lt;ul&gt;
+&lt;li&gt;if you really need to make sure every message is received, LoRaWAN is the wrong technology to use!&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Meta study about confirmed traffic: &lt;a href=&quot;https://ieeexplore.ieee.org/document/8952708&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;A Survey on the Viability of Confirmed Traffic in a LoRaWAN | IEEE Journals &amp;amp; Magazine | IEEE Xplore&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;devices-sensors&quot; tabindex=&quot;-1&quot;&gt;Devices / Sensors&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;choose devices which let you configure everything via downlinks. It will make your life much easier, because you can configure them remotely. Getting every parameter right a-priori is hard. You will learn a lot while doing a use-case and will want to adjust.&lt;/li&gt;
-&lt;li&gt;Chose a manufacturer that supplies their full payload description and ideally TTN driver. Look at the documentation carefully. Often it is not complete
+&lt;li&gt;choose devices which let you configure everything via downlinks. It will make your life much easier, because you can configure them remotely. Getting every parameter right a-priori is hard. You will learn a lot while doing a use-case and will want to adjust on the fly&lt;/li&gt;
+&lt;li&gt;Chose a manufacturer that supplies their full payload description and ideally a TTN driver. Look at the documentation carefully. Often it is not complete
 &lt;ul&gt;
 &lt;li&gt;avoid companies that make you pay for this&lt;/li&gt;
 &lt;li&gt;Sensoterra is really bad (uplinks are encrypted forcing you to use their cloud services)&lt;/li&gt;
@@ -713,37 +724,10 @@ this.status({fill:&amp;quot;green&amp;quot;,shape:&amp;quot;dot&amp;quot;,text:&
 &lt;li&gt;Having a way to locally configure the sensor is a big plus. Speeds up rollouts and early iterations (since you do not have to wait for the downlink response and downlinks might get lost). I like the NFC-based approaches (see Milesight and Elsys devices). USB is fine too, but usually more cumbersome.&lt;/li&gt;
 &lt;li&gt;I can generally recommend devices by Milesight and Abeeway&lt;/li&gt;
 &lt;li&gt;did not have good luck with RAK devices (hardware was unreliable)&lt;/li&gt;
+&lt;li&gt;Kerlink Wanesy Wave was also a failure. The device would often forget it&#39;s configuration parameters and only send one join request per startup, so it would get stuck offline if that one join request was lost.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;drivers-firmware&quot; tabindex=&quot;-1&quot;&gt;Drivers / Firmware&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;my plea to vendors: for the love of god, just write simple driver code&lt;/li&gt;
-&lt;li&gt;switch on type bytes and convert the data (Milesight drivers are a good reference here)&lt;/li&gt;
-&lt;li&gt;don&#39;t do overly complicated map reduce shit, it will bite you in the ass later and make the driver much less readable, more complicated and way slower than it needs to&lt;/li&gt;
-&lt;li&gt;don&#39;t convert anything to a hex string, just work with the raw bytes&lt;/li&gt;
-&lt;li&gt;don&#39;t use .slice, just index into the byte array&lt;/li&gt;
-&lt;li&gt;yes, JavaScript handles numbers in a weird way, but the rules are consistent. Just learn them.&lt;br /&gt;
-Seriously, don&#39;t do this (actual code from an actual &amp;quot;production-ready&amp;quot; driver):&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;    var i = bytesToInt(byte);
-    var bm = (&#39;00000000&#39; + Number(i).toString(2)).substr(-8).split(&#39;&#39;).map(Number).map(Boolean);
-    return [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;]
-        .reduce(function (obj, pos, index) {
-            obj[pos] = bm[index];
-            return obj;
-        }, {});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Just do this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;    return {
-        &amp;quot;a&amp;quot;: (byte &amp;amp; 0x80) &amp;gt; 0,
-        &amp;quot;b&amp;quot;: (byte &amp;amp; 0x40) &amp;gt; 0,
-        &amp;quot;c&amp;quot;: (byte &amp;amp; 0x20) &amp;gt; 0,
-        &amp;quot;d&amp;quot;: (byte &amp;amp; 0x10) &amp;gt; 0,
-        &amp;quot;e&amp;quot;: (byte &amp;amp; 0x08) &amp;gt; 0,
-        &amp;quot;f&amp;quot;: (byte &amp;amp; 0x04) &amp;gt; 0,
-        &amp;quot;g&amp;quot;: (byte &amp;amp; 0x02) &amp;gt; 0,
-        &amp;quot;h&amp;quot;: (byte &amp;amp; 0x01) &amp;gt; 0,
-    };
-&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;decoders-and-firmware&quot; tabindex=&quot;-1&quot;&gt;Decoders and Firmware&lt;/h2&gt;
+&lt;p&gt;My wishlist for a device firmware:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;add a downlink that makes the device send its config in an uplink
 &lt;ul&gt;
@@ -752,48 +736,413 @@ Seriously, don&#39;t do this (actual code from an actual &amp;quot;production-re
 &lt;/li&gt;
 &lt;li&gt;make everything configurable via downlink
 &lt;ul&gt;
-&lt;li&gt;no need for SF settings though, Lora can handle that by default (&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#adr&quot;&gt;#ADR&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;especially the periodic update interval&lt;/li&gt;
+&lt;li&gt;no need for SF settings though, Lora can handle that with MAC commands (&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#adr&quot;&gt;#ADR&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;make the sensor confirm each configuration by sending the new values back&lt;/li&gt;
+&lt;li&gt;keep the configuration simple. It will make the operators and decoder developers job much easier.
+&lt;ul&gt;
+&lt;li&gt;again Milesight is doing a good job in this regard&lt;/li&gt;
+&lt;li&gt;Watteco ino devices are particularly bad example. Their configuration is ridiculously complex for no reason inherit whatsoever.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Ideally make it possible to configure individual values without having to send the current values of parameters you don&#39;t want to change&lt;/li&gt;
+&lt;li&gt;keep packages as small as possible
+&lt;ul&gt;
+&lt;li&gt;only transmit necessary information&lt;/li&gt;
+&lt;li&gt;use sensible data types (e.g. ambient temperature can be compressed down to an int8 with 0,2 precision and limited range)&lt;/li&gt;
+&lt;li&gt;work with standard data types (int8/uint16/etc.). Most of the time, using special types to reduce size by a few bits (or splitting them over parts of a byte to fill unused bits of other fields) is not worth the cost of added complexity&lt;/li&gt;
+&lt;li&gt;use the port! It is transmitted every time, so you essentially get one uint8 for free (or rather pay the cost anyway if you don&#39;t use it)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;properly implement all the system messages (MAC commands): &lt;a href=&quot;https://learn.semtech.com/mod/book/view.php?id=173&amp;amp;chapterid=138&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;3 - Receiving Messages: Handling MAC Commands | Semtech Learning Center&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;there is a quite a bit important functionality there, that you will not have to implement in custom parameters&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LinkADRReq&lt;/code&gt;: change ADR and nbTrans as requested by the server. Makes it possible to set SF/DR values from the server. nbTrans is also very useful to decrease loss (see &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#sf-12-the-sweet-poison&quot;&gt;#SF12 the sweet poison&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DeviceTimeAns&lt;/code&gt;: Get UTC time from the server&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DevStatusReq&lt;/code&gt;: Transmit battery and network info, so it can be displayed on the server (countless devices implement this wrong, leading to all kinds of horrible workarounds)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LinkCheckAns&lt;/code&gt;: Get link margin and number of gateways in reach from server. Useful to adjust SF/DR when ADR is on.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;for parking devices in particular (or any device recording a binary change):
+&lt;ul&gt;
+&lt;li&gt;include a timestamp of the last change in the periodic uplink. This enables you to reconstruct some data, if the uplink at the time of change was lost&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;generally keep in mind that packages will get lost, so provide means to mitigate this
+&lt;ul&gt;
+&lt;li&gt;record data locally and send them again if requested by a downlink&lt;/li&gt;
+&lt;li&gt;send change event uplinks, but also periodic uplinks with all of the current values&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;provide documentation with examples! Examples help understanding and can serve as a first test case for your own implementation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My plea to vendors for driver code:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for the love of god, just write simple driver code&lt;/li&gt;
+&lt;li&gt;switch on type bytes, then convert the data (Milesight drivers are a good reference here)&lt;/li&gt;
+&lt;li&gt;don&#39;t do overly complicated map reduce shit, it will bite you in the ass later and make the driver much less readable, more complicated and way slower than it needs to&lt;/li&gt;
+&lt;li&gt;don&#39;t convert uplink data to a hex or binary string, just work with the raw bytes&lt;/li&gt;
+&lt;li&gt;don&#39;t use .slice, just index into the byte array&lt;/li&gt;
+&lt;li&gt;yes, JavaScript handles numbers in a weird way, but the rules are consistent. Just learn them.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;wall-of-shame&quot; tabindex=&quot;-1&quot;&gt;Wall of shame&lt;/h3&gt;
+&lt;p&gt;Seriously, don&#39;t do this (actual code from an actual professional &amp;quot;production-ready&amp;quot; driver):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;var i = bytesToInt(byte);
+var bm = (&#39;00000000&#39; + Number(i).toString(2)).substr(-8).split(&#39;&#39;).map(Number).map(Boolean);
+return [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;]
+	.reduce(function (obj, pos, index) {
+		obj[pos] = bm[index];
+		return obj;
+	}, {});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Just do this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;return {
+	&amp;quot;a&amp;quot;: (byte &amp;amp; 0x80) &amp;gt; 0,
+	&amp;quot;b&amp;quot;: (byte &amp;amp; 0x40) &amp;gt; 0,
+	&amp;quot;c&amp;quot;: (byte &amp;amp; 0x20) &amp;gt; 0,
+	&amp;quot;d&amp;quot;: (byte &amp;amp; 0x10) &amp;gt; 0,
+	&amp;quot;e&amp;quot;: (byte &amp;amp; 0x08) &amp;gt; 0,
+	&amp;quot;f&amp;quot;: (byte &amp;amp; 0x04) &amp;gt; 0,
+	&amp;quot;g&amp;quot;: (byte &amp;amp; 0x02) &amp;gt; 0,
+	&amp;quot;h&amp;quot;: (byte &amp;amp; 0x01) &amp;gt; 0,
+};
+// you can even use binary literals (i.e. 0b01000000 insead of 0x40, etc.)
+// if your environment supports ES6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The following is also pretty bad (I have removed some parts for brevity):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;var sensorEuiLowBytes
+var sensorEuiHighBytes
+var realDataValue = isSpecialDataId(dataID) ? ttnDataSpecialFormat(dataID, dataValue) : ttnDataFormat(dataValue)
+
+...
+      switch (dataID) {
+...
+        case 2:
+          // sensor eui, low bytes
+          sensorEuiLowBytes = realDataValue
+          break
+        case 3:
+          // sensor eui, high bytes
+          sensorEuiHighBytes = realDataValue
+          break
+...
+      }
+...
+
+  // if the complete id received, as &amp;quot;upload_sensor_id&amp;quot;
+  if (sensorEuiHighBytes &amp;amp;&amp;amp; sensorEuiLowBytes) {
+    decoded.messages.unshift({
+      type: &#39;upload_sensor_id&#39;, channel: 1, sensorId: (sensorEuiHighBytes + sensorEuiLowBytes).toUpperCase()
+    })
+  }
+
+...
+
+function ttnDataFormat (str) {
+  var strReverse = littleEndianTransform(str)
+  var str2 = toBinary(strReverse)
+  if (str2.substring(0, 1) === &#39;1&#39;) {
+    var arr = str2.split(&#39;&#39;)
+    var reverseArr = []
+    for (var forArr = 0; forArr &amp;lt; arr.length; forArr++) {
+      var item = arr[forArr]
+      if (parseInt(item) === 1) {
+        reverseArr.push(0)
+      } else {
+        reverseArr.push(1)
+      }
+    }
+    var num = parseInt(reverseArr.join(&#39;&#39;), 2) + 1
+    return parseFloat(&#39;-&#39; + num / 1000)
+  }
+  return parseInt(str2, 2) / 1000
+}
+
+// configurable
+function ttnDataSpecialFormat (dataId, str) {
+  var strReverse = littleEndianTransform(str)
+  if (dataId === 2 || dataId === 3) {
+    return strReverse.join(&#39;&#39;)
+  }
+
+  // handle unsigned number
+  var str2 = toBinary(strReverse)
+  var dataArray = []
+  switch (dataId) {
+...
+    case 7:
+      // battery &amp;amp;&amp;amp; interval
+      return {
+        interval: parseInt(str2.substr(0, 16), 2), power: parseInt(str2.substr(-16, 16), 2)
+      }
+    case 9:
+      let dataValue = {
+        detectionType: parseInt(str2.substring(0, 8), 2),
+        modelId: parseInt(str2.substring(8, 16), 2),
+        modelVer: parseInt(str2.substring(16, 24), 2)
+      }
+      // 01010000
+      return dataValue
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You have &lt;code&gt;realDataValue&lt;/code&gt;, which can either be a Number, a string or two different types of structs! &lt;code&gt;realDataValue&lt;/code&gt; is then copied to two other variables. So everywhere you want to work with any of these 3 vars, you would have to check which type you are working with! Which the code does not do: &lt;code&gt;(sensorEuiHighBytes + sensorEuiLowBytes).toUpperCase()&lt;/code&gt;. At the moment this might be okay, since this codepath is only called with strings. But that is dangerous implicit knowledge with a high potential to explode at some point.&lt;br /&gt;
+Don&#39;t merge codepaths that do different things! Instead of working with a mystery object, explicitly parse the data at the point where you know which data to expect (switch on type bytes, then do the conversion from bytes to whatever data you need).&lt;br /&gt;
+Then there is also this gem:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-JavaScript&quot;&gt;var num = parseInt(reverseArr.join(&#39;&#39;), 2) + 1
+return parseFloat(&#39;-&#39; + num / 1000)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Converting a string to an int, to convert it back to a string to negate it, to be converted into a float (which ironically can become NaN if num is already negative). A better solution is left as an exercise to the reader.&lt;/p&gt;
+&lt;h2 id=&quot;installing-the-things-stack-on-an-raspberry-pi-in-2025&quot; tabindex=&quot;-1&quot;&gt;Installing The Things Stack on an RaspberryPi in 2025&lt;/h2&gt;
+&lt;p&gt;This basically is an updated version of this &amp;quot;official&amp;quot; guide: &lt;a href=&quot;https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Deploy The Things Stack  in your local network&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;what-do-you-need&quot; tabindex=&quot;-1&quot;&gt;What do you need?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Raspberry Pi with MicroSD card
+&lt;ul&gt;
+&lt;li&gt;I used a RaspberryPi 4 with 8GB of RAM (though looking at &lt;code&gt;top&lt;/code&gt; with tts running, 4GB are more than enough for a small/test setup)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;A Local Network (WiFi, but Ethernet can also be used)
+&lt;ul&gt;
+&lt;li&gt;DHCP Server (that assigns a static IP address to your Raspeberry Pi)&lt;/li&gt;
+&lt;li&gt;DNS Records or DNS Server in your local network (optional)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;installing-the-things-stack-on-an-raspberry-pi-in-2025&quot; tabindex=&quot;-1&quot;&gt;Installing The Things Stack on an RaspberryPi in 2025&lt;/h2&gt;
-&lt;p&gt;Follow this guide:&lt;br /&gt;
-&lt;a href=&quot;https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.thethingsnetwork.org/article/deploy-the-things-stack-in-your-local-network&lt;/a&gt;&lt;br /&gt;
-I also used a RaspberryPi 4 with 8GB of RAM (though looking at &lt;code&gt;top&lt;/code&gt; 4GB are more than enough for a small/test setup)&lt;/p&gt;
-&lt;p&gt;We install the open-source version of TTS and skip all steps that say so (which it usually says after the step, so beware!).&lt;/p&gt;
-&lt;p&gt;NOTE: Make the following changes (roughly in order as they appear in the guide)&lt;/p&gt;
-&lt;p&gt;To add the docker apt repository run this instead (backslash removed):&lt;/p&gt;
+&lt;h3 id=&quot;end-result&quot; tabindex=&quot;-1&quot;&gt;End result&lt;/h3&gt;
+&lt;p&gt;In the end you will get a working open source installation of The Things Stack on your Raspberry Pi with a gateway connected to it for sending and receiving data. Everything is connected locally through WiFi or Ethernet and without TLS (so http only). You can use this as a private LoRaWAN setup (e.g. for testing).&lt;br /&gt;
+This guide will focus on the open-source version.&lt;/p&gt;
+&lt;h3 id=&quot;setting-up-the-pi&quot; tabindex=&quot;-1&quot;&gt;Setting up the Pi&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Install the Raspberry Pi Operating System:&lt;/strong&gt; &lt;a href=&quot;https://www.raspberrypi.org/software&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.raspberrypi.org/software&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Download the Raspberry Pi Imager.&lt;/li&gt;
+&lt;li&gt;Start the Raspberry Pi Imager, select Raspberry Pi OS (Other) &amp;gt; Raspberry Pi OS Lite (64-bit)&lt;/li&gt;
+&lt;li&gt;Select the SD card.&lt;/li&gt;
+&lt;li&gt;Click Write (you may have to enter your password)&lt;/li&gt;
+&lt;li&gt;When promted if you want to apply or change settings, click &amp;quot;Change settings&amp;quot;&lt;/li&gt;
+&lt;li&gt;Here you can set the mDNS address (I chose &lt;code&gt;thingsstack.local&lt;/code&gt;), configure your username and password, configure WiFi and enable SSH. You should do all of these steps, since it saves you from connecting a monitor and keyboard to the Pi. You then can do the rest of the installation via SSH.&lt;/li&gt;
+&lt;li&gt;When it&#39;s finished, take the SD card and slide it into your Raspberry Pi. The first time you power on your Raspberry Pi it may restart a couple of times, but eventually you&#39;ll see the login prompt or are able connect via SSH.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;If you missed setting up WiFi or SSH in the imager:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Connect a monitor and keyboard to the Pi&lt;/li&gt;
+&lt;li&gt;Login with your username and password (default is &lt;code&gt;pi&lt;/code&gt; and &lt;code&gt;raspberry&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;sudo raspi-config&lt;/code&gt; from the shell for the general configuration tool&lt;/li&gt;
+&lt;li&gt;More info here: &lt;a href=&quot;https://www.raspberrypi.com/documentation/computers/configuration.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Configuration - Raspberry Pi Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Find out the IP of your Pi and connect to it via SSH&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If a monitor is connected, you can find it in the login promt or during boot (&amp;quot;My IP address is:&amp;quot;)&lt;/li&gt;
+&lt;li&gt;Else check the DHCP leases in your router or do an IP scan&lt;/li&gt;
+&lt;li&gt;On your PC run &lt;code&gt;ssh username@ip&lt;/code&gt; with the username you setup for the pi (default &lt;code&gt;pi&lt;/code&gt;) and the IP you just looked up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;installation&quot; tabindex=&quot;-1&quot;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Update packages&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Run &lt;code&gt;sudo apt-get update&lt;/code&gt; and afterwards &lt;code&gt;apt-get upgrade&lt;/code&gt;, which will update all packages to their latest versions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Install docker&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;download Docker&#39;s GPG key&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;add their apt repository&lt;/li&gt;
+&lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;echo &#92; &amp;quot;deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable&amp;quot; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;From the &amp;quot;Next we&#39;ll install The Things Stack:&amp;quot; chapter onwards they put multiple commands on one line separated by $ (likely just a HTML/layout error).&lt;br /&gt;
-These will not work when just copy and pasted.&lt;br /&gt;
-You will have to copy the commands one-by-one and run them individually (without the $).&lt;/p&gt;
-&lt;p&gt;The URL to the docker-compose.yml has moved to:&lt;br /&gt;
-&lt;a href=&quot;https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You do not need to change the docker-compose.yml. It seems to work fine with the default values (version 3.7, postgreSQL latest, etc.) as of 07/25.&lt;/p&gt;
-&lt;p&gt;Don&#39;t forget to run &lt;code&gt;docker-compose pull&lt;/code&gt; at the end of the install chapter (it is not marked as a command).&lt;/p&gt;
-&lt;p&gt;Use the IP as HOSTNAME, &amp;quot;thingsstack.local&amp;quot; did not work and would result in OAuth errors after trying to log in (though you can still use it to open the webpage as a user).&lt;/p&gt;
-&lt;p&gt;To use the stack.env file in docker compose, add &lt;code&gt;env_file: stack.env&lt;/code&gt; to the stack block in docker-compose.yml&lt;br /&gt;
-see &lt;a href=&quot;https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute&lt;/a&gt; for more info&lt;/p&gt;
-&lt;p&gt;Skip the packet broker steps.&lt;/p&gt;
-&lt;p&gt;Use &lt;code&gt;migrate&lt;/code&gt; instead of &lt;code&gt;init&lt;/code&gt; when initializing the database.&lt;/p&gt;
-&lt;p&gt;For most of the commands in the &amp;quot;initialize&amp;quot; chapter, you will need to remove the backslashes &#92; from the commands.&lt;br /&gt;
-They are to escape line breaks, but the commands render without line breaks, probably because someone fucked up the rendering of the page.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker-compose run --rm stack is-db create-admin-user --id admin --email your@email.com
-docker-compose run --rm stack is-db create-oauth-client --id cli --name &amp;quot;Command Line Interface&amp;quot; --owner admin --no-secret --redirect-uri &amp;quot;local-callback&amp;quot; --redirect-uri &amp;quot;code&amp;quot;
-docker-compose run --rm stack is-db create-oauth-client --id console --name &amp;quot;Console&amp;quot; --owner admin --secret &amp;quot;${CONSOLE_SECRET}&amp;quot; --redirect-uri &amp;quot;/console/oauth/callback&amp;quot; --logout-redirect-uri &amp;quot;/console&amp;quot;
+&lt;ul&gt;
+&lt;li&gt;Run &lt;code&gt;sudo apt-get update&lt;/code&gt; again and then install docker and its tools using the following&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When creating the admin user, it seems like the password has to be entered rather quickly. Else you get a &amp;quot;context deadline exceeded&amp;quot; error and need to try again.&lt;/p&gt;
-&lt;p&gt;To enable automatic startup of the stack at boot:&lt;/p&gt;
+&lt;p&gt;If anything fails during this step, check the official guide: &lt;a href=&quot;https://docs.docker.com/engine/install/debian&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Debian | Docker Docs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Setup docker&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add a docker group: &lt;code&gt;sudo groupadd docker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add the current user: &lt;code&gt;sudo usermod -aG docker $USER&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Load the group: &lt;code&gt;newgrp docker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Now docker should work without errors. To try run &lt;code&gt;docker ps&lt;/code&gt;&lt;br /&gt;
+If anything fails during this step, check the official guide: &lt;a href=&quot;https://docs.docker.com/engine/install/linux-postinstall&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Post-installation steps | Docker Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Next, we&#39;ll install The Things Stack&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Setup a folder for the installation and assign it to your user (which you chose when setting up the image, default is &lt;code&gt;pi&lt;/code&gt;). The folder can be something different, if you like:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo mkdir -p /app/the-things-stack
+
+sudo chown username:username /app/the-things-stack 
+
+cd /app/the-things-stack
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Download the example docker-compose file from the TTI website&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;curl -sSL -o docker-compose.yml https://www.thethingsindustries.com/docs/enterprise/docker/configuration/docker-compose-open-source.yml
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;There is no need to change the versions in the docker-compose.yml. As of 07/25 everything works well with the latest versions (version 3.7, postgreSQL latest, things-stack latest, etc.)&lt;/li&gt;
+&lt;li&gt;At the time of writing it is using the following versions (you may fix these, if it stops working any time in the future)
+&lt;ul&gt;
+&lt;li&gt;postgres: 17.5-1.pgdg120+1&lt;/li&gt;
+&lt;li&gt;redis: 8.0.3&lt;/li&gt;
+&lt;li&gt;stack: 3.34.1.e22b9512d&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Install everything by running &lt;code&gt;docker compose pull&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Time to configure The Things Stack&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;At this point you have to chose, whether to address the Pi via IP or a domain (if you did setup DNS previously). IP will always work without further setup, but comes with some &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#changing-the-ip&quot;&gt;caveats&lt;/a&gt; (i.e. I strongly recommend setting a static IP for the Raspberry Pi). If you have a domain to use, that is probably preferrable.&lt;/li&gt;
+&lt;li&gt;NOTE: The mDNS address (xyz.local) will not work here! Logging in would result in OAuth errors for me.&lt;/li&gt;
+&lt;li&gt;Enter one of the following to set an environment variable, we are going to use later:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;HOSTNAME=192.168.178.43
+
+HOSTNAME=demo.thethingsconference.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Set up some random secrets for the Console&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;CONSOLE_SECRET=$(openssl rand -hex 16)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;
+&lt;p&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cbx_0&quot; disabled=&quot;true&quot; /&gt;&lt;label for=&quot;cbx_0&quot;&gt; TODO: Check ttn-lw-stack-docker.yml file&lt;/label&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We&#39;ll first have The Things Stack write a full list of environment variables to a file, and then I&#39;ll create an empty file so that we can cherry-pick the environment variables we want to override.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;docker compose run --rm stack config --env &amp;gt; stack.default.env
+
+touch stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Disable TLS listeners (since we will not be using https)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;grep LISTEN_TLS stack.default.env | sed -e &amp;quot;s/:888[0-9]//&amp;quot; &amp;gt;&amp;gt; stack.env
+
+grep PUBLIC_TLS_ADDRESS stack.default.env | sed -e &amp;quot;s/localhost:888[0-9]//&amp;quot; &amp;gt;&amp;gt; stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Change every instance of &lt;code&gt;localhost&lt;/code&gt; to the hostname we set earlier (this includes MQTT ports 1881..1883)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;grep localhost:188[123] stack.default.env | sed -e &amp;quot;s/localhost/$HOSTNAME/&amp;quot; &amp;gt;&amp;gt; stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Remove port 1885 (not needed for http only)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;grep localhost:1885 stack.default.env | sed -e &amp;quot;s/localhost:1885/$HOSTNAME/&amp;quot; &amp;gt;&amp;gt; stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Change every instance of https, wss, mqtts to their insecure variants&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;grep &#39;s://localhost:888&#39; stack.default.env | sed -e &amp;quot;s|s://localhost:888|://$HOSTNAME:188|&amp;quot; &amp;gt;&amp;gt; stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Write secret to file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;echo TTN_LW_CONSOLE_OAUTH_CLIENT_SECRET=$CONSOLE_SECRET &amp;gt;&amp;gt; stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;For HTTP cookie secrets, just write some random values&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;echo TTN_LW_HTTP_COOKIE_BLOCK_KEY=$(openssl rand -hex 32) &amp;gt;&amp;gt; stack.env
+
+echo TTN_LW_HTTP_COOKIE_HASH_KEY=$(openssl rand -hex 64) &amp;gt;&amp;gt; stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Remove quotes (docker compose does not like these)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sed -i&#39;&#39; -e &#39;s/&amp;quot;//g&#39; stack.env
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Check if the file looks good: &lt;code&gt;cat stack.env&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;To set the environment file, edit &lt;code&gt;docker-compose.yml&lt;/code&gt; and add &lt;code&gt;env_file: stack.env&lt;/code&gt; to the &lt;code&gt;stack&lt;/code&gt; block at the bottom.
+&lt;ul&gt;
+&lt;li&gt;see &lt;a href=&quot;https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute&lt;/a&gt; for more info&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Now let&#39;s initialize The Things Stack&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Initialize the database&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;docker compose run --rm stack is-db migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Create the admin user (change e-mail). Enter the password fairly quickly, else you will get a &amp;quot;context deadline exceeded&amp;quot; error and need to try again&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;docker compose run --rm stack is-db create-admin-user --id admin --email your@email.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Setup OAuth&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;docker compose run --rm stack is-db create-oauth-client --id cli --name &amp;quot;Command Line Interface&amp;quot; --owner admin --no-secret --redirect-uri &amp;quot;local-callback&amp;quot; --redirect-uri &amp;quot;code&amp;quot;
+
+docker compose run --rm stack is-db create-oauth-client --id console --name &amp;quot;Console&amp;quot; --owner admin --secret &amp;quot;${CONSOLE_SECRET}&amp;quot; --redirect-uri &amp;quot;/console/oauth/callback&amp;quot; --logout-redirect-uri &amp;quot;/console&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Time to start The Things Stack&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start everything up&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;docker compose up -d stack
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Watch the logs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;docker compose logs -f stack
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;If you setup mDNS during Raspberry Pi image creation you can go to that domain in your browser (xyz.local), else enter the IP address of the PI to open up the GUI&lt;/li&gt;
+&lt;li&gt;Login using the admin credentials you just created&lt;/li&gt;
+&lt;li&gt;Enable automatic startup of the thingsstack at boot
+&lt;ul&gt;
+&lt;li&gt;services in the docker compose file are set to &lt;code&gt;restart: unless-stopped&lt;/code&gt;, so they will automatically boot-up when not manually shut down. i.e. if you just disconnected the power, they will boot up again. If you shut them down properly (&lt;code&gt;docker compose down -d stack&lt;/code&gt;), they will not come back.&lt;/li&gt;
+&lt;li&gt;Change the setting to &lt;code&gt;restart: always&lt;/code&gt;, if you want them to always come back.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;sudo systemctl enable docker
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The services in the docker compose file are set to &lt;code&gt;restart: unless-stopped&lt;/code&gt;, so they will automatically boot-up when not manually shut down. i.e. if you just disconnected the power, they will boot up again. If you shut them down properly (&lt;code&gt;docker compose down -d stack&lt;/code&gt;), they will not come back.&lt;br /&gt;
-Change the setting to &lt;code&gt;restart: always&lt;/code&gt;, if you want them to always come back.&lt;/p&gt;
-&lt;p&gt;Use &lt;code&gt;docker compose up -d stack&lt;/code&gt; instead of &amp;quot;docker-compose up -d stack&amp;quot;. The latter only worked like 3 times then spat out weird errors about &amp;quot;ContainerConfig&amp;quot;.&lt;br /&gt;
-see: &lt;a href=&quot;https://askubuntu.com/questions/1508129/docker-compose-giving-containerconfig-errors-after-update-today&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://askubuntu.com/questions/1508129/docker-compose-giving-containerconfig-errors-after-update-today&lt;/a&gt;&lt;br /&gt;
-(have not tried to use it before this, but might be worth a try if previous docker-compose commands throw errors as well).&lt;/p&gt;
-&lt;p&gt;I have skipped the CLI setup at the end for now.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Setup the CLI&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install the CLI tool on your laptop (not the raspberryPi): &lt;a href=&quot;https://www.thethingsindustries.com/docs/concepts/features/cli/installing-cli/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Installing the CLI | The Things Stack for LoRaWAN&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Here replace &lt;code&gt;YOUR_DOMAIN_OR_IP&lt;/code&gt; with the address you use to access the Raspberry Pi&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;ttn-lw-cli use YOUR_DOMAIN_OR_IP --grpc-port 1884
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;A config file should be created next to the cli tool called &lt;code&gt;.ttn-lw-cli.yml&lt;/code&gt;, open it for editing&lt;/li&gt;
+&lt;li&gt;Change every instance of HTTPS to HTTP&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;insecure&lt;/code&gt; to true&lt;/li&gt;
+&lt;li&gt;You should be able to login using &lt;code&gt;tti-lw-cli login&lt;/code&gt; (or &lt;code&gt;.&#92;tti-lw-cli.exe login&lt;/code&gt; on Windows). It will open your web browser to get an access token, login there if you are not already.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;gateway-installation&quot; tabindex=&quot;-1&quot;&gt;Gateway Installation&lt;/h3&gt;
 &lt;p&gt;see &lt;a href=&quot;https://www.thethingsindustries.com/docs/hardware/gateways/concepts/adding-gateways/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Adding Gateways | The Things Stack for LoRaWAN&lt;/a&gt; and &lt;a href=&quot;https://www.thethingsindustries.com/docs/hardware/gateways/concepts/lora-basics-station/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;LoRa Basics™ Station | The Things Stack for LoRaWAN&lt;/a&gt; for adding Gateways.&lt;/p&gt;
+&lt;p&gt;Using &lt;a href=&quot;https://www.thethingsindustries.com/docs/hardware/gateways/concepts/lora-basics-station/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Basic Station&lt;/a&gt; did not work with &lt;a href=&quot;https://knowledgehub.tektelic.com/basic-station-interface-for-ttnv3&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Tektelik Micro Gateways&lt;/a&gt;. There were TLS errors (probably because the connection to the PI is not secured) - even though TLS was disabled in the configuration on the gateway (maybe it&#39;s a gateway bug?).&lt;/p&gt;
+&lt;p&gt;Installation of the &lt;a href=&quot;https://knowledgehub.tektelic.com/connecting-kona-gateways-to-3rd-party-network-servers&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;UDP Package Forwarders&lt;/a&gt; worked instead (Tektelik calls is &amp;quot;Kona Package Forwarder&amp;quot;, installation instructions for TTN further down the page linked above). To setup you will need the KonaFT tool. Chose the &amp;quot;SNMP V2c&amp;quot; protocol. Username and password can be found on the &amp;quot;KONA Test Summary Certificate&amp;quot; which comes with the gateway.&lt;/p&gt;
+&lt;h3 id=&quot;troubleshooting&quot; tabindex=&quot;-1&quot;&gt;Troubleshooting&lt;/h3&gt;
+&lt;p&gt;If you are getting &amp;quot;OAuth&amp;quot; errors when trying to login to the ThingsStack GUI, there probably is a mismatch between the IP you are accessing the GUI on and the one setup for the auth-service in the &lt;code&gt;stack.env&lt;/code&gt; file.&lt;br /&gt;
+Solution: Confirm the IP of the Raspberry Pi is the same as the one in &lt;code&gt;stack.env&lt;/code&gt;, change it if necessary and restart the docker container. See &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#changing-the-ip&quot;&gt;below&lt;/a&gt; for caveats.&lt;/p&gt;
+&lt;h3 id=&quot;changing-the-ip&quot; tabindex=&quot;-1&quot;&gt;Changing the IP&lt;/h3&gt;
+&lt;p&gt;If the IP of the RaspberryPi ever changes, you need to change the IPs in the &lt;code&gt;stack.env&lt;/code&gt; file, close the application with &lt;code&gt;docker compose down&lt;/code&gt; (if it is running) and restart it with &lt;code&gt;docker compose up -d stack&lt;/code&gt; (&lt;code&gt;docker compose restart&lt;/code&gt; did not work for me).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!WARNING] IP changes&lt;br /&gt;
+You should only do this while you have not registered any device yet. This is also why using a domain is preferred.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Applications and Devices are registered on a &amp;quot;cluster&amp;quot;, which is determined by the IP of the Server (i.e. the RaspberryPi) at the time of creation. If the IP changes, you will need to change the &amp;quot;cluster&amp;quot; of the application using the CLI:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ttn-lw-cli applications set APP_ID --network-server-address NEW_IP --application-server-address NEW_IP --join-server-address NEW_IP
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;see for more info: &lt;a href=&quot;https://www.thethingsindustries.com/docs/ttn-lw-cli/ttn-lw-cli_applications_set/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;ttn-lw-cli applications set | The Things Stack for LoRaWAN&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!FAIL] Updating device cluster&lt;br /&gt;
+Devices will also need to be updated. However I have not found a way to do this. Running equivalent commands only results in errors like &lt;code&gt;Registered Network Server address of end device &amp;quot;xyz&amp;quot; does not match CLI configuration&lt;/code&gt;. I was also unable to delete the device. So beware!&lt;/p&gt;
+&lt;/blockquote&gt;
 
             </content>
             <link href="https://janek.ing/tech/lo-ra-wan/" >
@@ -1111,6 +1460,69 @@ Generell sollte man zu CMR/PMR greifen, da die Vorteile überwiegen.&lt;/p&gt;
         </entry>
         <entry>
             <title>
+                Festplatten
+                
+            </title>
+            <updated>2025-12-04T08:13:41.301Z</updated>
+            <id>https://janek.ing/tech/festplatten/</id>
+            <content type="html">
+                &lt;h2 id=&quot;hdd&quot; tabindex=&quot;-1&quot;&gt;HDD&lt;/h2&gt;
+&lt;h3 id=&quot;smr-vs-cmr-pmr&quot; tabindex=&quot;-1&quot;&gt;SMR vs CMR/PMR&lt;/h3&gt;
+&lt;p&gt;Bei SMR werden die Daten leicht überlappend geschrieben. Dadurch wird eine höhere Speicherdichte erreicht, aber die Schreibraten leiden bei langen Schreibprozessen. Außerdem gibt es Erfahrungsberichte, wo SMR Platten nicht so lange halten und Datenverlust auftritt.&lt;br /&gt;
+SMR ist stromsparender und oft günstiger (bei gleicher Speichergröße).&lt;br /&gt;
+NAS Laufwerke sind meist CMR/PMR. Günstige Consumer Laufwerke oft SMR. Aber Achtung: WD hat zwischen 2 Modellgenerationen von CMR zu SMR gewechselt (WD Red). Das Datenblatt gibt hier meist mehr Auskunft (entweder direkt oder über eine Speicherdichte &amp;gt;1000GB/in²).&lt;br /&gt;
+Generell sollte man zu CMR/PMR greifen, da die Vorteile überwiegen.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.reichelt.de/magazin/ratgeber/smr-cmr-welche-festplatte-eignet-sich-am-besten-fuer-welchen-zweck/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;SMR? CMR? Welche Festplatte eignet sich am besten für welchen Zweck? - reichelt Magazin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.hardwareluxx.de/index.php/artikel/hardware/storage/51244-cmr-smr-der-hdd-guide-zu-den-verschiedenen-aufnahmemethoden.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;CMR/SMR: Der HDD-Guide zu den verschiedenen Aufnahmemethoden - Hardwareluxx&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;u-min&quot; tabindex=&quot;-1&quot;&gt;U/min&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Mehr = schneller (lesen/schreiben), aber lauter und stromhungriger&lt;/li&gt;
+&lt;li&gt;Gaming/Performance: 7200+&lt;/li&gt;
+&lt;li&gt;NAS/Archiv: 5400&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;cache&quot; tabindex=&quot;-1&quot;&gt;Cache&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Generell: Mehr = besser&lt;/li&gt;
+&lt;li&gt;Cache ist meist Flashspeicher und deutlich schneller als Platten&lt;/li&gt;
+&lt;li&gt;je größer, desto eher passen ganze Dateien in Cache, was kleine Lese- oder Schreibvorgänge beschleunigt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;festplatten-arten&quot; tabindex=&quot;-1&quot;&gt;Festplatten Arten&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;z.B. WD Black/Blue/Red&lt;/li&gt;
+&lt;li&gt;Am besten auf der Hersteller-Webseite gucken, für welchen Anwendungsfall die Bauart gedacht ist und sich an diese Angabe halten.&lt;/li&gt;
+&lt;li&gt;Unterschiede sind Bauart (Anzahl Platten, Lagerung), U/min, SMR vs. CMR, Firmware, etc.&lt;/li&gt;
+&lt;li&gt;NAS Festplatten sind bspw. darauf ausgelegt dauerhaft zu laufen und verkraften evtl. nicht so viele Spindowns und -ups&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;ssd&quot; tabindex=&quot;-1&quot;&gt;SSD&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;mit DRAM Cache zu bevorzugen (gleiche Funktion wie Flash-Cache auf HDD, enthält die Mappingtabelle für Dateien und freien Speicher). Ohne Cache bricht beim Speichern die Geschwindigkeit irgendwann ein und Dateizugriffe dauern bei voller Platte länger.
+&lt;ul&gt;
+&lt;li&gt;Crucial: MX500 (mit Cache) &amp;gt; BX500 (ohne Cache)&lt;/li&gt;
+&lt;li&gt;Samsung 860 / 870 Evo&lt;/li&gt;
+&lt;li&gt;WD Red&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Anders als bei HDDs kündigt sich ein Ausfall einer SSD nicht durch defekte Sektoren oder Zugriffsfehler vorher an. SSDs fallen üblicherweise plötzlich und komplett aus.&lt;/li&gt;
+&lt;li&gt;Auf TBW-Wert achten (wie viel TB auf die Platte insgesamt geschrieben werden können).
+&lt;ul&gt;
+&lt;li&gt;Bei Erreichen dieses Wertes sollte die Platte spätestens ausgetauscht werden, wenn kein Ausfall riskiert werden soll&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Meist haben Hersteller 2 Modelle: Eins mit DRAM-Cache und höherem TBW (z.B. 1300 TB) und eins ohne Cache und mit niedrigerem TBW (z.B. 700 TB)
+&lt;ul&gt;
+&lt;li&gt;Preisunterschied ist oft 10-20€ / TB und es lohnt sich das höherwertige Modell zu holen&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Hersteller von Speichermodule sind: Samsung, Micron/Crucial, SK Hynix und Intel (alle anderen kaufen hier nur ein)&lt;/li&gt;
+&lt;/ul&gt;
+
+            </content>
+            <link href="https://janek.ing/tech/festplatten/" >
+        </entry>
+        <entry>
+            <title>
                 Database Types
                 
             </title>
@@ -1338,7 +1750,7 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
                 CPU
                 
             </title>
-            <updated>2025-07-11T14:01:28.658Z</updated>
+            <updated>2025-11-19T15:17:40.680Z</updated>
             <id>https://janek.ing/tech/cpu/</id>
             <content type="html">
                 &lt;h2 id=&quot;cache&quot; tabindex=&quot;-1&quot;&gt;Cache&lt;/h2&gt;
@@ -1350,24 +1762,34 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
 &lt;li&gt;L1 oftmals pro Core&lt;/li&gt;
 &lt;li&gt;L1: Größe bei aktuellen Prozessoren &amp;lt;100kB (pro Kern)
 &lt;ul&gt;
-&lt;li&gt;5700X: 32KB, 9950X3D: 80KB&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.techpowerup.com/cpu-specs/ryzen-7-5700x.c2755&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;5700X&lt;/a&gt;: 32KB (instruction) + 32KB (data)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.techpowerup.com/review/amd-ryzen-9-9950x3d/2.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;9950X3D&lt;/a&gt;: 32KB (instruction) + 48KB (data)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://theapplewiki.com/wiki/M5&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Apple M5&lt;/a&gt;: P-Core: 192 KB (instruction) + 128 KB (data), E-Core: 128 + 64 KB&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;L2-Cache wird unter Windows &amp;quot;unified cache&amp;quot; genannt&lt;/li&gt;
-&lt;li&gt;L2 oftmals pro Core, manchmal geteilt mit mehreren Cores oder gesamter CPU&lt;/li&gt;
+&lt;li&gt;L2 oftmals pro Core, manchmal geteilt mit mehreren Cores oder gesamter CPU
+&lt;ul&gt;
+&lt;li&gt;bei x64: pro Core, Apple Silicon (mindestens bis M5): für gesamten Chip&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;L2: Größe bei aktuellen Prozessoren &amp;lt; 1MB (pro Kern)
 &lt;ul&gt;
-&lt;li&gt;5700X: 512KB, 9950X3D: 1MB&lt;/li&gt;
+&lt;li&gt;5700X: 512KB&lt;/li&gt;
+&lt;li&gt;9950X3D: 1MB&lt;/li&gt;
+&lt;li&gt;Apple M5: P-Cores: 16 MB (geteilt), E-Cores: 6 MB (geteilt)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;L3/L4 cache meist für gesamte CPU, Größe &amp;lt; 100MB
 &lt;ul&gt;
-&lt;li&gt;5700X: 32MB, 9950X3D: 128MB&lt;/li&gt;
+&lt;li&gt;5700X: 32MB&lt;/li&gt;
+&lt;li&gt;9950X3D: 128MB&lt;/li&gt;
+&lt;li&gt;Apple M5: nicht vorhanden&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache
+&lt;li&gt;Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache (bei modernen x64 CPUs)
 &lt;ul&gt;
 &lt;li&gt;ESP32: 32 Bytes&lt;/li&gt;
 &lt;li&gt;ARM Cortex M0..4: kein Cache&lt;/li&gt;
@@ -1377,7 +1799,11 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
 &lt;li&gt;Cache Miss: Programm fordert Daten an, welche nicht im L1+L2-Cache sind und daher aus dem RAM geladen werden müssen&lt;/li&gt;
 &lt;li&gt;Viele Operationen sind schneller, als das Laden aus dem RAM -&amp;gt; Performance wird von Nutzung des Caches dominiert
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://igoro.com/archive/gallery-of-processor-cache-effects/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Gallery of Processor Cache Effects (igoro.com)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://igoro.com/archive/gallery-of-processor-cache-effects/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Gallery of Processor Cache Effects (igoro.com)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Graphen welche den Effekt von CPU Cache, Cache Lines, Cache Aufbau, etc. verdeutlichen&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.7-cpu.com/cpu/Zen.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Zen 1 timings&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;L1 Cache: 4-5 cycles (1ns)&lt;/li&gt;
@@ -1419,6 +1845,12 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!tip] Block sizes in code&lt;br /&gt;
+When choosing a block size in your code (i.e. when reading a file in chunks), make it smaller than the L2 or L3 cache. This way the block will more likely stay in cache while you do operations on it. If you make the block too big, the CPU will need to continuously swap parts of it between the CPU cache and RAM making things &lt;em&gt;much&lt;/em&gt; slower.&lt;br /&gt;
+Keep in mind other stuff will be in the cache, too (like the stack of your program). 10% of smallest cache size of the target machines probably will be fine.&lt;br /&gt;
+The best size can be determined by testing (measure performance with increasing blocks sizes), there will be a big drop once swap starts.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&quot;pointers&quot; tabindex=&quot;-1&quot;&gt;Pointers&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;mindestens top 8 bits bei Intel und ARM Prozessoren sind nicht Teil der Speicheradresse (da unrealistisch großer Speicher benötigt werden würde), sondern können für andere Zwecke wie GC-flags genutzt werden. Meist werden nur 48bit für Speicheradresse genutzt
@@ -1448,6 +1880,112 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
 -&amp;gt; Modulus mit zur Compile-Zeit unbekanntem Divisor ist für CPU sehr aufwändig, da diese Operation nicht umgewandelt werden kann&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;napkin-math&quot; tabindex=&quot;-1&quot;&gt;Napkin Math&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Throughput&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;DDR4 RAM Read/Write (2133 MHz)&lt;/td&gt;
+&lt;td&gt;17 GiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DDR4 RAM Read/Write (3200 MHz, 2020 Standard)&lt;/td&gt;
+&lt;td&gt;25.6 GiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DDR5 RAM Read/Write (5500 MHz, 2025 Standard)&lt;/td&gt;
+&lt;td&gt;45 GiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DDR5 RAM Read/Write (8800 MHz)&lt;/td&gt;
+&lt;td&gt;70 GiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSD Sequential Read/Write (PCI Gen. 3 - 2020 Standard)&lt;/td&gt;
+&lt;td&gt;3 GiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSD Sequential Read/Write (PCI Gen. 4/5 - 2025 Standard)&lt;/td&gt;
+&lt;td&gt;6 GiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSD Sequential Read/Write on SATA III&lt;/td&gt;
+&lt;td&gt;600 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSD Random Read/Write (depends on file size)&lt;/td&gt;
+&lt;td&gt;50 - 500 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HDD Sequential Read&lt;/td&gt;
+&lt;td&gt;250 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HDD Sequential Write&lt;/td&gt;
+&lt;td&gt;200 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HDD Random Read&lt;/td&gt;
+&lt;td&gt;&amp;lt;20 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HDD Random Write&lt;/td&gt;
+&lt;td&gt;1 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SD Card (UHS I) Sequential Read/Write&lt;/td&gt;
+&lt;td&gt;150 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SD Card (UHS I) Random Read/Write&lt;/td&gt;
+&lt;td&gt;&amp;lt;5 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;USB Stick (USB 3.0) Sequential Read/Write&lt;/td&gt;
+&lt;td&gt;150 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;USB Stick (USB 3.0) Random Read/Write&lt;/td&gt;
+&lt;td&gt;&amp;lt;5 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;USB 2.0 Peak Read/Write&lt;/td&gt;
+&lt;td&gt;50 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;USB 3.0 Peak Read/Write&lt;/td&gt;
+&lt;td&gt;330 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;USB 3.1 Gen 2 / 3.2 Gen 1x2 / 3.2 Gen 2x1 Peak Read/Write (10 Gbps)&lt;/td&gt;
+&lt;td&gt;800 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Home Network (1 GBit/s)&lt;/td&gt;
+&lt;td&gt;100 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Fiber Internet (100 - 1000 MBit/s)&lt;/td&gt;
+&lt;td&gt;20 - 100 MiB/s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Notes:&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;Sequential throughput means one big file (&amp;gt;100 MiB or multiple GiB)&lt;/li&gt;
+&lt;li&gt;Random throughput means many small files (each much less than 1 MiB). Random read or write throughput is highly dependent on file size: the smaller the files, the lower the speed. HDDs have to physically move the disk head, SSDs lose speed when you read files smaller than the page size (usually 4 KiB) due to overhead. It is also generally bad for caching behavior of the disk and OS.&lt;/li&gt;
+&lt;li&gt;For USB the real peak throughput (values above) is about 2/3 of the raw max data rate&lt;/li&gt;
+&lt;li&gt;For NVMe SSDs speed is limited by PCI lanes (the more the better), although most modules are optimized for 4x PCI Gen. 3/4 or 2x PCI Gen. 5&lt;/li&gt;
+&lt;li&gt;HDDs usually have a RAM cache (often 256MB) for often/last used files, which is much faster&lt;/li&gt;
+&lt;li&gt;The OS might cache often/last accessed files on RAM&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Cost of CPU operations: &lt;a href=&quot;http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Infographics: Operation Costs in CPU Clock Cycles - IT Hare on Soft.ware&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;GitHub repo with programming related &amp;quot;ballpark&amp;quot; numbers: &lt;a href=&quot;https://github.com/sirupsen/napkin-math&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;GitHub - sirupsen/napkin-math: Techniques and numbers for estimating system&#39;s performance from first-principles&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Great visualization of latency numbers (with historical data): &lt;a href=&quot;https://colin-scott.github.io/personal_website/research/interactive_latency.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://colin-scott.github.io/personal_website/research/interactive_latency.html&lt;/a&gt;&lt;/p&gt;
@@ -5041,7 +5579,7 @@ Also needs special attention if negative numbers are involved (additional sort o
                 Architecture
                 
             </title>
-            <updated>2025-09-11T13:43:31.347Z</updated>
+            <updated>2025-09-25T14:43:21.059Z</updated>
             <id>https://janek.ing/code/architecture/</id>
             <content type="html">
                 &lt;h2 id=&quot;golden-rules&quot; tabindex=&quot;-1&quot;&gt;Golden Rules&lt;/h2&gt;
@@ -5155,9 +5693,10 @@ Also needs special attention if negative numbers are involved (additional sort o
 &lt;ul&gt;
 &lt;li&gt;Don&#39;t DRY: Zu kurze Funktionen, die nur andere Funktionen aufrufen, die nur wieder eine andere Funktion aufrufen sind so schwierig nachzuvollziehen, weil man Kontext im Kopf aufbauen muss und viel hin- und herspringt. Eine größere Funktion, die die gesamte Arbeit erledigt, ist auf einen Blick zu erfassen oder lässt sich zumindest wie eine Zeitung von oben nach unten lesen.&lt;/li&gt;
 &lt;li&gt;Martin Fowler: Refactor wenn man sich 3x wiederholt&lt;/li&gt;
-&lt;li&gt;Small Focused Functions that don&#39;t do anything meaningful -&amp;gt; man muss zu viel im Code springen, um zu verstehen, was er macht. Context fehlt.&lt;/li&gt;
+&lt;li&gt;Small Focused Functions that don&#39;t do anything meaningful -&amp;gt; man muss zu viel im Code springen, um zu verstehen, was er macht. Context fehlt. Zu viel context switching overhead.&lt;/li&gt;
 &lt;li&gt;Every function should do something &lt;strong&gt;meaningful&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;Idee: Code sollte im Stile einer StackOverflow Antwort geschrieben sein. Macht etwas sinnvolles und beinhaltet allen notwendigen Kontext. (&lt;a href=&quot;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=1150&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=1150&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://read.engineerscodex.com/p/how-to-not-write-garbage-code-by&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://read.engineerscodex.com/p/how-to-not-write-garbage-code-by&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&quot;https://htmx.org/essays/codin-dirty/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://htmx.org/essays/codin-dirty/&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.youtube.com/watch?v=hQJcGmWXDJw&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=hQJcGmWXDJw&lt;/a&gt;&lt;/p&gt;

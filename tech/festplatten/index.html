@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Collision Detection</title>
+<title>Festplatten</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -126,7 +126,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
@@ -213,7 +213,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
@@ -290,7 +290,7 @@ CTRL + K
 <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2025-12-04T20:48:40.868Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2025-12-04T20:48:40.868Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2025-12-04T20:48:40.868Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
-<h1 data-note-icon="">Collision Detection</h1>
+<h1 data-note-icon="">Festplatten</h1>
 <div class="header-meta">
 <div class="header-tags">
 <a class="tag" onclick="toggleTagSearch(this)">
@@ -300,62 +300,58 @@ CTRL + K
 #german
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2024-02-19T18:53:39.817+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-23T15:06:13.098+02:00"></span></div></div></div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-12-04T19:17:13.864+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-12-04T09:13:41.301+01:00"></span></div></div></div>
 </header>
-<p>Bestes Buch zum Thema: Real Time Collision Detection von Christer Ericson</p>
-<h2 id="broad-phase-vs-narrow-phase" tabindex="-1">Broad-Phase vs. Narrow-Phase</h2>
+<h2 id="hdd" tabindex="-1">HDD</h2>
+<h3 id="smr-vs-cmr-pmr" tabindex="-1">SMR vs CMR/PMR</h3>
+<p>Bei SMR werden die Daten leicht überlappend geschrieben. Dadurch wird eine höhere Speicherdichte erreicht, aber die Schreibraten leiden bei langen Schreibprozessen. Außerdem gibt es Erfahrungsberichte, wo SMR Platten nicht so lange halten und Datenverlust auftritt.<br>
+SMR ist stromsparender und oft günstiger (bei gleicher Speichergröße).<br>
+NAS Laufwerke sind meist CMR/PMR. Günstige Consumer Laufwerke oft SMR. Aber Achtung: WD hat zwischen 2 Modellgenerationen von CMR zu SMR gewechselt (WD Red). Das Datenblatt gibt hier meist mehr Auskunft (entweder direkt oder über eine Speicherdichte &gt;1000GB/in²).<br>
+Generell sollte man zu CMR/PMR greifen, da die Vorteile überwiegen.</p>
 <ul>
-<li>Ersteres für grobe Paarbildung von kollidierenden Objekten. Schnell, aber ungenau.</li>
-<li>Letzteres für genaue Berechnung der Kollision und notwendigen Daten zur Auflösung/Vermeidung der Kollision</li>
-<li>Zuerst wird Broad-Phase durchgeführt, um die Anzahl an Paaren zu reduzieren, dann Narrow-Phase auf die verbleibenden Paare</li>
-<li>Algorithmen
+<li><a href="https://www.reichelt.de/magazin/ratgeber/smr-cmr-welche-festplatte-eignet-sich-am-besten-fuer-welchen-zweck/" target="_blank" class="external-link">SMR? CMR? Welche Festplatte eignet sich am besten für welchen Zweck? - reichelt Magazin</a></li>
+<li><a href="https://www.hardwareluxx.de/index.php/artikel/hardware/storage/51244-cmr-smr-der-hdd-guide-zu-den-verschiedenen-aufnahmemethoden.html" target="_blank" class="external-link">CMR/SMR: Der HDD-Guide zu den verschiedenen Aufnahmemethoden - Hardwareluxx</a></li>
+</ul>
+<h3 id="u-min" tabindex="-1">U/min</h3>
 <ul>
-<li>Broad-Phase
+<li>Mehr = schneller (lesen/schreiben), aber lauter und stromhungriger</li>
+<li>Gaming/Performance: 7200+</li>
+<li>NAS/Archiv: 5400</li>
+</ul>
+<h3 id="cache" tabindex="-1">Cache</h3>
 <ul>
-<li>Sweep and Prune</li>
+<li>Generell: Mehr = besser</li>
+<li>Cache ist meist Flashspeicher und deutlich schneller als Platten</li>
+<li>je größer, desto eher passen ganze Dateien in Cache, was kleine Lese- oder Schreibvorgänge beschleunigt</li>
+</ul>
+<h3 id="festplatten-arten" tabindex="-1">Festplatten Arten</h3>
+<ul>
+<li>z.B. WD Black/Blue/Red</li>
+<li>Am besten auf der Hersteller-Webseite gucken, für welchen Anwendungsfall die Bauart gedacht ist und sich an diese Angabe halten.</li>
+<li>Unterschiede sind Bauart (Anzahl Platten, Lagerung), U/min, SMR vs. CMR, Firmware, etc.</li>
+<li>NAS Festplatten sind bspw. darauf ausgelegt dauerhaft zu laufen und verkraften evtl. nicht so viele Spindowns und -ups</li>
+</ul>
+<h2 id="ssd" tabindex="-1">SSD</h2>
+<ul>
+<li>mit DRAM Cache zu bevorzugen (gleiche Funktion wie Flash-Cache auf HDD, enthält die Mappingtabelle für Dateien und freien Speicher). Ohne Cache bricht beim Speichern die Geschwindigkeit irgendwann ein und Dateizugriffe dauern bei voller Platte länger.
+<ul>
+<li>Crucial: MX500 (mit Cache) &gt; BX500 (ohne Cache)</li>
+<li>Samsung 860 / 870 Evo</li>
+<li>WD Red</li>
 </ul>
 </li>
-<li>Narrow Phase
+<li>Anders als bei HDDs kündigt sich ein Ausfall einer SSD nicht durch defekte Sektoren oder Zugriffsfehler vorher an. SSDs fallen üblicherweise plötzlich und komplett aus.</li>
+<li>Auf TBW-Wert achten (wie viel TB auf die Platte insgesamt geschrieben werden können).
 <ul>
-<li>AABB</li>
-<li>Separating Axis Theorem</li>
-<li>GJK</li>
+<li>Bei Erreichen dieses Wertes sollte die Platte spätestens ausgetauscht werden, wenn kein Ausfall riskiert werden soll</li>
 </ul>
 </li>
+<li>Meist haben Hersteller 2 Modelle: Eins mit DRAM-Cache und höherem TBW (z.B. 1300 TB) und eins ohne Cache und mit niedrigerem TBW (z.B. 700 TB)
+<ul>
+<li>Preisunterschied ist oft 10-20€ / TB und es lohnt sich das höherwertige Modell zu holen</li>
 </ul>
 </li>
-</ul>
-<h2 id="sweep-and-prune" tabindex="-1">Sweep and Prune</h2>
-<ul>
-<li>Sortieren der Objekte auf einer (oder mehreren) Achsen</li>
-<li>Wenn eine Achse: Ermöglicht frühen Abbruch des n × m Loops zum Testen auf Kollision, da A &lt; C wenn A &lt; B und B &lt; C</li>
-<li>Bei mehreren Achsen: Ermöglicht groben boolschen Test auf Kollision: <a href="https://www.youtube.com/watch?v=E-cQaDnapjo" target="_blank" class="external-link">https://www.youtube.com/watch?v=E-cQaDnapjo</a></li>
-<li>Es wird ausgenutzt, dass sich die Objekte pro Zeitstep kaum bewegen, daher behält man die sortierten Listen bei und nutzt bspw. Insertion Sort (sehr effizient bei bereits fast sortierten Listen), anstatt die Liste immer neu zu erstellen</li>
-<li>Meist wird (implizit) die AABB-Hülle eines komplexeren Körpers für das Sortieren genutzt</li>
-<li>Buch: Kapitel 7.5, S. 329</li>
-<li><a href="https://leanrada.com/notes/sweep-and-prune/" target="_blank" class="external-link">https://leanrada.com/notes/sweep-and-prune/</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Sweep_and_prune" target="_blank" class="external-link">Wikipedia</a> (nicht wirklich verständlich imo)</li>
-</ul>
-<h2 id="separating-axis-theorem-sat" tabindex="-1">Separating Axis Theorem (SAT)</h2>
-<ul>
-<li>Guter Algorithmus für 2D</li>
-<li>Funktioniert mit Kreisen und konvexen Polygonen
-<ul>
-<li>konkave Polygone müssen in mehrere konvexe geteilt werden</li>
-</ul>
-</li>
-<li>Liefert boolsches Ergebnis oder (mit etwas mehr Aufwand) Vektor und Schnitttiefe zurück</li>
-<li>Prüft, ob es auf einer Achse der Körper einen Spalt gibt</li>
-<li><a href="https://www.youtube.com/watch?v=Zgf1DYrmSnk&amp;list=PLSlpr6o9vURwq3oxVZSimY8iC-cdd3kIs&amp;index=6" target="_blank" class="external-link">Separating Axis Theorem (SAT) - Let's Make a Physics Engine 05 - YouTube</a></li>
-</ul>
-<h2 id="gilbert-johnson-keerthi-gjk" tabindex="-1">Gilbert–Johnson–Keerthi (GJK)</h2>
-<ul>
-<li>Schneller als SAT</li>
-<li>Funktioniert im n-dimensionalen Raum mit konvexen Objekten jeder Art</li>
-<li>Liefert nur boolsches Ergebnis</li>
-<li>Lässt sich gut für unterschiedliche Typen von Körpern abstrahieren, da die Form nur einen Schritt des Algorithmus beeinflusst</li>
-<li>Prüft ob die Differenz der Körper den Nullpunkt einschließt</li>
-<li><a href="https://caseymuratori.com/blog_0003" target="_blank" class="external-link">https://caseymuratori.com/blog_0003</a></li>
+<li>Hersteller von Speichermodule sind: Samsung, Micron/Crucial, SK Hynix und Intel (alle anderen kaufen hier nur ein)</li>
 </ul>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
@@ -371,13 +367,19 @@ On this page
 <div class="toc-container">
 <nav class="toc">
 <ol>
-<li><a href="#broad-phase-vs-narrow-phase">Broad-Phase vs. Narrow-Phase</a>
+<li><a href="#hdd">HDD</a>
+<ol>
+<li><a href="#smr-vs-cmr-pmr">SMR vs CMR/PMR</a>
 </li>
-<li><a href="#sweep-and-prune">Sweep and Prune</a>
+<li><a href="#u-min">U/min</a>
 </li>
-<li><a href="#separating-axis-theorem-sat">Separating Axis Theorem (SAT)</a>
+<li><a href="#cache">Cache</a>
 </li>
-<li><a href="#gilbert-johnson-keerthi-gjk">Gilbert–Johnson–Keerthi (GJK)</a>
+<li><a href="#festplatten-arten">Festplatten Arten</a>
+</li>
+</ol>
+</li>
+<li><a href="#ssd">SSD</a>
 </li>
 </ol>
 </nav>
