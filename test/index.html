@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>NodeRed</title>
+<title>Test</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -229,7 +229,7 @@ CTRL + K
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
@@ -261,7 +261,7 @@ CTRL + K
 <div x-show="isOpen" style="display:none" class="">
 </div>
 <div x-show="isOpen" style="display:none" class="">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/test/">Test </a>
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/test/">Test </a>
 </div>
 </div>
 </div>
@@ -290,121 +290,226 @@ CTRL + K
 <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2026-01-19T12:19:12.625Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2026-01-19T12:19:12.625Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2026-01-19T12:19:12.625Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
-<h1 data-note-icon="">NodeRed</h1>
+<h1 data-note-icon="">Test</h1>
 <div class="header-meta">
 <div class="header-tags">
-<a class="tag" onclick="toggleTagSearch(this)">
-#knowledge-base
+</div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2026-01-19T13:16:49.510+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2026-01-19T13:18:40.475+01:00"></span></div></div></div>
+</header>
+<div style="font-family:Arial,sans-serif;max-width:1200px;margin:0 auto;padding:20px">
+<style>.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;width:100%}.grid-item{border-radius:8px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%}.grid-item:hover{transform:translateY(-5px);box-shadow:0 6px 12px rgba(0,0,0,.15)}.grid-item img{width:100%;height:150px;object-fit:cover}.grid-item-content{padding:12px}.grid-item h3{margin:0 0 8px 0;font-size:16px}.grid-item p{margin:0;font-size:14px;color:#666}.grid-link{text-decoration:none;color:inherit}</style>
+<div class="grid">
+<a href="#item1" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=1" alt="Item 1">
+<div class="grid-item-content">
+<h3>Item One</h3>
+<p>Description here</p>
+</div>
+</div>
 </a>
-<a class="tag" onclick="toggleTagSearch(this)">
-#german
+<a href="#item2" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=2" alt="Item 2">
+<div class="grid-item-content">
+<h3>Item Two</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item3" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=3" alt="Item 3">
+<div class="grid-item-content">
+<h3>Item Three</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item4" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=4" alt="Item 4">
+<div class="grid-item-content">
+<h3>Item Four</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item5" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=5" alt="Item 5">
+<div class="grid-item-content">
+<h3>Item Five</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item6" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=6" alt="Item 6">
+<div class="grid-item-content">
+<h3>Item Six</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item7" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=7" alt="Item 7">
+<div class="grid-item-content">
+<h3>Item Seven</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item8" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=8" alt="Item 8">
+<div class="grid-item-content">
+<h3>Item Eight</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item9" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=9" alt="Item 9">
+<div class="grid-item-content">
+<h3>Item Nine</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item10" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=10" alt="Item 10">
+<div class="grid-item-content">
+<h3>Item Ten</h3>
+<p>Description here</p>
+</div>
+</div>
+</a>
+<a href="#item11" class="grid-link">
+<div class="grid-item">
+<img src="https://picsum.photos/200/150?random=11" alt="Item 11">
+<div class="grid-item-content">
+<h3>Item Eleven</h3>
+<p>Description here</p>
+</div>
+</div>
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-05-26T18:08:10.481+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-05-26T14:51:52.521+02:00"></span></div></div></div>
-</header>
-<h2 id="function-node-rueckgabewert" tabindex="-1">Function node - Rückgabewert</h2>
-<pre><code class="language-js">// Message passthorugh, normal return
-return msg;
-// Will stop flow at this point and not pass anything to next node
-return null;
-// Send array of messages to single output
-arr = new Array(10);
-return [arr];
-return [[msg1, msg2, msg3]];
-// Send msg1 to output 1, msg2 to output 2, msg3 to output 3
-return [msg1, msg2, msg3];
-// Send msg only to second output (of 4)
-return [null, msg, null, null];
-// Send 2 messages to first output, none to second, one to third
-return [[msg1, msg2], null, msg3];
-</code></pre>
-<h2 id="context" tabindex="-1">Context</h2>
-<p>Daten lesen und speichern. Doku: <a href="https://nodered.org/docs/user-guide/writing-functions#storing-data" target="_blank" class="external-link">Writing Functions : Node-RED (nodered.org)</a></p>
-<pre><code class="language-JS">let data = context.get(&quot;key&quot;)
-context.set(&quot;key&quot;, &quot;value&quot;);
-let data = flow.get(&quot;key&quot;);
-flow.set(&quot;key&quot;, &quot;value&quot;);
-let data = global.get(&quot;key&quot;);
-global.set(&quot;key&quot;, &quot;value&quot;);
-// get/set multiple (NodeRED 0.19+)
-var values = flow.get([&quot;count&quot;, &quot;colour&quot;, &quot;temperature&quot;]);
-// values[0] is the 'count' value
-// values[1] is the 'colour' value
-// values[2] is the 'temperature' value
-flow.set([&quot;count&quot;, &quot;colour&quot;, &quot;temperature&quot;], [123, &quot;red&quot;, &quot;12.5&quot;]);
-</code></pre>
-<ul>
-<li><code>context</code> - Node
-<ul>
-<li>Wird gelöscht/zurückgesetzt, wenn sich Node ändert (Titel, Inhalt, Verknüpfungen und Position im Flow sind egal)</li>
-<li>Nur im ausführenden Node verfügbar (gleicher Key in anderem Node liefert andere Daten)</li>
-</ul>
-</li>
-<li><code>flow</code> - Flow
-<ul>
-<li>Wird zurückgesetzt, wenn sich Flow maßgeblich ändert (Nicht ganz klar wann das ist. Bewegungen sind egal, Löschen von Verknüpfungen und einzelnen Nodes auch)</li>
-<li>Nur im ausführenden Flow verfügbar</li>
-</ul>
-</li>
-<li><code>global</code> - NodeRed Instanz
-<ul>
-<li>Wird vermutlich zurückgesetzt, wenn sich Instanz neu startet</li>
-<li>Flow- und Node-übergreifend verfügbar (Keys überschreiben aber nicht Daten mit gleichem Key in <code>context</code> oder <code>flow</code>)</li>
-</ul>
-</li>
-<li>Werte können beliebigen Typs sein</li>
-<li>Es ist auch möglich Werte asynchron zu lesen/schreiben (aber wer braucht das?)</li>
-<li>Seit 0.19 kann man auch den Speicherort explizit angeben (sofern mehrere eingerichtet sind)</li>
-</ul>
-<h2 id="node-status" tabindex="-1">Node Status</h2>
-<p>Doku: <a href="https://nodered.org/docs/creating-nodes/status" target="_blank" class="external-link">Node status : Node-RED (nodered.org)</a></p>
-<pre><code class="language-javascript">node.status({fill:&quot;red&quot;,shape:&quot;ring&quot;,text:&quot;disconnected&quot;});
-node.status({fill:&quot;green&quot;,shape:&quot;dot&quot;,text:&quot;connected&quot;});
-node.status({text:&quot;Just text status&quot;});
-node.status({});   // to clear the status
-// The `shape` property can be: `ring` or `dot`.
-// The `fill` property can be: `red`, `green`, `yellow`, `blue` or `grey`
-
-// Example:
-this.status({fill:&quot;red&quot;,shape:&quot;ring&quot;,text:&quot;disconnected&quot;});
-this.status({fill:&quot;green&quot;,shape:&quot;dot&quot;,text:&quot;connected&quot;});
-</code></pre>
-<p><picture src="/img/user/_attachments/Pasted%20image%2020240621141018.png" alt="Pasted image 20240621141018.png"><source media="(max-width:480px)" srcset="/img/optimized/vSFoKoJiSR-362.webp" type="image/webp">
-<source media="(max-width:480px)" srcset="/img/optimized/vSFoKoJiSR-362.jpeg">
-<img class="" src="/img/user/_attachments/Pasted%20image%2020240621141018.png" alt="Pasted image 20240621141018.png" width=""></picture></p>
-<h2 id="url-parameter" tabindex="-1">URL Parameter</h2>
-<p>TODO<br>
-<code>{{{field of msg object}}}</code></p>
-<h2 id="nuetzliche-links" tabindex="-1">Nützliche Links</h2>
-<p><a href="https://nodered.org/docs/user-guide/messages" target="_blank" class="external-link">Working with messages : Node-RED (nodered.org)</a></p>
+</div>
+<hr>
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;max-width:1200px;margin:0 auto;padding:20px">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;width:100%">
+<a href="#item1" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=1" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item One</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item2" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=2" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Two</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item3" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=3" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Three</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item4" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=4" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Four</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item5" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=5" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Five</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item6" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=6" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Six</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item7" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=7" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Seven</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item8" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=8" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Eight</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item9" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=9" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Nine</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item10" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=10" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Ten</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+<a href="#item11" style="text-decoration:none;color:inherit">
+<div style="border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s;height:100%">
+<img src="https://picsum.photos/200/150?random=11" alt="Placeholder" style="width:100%;height:150px;object-fit:cover">
+<div style="padding:12px">
+<h3 style="margin:0 0 6px 0;font-size:16px;font-weight:600">Item Eleven</h3>
+<p style="margin:0;font-size:14px;color:#666">Short desc</p>
+</div>
+</div>
+</a>
+</div>
+<script>document.querySelectorAll("a > div").forEach((e=>{e.addEventListener("mouseenter",(()=>{e.style.transform="translateY(-4px)",e.style.boxShadow="0 6px 16px rgba(0,0,0,0.15)"})),e.addEventListener("mouseleave",(()=>{e.style.transform="",e.style.boxShadow="0 2px 8px rgba(0,0,0,0.1)"}))}))</script>
+</div>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
 <aside>
 <div class="sidebar">
 <div class="sidebar-container">
-<div class="toc">
-<div class="toc-title-container">
-<div class="toc-title">
-On this page
-</div>
-</div>
-<div class="toc-container">
-<nav class="toc">
-<ol>
-<li><a href="#function-node-rueckgabewert">Function node - Rückgabewert</a>
-</li>
-<li><a href="#context">Context</a>
-</li>
-<li><a href="#node-status">Node Status</a>
-</li>
-<li><a href="#url-parameter">URL Parameter</a>
-</li>
-<li><a href="#nuetzliche-links">Nützliche Links</a>
-</li>
-</ol>
-</nav>
-</div>
-</div>
 </div>
 </div>
 </aside>

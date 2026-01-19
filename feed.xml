@@ -3,8 +3,249 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2025-12-04T20:49:25Z</updated>
+    <updated>2026-01-19T12:19:13Z</updated>
     <id>https://janek.ing</id>
+        <entry>
+            <title>
+                Test
+                
+            </title>
+            <updated>2026-01-19T12:18:40.475Z</updated>
+            <id>https://janek.ing/test/</id>
+            <content type="html">
+                &lt;div style=&quot;font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;&quot;&gt;
+  &lt;style&gt;
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; }
+    .grid-item { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%; }
+    .grid-item:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+    .grid-item img { width: 100%; height: 150px; object-fit: cover; }
+    .grid-item-content { padding: 12px; }
+    .grid-item h3 { margin: 0 0 8px 0; font-size: 16px; }
+    .grid-item p { margin: 0; font-size: 14px; color: #666; }
+    .grid-link { text-decoration: none; color: inherit; }
+  &lt;/style&gt;
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;a href=&quot;https://janek.ing/#item1&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=1&quot; alt=&quot;Item 1&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item One&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item2&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=2&quot; alt=&quot;Item 2&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Two&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item3&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=3&quot; alt=&quot;Item 3&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Three&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item4&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=4&quot; alt=&quot;Item 4&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Four&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item5&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=5&quot; alt=&quot;Item 5&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Five&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item6&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=6&quot; alt=&quot;Item 6&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Six&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item7&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=7&quot; alt=&quot;Item 7&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Seven&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item8&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=8&quot; alt=&quot;Item 8&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Eight&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item9&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=9&quot; alt=&quot;Item 9&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Nine&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item10&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=10&quot; alt=&quot;Item 10&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Ten&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item11&quot; class=&quot;grid-link&quot;&gt;
+      &lt;div class=&quot;grid-item&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=11&quot; alt=&quot;Item 11&quot; /&gt;
+        &lt;div class=&quot;grid-item-content&quot;&gt;
+          &lt;h3&gt;Item Eleven&lt;/h3&gt;
+          &lt;p&gt;Description here&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+&lt;div style=&quot;font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px;&quot;&gt;
+  &lt;div style=&quot;display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%;&quot;&gt;
+    &lt;a href=&quot;https://janek.ing/#item1&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=1&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item One&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item2&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=2&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Two&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item3&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=3&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Three&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item4&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=4&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Four&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item5&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=5&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Five&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item6&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=6&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Six&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item7&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=7&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Seven&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item8&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=8&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Eight&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item9&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=9&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Nine&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item10&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=10&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Ten&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+    &lt;a href=&quot;https://janek.ing/#item11&quot; style=&quot;text-decoration: none; color: inherit;&quot;&gt;
+      &lt;div style=&quot;border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; height: 100%;&quot;&gt;
+        &lt;img src=&quot;https://picsum.photos/200/150?random=11&quot; alt=&quot;Placeholder&quot; style=&quot;width: 100%; height: 150px; object-fit: cover;&quot; /&gt;
+        &lt;div style=&quot;padding: 12px;&quot;&gt;
+          &lt;h3 style=&quot;margin: 0 0 6px 0; font-size: 16px; font-weight: 600;&quot;&gt;Item Eleven&lt;/h3&gt;
+          &lt;p style=&quot;margin: 0; font-size: 14px; color: #666;&quot;&gt;Short desc&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    document.querySelectorAll(&#39;a &gt; div&#39;).forEach(el =&gt; {
+      el.addEventListener(&#39;mouseenter&#39;, () =&gt; {
+        el.style.transform = &#39;translateY(-4px)&#39;;
+        el.style.boxShadow = &#39;0 6px 16px rgba(0,0,0,0.15)&#39;;
+      });
+      el.addEventListener(&#39;mouseleave&#39;, () =&gt; {
+        el.style.transform = &#39;&#39;;
+        el.style.boxShadow = &#39;0 2px 8px rgba(0,0,0,0.1)&#39;;
+      });
+    });
+  &lt;/script&gt;
+&lt;/div&gt;
+
+            </content>
+            <link href="https://janek.ing/test/" >
+        </entry>
         <entry>
             <title>
                 Projects Home
