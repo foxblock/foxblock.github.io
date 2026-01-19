@@ -1,11 +1,11 @@
 ---
-{"dg-publish":true,"dg-path":"Test.md","permalink":"/test/","created":"2026-01-19T13:16:49.510+01:00","updated":"2026-01-19T14:46:47.046+01:00"}
+{"dg-publish":true,"dg-path":"Test.md","permalink":"/test/","created":"2026-01-19T13:16:49.510+01:00","updated":"2026-01-19T14:50:08.264+01:00"}
 ---
 
 <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
   <style>
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; }
-    .grid-item { overflow: hidden; height: 100%; background-color: #f5f5f5; }
+    .grid-item { border-radius: var(--radius-m); overflow: hidden; height: 100%; }
     .grid-item:hover { background-color: var(--link-color-hover); }
     .grid-item img { width: 100%; height: 150px; object-fit: cover; }
     .grid-item-content { padding: 12px; }
