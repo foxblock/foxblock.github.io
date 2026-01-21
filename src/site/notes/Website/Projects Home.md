@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"created":"2026-01-16T09:06:49.362+01:00","updated":"2026-01-21T22:35:48.495+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-01-16T09:06:49.362+01:00","updated":"2026-01-21T22:39:06.932+01:00"}
 ---
 
 <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
@@ -59,7 +59,7 @@
         </div>
       </div>
     </a>
-    <a href="#terrance-bench" style="text-decoration:none;color:inherit">
+    <a href="#terrace-bench" style="text-decoration:none;color:inherit">
       <div class="grid-item">
         <img src="/img/user/_attachments/DSC_0443.jpg" alt="Terrace Bench">
         <div class="grid-item-content">
@@ -68,7 +68,7 @@
         </div>
       </div>
     </a>
-    <a href="#cabis" style="text-decoration:none;color:inherit">
+    <a href="#ca-bi-s" style="text-decoration:none;color:inherit">
       <div class="grid-item">
         <img src="/img/user/_attachments/IMG_20170809_151849548.jpg" alt="CaBiS setup">
         <div class="grid-item-content">
