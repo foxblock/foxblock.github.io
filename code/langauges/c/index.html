@@ -283,7 +283,7 @@ CTRL + K
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
-<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2026-01-21T21:41:39.511Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2026-01-21T21:41:39.511Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2026-01-21T21:41:39.511Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2026-01-21T21:54:01.856Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2026-01-21T21:54:01.856Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2026-01-21T21:54:01.856Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
 <h1 data-note-icon="">C</h1>
@@ -296,7 +296,7 @@ CTRL + K
 #german
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-09-17T08:57:43.823+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2025-09-16T15:55:13.376+02:00"></span></div></div></div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-12-10T20:06:11.235+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2026-01-06T17:47:07.602+01:00"></span></div></div></div>
 </header>
 <h2 id="strncpy-strncat" tabindex="-1">strncpy, strncat</h2>
 <pre><code class="language-C">char * strncpy ( char * destination, const char * source, size_t num );
@@ -494,7 +494,8 @@ struct foo {
 };
 </code></pre>
 <p>Hides internal details, datamembers and functions of a struct from the user (i.e. only the struct name is known to the public API). Essentially this means: do not access the internals of this struct manually, only pass it to the accompanying API functions. Is the equivalent of making things protected/private in C++.<br>
-Advantage: Implementation details of struct can change and user-code is unaffected.</p>
+Advantage: Implementation details of struct can change and user-code is unaffected.<br>
+Allows multiple implementations of the same concept/interface (e.g. for <a class="internal-link" target="" data-note-icon="" href="#platform-independent-code">platform specific code</a>)</p>
 <h2 id="bitshift" tabindex="-1">Bitshift</h2>
 <pre><code class="language-C">// &gt;&gt; shifts all bits right and fills with 0 (+int and uint) or 1 (-int, preserves sign bit, technically compiler dependant)
 // -1 is all bits=1 in two's complement
@@ -634,10 +635,24 @@ FILE *b = fopen(&quot;somefile.txt&quot;, &quot;r+b&quot;); // binary mode
 <h2 id="unity-build" tabindex="-1">Unity build</h2>
 <ul>
 <li><code>#include</code> all .c files in one file and only send that to the compiler</li>
+<li><a href="https://hereket.com/posts/cpp-unity-compile-inkscape/" target="_blank" class="external-link">Comparing C/C++ unity build with regular build on a large codebase | Hereket</a>
+<ul>
 <li>Faster than non-incremental builds</li>
-<li>Slower than &quot;clever&quot; incremental builds with tools like cmake+ninja</li>
-<li>Is also what raddbg uses (main .c file <code>#includes</code> all .h and .c files - module .c files barely <code>#include</code>anything on their own - not even the corresponding .h file)<br>
-<a href="https://hereket.com/posts/cpp-unity-compile-inkscape/" target="_blank" class="external-link">Comparing C/C++ unity build with regular build on a large codebase | Hereket</a></li>
+<li>Slower than &quot;clever&quot; incremental builds with tools like cmake+ninja (only compiling changed files)</li>
+</ul>
+</li>
+<li><a href="https://github.com/EpicGamesExt/raddebugger/blob/master/src/raddbg/raddbg_main.c#L196" target="_blank" class="external-link">Is also what raddbg uses</a> (main .c file <code>#includes</code> all .h and .c files - module .c files barely <code>#include</code>anything on their own - not even the corresponding .h file)</li>
+<li>Very simple compiler call, no need for cmake or a complicated build system: only need to specify one file, never change the compiler call</li>
+<li>Puts everything in one translation unit. This has advantages and disadvantages
+<ul>
+<li>Mostly no need for header files and forward declarations anymore. Define functions before use and it just works.</li>
+<li>Using invasive APIs like windows.h is tricky, because they pollute your whole environment. Most often it is the &quot;Rectangle&quot; definition in windows.h (e.g. conflicting with raylib). Getting libraries like this to work might still involve creating separate translation units for all code that uses the library/API (in NetworkMonitor there is a separate translation unit for code using windows API or curl, which includes the windows API internally, since these conflicted with raylib).
+<ul>
+<li>Using -DWIN32_LEAN_AND_MEAN can also help</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Sidenote: The C compiler is up to 10x faster than C++ compiler if templates and such are used in the C++ code</li>
 </ul>
 <h2 id="macro-best-practices" tabindex="-1">Macro best practices</h2>
@@ -710,6 +725,68 @@ x &gt; 0 ? debug_print(&quot;greater&quot;) : debug_print(&quot;smaller&quot;)
 <source media="(max-width:480px)" srcset="/img/optimized/NPeH-qdFry-500.jpeg">
 <source media="(max-width:1920px)" srcset="/img/optimized/NPeH-qdFry-700.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/NPeH-qdFry-700.jpeg"><img class="" src="/img/user/_attachments/Pasted%20image%2020250902113438.png" alt="Pasted image 20250902113438.png" width=""></picture><br>
 NOTE: Might not be ideal for hot paths. Function arguments are usually put in registers, structs are put in memory (so the assembly has to work with memory addresses and offsets, which is slower).</p>
+<h2 id="platform-independent-code" tabindex="-1">Platform Independent Code</h2>
+<p><a href="https://guide.handmadehero.org/code/day011/" target="_blank" class="external-link">The Basics of Platform API Design  —  Handmade Hero  —  Episode Guide  —  Handmade Hero</a><br>
+Don't do this:</p>
+<pre><code class="language-C">int main(int argc, char **argv)
+{
+	platformIndedependentCode1();
+	#ifdef _WIN32
+	doWindowsStuff();
+	#elif _LINUX
+	doLinuxStuff();
+	#endif
+	platformIndedependentCode2();
+}
+</code></pre>
+<ul>
+<li>Code will get very messy and unreadable fast (hard to follow the correct codepath for the current platform)</li>
+<li>Hard to maintain and extend. You need to search through all files to find all the ifdefs, if you want to add a platform</li>
+<li>Limits all platforms to the same control flow. Since only the smallest bits are abstracted, each platform has to follow the same basic structure.</li>
+</ul>
+<p>Better approach:</p>
+<ul>
+<li>Have a platform specific main.cpp with the platform specific program entry (e.g. win32_main.cpp with WinMain, linux_main.cpp with main, etc.)</li>
+<li>Have that main function call a platform independent MainLoop() function, which starts up the actual (platform independent) program loop</li>
+<li>Inside the MainLoop() call out to platform specific functions from the platform layer (e.g. for reading files). These functions need to have the same API on all platforms and are defined in one common header file and implemented in the platform specific cpp file(s).</li>
+<li>You can chose to implement basic platform specific initialization (like creating a window) and loop code (like reading input or the message queue) directly in the platform specific main (i.e. wrapped around the MainLoop() call, passing messages and input in and getting video and sound data out) or abstract the code in functions and <a class="internal-link" target="" data-note-icon="" href="#opaque-struct">opaque structs</a>, which are called/passed from MainLoop() (like you would reading a file). The example below uses the former approach.</li>
+<li>Selection of the desired platform code is done through passing the correct platform specific cpp file to the compiler (works well with <a class="internal-link" target="" data-note-icon="" href="#unity-build">#Unity build</a>)</li>
+</ul>
+<pre><code class="language-C">// program.h - main header file
+void MainLoop();
+void *loadFile(char *filepath);
+
+// program.cpp
+#include &quot;program.h&quot;
+void MainLoop()
+{
+	// main program flow
+	loadFile(&quot;foo.tmp&quot;);
+}
+
+// win32_main.cpp
+#include &quot;program.cpp&quot;
+int WinMain(...)
+{
+	doWindowsInit();
+	while (!ProgramShouldClose)
+	{
+		// NOTE: Not in this example: passing of data between platform code and
+		// MainLoop() - possibly through some global state
+		handleMessages(); // platform specific
+		getInput(); // platform specific
+		MainLoop();
+	}
+}
+void *loadFile(char *filepath)
+{
+	// do load and return
+}
+</code></pre>
+<h2 id="weird-behavior-calling-into-external-library" tabindex="-1">Weird Behavior calling into external library</h2>
+<p>When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files)<br>
+Otherwise the behavior is undefined and you will get crashes or weird stuff due to the stack being not handled correctly.<br>
+In my case a boolean function was returning -256 (which evaluates to true), instead of false or 0, but otherwise the code would run and behave normally. Replacing the header files with the correct version fixed this.</p>
 <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
 <aside>
@@ -779,6 +856,10 @@ On this page
 <li><a href="#clockwise-spiral-rule">Clockwise Spiral Rule</a>
 </li>
 <li><a href="#macro-for-optional-function-parameters">Macro for optional function parameters</a>
+</li>
+<li><a href="#platform-independent-code">Platform Independent Code</a>
+</li>
+<li><a href="#weird-behavior-calling-into-external-library">Weird Behavior calling into external library</a>
 </li>
 </ol>
 </nav>

@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-01-21T21:41:40Z</updated>
+    <updated>2026-01-21T21:54:02Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -273,7 +273,7 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
                 Windows
                 
             </title>
-            <updated>2025-06-08T10:59:58.023Z</updated>
+            <updated>2025-12-06T16:51:34.859Z</updated>
             <id>https://janek.ing/tech/windows/</id>
             <content type="html">
                 &lt;h2 id=&quot;md-5-sha-berechnen&quot; tabindex=&quot;-1&quot;&gt;MD5, SHA berechnen&lt;/h2&gt;
@@ -322,6 +322,7 @@ Manchmal hilft dies nicht, dann aber das Folgende:&lt;br /&gt;
 &lt;li&gt;Maus bewegen -&amp;gt; Fenster klebt an der Maus&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;reboot-to-bios&quot; tabindex=&quot;-1&quot;&gt;Reboot to bios&lt;/h2&gt;
+&lt;p&gt;In Admin cmd:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;shutdown /r /fw /t 0
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;wlan-schluessel-anzeigen&quot; tabindex=&quot;-1&quot;&gt;WLAN Schlüssel anzeigen&lt;/h2&gt;
@@ -1484,10 +1485,15 @@ Put a file (usually named after the program/logfile you are rotating) in &lt;cod
                 Illustrator
                 
             </title>
-            <updated>2025-05-24T10:59:53.509Z</updated>
+            <updated>2025-12-13T18:48:22.040Z</updated>
             <id>https://janek.ing/tech/illustrator/</id>
             <content type="html">
-                &lt;h2 id=&quot;objekte-auf-pfad-verteilen-spezialpinsel&quot; tabindex=&quot;-1&quot;&gt;Objekte auf Pfad verteilen, Spezialpinsel&lt;/h2&gt;
+                &lt;blockquote&gt;
+&lt;p&gt;[!INFO] Title&lt;br /&gt;
+Bei Änderungen an den Eigenschaften (Effekte, Kontur, etc.) immer darauf achten, dass das richtige Objekt ausgewählt ist (Quadrat in Farbe des Layers rechts neben Objekt in Ebeneninspektor - Standard ist blau)&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020251213194820.png&quot; alt=&quot;Pasted image 20251213194820.png&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;objekte-auf-pfad-verteilen-spezialpinsel&quot; tabindex=&quot;-1&quot;&gt;Objekte auf Pfad verteilen, Spezialpinsel&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=bcOK-uNnCjU&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=bcOK-uNnCjU&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;abgerundetes-rechteck&quot; tabindex=&quot;-1&quot;&gt;Abgerundetes Rechteck&lt;/h2&gt;
 &lt;p&gt;Mit entsprechendem Werkzeug: Pfeiltasten zur Veränderung des Radius bei Erstellung (oder einfacher Linksklick öffnet Dialog zum Erstellen aus Werten)&lt;/p&gt;
@@ -2407,10 +2413,11 @@ The best size can be determined by testing (measure performance with increasing 
                 UI - UX
                 
             </title>
-            <updated>2025-06-26T09:48:10.505Z</updated>
+            <updated>2026-01-14T13:25:01.265Z</updated>
             <id>https://janek.ing/design/ui-ux/</id>
             <content type="html">
-                &lt;ul&gt;
+                &lt;h2 id=&quot;general-scattered-thoughts&quot; tabindex=&quot;-1&quot;&gt;General / Scattered thoughts&lt;/h2&gt;
+&lt;ul&gt;
 &lt;li&gt;Error / Info messages &amp;gt; Disabled buttons &amp;gt; Hidden buttons
 &lt;ul&gt;
 &lt;li&gt;hiding UI elements can be useful in complex environments to filter non-applicable items&lt;/li&gt;
@@ -2575,6 +2582,12 @@ The best size can be determined by testing (measure performance with increasing 
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;dropdown-hell&quot; tabindex=&quot;-1&quot;&gt;Dropdown hell&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260114140947.png&quot; alt=&quot;Pasted image 20260114140947.png&quot; /&gt;&lt;br /&gt;
+Microsoft Teams in general is a shitshow, but UI-wise this one takes the cake so far.&lt;br /&gt;
+I wanted to open a taskboard in a new window and was left with 4 different dropdown menus which might apply to this task (not counting the 2 other dropdowns, which I already knew about and eliminated based on that). Initially I only found 3 of them and neither worked, so I gave up. The correct one is the second from the left btw.&lt;br /&gt;
+So, for any feature without a button on screen, you might have to look through 4 different invisible menus...&lt;br /&gt;
+Granted with a bit of thinking, I can see where the individual menus are coming from. But would it not be a good idea to at least combine the two menus on the same row?&lt;/p&gt;
 
             </content>
             <link href="https://janek.ing/design/ui-ux/" >
@@ -3327,7 +3340,7 @@ A table with weak keys and strong values is also called an ephemeron table. In a
                 JavaScript
                 
             </title>
-            <updated>2025-05-23T13:03:45.396Z</updated>
+            <updated>2026-01-20T15:15:51.571Z</updated>
             <id>https://janek.ing/code/langauges/java-script/</id>
             <content type="html">
                 &lt;h2 id=&quot;achtung&quot; tabindex=&quot;-1&quot;&gt;Achtung&lt;/h2&gt;
@@ -3479,8 +3492,9 @@ console.log(array2[2]); // undefined
 &lt;h2 id=&quot;default-values&quot; tabindex=&quot;-1&quot;&gt;Default values&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;function test(param) {
 	// filters all falsy values (null, undefined, 0, false, etc.)
-	// only works if default value is falsy or valid values are never falsy, otherwise it might overwrite falsy values of param (e.g. 0)
-	param = param || 0;
+	// only works if default value is falsy or valid values are never falsy, otherwise it might overwrite falsy values of param
+	param = param || 0; // ok, defaults to 0
+	param = param || 1; // will overwrite with 1 if param is falsy (e.g. 0)
 	// filters only undefined specifically (param was not passed)
 	if (param === undefined) param = 0;
 }
@@ -3502,7 +3516,8 @@ for..of ist ähnlich schnell wie for.&lt;br /&gt;
 Mikro-Optimierungen, wie z.B. das Cachen von &amp;quot;array.length&amp;quot; vor dem Loop bringen keine Verbesserung (macht der Compiler vermutlich eh).&lt;br /&gt;
 &lt;a href=&quot;https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Performance of JavaScript .forEach, .map and .reduce vs for and for..of (leanylabs.com)&lt;/a&gt;&lt;br /&gt;
 &lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240301103722.png&quot; alt=&quot;Pasted image 20240301103722.png&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240301103739.png&quot; alt=&quot;Pasted image 20240301103739.png&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020240301103739.png&quot; alt=&quot;Pasted image 20240301103739.png&quot; /&gt;&lt;br /&gt;
+(Operationen pro Sekunde, mehr ist besser)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Eine pre-Allokation eines Ergebnis-Arrays ist deutlich schneller, als Elemente einzeln zu pushen (gilt in jeder Sprache)&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-JS&quot;&gt;// bad
@@ -4394,7 +4409,7 @@ span, div /* apply same style to both span and div */
                 C
                 
             </title>
-            <updated>2025-09-16T13:55:13.376Z</updated>
+            <updated>2026-01-06T16:47:07.602Z</updated>
             <id>https://janek.ing/code/langauges/c/</id>
             <content type="html">
                 &lt;h2 id=&quot;strncpy-strncat&quot; tabindex=&quot;-1&quot;&gt;strncpy, strncat&lt;/h2&gt;
@@ -4590,7 +4605,8 @@ struct foo {
 };
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Hides internal details, datamembers and functions of a struct from the user (i.e. only the struct name is known to the public API). Essentially this means: do not access the internals of this struct manually, only pass it to the accompanying API functions. Is the equivalent of making things protected/private in C++.&lt;br /&gt;
-Advantage: Implementation details of struct can change and user-code is unaffected.&lt;/p&gt;
+Advantage: Implementation details of struct can change and user-code is unaffected.&lt;br /&gt;
+Allows multiple implementations of the same concept/interface (e.g. for &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#platform-independent-code&quot;&gt;platform specific code&lt;/a&gt;)&lt;/p&gt;
 &lt;h2 id=&quot;bitshift&quot; tabindex=&quot;-1&quot;&gt;Bitshift&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;// &amp;gt;&amp;gt; shifts all bits right and fills with 0 (+int and uint) or 1 (-int, preserves sign bit, technically compiler dependant)
 // -1 is all bits=1 in two&#39;s complement
@@ -4730,10 +4746,24 @@ FILE *b = fopen(&amp;quot;somefile.txt&amp;quot;, &amp;quot;r+b&amp;quot;); // b
 &lt;h2 id=&quot;unity-build&quot; tabindex=&quot;-1&quot;&gt;Unity build&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;#include&lt;/code&gt; all .c files in one file and only send that to the compiler&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://hereket.com/posts/cpp-unity-compile-inkscape/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Comparing C/C++ unity build with regular build on a large codebase | Hereket&lt;/a&gt;
+&lt;ul&gt;
 &lt;li&gt;Faster than non-incremental builds&lt;/li&gt;
-&lt;li&gt;Slower than &amp;quot;clever&amp;quot; incremental builds with tools like cmake+ninja&lt;/li&gt;
-&lt;li&gt;Is also what raddbg uses (main .c file &lt;code&gt;#includes&lt;/code&gt; all .h and .c files - module .c files barely &lt;code&gt;#include&lt;/code&gt;anything on their own - not even the corresponding .h file)&lt;br /&gt;
-&lt;a href=&quot;https://hereket.com/posts/cpp-unity-compile-inkscape/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Comparing C/C++ unity build with regular build on a large codebase | Hereket&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slower than &amp;quot;clever&amp;quot; incremental builds with tools like cmake+ninja (only compiling changed files)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/EpicGamesExt/raddebugger/blob/master/src/raddbg/raddbg_main.c#L196&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Is also what raddbg uses&lt;/a&gt; (main .c file &lt;code&gt;#includes&lt;/code&gt; all .h and .c files - module .c files barely &lt;code&gt;#include&lt;/code&gt;anything on their own - not even the corresponding .h file)&lt;/li&gt;
+&lt;li&gt;Very simple compiler call, no need for cmake or a complicated build system: only need to specify one file, never change the compiler call&lt;/li&gt;
+&lt;li&gt;Puts everything in one translation unit. This has advantages and disadvantages
+&lt;ul&gt;
+&lt;li&gt;Mostly no need for header files and forward declarations anymore. Define functions before use and it just works.&lt;/li&gt;
+&lt;li&gt;Using invasive APIs like windows.h is tricky, because they pollute your whole environment. Most often it is the &amp;quot;Rectangle&amp;quot; definition in windows.h (e.g. conflicting with raylib). Getting libraries like this to work might still involve creating separate translation units for all code that uses the library/API (in NetworkMonitor there is a separate translation unit for code using windows API or curl, which includes the windows API internally, since these conflicted with raylib).
+&lt;ul&gt;
+&lt;li&gt;Using -DWIN32_LEAN_AND_MEAN can also help&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Sidenote: The C compiler is up to 10x faster than C++ compiler if templates and such are used in the C++ code&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;macro-best-practices&quot; tabindex=&quot;-1&quot;&gt;Macro best practices&lt;/h2&gt;
@@ -4800,6 +4830,68 @@ x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;
 &lt;h2 id=&quot;macro-for-optional-function-parameters&quot; tabindex=&quot;-1&quot;&gt;Macro for optional function parameters&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250902113438.png&quot; alt=&quot;Pasted image 20250902113438.png&quot; /&gt;&lt;br /&gt;
 NOTE: Might not be ideal for hot paths. Function arguments are usually put in registers, structs are put in memory (so the assembly has to work with memory addresses and offsets, which is slower).&lt;/p&gt;
+&lt;h2 id=&quot;platform-independent-code&quot; tabindex=&quot;-1&quot;&gt;Platform Independent Code&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://guide.handmadehero.org/code/day011/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;The Basics of Platform API Design  —  Handmade Hero  —  Episode Guide  —  Handmade Hero&lt;/a&gt;&lt;br /&gt;
+Don&#39;t do this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;int main(int argc, char **argv)
+{
+	platformIndedependentCode1();
+	#ifdef _WIN32
+	doWindowsStuff();
+	#elif _LINUX
+	doLinuxStuff();
+	#endif
+	platformIndedependentCode2();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Code will get very messy and unreadable fast (hard to follow the correct codepath for the current platform)&lt;/li&gt;
+&lt;li&gt;Hard to maintain and extend. You need to search through all files to find all the ifdefs, if you want to add a platform&lt;/li&gt;
+&lt;li&gt;Limits all platforms to the same control flow. Since only the smallest bits are abstracted, each platform has to follow the same basic structure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Better approach:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have a platform specific main.cpp with the platform specific program entry (e.g. win32_main.cpp with WinMain, linux_main.cpp with main, etc.)&lt;/li&gt;
+&lt;li&gt;Have that main function call a platform independent MainLoop() function, which starts up the actual (platform independent) program loop&lt;/li&gt;
+&lt;li&gt;Inside the MainLoop() call out to platform specific functions from the platform layer (e.g. for reading files). These functions need to have the same API on all platforms and are defined in one common header file and implemented in the platform specific cpp file(s).&lt;/li&gt;
+&lt;li&gt;You can chose to implement basic platform specific initialization (like creating a window) and loop code (like reading input or the message queue) directly in the platform specific main (i.e. wrapped around the MainLoop() call, passing messages and input in and getting video and sound data out) or abstract the code in functions and &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#opaque-struct&quot;&gt;opaque structs&lt;/a&gt;, which are called/passed from MainLoop() (like you would reading a file). The example below uses the former approach.&lt;/li&gt;
+&lt;li&gt;Selection of the desired platform code is done through passing the correct platform specific cpp file to the compiler (works well with &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#unity-build&quot;&gt;#Unity build&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;// program.h - main header file
+void MainLoop();
+void *loadFile(char *filepath);
+
+// program.cpp
+#include &amp;quot;program.h&amp;quot;
+void MainLoop()
+{
+	// main program flow
+	loadFile(&amp;quot;foo.tmp&amp;quot;);
+}
+
+// win32_main.cpp
+#include &amp;quot;program.cpp&amp;quot;
+int WinMain(...)
+{
+	doWindowsInit();
+	while (!ProgramShouldClose)
+	{
+		// NOTE: Not in this example: passing of data between platform code and
+		// MainLoop() - possibly through some global state
+		handleMessages(); // platform specific
+		getInput(); // platform specific
+		MainLoop();
+	}
+}
+void *loadFile(char *filepath)
+{
+	// do load and return
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;weird-behavior-calling-into-external-library&quot; tabindex=&quot;-1&quot;&gt;Weird Behavior calling into external library&lt;/h2&gt;
+&lt;p&gt;When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files)&lt;br /&gt;
+Otherwise the behavior is undefined and you will get crashes or weird stuff due to the stack being not handled correctly.&lt;br /&gt;
+In my case a boolean function was returning -256 (which evaluates to true), instead of false or 0, but otherwise the code would run and behave normally. Replacing the header files with the correct version fixed this.&lt;/p&gt;
 
             </content>
             <link href="https://janek.ing/code/langauges/c/" >
@@ -4809,7 +4901,7 @@ NOTE: Might not be ideal for hot paths. Function arguments are usually put in re
                 Batch
                 
             </title>
-            <updated>2025-07-14T06:54:15.883Z</updated>
+            <updated>2026-01-06T16:40:23.088Z</updated>
             <id>https://janek.ing/code/langauges/batch/</id>
             <content type="html">
                 &lt;h2 id=&quot;best-practices&quot; tabindex=&quot;-1&quot;&gt;Best practices&lt;/h2&gt;
@@ -4867,6 +4959,7 @@ set &amp;quot;foo=bar&amp;quot; &amp;amp; set &amp;quot;poo=bear&amp;quot;
 %var%==true
 [%var%]==[some text]
 &amp;quot;%1&amp;quot;==&amp;quot;-h &amp;amp; shift&amp;quot;
+not &amp;quot;%1&amp;quot;==&amp;quot;&amp;quot;
 &amp;quot;%1&amp;quot; NEQ &amp;quot;&amp;quot;
 &amp;quot;%foo%&amp;quot; EQU &amp;quot;%bar%&amp;quot;
 :: numeric comparisons
@@ -5651,7 +5744,7 @@ Also needs special attention if negative numbers are involved (additional sort o
                 Architecture
                 
             </title>
-            <updated>2025-09-25T14:43:21.059Z</updated>
+            <updated>2026-01-13T16:10:37.143Z</updated>
             <id>https://janek.ing/code/architecture/</id>
             <content type="html">
                 &lt;h2 id=&quot;golden-rules&quot; tabindex=&quot;-1&quot;&gt;Golden Rules&lt;/h2&gt;
@@ -5663,6 +5756,7 @@ Also needs special attention if negative numbers are involved (additional sort o
 &lt;li&gt;Refactor with caution&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Quelle: &lt;a href=&quot;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=773&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/NiljDyzAOcI?feature=shared&amp;amp;t=773&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020251214141324.png&quot; alt=&quot;Pasted image 20251214141324.png&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;Eigener Ansatz:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Prototyp bauen (max. 1-3 Monate) mit Fokus auf bekannte Anforderungen und Funktionen (nicht zu weit in die Zukunft schauen, zu viele Dinge annehmen. Abstraktionen minimal halten!)&lt;/li&gt;
@@ -5800,6 +5894,7 @@ Also needs special attention if negative numbers are involved (additional sort o
 &lt;p&gt;Immer den Anwendungscode zuerst schreiben oder zumindest ein Mock-Up davon. Dies offenbart die notwendigen API Funktionen, ihre Parameter, Call-Order, etc.&lt;br /&gt;
 Erst anschließend die Implementierung dieser Funktionen schreiben.&lt;br /&gt;
 -&amp;gt; Empfehlung von Casey Muratori&lt;br /&gt;
+&lt;a href=&quot;https://caseymuratori.com/blog_0018&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://caseymuratori.com/blog_0018&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://caseymuratori.com/blog_0024&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://caseymuratori.com/blog_0024&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Keine globalen Variablen in Library (mutable global state) -&amp;gt; nicht thread-safe und re-entrant.&lt;br /&gt;
 Besser: Kontext struct anlegen, welcher der API mitgegeben wird und von ihr mit dem aktuellen Zustand beschrieben wird.&lt;br /&gt;
@@ -5949,6 +6044,7 @@ void read(file* f, char* buf, int n) {
 	}
 }
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Weitere Beispiele für data-oriented Code vs. OOP: &lt;a href=&quot;https://caseymuratori.com/blog_0017&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Defining a Single Enumerant&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;good-code-bad-code&quot; tabindex=&quot;-1&quot;&gt;Good code / bad code&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;bad code can&#39;t handle small changes in requirements&lt;/li&gt;
@@ -6131,6 +6227,23 @@ You can also draw the boundary between the different systems. Entities are only 
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;idiomatic-vs-specialized&quot; tabindex=&quot;-1&quot;&gt;Idiomatic vs. Specialized&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://benhoyt.com/writings/go-1brc/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;The One Billion Row Challenge in Go: from 1m45s to 3.4s in nine solutions&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Modern languages like Go come with &amp;quot;batteries included&amp;quot;, i.e. a big standard library&lt;/li&gt;
+&lt;li&gt;using that library will get you quickly to a solution, but that solution is probably not the fastest&lt;/li&gt;
+&lt;li&gt;Using parallelization will help a lot of the time, but usually needs big code changes to implement (though why not &lt;a href=&quot;https://www.rfleury.com/p/multi-core-by-default&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;start developing multithreaded&lt;/a&gt; to begin with?)&lt;/li&gt;
+&lt;li&gt;Using specialized constructs (like a home-grown hash table) can be much faste than the generalized idiomatic solutions, but again require domain specific engineering&lt;/li&gt;
+&lt;li&gt;Generally
+&lt;ul&gt;
+&lt;li&gt;Profile your performance, before you optimize. Establish an ideal baseline and work from there (&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/tech/cpu/#napkin-math&quot;&gt;CPU#Napkin Math&lt;/a&gt; can help). Be aware of the bottlenecks (optimizing before or after the bottleneck is futile, but optimizing the bottleneck will usually result in something else becoming the bottleneck).&lt;/li&gt;
+&lt;li&gt;Do not pessimize your code, e.g. do not copy data needlessly around. This usually implies you have to know how any library you use and your language behaves (e.g. when it does a copy vs. a reference).&lt;/li&gt;
+&lt;li&gt;Respect the constrains of the use-case and the documentation you got. Do not overcomplicate and overgeneralize things.&lt;/li&gt;
+&lt;li&gt;Know how the hardware and software environment works. This and the first point allow you to determine which things can be efficiently parallelized and optimized.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://ricomariani.medium.com/common-performance-tuning-advice-some-flaws-b2c427fad7ca&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Performance matters&lt;/a&gt;. Design for performance from the beginning and know which things can be easily optimized later (without big architectural changes).&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 
