@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2025-09-11T18:23:36.950+02:00","updated":"2025-09-25T16:43:21.059+02:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2026-01-13T18:03:34.475+01:00","updated":"2026-01-13T17:10:37.143+01:00"}
 ---
 
 ## Golden Rules
@@ -10,6 +10,8 @@
 - Refactor with caution
 
 Quelle: https://youtu.be/NiljDyzAOcI?feature=shared&t=773
+
+![Pasted image 20251214141324.png](/img/user/_attachments/Pasted%20image%2020251214141324.png)
 
 Eigener Ansatz:
 1. Prototyp bauen (max. 1-3 Monate) mit Fokus auf bekannte Anforderungen und Funktionen (nicht zu weit in die Zukunft schauen, zu viele Dinge annehmen. Abstraktionen minimal halten!)
@@ -116,6 +118,7 @@ https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction
 Immer den Anwendungscode zuerst schreiben oder zumindest ein Mock-Up davon. Dies offenbart die notwendigen API Funktionen, ihre Parameter, Call-Order, etc.
 Erst anschließend die Implementierung dieser Funktionen schreiben.
 -> Empfehlung von Casey Muratori
+https://caseymuratori.com/blog_0018
 https://caseymuratori.com/blog_0024
 
 Keine globalen Variablen in Library (mutable global state) -> nicht thread-safe und re-entrant.
@@ -263,6 +266,8 @@ void read(file* f, char* buf, int n) {
 	}
 }
 ```
+
+Weitere Beispiele für data-oriented Code vs. OOP: [Defining a Single Enumerant](https://caseymuratori.com/blog_0017)
 ## Good code / bad code
 - bad code can't handle small changes in requirements
 ## Cost of Dependencies
@@ -381,3 +386,15 @@ You can also draw the boundary between the different systems. Entities are only 
 		1. Polling: "wasteful" since CPU time is needed when nothing happens. Usually totally okay if the polling-rate or amount of data is low. Code is easier to write and read, since it is very linear.
 		2. Callbacks: Store a list of functions to call in the case of an event. It often is a good idea to not do callbacks immediately, but queue them for later, so that they happen at a predictable time. Doing them immediately can also trash your caches, due to context switching and you have to be aware of possible problems with multi-threading and out-of-order execution (don't delete an object in a callback, while you are iterating over a list with said object). Try to avoid too many boilerplate code when writing callbacks in C++. More often than not a simple C function pointer is enough.
 		3. Events: Very similar to callbacks, but using "event IDs" instead of function pointers. Events might work better when processed in bulk, since it can be just a raw array if IDs and data. The control flow is reversed compared to callbacks, since the low-level system collects the events and the high level system reads through the collected buffer (instead of the low-level system calling the registered callback of the higher-level system). Arduino uses a system like this for all "system events" (like Wifi connect, Wifi disconnect).
+## Idiomatic vs. Specialized
+[The One Billion Row Challenge in Go: from 1m45s to 3.4s in nine solutions](https://benhoyt.com/writings/go-1brc/)
+- Modern languages like Go come with "batteries included", i.e. a big standard library
+- using that library will get you quickly to a solution, but that solution is probably not the fastest
+- Using parallelization will help a lot of the time, but usually needs big code changes to implement (though why not [start developing multithreaded](https://www.rfleury.com/p/multi-core-by-default) to begin with?)
+- Using specialized constructs (like a home-grown hash table) can be much faste than the generalized idiomatic solutions, but again require domain specific engineering
+- Generally
+	- Profile your performance, before you optimize. Establish an ideal baseline and work from there ([[Technik/CPU#Napkin Math\|CPU#Napkin Math]] can help). Be aware of the bottlenecks (optimizing before or after the bottleneck is futile, but optimizing the bottleneck will usually result in something else becoming the bottleneck).
+	- Do not pessimize your code, e.g. do not copy data needlessly around. This usually implies you have to know how any library you use and your language behaves (e.g. when it does a copy vs. a reference). 
+	- Respect the constrains of the use-case and the documentation you got. Do not overcomplicate and overgeneralize things. 
+	- Know how the hardware and software environment works. This and the first point allow you to determine which things can be efficiently parallelized and optimized. 
+	- [Performance matters](https://ricomariani.medium.com/common-performance-tuning-advice-some-flaws-b2c427fad7ca). Design for performance from the beginning and know which things can be easily optimized later (without big architectural changes).

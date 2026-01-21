@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2025-06-08T12:59:58.023+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2025-12-06T17:51:34.859+01:00"}
 ---
 
 ## MD5, SHA berechnen
@@ -50,6 +50,7 @@ Manchmal hilft dies nicht, dann aber das Folgende:
 - Eine Pfeiltaste drücken
 - Maus bewegen -> Fenster klebt an der Maus
 ## Reboot to bios
+In Admin cmd:
 ```
 shutdown /r /fw /t 0
 ```

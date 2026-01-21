@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/java-script/","tags":["knowledge-base","german"],"created":"2024-12-11T20:18:38.360+01:00","updated":"2025-05-23T15:03:45.396+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/java-script/","tags":["knowledge-base","german"],"created":"2026-01-20T17:12:38.754+01:00","updated":"2026-01-20T16:15:51.571+01:00"}
 ---
 
 ## Achtung
@@ -154,8 +154,9 @@ sind als [Ropes](https://en.wikipedia.org/wiki/Rope_(data_structure)) implementi
 ```js
 function test(param) {
 	// filters all falsy values (null, undefined, 0, false, etc.)
-	// only works if default value is falsy or valid values are never falsy, otherwise it might overwrite falsy values of param (e.g. 0)
-	param = param || 0;
+	// only works if default value is falsy or valid values are never falsy, otherwise it might overwrite falsy values of param
+	param = param || 0; // ok, defaults to 0
+	param = param || 1; // will overwrite with 1 if param is falsy (e.g. 0)
 	// filters only undefined specifically (param was not passed)
 	if (param === undefined) param = 0;
 }
@@ -177,6 +178,7 @@ Mikro-Optimierungen, wie z.B. das Cachen von "array.length" vor dem Loop bringen
 [Performance of JavaScript .forEach, .map and .reduce vs for and for..of (leanylabs.com)](https://leanylabs.com/blog/js-forEach-map-reduce-vs-for-for_of/)
 ![Pasted image 20240301103722.png](/img/user/_attachments/Pasted%20image%2020240301103722.png)
 ![Pasted image 20240301103739.png](/img/user/_attachments/Pasted%20image%2020240301103739.png)
+(Operationen pro Sekunde, mehr ist besser)
 
 Eine pre-Allokation eines Ergebnis-Arrays ist deutlich schneller, als Elemente einzeln zu pushen (gilt in jeder Sprache)
 ```JS

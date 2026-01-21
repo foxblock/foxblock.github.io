@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/batch/","tags":["knowledge-base"],"created":"2025-05-08T19:24:07.675+02:00","updated":"2025-07-14T08:54:15.883+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/batch/","tags":["knowledge-base"],"created":"2025-05-08T19:24:07.675+02:00","updated":"2026-01-06T17:40:23.088+01:00"}
 ---
 
 ## Best practices
@@ -58,6 +58,7 @@ set "foo=bar" & set "poo=bear"
 %var%==true
 [%var%]==[some text]
 "%1"=="-h & shift"
+not "%1"==""
 "%1" NEQ ""
 "%foo%" EQU "%bar%"
 :: numeric comparisons

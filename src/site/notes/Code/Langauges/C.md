@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-09-17T08:57:43.823+02:00","updated":"2025-09-16T15:55:13.376+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-12-10T20:06:11.235+01:00","updated":"2026-01-06T17:47:07.602+01:00"}
 ---
 
 ## strncpy, strncat
@@ -204,6 +204,7 @@ struct foo {
 ```
 Hides internal details, datamembers and functions of a struct from the user (i.e. only the struct name is known to the public API). Essentially this means: do not access the internals of this struct manually, only pass it to the accompanying API functions. Is the equivalent of making things protected/private in C++.
 Advantage: Implementation details of struct can change and user-code is unaffected.
+Allows multiple implementations of the same concept/interface (e.g. for [[#Platform Independent Code|platform specific code]])
 ## Bitshift
 ```C
 // >> shifts all bits right and fills with 0 (+int and uint) or 1 (-int, preserves sign bit, technically compiler dependant)
@@ -320,10 +321,15 @@ FILE *b = fopen("somefile.txt", "r+b"); // binary mode
 	- [c - Printing UTF-8 strings with printf - wide vs. multibyte string literals - Stack Overflow](https://stackoverflow.com/questions/15528359/printing-utf-8-strings-with-printf-wide-vs-multibyte-string-literals)
 ## Unity build
 - `#include` all .c files in one file and only send that to the compiler
-- Faster than non-incremental builds
-- Slower than "clever" incremental builds with tools like cmake+ninja
-- Is also what raddbg uses (main .c file `#includes` all .h and .c files - module .c files barely `#include`anything on their own - not even the corresponding .h file)
-[Comparing C/C++ unity build with regular build on a large codebase | Hereket](https://hereket.com/posts/cpp-unity-compile-inkscape/)
+- [Comparing C/C++ unity build with regular build on a large codebase | Hereket](https://hereket.com/posts/cpp-unity-compile-inkscape/)
+	- Faster than non-incremental builds
+	- Slower than "clever" incremental builds with tools like cmake+ninja (only compiling changed files)
+- [Is also what raddbg uses](https://github.com/EpicGamesExt/raddebugger/blob/master/src/raddbg/raddbg_main.c#L196) (main .c file `#includes` all .h and .c files - module .c files barely `#include`anything on their own - not even the corresponding .h file)
+- Very simple compiler call, no need for cmake or a complicated build system: only need to specify one file, never change the compiler call
+- Puts everything in one translation unit. This has advantages and disadvantages
+	- Mostly no need for header files and forward declarations anymore. Define functions before use and it just works.
+	- Using invasive APIs like windows.h is tricky, because they pollute your whole environment. Most often it is the "Rectangle" definition in windows.h (e.g. conflicting with raylib). Getting libraries like this to work might still involve creating separate translation units for all code that uses the library/API (in NetworkMonitor there is a separate translation unit for code using windows API or curl, which includes the windows API internally, since these conflicted with raylib).
+		- Using -DWIN32_LEAN_AND_MEAN can also help
 - Sidenote: The C compiler is up to 10x faster than C++ compiler if templates and such are used in the C++ code
 ## Macro best practices
 - For multiple statements: wrap in do ... while(0) loop
@@ -384,3 +390,65 @@ How to read complex type declarations: https://c-faq.com/decl/spiral.anderson.ht
 ## Macro for optional function parameters
 ![Pasted image 20250902113438.png](/img/user/_attachments/Pasted%20image%2020250902113438.png)
 NOTE: Might not be ideal for hot paths. Function arguments are usually put in registers, structs are put in memory (so the assembly has to work with memory addresses and offsets, which is slower).
+## Platform Independent Code
+[The Basics of Platform API Design  —  Handmade Hero  —  Episode Guide  —  Handmade Hero](https://guide.handmadehero.org/code/day011/)
+Don't do this:
+```C
+int main(int argc, char **argv)
+{
+	platformIndedependentCode1();
+	#ifdef _WIN32
+	doWindowsStuff();
+	#elif _LINUX
+	doLinuxStuff();
+	#endif
+	platformIndedependentCode2();
+}
+```
+- Code will get very messy and unreadable fast (hard to follow the correct codepath for the current platform)
+- Hard to maintain and extend. You need to search through all files to find all the ifdefs, if you want to add a platform
+- Limits all platforms to the same control flow. Since only the smallest bits are abstracted, each platform has to follow the same basic structure.
+
+Better approach:
+- Have a platform specific main.cpp with the platform specific program entry (e.g. win32_main.cpp with WinMain, linux_main.cpp with main, etc.)
+- Have that main function call a platform independent MainLoop() function, which starts up the actual (platform independent) program loop
+- Inside the MainLoop() call out to platform specific functions from the platform layer (e.g. for reading files). These functions need to have the same API on all platforms and are defined in one common header file and implemented in the platform specific cpp file(s).
+- You can chose to implement basic platform specific initialization (like creating a window) and loop code (like reading input or the message queue) directly in the platform specific main (i.e. wrapped around the MainLoop() call, passing messages and input in and getting video and sound data out) or abstract the code in functions and [[#Opaque struct|opaque structs]], which are called/passed from MainLoop() (like you would reading a file). The example below uses the former approach.
+- Selection of the desired platform code is done through passing the correct platform specific cpp file to the compiler (works well with [[#Unity build]])
+```C
+// program.h - main header file
+void MainLoop();
+void *loadFile(char *filepath);
+
+// program.cpp
+#include "program.h"
+void MainLoop()
+{
+	// main program flow
+	loadFile("foo.tmp");
+}
+
+// win32_main.cpp
+#include "program.cpp"
+int WinMain(...)
+{
+	doWindowsInit();
+	while (!ProgramShouldClose)
+	{
+		// NOTE: Not in this example: passing of data between platform code and
+		// MainLoop() - possibly through some global state
+		handleMessages(); // platform specific
+		getInput(); // platform specific
+		MainLoop();
+	}
+}
+void *loadFile(char *filepath)
+{
+	// do load and return
+}
+```
+
+## Weird Behavior calling into external library
+When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files)
+Otherwise the behavior is undefined and you will get crashes or weird stuff due to the stack being not handled correctly.
+In my case a boolean function was returning -256 (which evaluates to true), instead of false or 0, but otherwise the code would run and behave normally. Replacing the header files with the correct version fixed this.

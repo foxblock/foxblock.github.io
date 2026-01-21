@@ -1,7 +1,8 @@
 ---
-{"dg-publish":true,"permalink":"/design/ui-ux/","tags":["opinion"],"created":"2025-04-04T16:35:15.770+02:00","updated":"2025-06-26T11:48:10.505+02:00"}
+{"dg-publish":true,"permalink":"/design/ui-ux/","tags":["opinion"],"created":"2026-01-14T19:41:44.668+01:00","updated":"2026-01-14T14:25:01.265+01:00"}
 ---
 
+## General / Scattered thoughts
 - Error / Info messages > Disabled buttons > Hidden buttons
 	- hiding UI elements can be useful in complex environments to filter non-applicable items
 	- however keep in mind that making an element unavailable or unclickable always comes with the user asking himself "where is that button I used a minute ago?" or "why can't I click this now - I could before?"
@@ -101,3 +102,9 @@ https://www.youtube.com/watch?v=Tvms2DaG8UY
 	- Ideally include a hint on how to fix the error
 	- Make the error message easily googleable (use descriptive keywords, make the text copyable - old Windows error dialog boxes copied the whole content to clipboard when the user pressed Ctrl + C)
 	- If you fear overly technical terms might scare the user, first reconsider the user as a competent individual, second if you are still unsure hide additional details "for nerds" behind a "more info" dropdown
+## Dropdown hell
+![Pasted image 20260114140947.png](/img/user/_attachments/Pasted%20image%2020260114140947.png)
+Microsoft Teams in general is a shitshow, but UI-wise this one takes the cake so far.
+I wanted to open a taskboard in a new window and was left with 4 different dropdown menus which might apply to this task (not counting the 2 other dropdowns, which I already knew about and eliminated based on that). Initially I only found 3 of them and neither worked, so I gave up. The correct one is the second from the left btw.
+So, for any feature without a button on screen, you might have to look through 4 different invisible menus...
+Granted with a bit of thinking, I can see where the individual menus are coming from. But would it not be a good idea to at least combine the two menus on the same row? 

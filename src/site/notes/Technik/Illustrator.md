@@ -1,6 +1,11 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Illustrator.md","permalink":"/tech/illustrator/","tags":["knowledge-base","german"],"created":"2024-06-21T23:06:45.250+02:00","updated":"2025-05-24T12:59:53.509+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Illustrator.md","permalink":"/tech/illustrator/","tags":["knowledge-base","german"],"created":"2024-06-21T23:06:45.250+02:00","updated":"2025-12-13T19:48:22.040+01:00"}
 ---
+
+
+> [!INFO] Title
+> Bei Änderungen an den Eigenschaften (Effekte, Kontur, etc.) immer darauf achten, dass das richtige Objekt ausgewählt ist (Quadrat in Farbe des Layers rechts neben Objekt in Ebeneninspektor - Standard ist blau)
+> ![Pasted image 20251213194820.png](/img/user/_attachments/Pasted%20image%2020251213194820.png)
 
 ## Objekte auf Pfad verteilen, Spezialpinsel
 https://www.youtube.com/watch?v=bcOK-uNnCjU
