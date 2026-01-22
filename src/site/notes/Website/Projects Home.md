@@ -1,12 +1,12 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-01-22T11:15:11.668+01:00","updated":"2026-01-22T11:15:11.668+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-01-22T18:47:11.842+01:00","updated":"2026-01-22T20:17:29.228+01:00"}
 ---
 
 <div>
   <style>
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; padding: 20px; }
     .grid-item { border-radius: var(--radius-m); overflow: hidden; height: 100%; transition: all 0.15s ease-out}
-    .grid-item:hover { background-color: var(--link-color-hover); transform: scale(1.05); box-shadow: 0 0 8px 1px color-mix(in srgb, var(--h3-color) 100%, transparent 80%) }
+    .grid-item:hover { background-color: var(--link-color-hover); transform: scale(1.05); }
     .grid-item img { width: 100%; height: 150px; object-fit: cover; }
     .grid-item-content { padding: 6px 12px 12px; }
     .grid-item h3 { margin: 0 0 8px 0; font-size: 18px; }
