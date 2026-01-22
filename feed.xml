@@ -3,21 +3,21 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-01-22T17:15:40Z</updated>
+    <updated>2026-01-22T19:20:07Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
                 Projects Home
                 
             </title>
-            <updated>2026-01-22T10:15:11.668Z</updated>
+            <updated>2026-01-22T19:17:29.228Z</updated>
             <id>https://janek.ing/projects/</id>
             <content type="html">
                 &lt;div&gt;
   &lt;style&gt;
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; padding: 20px; }
     .grid-item { border-radius: var(--radius-m); overflow: hidden; height: 100%; transition: all 0.15s ease-out}
-    .grid-item:hover { background-color: var(--link-color-hover); transform: scale(1.05); box-shadow: 0 0 8px 1px color-mix(in srgb, var(--h3-color) 100%, transparent 80%) }
+    .grid-item:hover { background-color: var(--link-color-hover); transform: scale(1.05); }
     .grid-item img { width: 100%; height: 150px; object-fit: cover; }
     .grid-item-content { padding: 6px 12px 12px; }
     .grid-item h3 { margin: 0 0 8px 0; font-size: 18px; }
@@ -255,7 +255,7 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
                 About Main Home
                 
             </title>
-            <updated>2025-07-02T21:39:06.666Z</updated>
+            <updated>2026-01-22T10:18:29.185Z</updated>
             <id>https://janek.ing/</id>
             <content type="html">
                 &lt;h1 id=&quot;hi&quot; tabindex=&quot;-1&quot;&gt;Hi!&lt;/h1&gt;
