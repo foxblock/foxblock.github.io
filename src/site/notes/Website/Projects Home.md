@@ -1,15 +1,15 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-01-16T09:06:49.362+01:00","updated":"2026-01-21T22:39:06.932+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-01-22T11:15:11.668+01:00","updated":"2026-01-22T11:15:11.668+01:00"}
 ---
 
-<div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+<div>
   <style>
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; }
-    .grid-item { border-radius: var(--radius-m); overflow: hidden; height: 100%; }
-    .grid-item:hover { background-color: var(--link-color-hover); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; padding: 20px; }
+    .grid-item { border-radius: var(--radius-m); overflow: hidden; height: 100%; transition: all 0.15s ease-out}
+    .grid-item:hover { background-color: var(--link-color-hover); transform: scale(1.05); box-shadow: 0 0 8px 1px color-mix(in srgb, var(--h3-color) 100%, transparent 80%) }
     .grid-item img { width: 100%; height: 150px; object-fit: cover; }
-    .grid-item-content { padding: 12px; }
-    .grid-item h3 { margin: 0 0 8px 0; font-size: 16px; }
+    .grid-item-content { padding: 6px 12px 12px; }
+    .grid-item h3 { margin: 0 0 8px 0; font-size: 18px; }
     .grid-item p { margin: 0; font-size: 14px; }
   </style>
   <!-- NOTE (JS, 19.01.2026): inline style is necessary on the main a elements, because a class based style was always overwritten by some "@media (hover:hover) a:hover" style defined in obsidian-base.scss. So this is to prevent text inside the a element behaving like all other links. -->
