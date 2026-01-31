@@ -3,14 +3,14 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-01-22T19:49:42Z</updated>
+    <updated>2026-01-31T15:34:23Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
                 Projects Home
                 
             </title>
-            <updated>2026-01-22T19:17:29.228Z</updated>
+            <updated>2026-01-26T12:58:15.104Z</updated>
             <id>https://janek.ing/projects/</id>
             <content type="html">
                 &lt;div&gt;
@@ -187,7 +187,7 @@ Re-creation of the wonderful &lt;a href=&quot;https://www.designswarm.com/good-n
 &lt;a href=&quot;https://youtu.be/uzuDoKGgP_o&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Video on YouTube&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;soundbox&quot; tabindex=&quot;-1&quot;&gt;Soundbox&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/DSC_2698.jpg&quot; alt=&quot;DSC_2698.jpg&quot; /&gt;&lt;br /&gt;
-2023 • C++, ESP32&lt;br /&gt;
+&lt;em&gt;2023 • C++, ESP32&lt;/em&gt;&lt;br /&gt;
 Play popular meme sounds at the press of the button. Annoy or delight your co-workers. Let them join in on the fun via the built-in web-interface.&lt;/p&gt;
 &lt;h2 id=&quot;woodworking-and-jewlery&quot; tabindex=&quot;-1&quot;&gt;Woodworking and Jewlery&lt;/h2&gt;
 &lt;h3 id=&quot;wooden-cube-shelf&quot; tabindex=&quot;-1&quot;&gt;Wooden Cube Shelf&lt;/h3&gt;
@@ -207,10 +207,11 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
                 Imprint
                 
             </title>
-            <updated>2025-05-13T08:42:08.367Z</updated>
+            <updated>2026-01-26T14:46:30.572Z</updated>
             <id>https://janek.ing/imprint/</id>
             <content type="html">
-                &lt;p&gt;Not necessary: &lt;a href=&quot;https://www.e-recht24.de/impressum/13095-impressum-fuer-die-private-homepage.html#toc_3-wann-ist-eine-website-rein-privat&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.e-recht24.de/impressum/13095-impressum-fuer-die-private-homepage.html#toc_3-wann-ist-eine-website-rein-privat&lt;/a&gt;&lt;/p&gt;
+                &lt;p&gt;This page has no imprint, because it is strictly non-commercial.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.e-recht24.de/impressum/13095-impressum-fuer-die-private-homepage.html#toc_3-wann-ist-eine-website-rein-privat&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.e-recht24.de/impressum/13095-impressum-fuer-die-private-homepage.html#toc_3-wann-ist-eine-website-rein-privat&lt;/a&gt;&lt;/p&gt;
 
             </content>
             <link href="https://janek.ing/imprint/" >
@@ -255,7 +256,7 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
                 About Main Home
                 
             </title>
-            <updated>2026-01-22T10:18:29.185Z</updated>
+            <updated>2026-01-26T14:47:42.881Z</updated>
             <id>https://janek.ing/</id>
             <content type="html">
                 &lt;h1 id=&quot;hi&quot; tabindex=&quot;-1&quot;&gt;Hi!&lt;/h1&gt;
@@ -1828,7 +1829,7 @@ Noch mehr Befehle, Beispiele und Erklärungen&lt;br /&gt;
                 CPU
                 
             </title>
-            <updated>2025-11-19T15:17:40.680Z</updated>
+            <updated>2026-01-28T12:15:27.494Z</updated>
             <id>https://janek.ing/tech/cpu/</id>
             <content type="html">
                 &lt;h2 id=&quot;cache&quot; tabindex=&quot;-1&quot;&gt;Cache&lt;/h2&gt;
