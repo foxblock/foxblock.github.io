@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-01-22T18:47:11.842+01:00","updated":"2026-01-22T20:17:29.228+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-01-26T16:48:14.171+01:00","updated":"2026-01-26T13:58:15.104+01:00"}
 ---
 
 <div>
@@ -176,7 +176,7 @@ Re-creation of the wonderful [Good Night Lamp](https://www.designswarm.com/good-
 [Video on YouTube](https://youtu.be/uzuDoKGgP_o)
 ### Soundbox
 ![DSC_2698.jpg](/img/user/_attachments/DSC_2698.jpg)
-2023 • C++, ESP32
+*2023 • C++, ESP32*
 Play popular meme sounds at the press of the button. Annoy or delight your co-workers. Let them join in on the fun via the built-in web-interface.
 
 ## Woodworking and Jewlery

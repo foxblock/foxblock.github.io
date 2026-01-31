@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/CPU.md","permalink":"/tech/cpu/","tags":["knowledge-base","german"],"created":"2025-11-19T16:55:16.658+01:00","updated":"2025-11-19T16:17:40.680+01:00"}
+{"dg-publish":true,"dg-path":"Tech/CPU.md","permalink":"/tech/cpu/","tags":["knowledge-base","german"],"created":"2025-11-19T16:55:16.658+01:00","updated":"2026-01-28T13:15:27.494+01:00"}
 ---
 
 ## Cache
