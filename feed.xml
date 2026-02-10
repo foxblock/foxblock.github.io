@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-02-04T15:31:52Z</updated>
+    <updated>2026-02-10T18:19:37Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -204,14 +204,82 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
         </entry>
         <entry>
             <title>
+                Privacy
+                
+            </title>
+            <updated>2026-02-10T18:17:36.905Z</updated>
+            <id>https://janek.ing/privacy/</id>
+            <content type="html">
+                &lt;h3 id=&quot;verantwortlicher-im-sinne-der-dsgvo&quot; tabindex=&quot;-1&quot;&gt;Verantwortlicher im Sinne der DSGVO&lt;/h3&gt;
+&lt;p&gt;Janek Schäfer&lt;br /&gt;
+An den Birken 23&lt;br /&gt;
+50827 Köln&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kontakt:&lt;/strong&gt;&lt;br /&gt;
+foxblock{plus}janeking{ät}gmail{punkt}com&lt;/p&gt;
+&lt;h3 id=&quot;allgemeine-hinweise&quot; tabindex=&quot;-1&quot;&gt;Allgemeine Hinweise&lt;/h3&gt;
+&lt;p&gt;Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung von personenbezogenen Daten auf dieser Webseite. Die Nutzung dieser Webseite ist grundsätzlich ohne Angabe personenbezogener Daten möglich. Soweit auf dieser Webseite personenbezogene Daten erhoben werden, erfolgt dies stets auf freiwilliger Basis und nur für die Nutzung der angebotenen Dienste (z. B. Kommentarfunktion).&lt;/p&gt;
+&lt;h3 id=&quot;hosting&quot; tabindex=&quot;-1&quot;&gt;Hosting&lt;/h3&gt;
+&lt;p&gt;Diese Webseite wird auf &lt;strong&gt;GitHub Pages&lt;/strong&gt; gehostet. GitHub, Inc. (88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim Aufruf der Seite erfasst GitHub automatisch sogenannte Server-Logfiles.&lt;br /&gt;
+Dabei können insbesondere folgende Daten verarbeitet werden:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IP-Adresse&lt;/li&gt;
+&lt;li&gt;Datum und Uhrzeit der Anfrage&lt;/li&gt;
+&lt;li&gt;aufgerufene Seite bzw. Datei&lt;/li&gt;
+&lt;li&gt;Browsertyp und Betriebssystem&lt;/li&gt;
+&lt;li&gt;Referrer-URL (die zuvor besuchte Seite)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Diese Daten sind technisch erforderlich, um die Webseite bereitzustellen und die Stabilität und Sicherheit zu gewährleisten.&lt;br /&gt;
+Die Verarbeitung erfolgt auf Grundlage von &lt;strong&gt;Art. 6 Abs. 1 f DSGVO&lt;/strong&gt; (berechtigtes Interesse).&lt;/p&gt;
+&lt;p&gt;Weitere Informationen zur Datenverarbeitung durch GitHub finden sich in der &lt;a href=&quot;https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Datenschutzerklärung von GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;kommentarfunktion-giscus&quot; tabindex=&quot;-1&quot;&gt;Kommentarfunktion (giscus)&lt;/h3&gt;
+&lt;p&gt;Diese Webseite nutzt &lt;strong&gt;giscus&lt;/strong&gt;, einen Dienst auf Basis von GitHub Issues, um Kommentare zu ermöglichen. Wenn Nutzer einen Kommentar verfassen, erfolgt die Anmeldung über ein GitHub-Konto. Dabei werden Daten direkt an GitHub übermittelt und dort verarbeitet, insbesondere:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub-Benutzername&lt;/li&gt;
+&lt;li&gt;Profilinformationen&lt;/li&gt;
+&lt;li&gt;Kommentarinhalt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Die Verarbeitung erfolgt durch GitHub. Weitere Informationen finden Sie in der &lt;a href=&quot;https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Datenschutzerklärung von GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Die Nutzung von giscus ist freiwillig.&lt;br /&gt;
+Rechtsgrundlage für die Verarbeitung ist &lt;strong&gt;Art. 6 Abs. 1 a DSGVO&lt;/strong&gt; (Einwilligung).&lt;/p&gt;
+&lt;h3 id=&quot;cookies&quot; tabindex=&quot;-1&quot;&gt;Cookies&lt;/h3&gt;
+&lt;p&gt;Diese Webseite nutzt &lt;strong&gt;keine eigenen Cookies&lt;/strong&gt;, die über technisch notwendige Funktionen hinausgehen.. Falls GitHub oder giscus Cookies setzen, werden diese in den Datenschutzerklärungen der jeweiligen Anbieter erläutert (siehe Links oben).&lt;/p&gt;
+&lt;h3 id=&quot;ihre-rechte&quot; tabindex=&quot;-1&quot;&gt;Ihre Rechte&lt;/h3&gt;
+&lt;p&gt;Sie haben das Recht auf:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)&lt;/li&gt;
+&lt;li&gt;Berichtigung unrichtiger Daten (Art. 16 DSGVO)&lt;/li&gt;
+&lt;li&gt;Löschung Ihrer Daten (Art. 17 DSGVO)&lt;/li&gt;
+&lt;li&gt;Einschränkung der Verarbeitung (Art. 18 DSGVO)&lt;/li&gt;
+&lt;li&gt;Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Für Anfragen wenden Sie sich bitte an die oben angegebenen Kontaktdaten.&lt;/p&gt;
+&lt;h3 id=&quot;aenderungen-dieser-datenschutzerklaerung&quot; tabindex=&quot;-1&quot;&gt;Änderungen dieser Datenschutzerklärung&lt;/h3&gt;
+&lt;p&gt;Ich behalte mir vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder Änderungen der Webseite anzupassen. Der aktuelle Stand ist immer auf dieser Seite einsehbar.&lt;/p&gt;
+
+            </content>
+            <link href="https://janek.ing/privacy/" >
+        </entry>
+        <entry>
+            <title>
                 Imprint
                 
             </title>
-            <updated>2026-01-26T14:46:30.572Z</updated>
+            <updated>2026-02-10T17:04:12.213Z</updated>
             <id>https://janek.ing/imprint/</id>
             <content type="html">
-                &lt;p&gt;This page has no imprint, because it is strictly non-commercial.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.e-recht24.de/impressum/13095-impressum-fuer-die-private-homepage.html#toc_3-wann-ist-eine-website-rein-privat&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.e-recht24.de/impressum/13095-impressum-fuer-die-private-homepage.html#toc_3-wann-ist-eine-website-rein-privat&lt;/a&gt;&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Angaben gemäß § 5 TMG:&lt;/strong&gt;&lt;br /&gt;
+Janek Schäfer&lt;br /&gt;
+An den Birken 23&lt;br /&gt;
+50827 Köln&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kontakt:&lt;/strong&gt;&lt;br /&gt;
+foxblock{plus}janeking{ät}gmail{punkt}com&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hinweis zur Plattform:&lt;/strong&gt;&lt;br /&gt;
+Diese Webseite wird über &lt;a href=&quot;https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;GitHub Pages&lt;/a&gt; gehostet. Der Anbieter ist:&lt;br /&gt;
+GitHub B.V Prins Bernhardplein 200, Amsterdam 1097JB, Niederlande&lt;br /&gt;
+bzw.&lt;br /&gt;
+GitHub, Inc. 88 Colin P. Kelly Jr. St. San Francisco, CA 94107 United States&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Haftungshinweis:&lt;/strong&gt;&lt;br /&gt;
+Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.&lt;/p&gt;
 
             </content>
             <link href="https://janek.ing/imprint/" >
@@ -256,7 +324,7 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
                 About Main Home
                 
             </title>
-            <updated>2026-01-26T14:47:42.881Z</updated>
+            <updated>2026-01-31T15:36:48.029Z</updated>
             <id>https://janek.ing/</id>
             <content type="html">
                 &lt;h1 id=&quot;hi&quot; tabindex=&quot;-1&quot;&gt;Hi!&lt;/h1&gt;
@@ -274,7 +342,7 @@ Our Corona project. Fits up to 6 people or 2 people lying down. Can fold out one
                 Windows
                 
             </title>
-            <updated>2025-12-06T16:51:34.859Z</updated>
+            <updated>2026-02-01T14:01:46.352Z</updated>
             <id>https://janek.ing/tech/windows/</id>
             <content type="html">
                 &lt;h2 id=&quot;md-5-sha-berechnen&quot; tabindex=&quot;-1&quot;&gt;MD5, SHA berechnen&lt;/h2&gt;
@@ -378,6 +446,80 @@ Dies scheint nicht mit dem Ordner &lt;code&gt;%userprofile%&#92;AppData&#92;Loca
 &lt;li&gt;Alte Programme listen nur Schriftarten auf, welche unter &lt;code&gt;C:&#92;Windows&#92;Fonts&lt;/code&gt; installiert sind&lt;/li&gt;
 &lt;li&gt;Lösung: Rechtsklick auf Schriftart -&amp;gt; &lt;code&gt;Für alle Benutzer installieren&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;take-ownership&quot; tabindex=&quot;-1&quot;&gt;Take Ownership&lt;/h2&gt;
+&lt;p&gt;Super nützliche Erweiterung für das Kontextmenü. Klick auf jede Datei oder Ordner erlaubt es den Besitzer zum aktuellen Benutzer zu ändern. Damit kann man in Folge Dateien anderer Benutzer oder Systemdateien einfach löschen (wie z.B. &lt;code&gt;C:&#92;Windows&#92;SystemApps&#92;ParentalControls_...&lt;/code&gt;, um das nervige Family Safety Popup nach jedem Login loszuwerden).&lt;br /&gt;
+Man kann damit auch viel kaputt machen, also entsprechend mit Vorsicht behandeln.&lt;/p&gt;
+&lt;p&gt;Quelle: &lt;a href=&quot;https://www.tenforums.com/tutorials/3841-add-take-ownership-context-menu-windows-10-a.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.tenforums.com/tutorials/3841-add-take-ownership-context-menu-windows-10-a.html&lt;/a&gt; (für Win10, funktioniert auch in Win11 - verschiedene Varianten für das einfache oder erweiterte Kontextmenü und mit oder ohne Konsolenausgabe).&lt;/p&gt;
+&lt;p&gt;Hier das Skript für das erweitere Kontextmenü (Shift + Rechtsklick) und mit &lt;code&gt;pause&lt;/code&gt; am Ende, damit man das Ergebnis begutachten kann.&lt;br /&gt;
+Als &lt;code&gt;.reg&lt;/code&gt; Datei abspeichern und ausführen.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-reg&quot;&gt;Windows Registry Editor Version 5.00
+
+; Created by: Shawn Brink
+; Created on: January 28, 2015
+; Updated on: February 25, 2024
+; Tutorial: https://www.tenforums.com/tutorials/3841-add-take-ownership-context-menu-windows-10-a.html
+
+
+
+[-HKEY_CLASSES_ROOT&#92;*&#92;shell&#92;TakeOwnership]
+[-HKEY_CLASSES_ROOT&#92;*&#92;shell&#92;runas]
+
+[HKEY_CLASSES_ROOT&#92;*&#92;shell&#92;TakeOwnership]
+@=&amp;quot;Take Ownership&amp;quot;
+&amp;quot;Extended&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;HasLUAShield&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;NoWorkingDirectory&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;NeverDefault&amp;quot;=&amp;quot;&amp;quot;
+
+[HKEY_CLASSES_ROOT&#92;*&#92;shell&#92;TakeOwnership&#92;command]
+@=&amp;quot;powershell -windowstyle hidden -command &#92;&amp;quot;Start-Process cmd -ArgumentList &#39;/c takeown /f &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; &amp;amp;&amp;amp; icacls &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /grant *S-1-3-4:F /t /c /l &amp;amp; pause&#39; -Verb runAs&#92;&amp;quot;&amp;quot;
+&amp;quot;IsolatedCommand&amp;quot;= &amp;quot;powershell -windowstyle hidden -command &#92;&amp;quot;Start-Process cmd -ArgumentList &#39;/c takeown /f &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; &amp;amp;&amp;amp; icacls &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /grant *S-1-3-4:F /t /c /l &amp;amp; pause&#39; -Verb runAs&#92;&amp;quot;&amp;quot;
+
+
+
+[HKEY_CLASSES_ROOT&#92;Directory&#92;shell&#92;TakeOwnership]
+@=&amp;quot;Take Ownership&amp;quot;
+&amp;quot;AppliesTo&amp;quot;=&amp;quot;NOT (System.ItemPathDisplay:=&#92;&amp;quot;C:&#92;&#92;Users&#92;&amp;quot; OR System.ItemPathDisplay:=&#92;&amp;quot;C:&#92;&#92;ProgramData&#92;&amp;quot; OR System.ItemPathDisplay:=&#92;&amp;quot;C:&#92;&#92;Windows&#92;&amp;quot; OR System.ItemPathDisplay:=&#92;&amp;quot;C:&#92;&#92;Windows&#92;&#92;System32&#92;&amp;quot; OR System.ItemPathDisplay:=&#92;&amp;quot;C:&#92;&#92;Program Files&#92;&amp;quot; OR System.ItemPathDisplay:=&#92;&amp;quot;C:&#92;&#92;Program Files (x86)&#92;&amp;quot;)&amp;quot;
+&amp;quot;Extended&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;HasLUAShield&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;NoWorkingDirectory&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;Position&amp;quot;=&amp;quot;middle&amp;quot;
+
+[HKEY_CLASSES_ROOT&#92;Directory&#92;shell&#92;TakeOwnership&#92;command]
+@=&amp;quot;powershell -windowstyle hidden -command &#92;&amp;quot;$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList (&#39;/c takeown /f &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /r /d &#39; + $Y + &#39; &amp;amp;&amp;amp; icacls &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /grant *S-1-3-4:F /t /c /l /q &amp;amp; pause&#39;) -Verb runAs&#92;&amp;quot;&amp;quot;
+&amp;quot;IsolatedCommand&amp;quot;=&amp;quot;powershell -windowstyle hidden -command &#92;&amp;quot;$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList (&#39;/c takeown /f &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /r /d &#39; + $Y + &#39; &amp;amp;&amp;amp; icacls &#92;&#92;&#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /grant *S-1-3-4:F /t /c /l /q &amp;amp; pause&#39;) -Verb runAs&#92;&amp;quot;&amp;quot;
+
+
+
+[HKEY_CLASSES_ROOT&#92;Drive&#92;shell&#92;runas]
+@=&amp;quot;Take Ownership&amp;quot;
+&amp;quot;Extended&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;HasLUAShield&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;NoWorkingDirectory&amp;quot;=&amp;quot;&amp;quot;
+&amp;quot;Position&amp;quot;=&amp;quot;middle&amp;quot;
+&amp;quot;AppliesTo&amp;quot;=&amp;quot;NOT (System.ItemPathDisplay:=&#92;&amp;quot;C:&#92;&#92;&#92;&amp;quot;)&amp;quot;
+
+[HKEY_CLASSES_ROOT&#92;Drive&#92;shell&#92;runas&#92;command]
+@=&amp;quot;cmd.exe /c takeown /f &#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /r /d y &amp;amp;&amp;amp; icacls &#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /grant *S-1-3-4:F /t /c &amp;amp; Pause&amp;quot;
+&amp;quot;IsolatedCommand&amp;quot;=&amp;quot;cmd.exe /c takeown /f &#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /r /d y &amp;amp;&amp;amp; icacls &#92;&amp;quot;%1&#92;&#92;&#92;&amp;quot; /grant *S-1-3-4:F /t /c &amp;amp; Pause&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Zum Entfernen:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-reg&quot;&gt;Windows Registry Editor Version 5.00
+
+; Created by: Shawn Brink
+; Created on: January 28, 2015
+; Updated on: January 11, 2021
+; Tutorial: https://www.tenforums.com/tutorials/3841-add-take-ownership-context-menu-windows-10-a.html
+
+
+[-HKEY_CLASSES_ROOT&#92;*&#92;shell&#92;TakeOwnership]
+
+[-HKEY_CLASSES_ROOT&#92;*&#92;shell&#92;runas]
+
+[-HKEY_CLASSES_ROOT&#92;Directory&#92;shell&#92;TakeOwnership]
+
+[-HKEY_CLASSES_ROOT&#92;Drive&#92;shell&#92;runas]
+&lt;/code&gt;&lt;/pre&gt;
 
             </content>
             <link href="https://janek.ing/tech/windows/" >
@@ -5507,7 +5649,7 @@ struct Trigger
                 Data Structures &amp; Algorithms
                 
             </title>
-            <updated>2025-08-22T12:28:24.644Z</updated>
+            <updated>2026-02-03T15:46:14.198Z</updated>
             <id>https://janek.ing/code/data-structures-and-algorithms/</id>
             <content type="html">
                 &lt;h2 id=&quot;hash-tables&quot; tabindex=&quot;-1&quot;&gt;Hash Tables&lt;/h2&gt;
@@ -5656,6 +5798,27 @@ Also needs special attention if negative numbers are involved (additional sort o
 &lt;/li&gt;
 &lt;li&gt;Somewhat similar to &lt;a href=&quot;https://en.wikipedia.org/wiki/Dictionary_coder&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Dictionary coder - Wikipedia&lt;/a&gt; used in LZMA (zip)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;branchless-programming&quot; tabindex=&quot;-1&quot;&gt;Branchless Programming&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.algorithmica.org/hpc/pipelining/branchless/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://en.algorithmica.org/hpc/pipelining/branchless/&lt;/a&gt; (generally a good resource for in-depth low-level programming tips)&lt;br /&gt;
+Branchy:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;for (int i=0; i &amp;lt; len; i++)
+	if (a[i] &amp;lt; 50)
+		sum += a[i];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Branchless:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;for (int i=0; i &amp;lt; len; i++)
+{
+	sum += (a[i] &amp;lt; 50) * a[i];
+	// alternative (is also translated to cmov):
+	sum += (a[i] &amp;lt; 50) ? a[i] : 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First code compiles with &lt;code&gt;cmp&lt;/code&gt; and &lt;code&gt;jne&lt;/code&gt; (jump) assembly instructions, second uses &lt;code&gt;cmov&lt;/code&gt; (conditional move). This can be still faster especially when the branch cannot be reliably predicted (e.g. the if condition returns true or false randomly/50% of the time each). It is essential for usage of SIMD, since that does not have branches.&lt;br /&gt;
+Branchless code like this will be slower when code in the branches is compute-intense, since essentially both branches are always computed.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Using predication eliminates &lt;a href=&quot;https://en.algorithmica.org/hpc/pipelining/hazards&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;a control hazard&lt;/a&gt; but introduces a data hazard. There is still a pipeline stall, but it is a cheaper one: you only need to wait for &lt;code&gt;cmov&lt;/code&gt; to be resolved and not flush the entire pipeline in case of a mispredict.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Many code snippets can be converted to be branchless. Simple code like the one above usually is converted by the compiler automatically when optimizations are turned on.&lt;/p&gt;
 
             </content>
             <link href="https://janek.ing/code/data-structures-and-algorithms/" >

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>janek.ing - Home</title>
+<title>janek.ing - Privacy Policy</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -112,18 +112,61 @@ CTRL + K
 <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2026-02-10T18:19:36.991Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2026-02-10T18:19:36.991Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2026-02-10T18:19:36.991Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
 <main class="content cm-s-obsidian">
 <header>
-<h1></h1>
+<h1 data-note-icon="">janek.ing - Privacy Policy</h1>
 <div class="header-meta">
 <div class="header-tags">
 </div>
-</div>
+<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2026-02-02T19:21:27.165+01:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2026-02-10T19:17:36.905+01:00"></span></div></div></div>
 </header>
-<h1 id="hi" tabindex="-1">Hi!</h1>
-<p>I am Janek, programmer / engineer / tinkerer from Cologne, Germany.</p>
-<p>My passion is building software for humans that lasts, combining electronics and design into interactive pieces and creating games for various platforms. Examples for all of these are showcased on the <a class="internal-link" target="" data-note-icon="" href="/projects/">Projects page</a>.</p>
-<p>I have been programming for 20 years and building software professionally for close to 10. Recently I worked as a product developer and product owner for several companies creating IoT solutions.</p>
-<p>Growing up in the 90s and 2000s, naturally my first &quot;programming&quot; experience was building a website for myself (using plain HTML, CSS and PHP). It showcased photos I took, cool videos I found on the web and &quot;funny&quot; jokes only me and my friends laughed about (and of course it had a forum with 2 active users, including me). It was online for a couple of years until the free webhosting provider went out of business. Nowadays the web is different, but mostly full of ads. Reading about the idea of a <a href="https://maggieappleton.com/garden-history/" target="_blank" class="external-link">&quot;digital garden&quot;</a> reminded me of the days where the web was mostly about sharing your ideas and experiences. A place of curiosity without the immediate drive to make money off everything.</p>
-<p>To participate in this idea, I publish some of my notes in my <a class="internal-link" target="" data-note-icon="" href="/garden/">Digital Garden</a>. If you find anything worthwhile or a mistake, consider leaving a comment.</p>
+<h3 id="verantwortlicher-im-sinne-der-dsgvo" tabindex="-1">Verantwortlicher im Sinne der DSGVO</h3>
+<p>Janek Schäfer<br>
+An den Birken 23<br>
+50827 Köln</p>
+<p><strong>Kontakt:</strong><br>
+foxblock{plus}janeking{ät}gmail{punkt}com</p>
+<h3 id="allgemeine-hinweise" tabindex="-1">Allgemeine Hinweise</h3>
+<p>Diese Datenschutzerklärung informiert Sie über die Art, den Umfang und den Zweck der Verarbeitung von personenbezogenen Daten auf dieser Webseite. Die Nutzung dieser Webseite ist grundsätzlich ohne Angabe personenbezogener Daten möglich. Soweit auf dieser Webseite personenbezogene Daten erhoben werden, erfolgt dies stets auf freiwilliger Basis und nur für die Nutzung der angebotenen Dienste (z. B. Kommentarfunktion).</p>
+<h3 id="hosting" tabindex="-1">Hosting</h3>
+<p>Diese Webseite wird auf <strong>GitHub Pages</strong> gehostet. GitHub, Inc. (88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim Aufruf der Seite erfasst GitHub automatisch sogenannte Server-Logfiles.<br>
+Dabei können insbesondere folgende Daten verarbeitet werden:</p>
+<ul>
+<li>IP-Adresse</li>
+<li>Datum und Uhrzeit der Anfrage</li>
+<li>aufgerufene Seite bzw. Datei</li>
+<li>Browsertyp und Betriebssystem</li>
+<li>Referrer-URL (die zuvor besuchte Seite)</li>
+</ul>
+<p>Diese Daten sind technisch erforderlich, um die Webseite bereitzustellen und die Stabilität und Sicherheit zu gewährleisten.<br>
+Die Verarbeitung erfolgt auf Grundlage von <strong>Art. 6 Abs. 1 f DSGVO</strong> (berechtigtes Interesse).</p>
+<p>Weitere Informationen zur Datenverarbeitung durch GitHub finden sich in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement" target="_blank" class="external-link">Datenschutzerklärung von GitHub</a>.</p>
+<h3 id="kommentarfunktion-giscus" tabindex="-1">Kommentarfunktion (giscus)</h3>
+<p>Diese Webseite nutzt <strong>giscus</strong>, einen Dienst auf Basis von GitHub Issues, um Kommentare zu ermöglichen. Wenn Nutzer einen Kommentar verfassen, erfolgt die Anmeldung über ein GitHub-Konto. Dabei werden Daten direkt an GitHub übermittelt und dort verarbeitet, insbesondere:</p>
+<ul>
+<li>GitHub-Benutzername</li>
+<li>Profilinformationen</li>
+<li>Kommentarinhalt</li>
+</ul>
+<p>Die Verarbeitung erfolgt durch GitHub. Weitere Informationen finden Sie in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement" target="_blank" class="external-link">Datenschutzerklärung von GitHub</a>.</p>
+<p>Die Nutzung von giscus ist freiwillig.<br>
+Rechtsgrundlage für die Verarbeitung ist <strong>Art. 6 Abs. 1 a DSGVO</strong> (Einwilligung).</p>
+<h3 id="cookies" tabindex="-1">Cookies</h3>
+<p>Diese Webseite nutzt <strong>keine eigenen Cookies</strong>, die über technisch notwendige Funktionen hinausgehen.. Falls GitHub oder giscus Cookies setzen, werden diese in den Datenschutzerklärungen der jeweiligen Anbieter erläutert (siehe Links oben).</p>
+<h3 id="ihre-rechte" tabindex="-1">Ihre Rechte</h3>
+<p>Sie haben das Recht auf:</p>
+<ul>
+<li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
+<li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+<li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
+<li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+<li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+</ul>
+<p>Für Anfragen wenden Sie sich bitte an die oben angegebenen Kontaktdaten.</p>
+<h3 id="aenderungen-dieser-datenschutzerklaerung" tabindex="-1">Änderungen dieser Datenschutzerklärung</h3>
+<p>Ich behalte mir vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder Änderungen der Webseite anzupassen. Der aktuelle Stand ist immer auf dieser Seite einsehbar.</p>
+<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
 </main>
+<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",(e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")}),!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach((function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}}))</script>
+<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
+<script defer="defer">TIMESTAMP_FORMAT="dd. MMM yyyy",document.querySelectorAll(".human-date").forEach((function(e){date=e.getAttribute("data-date")||e.innerText,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTML(date)),e.innerHTML=parsed_date.toFormat(TIMESTAMP_FORMAT)}))</script>
 </body>
 </html>
