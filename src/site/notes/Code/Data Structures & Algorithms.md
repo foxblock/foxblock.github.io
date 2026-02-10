@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-08-22T22:09:49.908+02:00","updated":"2025-08-22T14:28:24.644+02:00"}
+{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-08-22T22:09:49.908+02:00","updated":"2026-02-03T16:46:14.198+01:00"}
 ---
 
 ## Hash Tables
@@ -136,3 +136,26 @@ unsigned get_property(unsigned ch)
 	- The less unique byte sequences there are, the higher the compression ratio
 	- It's ideal for data with a lot of empty space or repeating patterns (in this example a lookup table for unicode character properties)
 - Somewhat similar to [Dictionary coder - Wikipedia](https://en.wikipedia.org/wiki/Dictionary_coder) used in LZMA (zip)
+## Branchless Programming
+https://en.algorithmica.org/hpc/pipelining/branchless/ (generally a good resource for in-depth low-level programming tips)
+Branchy:
+```C
+for (int i=0; i < len; i++)
+	if (a[i] < 50)
+		sum += a[i];
+```
+Branchless:
+```C
+for (int i=0; i < len; i++)
+{
+	sum += (a[i] < 50) * a[i];
+	// alternative (is also translated to cmov):
+	sum += (a[i] < 50) ? a[i] : 0;
+}
+```
+First code compiles with `cmp` and `jne` (jump) assembly instructions, second uses `cmov` (conditional move). This can be still faster especially when the branch cannot be reliably predicted (e.g. the if condition returns true or false randomly/50% of the time each). It is essential for usage of SIMD, since that does not have branches. 
+Branchless code like this will be slower when code in the branches is compute-intense, since essentially both branches are always computed.
+
+> Using predication eliminates [a control hazard](https://en.algorithmica.org/hpc/pipelining/hazards) but introduces a data hazard. There is still a pipeline stall, but it is a cheaper one: you only need to wait for `cmov` to be resolved and not flush the entire pipeline in case of a mispredict.
+
+Many code snippets can be converted to be branchless. Simple code like the one above usually is converted by the compiler automatically when optimizations are turned on.

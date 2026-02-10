@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2025-12-06T17:51:34.859+01:00"}
+{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2026-02-01T15:01:46.352+01:00"}
 ---
 
 ## MD5, SHA berechnen
@@ -100,3 +100,82 @@ Ressourcenmonitor > CPU Tab > Zugeordnete Handles nach Datei oder Pfad durchsuch
 - Schriftarten werden by default unter Windows 10/11 nur für den Benutzer unter `%userprofile%\AppData\Local\Microsoft\Windows\Fonts` installiert
 - Alte Programme listen nur Schriftarten auf, welche unter `C:\Windows\Fonts` installiert sind
 - Lösung: Rechtsklick auf Schriftart -> `Für alle Benutzer installieren`
+## Take Ownership
+Super nützliche Erweiterung für das Kontextmenü. Klick auf jede Datei oder Ordner erlaubt es den Besitzer zum aktuellen Benutzer zu ändern. Damit kann man in Folge Dateien anderer Benutzer oder Systemdateien einfach löschen (wie z.B. `C:\Windows\SystemApps\ParentalControls_...`, um das nervige Family Safety Popup nach jedem Login loszuwerden).
+Man kann damit auch viel kaputt machen, also entsprechend mit Vorsicht behandeln.
+
+Quelle: https://www.tenforums.com/tutorials/3841-add-take-ownership-context-menu-windows-10-a.html (für Win10, funktioniert auch in Win11 - verschiedene Varianten für das einfache oder erweiterte Kontextmenü und mit oder ohne Konsolenausgabe).
+
+Hier das Skript für das erweitere Kontextmenü (Shift + Rechtsklick) und mit `pause` am Ende, damit man das Ergebnis begutachten kann.
+Als `.reg` Datei abspeichern und ausführen.
+```reg
+Windows Registry Editor Version 5.00
+
+; Created by: Shawn Brink
+; Created on: January 28, 2015
+; Updated on: February 25, 2024
+; Tutorial: https://www.tenforums.com/tutorials/3841-add-take-ownership-context-menu-windows-10-a.html
+
+
+
+[-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+[-HKEY_CLASSES_ROOT\*\shell\runas]
+
+[HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+@="Take Ownership"
+"Extended"=""
+"HasLUAShield"=""
+"NoWorkingDirectory"=""
+"NeverDefault"=""
+
+[HKEY_CLASSES_ROOT\*\shell\TakeOwnership\command]
+@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
+"IsolatedCommand"= "powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/c takeown /f \\\"%1\\\" && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l & pause' -Verb runAs\""
+
+
+
+[HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
+@="Take Ownership"
+"AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\Users\" OR System.ItemPathDisplay:=\"C:\\ProgramData\" OR System.ItemPathDisplay:=\"C:\\Windows\" OR System.ItemPathDisplay:=\"C:\\Windows\\System32\" OR System.ItemPathDisplay:=\"C:\\Program Files\" OR System.ItemPathDisplay:=\"C:\\Program Files (x86)\")"
+"Extended"=""
+"HasLUAShield"=""
+"NoWorkingDirectory"=""
+"Position"="middle"
+
+[HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership\command]
+@="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
+"IsolatedCommand"="powershell -windowstyle hidden -command \"$Y = ($null | choice).Substring(1,1); Start-Process cmd -ArgumentList ('/c takeown /f \\\"%1\\\" /r /d ' + $Y + ' && icacls \\\"%1\\\" /grant *S-1-3-4:F /t /c /l /q & pause') -Verb runAs\""
+
+
+
+[HKEY_CLASSES_ROOT\Drive\shell\runas]
+@="Take Ownership"
+"Extended"=""
+"HasLUAShield"=""
+"NoWorkingDirectory"=""
+"Position"="middle"
+"AppliesTo"="NOT (System.ItemPathDisplay:=\"C:\\\")"
+
+[HKEY_CLASSES_ROOT\Drive\shell\runas\command]
+@="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\\\" /r /d y && icacls \"%1\\\" /grant *S-1-3-4:F /t /c & Pause"
+```
+
+Zum Entfernen:
+```reg
+Windows Registry Editor Version 5.00
+
+; Created by: Shawn Brink
+; Created on: January 28, 2015
+; Updated on: January 11, 2021
+; Tutorial: https://www.tenforums.com/tutorials/3841-add-take-ownership-context-menu-windows-10-a.html
+
+
+[-HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+
+[-HKEY_CLASSES_ROOT\*\shell\runas]
+
+[-HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
+
+[-HKEY_CLASSES_ROOT\Drive\shell\runas]
+```
