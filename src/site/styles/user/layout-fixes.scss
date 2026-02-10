@@ -26,10 +26,25 @@
 }
 
 /* styling for the footer (for imprint and such) */
+.markdown-preview-view {
+    padding: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1;
+    padding-top: 1em;
+}
 footer {
     display: flex;
     justify-content: center;
     background-color: var(--background-secondary);
-    padding: 2em 0;
+    padding: 1em 0;
+    margin-top: 2em;
     width: 100%;
+}
+footer a {
+    text-decoration: none;
 }
