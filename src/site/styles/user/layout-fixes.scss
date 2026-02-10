@@ -27,7 +27,7 @@
 
 /* styling for the footer (for imprint and such) */
 .markdown-preview-view {
-    padding: 0 1em;
+    padding: 0;
 }
 body {
     display: flex;
@@ -35,7 +35,7 @@ body {
 }
 main {
     flex: 1;
-    padding-top: 1em;
+    padding-top: 1em 1em 0 1em;
 }
 footer {
     display: flex;
