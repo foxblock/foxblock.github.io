@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-02-10T18:28:44Z</updated>
+    <updated>2026-02-10T18:33:11Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -324,13 +324,13 @@ Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die
                 About Main Home
                 
             </title>
-            <updated>2026-01-31T15:36:48.029Z</updated>
+            <updated>2026-02-10T18:31:54.730Z</updated>
             <id>https://janek.ing/</id>
             <content type="html">
                 &lt;h1 id=&quot;hi&quot; tabindex=&quot;-1&quot;&gt;Hi!&lt;/h1&gt;
 &lt;p&gt;I am Janek, programmer / engineer / tinkerer from Cologne, Germany.&lt;/p&gt;
 &lt;p&gt;My passion is building software for humans that lasts, combining electronics and design into interactive pieces and creating games for various platforms. Examples for all of these are showcased on the &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/projects/&quot;&gt;Projects page&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I have been programming for 20 years and building software professionally for close to 10. Recently I worked as a product developer and product owner for several companies creating IoT solutions.&lt;/p&gt;
+&lt;p&gt;I have been programming for 20 years and building software professionally for close to 10. Recently I worked as a product developer and product owner for several companies creating innovative products and IoT solutions.&lt;/p&gt;
 &lt;p&gt;Growing up in the 90s and 2000s, naturally my first &amp;quot;programming&amp;quot; experience was building a website for myself (using plain HTML, CSS and PHP). It showcased photos I took, cool videos I found on the web and &amp;quot;funny&amp;quot; jokes only me and my friends laughed about (and of course it had a forum with 2 active users, including me). It was online for a couple of years until the free webhosting provider went out of business. Nowadays the web is different, but mostly full of ads. Reading about the idea of a &lt;a href=&quot;https://maggieappleton.com/garden-history/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;&amp;quot;digital garden&amp;quot;&lt;/a&gt; reminded me of the days where the web was mostly about sharing your ideas and experiences. A place of curiosity without the immediate drive to make money off everything.&lt;/p&gt;
 &lt;p&gt;To participate in this idea, I publish some of my notes in my &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/garden/&quot;&gt;Digital Garden&lt;/a&gt;. If you find anything worthwhile or a mistake, consider leaving a comment.&lt;/p&gt;
 
@@ -4539,7 +4539,7 @@ span, div /* apply same style to both span and div */
                 C
                 
             </title>
-            <updated>2026-01-06T16:47:07.602Z</updated>
+            <updated>2026-02-10T18:32:11.400Z</updated>
             <id>https://janek.ing/code/langauges/c/</id>
             <content type="html">
                 &lt;h2 id=&quot;strncpy-strncat&quot; tabindex=&quot;-1&quot;&gt;strncpy, strncat&lt;/h2&gt;
@@ -5019,7 +5019,7 @@ void *loadFile(char *filepath)
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;weird-behavior-calling-into-external-library&quot; tabindex=&quot;-1&quot;&gt;Weird Behavior calling into external library&lt;/h2&gt;
-&lt;p&gt;When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files)&lt;br /&gt;
+&lt;p&gt;When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files).&lt;br /&gt;
 Otherwise the behavior is undefined and you will get crashes or weird stuff due to the stack being not handled correctly.&lt;br /&gt;
 In my case a boolean function was returning -256 (which evaluates to true), instead of false or 0, but otherwise the code would run and behave normally. Replacing the header files with the correct version fixed this.&lt;/p&gt;
 
