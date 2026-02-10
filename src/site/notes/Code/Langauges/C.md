@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-12-10T20:06:11.235+01:00","updated":"2026-01-06T17:47:07.602+01:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-12-10T20:06:11.235+01:00","updated":"2026-02-10T19:32:11.400+01:00"}
 ---
 
 ## strncpy, strncat
@@ -449,6 +449,6 @@ void *loadFile(char *filepath)
 ```
 
 ## Weird Behavior calling into external library
-When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files)
+When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files).
 Otherwise the behavior is undefined and you will get crashes or weird stuff due to the stack being not handled correctly.
 In my case a boolean function was returning -256 (which evaluates to true), instead of false or 0, but otherwise the code would run and behave normally. Replacing the header files with the correct version fixed this.
