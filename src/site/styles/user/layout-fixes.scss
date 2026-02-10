@@ -24,3 +24,12 @@
 .toc-container li::before {
     content: none !important;
 }
+
+/* styling for the footer (for imprint and such) */
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: var(--background-secondary);
+    padding: 2em 0;
+    width: 100%;
+}
