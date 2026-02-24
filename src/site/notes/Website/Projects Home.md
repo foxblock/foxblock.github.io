@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-02-23T13:58:28.204+01:00","updated":"2026-02-23T13:58:28.204+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2025-09-01T15:59:10.636+02:00","updated":"2026-02-24T08:57:55.932+01:00"}
 ---
 
 <div>
@@ -132,7 +132,7 @@
 *2024-2025 • C*
 Software for working with large clouds of geospatial data. Developed for visualizing and analyzing the performance of a city-wide LoRaWAN network. The main goal was to handle 1M+ datapoints in real-time. Loads 1M datapoints (a 200MB csv file) in less than a second and displays them on top of a fully-featured OpenStreetMap renderer. Is able to load 10M and 100M datapoints as well. Analytic tools like aggregations, displaying connections to gateway stations and more. All in real-time 60+ fps. Minimal dependencies (only curl and raylib).
 Currently available upon request.
-[↑ Back to top](#projects-grid)
+[[#projects-grid|↑ Back to top]]
 ### Crank-it!
 ![playdate-20240329-235626.gif](/img/user/_attachments/playdate-20240329-235626.gif)
 *2023-2024 • Lua*
