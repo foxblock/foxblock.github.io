@@ -3,7 +3,7 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-02-24T22:17:52Z</updated>
+    <updated>2026-02-25T14:34:39Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
@@ -325,7 +325,7 @@ Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die
                 About Main Home
                 
             </title>
-            <updated>2026-02-10T19:13:11.754Z</updated>
+            <updated>2026-02-10T20:05:36.909Z</updated>
             <id>https://janek.ing/</id>
             <content type="html">
                 &lt;h1 id=&quot;hi&quot; tabindex=&quot;-1&quot;&gt;Hi!&lt;/h1&gt;
@@ -5896,7 +5896,7 @@ Branchless code like this will be slower when code in the branches is compute-in
                 Architecture
                 
             </title>
-            <updated>2026-01-13T16:10:37.143Z</updated>
+            <updated>2026-02-12T17:24:27.032Z</updated>
             <id>https://janek.ing/code/architecture/</id>
             <content type="html">
                 &lt;h2 id=&quot;golden-rules&quot; tabindex=&quot;-1&quot;&gt;Golden Rules&lt;/h2&gt;
@@ -6050,7 +6050,7 @@ Erst anschließend die Implementierung dieser Funktionen schreiben.&lt;br /&gt;
 &lt;a href=&quot;https://caseymuratori.com/blog_0024&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://caseymuratori.com/blog_0024&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Keine globalen Variablen in Library (mutable global state) -&amp;gt; nicht thread-safe und re-entrant.&lt;br /&gt;
 Besser: Kontext struct anlegen, welcher der API mitgegeben wird und von ihr mit dem aktuellen Zustand beschrieben wird.&lt;br /&gt;
-Bei Callbacks: Thread Local Storage benutzen&lt;br /&gt;
+Bei Callbacks: Thread Local Storage benutzen (aber besser gar keine callbacks benutzen, sondern eine Event-Queue oder Callbacks als optionale Alternative)&lt;br /&gt;
 &lt;a href=&quot;https://nullprogram.com/blog/2014/10/12/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Global State: a Tale of Two Bad C APIs (nullprogram.com)&lt;/a&gt;&lt;br /&gt;
 siehe auch (als ein Ansatz in C): &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/langauges/c/#opaque-struct&quot;&gt;C#Opaque struct&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Konstanten immer public definieren (entweder als enum oder define). -&amp;gt; Keine magic values im user-code. Macht Code deutlich lesbarer und durchsuchbarer (Konstanten findet man einfach, eine &amp;quot;1&amp;quot; ist nicht eindeutig identifizierbar). Kann einfach geändert und erweitert werden ohne, dass user-code vorm nächsten Kompilieren geändert werden muss.&lt;br /&gt;
@@ -6097,8 +6097,13 @@ siehe auch: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-
 Cmuratori zu diesem Thema: &lt;a href=&quot;https://youtu.be/drCnFueS4og?feature=shared&amp;amp;t=5359&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://youtu.be/drCnFueS4og?feature=shared&amp;amp;t=5359&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;parallelisierung&quot; tabindex=&quot;-1&quot;&gt;Parallelisierung&lt;/h2&gt;
 &lt;p&gt;Mutex / Semaphore vermeiden! Insbesondere bei steigender Komplexität (und vielen Locks) kann nicht mehr gut abgeschätzt werden, wie häufig Threads in Mutex-locks laufen und wie viel wirklich parallel gearbeitet wird.&lt;br /&gt;
-Besser: API Design, welche unabhängig von Parallelität ist. Beispiel: Schreiben einer Datei in parallelen chunks: Anstatt fertige Chunks in Array zu pushen oder in Datei zu schreiben (POSIX write(), Reihenfolge abhängig von Parallelität) -&amp;gt; Thread mit offset Parameter starten und fertige Chunks mit Offset in bereits allokierten Speicher oder Datei schreiben (POSIX pwrite(), Reihenfolge unabhängig von Zeitpunkt der Fertigstellung)&lt;/p&gt;
+Besser: API Design, welche unabhängig von Parallelität ist. Beispiel: Schreiben einer Datei in parallelen chunks: Anstatt fertige Chunks in Array zu pushen oder in Datei zu schreiben (POSIX write(), Reihenfolge abhängig von Parallelität) -&amp;gt; Thread mit offset Parameter starten und fertige Chunks mit Offset in bereits allokierten Speicher oder Datei schreiben (POSIX pwrite(), Reihenfolge unabhängig von Zeitpunkt der Fertigstellung).&lt;/p&gt;
 &lt;p&gt;Quelle: &lt;a href=&quot;https://nullprogram.com/blog/2017/03/01/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;OpenMP and pwrite() (nullprogram.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Empfehlung Casey: Insbesondere bei High-Performance Anwendungen mit vielen Threads jegliche Locks und Kommunikation zwischen Threads vermeiden. Auch atomics sind Locks (nur auf CPU-Ebene)!&lt;br /&gt;
+Best Practice Beispiel für das Sammeln und Auswerten von Profiling Daten mehrerer Threads: Die Threads schreiben ihre Daten ohne jegliche Prüfung in einen Ringbuffer aus Chunks. Worker Thread liest periodisch die vorhandenen Chunks ein und testet Validität mit Checksumme.&lt;br /&gt;
+Bad Practice: Atomic integer für &amp;quot;current buffer&amp;quot; oder ähnliches. Ist auch ein Lock. Plus die Validitäts-Checks sind weiterhin erforderlich: Wenn der worker Thread zu langsam arbeitet und startet ein fertiges Chunk zu lesen, welches beim Lesen vom anderen Thread überschrieben wird.&lt;br /&gt;
+Worst Practice: Threads befüllen eine Queue, welche dann von Worker Thread abgearbeitet wird. Hier müssen alle Threads miteinander kommunizieren und konkurrieren über Schreibrechte auf der Queue.&lt;/p&gt;
+&lt;p&gt;Quelle: &lt;a href=&quot;https://www.computerenhance.com/p/q-and-a-81-2025-12-22&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.computerenhance.com/p/q-and-a-81-2025-12-22&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;protobufs-daten-zwischen-services-mit-typeninformationen-teilen&quot; tabindex=&quot;-1&quot;&gt;Protobufs: Daten zwischen Services mit Typeninformationen teilen&lt;/h2&gt;
 &lt;p&gt;-&amp;gt; Protobufs &lt;a href=&quot;https://protobuf.dev/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Protocol Buffers Documentation (protobuf.dev)&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;binaerdaten&quot; tabindex=&quot;-1&quot;&gt;Binärdaten&lt;/h2&gt;
@@ -6374,7 +6379,11 @@ You can also draw the boundary between the different systems. Entities are only 
 &lt;li&gt;How should a low-level system alert a higher-level system about an event? (in the interest of low-coupling the low-level system should never need to know or care about the higher-level system):
 &lt;ol&gt;
 &lt;li&gt;Polling: &amp;quot;wasteful&amp;quot; since CPU time is needed when nothing happens. Usually totally okay if the polling-rate or amount of data is low. Code is easier to write and read, since it is very linear.&lt;/li&gt;
-&lt;li&gt;Callbacks: Store a list of functions to call in the case of an event. It often is a good idea to not do callbacks immediately, but queue them for later, so that they happen at a predictable time. Doing them immediately can also trash your caches, due to context switching and you have to be aware of possible problems with multi-threading and out-of-order execution (don&#39;t delete an object in a callback, while you are iterating over a list with said object). Try to avoid too many boilerplate code when writing callbacks in C++. More often than not a simple C function pointer is enough.&lt;/li&gt;
+&lt;li&gt;Callbacks: Store a list of functions to call in the case of an event. It often is a good idea to not do callbacks immediately, but queue them for later, so that they happen at a predictable time. Doing them immediately can also trash your caches, due to context switching and you have to be aware of possible problems with multi-threading and out-of-order execution (don&#39;t delete an object in a callback, while you are iterating over a list with said object). Try to avoid too many boilerplate code when writing callbacks in C++. More often than not a simple C function pointer is enough.
+&lt;ol&gt;
+&lt;li&gt;Note: &lt;a href=&quot;https://www.computerenhance.com/p/q-and-a-81-2025-12-22&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Casey&lt;/a&gt; also advocates against callbacks. They lead to unpredictable control-flow and concurrency problems. Just use a queue instead and provide methods to get items off that queue.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;li&gt;Events: Very similar to callbacks, but using &amp;quot;event IDs&amp;quot; instead of function pointers. Events might work better when processed in bulk, since it can be just a raw array if IDs and data. The control flow is reversed compared to callbacks, since the low-level system collects the events and the high level system reads through the collected buffer (instead of the low-level system calling the registered callback of the higher-level system). Arduino uses a system like this for all &amp;quot;system events&amp;quot; (like Wifi connect, Wifi disconnect).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
