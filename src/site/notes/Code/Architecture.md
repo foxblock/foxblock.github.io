@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2026-01-13T18:03:34.475+01:00","updated":"2026-01-13T17:10:37.143+01:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2026-01-13T18:03:34.475+01:00","updated":"2026-02-12T18:24:27.032+01:00"}
 ---
 
 ## Golden Rules
@@ -123,7 +123,7 @@ https://caseymuratori.com/blog_0024
 
 Keine globalen Variablen in Library (mutable global state) -> nicht thread-safe und re-entrant.
 Besser: Kontext struct anlegen, welcher der API mitgegeben wird und von ihr mit dem aktuellen Zustand beschrieben wird.
-Bei Callbacks: Thread Local Storage benutzen
+Bei Callbacks: Thread Local Storage benutzen (aber besser gar keine callbacks benutzen, sondern eine Event-Queue oder Callbacks als optionale Alternative)
 [Global State: a Tale of Two Bad C APIs (nullprogram.com)](https://nullprogram.com/blog/2014/10/12/)
 siehe auch (als ein Ansatz in C): [[Code/Langauges/C#Opaque struct\|C#Opaque struct]]
 
@@ -173,9 +173,16 @@ Performance lässt sich nicht magisch am Ende der Entwicklung herbeiführen. Ins
 Cmuratori zu diesem Thema: https://youtu.be/drCnFueS4og?feature=shared&t=5359
 ## Parallelisierung
 Mutex / Semaphore vermeiden! Insbesondere bei steigender Komplexität (und vielen Locks) kann nicht mehr gut abgeschätzt werden, wie häufig Threads in Mutex-locks laufen und wie viel wirklich parallel gearbeitet wird.
-Besser: API Design, welche unabhängig von Parallelität ist. Beispiel: Schreiben einer Datei in parallelen chunks: Anstatt fertige Chunks in Array zu pushen oder in Datei zu schreiben (POSIX write(), Reihenfolge abhängig von Parallelität) -> Thread mit offset Parameter starten und fertige Chunks mit Offset in bereits allokierten Speicher oder Datei schreiben (POSIX pwrite(), Reihenfolge unabhängig von Zeitpunkt der Fertigstellung)
+Besser: API Design, welche unabhängig von Parallelität ist. Beispiel: Schreiben einer Datei in parallelen chunks: Anstatt fertige Chunks in Array zu pushen oder in Datei zu schreiben (POSIX write(), Reihenfolge abhängig von Parallelität) -> Thread mit offset Parameter starten und fertige Chunks mit Offset in bereits allokierten Speicher oder Datei schreiben (POSIX pwrite(), Reihenfolge unabhängig von Zeitpunkt der Fertigstellung).
 
 Quelle: [OpenMP and pwrite() (nullprogram.com)](https://nullprogram.com/blog/2017/03/01/)
+
+Empfehlung Casey: Insbesondere bei High-Performance Anwendungen mit vielen Threads jegliche Locks und Kommunikation zwischen Threads vermeiden. Auch atomics sind Locks (nur auf CPU-Ebene)!
+Best Practice Beispiel für das Sammeln und Auswerten von Profiling Daten mehrerer Threads: Die Threads schreiben ihre Daten ohne jegliche Prüfung in einen Ringbuffer aus Chunks. Worker Thread liest periodisch die vorhandenen Chunks ein und testet Validität mit Checksumme.
+Bad Practice: Atomic integer für "current buffer" oder ähnliches. Ist auch ein Lock. Plus die Validitäts-Checks sind weiterhin erforderlich: Wenn der worker Thread zu langsam arbeitet und startet ein fertiges Chunk zu lesen, welches beim Lesen vom anderen Thread überschrieben wird.
+Worst Practice: Threads befüllen eine Queue, welche dann von Worker Thread abgearbeitet wird. Hier müssen alle Threads miteinander kommunizieren und konkurrieren über Schreibrechte auf der Queue.
+
+Quelle: https://www.computerenhance.com/p/q-and-a-81-2025-12-22
 ## Protobufs: Daten zwischen Services mit Typeninformationen teilen
 -> Protobufs [Protocol Buffers Documentation (protobuf.dev)](https://protobuf.dev/)
 ## Binärdaten
@@ -385,6 +392,7 @@ You can also draw the boundary between the different systems. Entities are only 
 	5. How should a low-level system alert a higher-level system about an event? (in the interest of low-coupling the low-level system should never need to know or care about the higher-level system):
 		1. Polling: "wasteful" since CPU time is needed when nothing happens. Usually totally okay if the polling-rate or amount of data is low. Code is easier to write and read, since it is very linear.
 		2. Callbacks: Store a list of functions to call in the case of an event. It often is a good idea to not do callbacks immediately, but queue them for later, so that they happen at a predictable time. Doing them immediately can also trash your caches, due to context switching and you have to be aware of possible problems with multi-threading and out-of-order execution (don't delete an object in a callback, while you are iterating over a list with said object). Try to avoid too many boilerplate code when writing callbacks in C++. More often than not a simple C function pointer is enough.
+			1. Note: [Casey](https://www.computerenhance.com/p/q-and-a-81-2025-12-22) also advocates against callbacks. They lead to unpredictable control-flow and concurrency problems. Just use a queue instead and provide methods to get items off that queue.
 		3. Events: Very similar to callbacks, but using "event IDs" instead of function pointers. Events might work better when processed in bulk, since it can be just a raw array if IDs and data. The control flow is reversed compared to callbacks, since the low-level system collects the events and the high level system reads through the collected buffer (instead of the low-level system calling the registered callback of the higher-level system). Arduino uses a system like this for all "system events" (like Wifi connect, Wifi disconnect).
 ## Idiomatic vs. Specialized
 [The One Billion Row Challenge in Go: from 1m45s to 3.4s in nine solutions](https://benhoyt.com/writings/go-1brc/)

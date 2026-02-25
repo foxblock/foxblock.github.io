@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2025-09-01T15:59:10.636+02:00","updated":"2026-02-24T08:57:55.932+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-02-24T17:40:04.355+01:00","updated":"2026-02-24T08:57:55.932+01:00"}
 ---
 
 <div>
