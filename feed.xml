@@ -3,20 +3,20 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-02-28T23:13:55Z</updated>
+    <updated>2026-03-02T15:26:34Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
                 Projects Home
                 
             </title>
-            <updated>2026-02-24T07:57:55.932Z</updated>
+            <updated>2026-03-02T14:20:49.769Z</updated>
             <id>https://janek.ing/projects/</id>
             <content type="html">
                 &lt;div&gt;
   &lt;style&gt;
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; padding: 20px; }
-    .grid-item { border-radius: var(--radius-m); overflow: hidden; height: 100%; transition: all 0.15s ease-out}
+    .grid-item { background-color: var(--background-secondary); border-radius: var(--radius-m); overflow: hidden; height: 100%; transition: all 0.15s ease-out}
     .grid-item:hover { background-color: var(--link-color-hover); transform: scale(1.05); }
     .grid-item img { width: 100%; height: 150px; object-fit: cover; }
     .grid-item-content { padding: 6px 12px 12px; }
@@ -135,13 +135,13 @@
     &lt;/a&gt;--&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://janek.ing/#projects-grid&quot; class=&quot;internal-link&quot; style=&quot;position: fixed; bottom: 20px; right: 20px; padding: 8px 16px; background: var(--background-secondary); border-radius: var(--radius-m); text-decoration: none;&quot;&gt; ↑ Back to Top &lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;programming&quot; tabindex=&quot;-1&quot;&gt;Programming&lt;/h2&gt;
 &lt;h3 id=&quot;network-visualizer&quot; tabindex=&quot;-1&quot;&gt;Network Visualizer&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/2025-05-23%2012_21_03-Network%20Visualizer%20(v0.3.1-dev).png&quot; alt=&quot;2025-05-23 12_21_03-Network Visualizer (v0.3.1-dev).png&quot; /&gt;&lt;br /&gt;
 &lt;em&gt;2024-2025 • C&lt;/em&gt;&lt;br /&gt;
 Software for working with large clouds of geospatial data. Developed for visualizing and analyzing the performance of a city-wide LoRaWAN network. The main goal was to handle 1M+ datapoints in real-time. Loads 1M datapoints (a 200MB csv file) in less than a second and displays them on top of a fully-featured OpenStreetMap renderer. Is able to load 10M and 100M datapoints as well. Analytic tools like aggregations, displaying connections to gateway stations and more. All in real-time 60+ fps. Minimal dependencies (only curl and raylib).&lt;br /&gt;
-Currently available upon request.&lt;br /&gt;
-&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/#projects-grid&quot;&gt;↑ Back to top&lt;/a&gt;&lt;/p&gt;
+Currently available upon request.&lt;/p&gt;
 &lt;h3 id=&quot;crank-it&quot; tabindex=&quot;-1&quot;&gt;Crank-it!&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/playdate-20240329-235626.gif&quot; alt=&quot;playdate-20240329-235626.gif&quot; /&gt;&lt;br /&gt;
 &lt;em&gt;2023-2024 • Lua&lt;/em&gt;&lt;br /&gt;
