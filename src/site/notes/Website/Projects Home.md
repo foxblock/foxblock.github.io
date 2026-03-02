@@ -1,11 +1,11 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-02-24T17:40:04.355+01:00","updated":"2026-02-24T08:57:55.932+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2025-09-01T15:59:10.636+02:00","updated":"2026-03-02T15:20:49.769+01:00"}
 ---
 
 <div>
   <style>
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; width: 100%; padding: 20px; }
-    .grid-item { border-radius: var(--radius-m); overflow: hidden; height: 100%; transition: all 0.15s ease-out}
+    .grid-item { background-color: var(--background-secondary); border-radius: var(--radius-m); overflow: hidden; height: 100%; transition: all 0.15s ease-out}
     .grid-item:hover { background-color: var(--link-color-hover); transform: scale(1.05); }
     .grid-item img { width: 100%; height: 150px; object-fit: cover; }
     .grid-item-content { padding: 6px 12px 12px; }
@@ -125,6 +125,7 @@
   </div>
 </div>
 
+<a href="#projects-grid" class="internal-link" style="position: fixed; bottom: 20px; right: 20px; padding: 8px 16px; background: var(--background-secondary); border-radius: var(--radius-m); text-decoration: none;"> ↑ Back to Top </a>
 ## Programming
 
 ### Network Visualizer
@@ -132,7 +133,6 @@
 *2024-2025 • C*
 Software for working with large clouds of geospatial data. Developed for visualizing and analyzing the performance of a city-wide LoRaWAN network. The main goal was to handle 1M+ datapoints in real-time. Loads 1M datapoints (a 200MB csv file) in less than a second and displays them on top of a fully-featured OpenStreetMap renderer. Is able to load 10M and 100M datapoints as well. Analytic tools like aggregations, displaying connections to gateway stations and more. All in real-time 60+ fps. Minimal dependencies (only curl and raylib).
 Currently available upon request.
-[[#projects-grid|↑ Back to top]]
 ### Crank-it!
 ![playdate-20240329-235626.gif](/img/user/_attachments/playdate-20240329-235626.gif)
 *2023-2024 • Lua*
