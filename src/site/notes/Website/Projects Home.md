@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2025-09-01T15:59:10.636+02:00","updated":"2026-03-02T15:20:49.769+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2025-09-01T15:59:10.636+02:00","updated":"2026-03-02T16:35:43.027+01:00"}
 ---
 
 <div>
@@ -125,7 +125,7 @@
   </div>
 </div>
 
-<a href="#projects-grid" class="internal-link" style="position: fixed; bottom: 20px; right: 20px; padding: 8px 16px; background: var(--background-secondary); border-radius: var(--radius-m); text-decoration: none;"> ↑ Back to Top </a>
+<a href="#projects-grid" class="internal-link" style="position: fixed; bottom: 16px; right: 32px; padding: 8px 16px; background: var(--background-secondary); border-radius: var(--radius-m); text-decoration: none; z-index: 9"> ↑ Back to Top </a>
 ## Programming
 
 ### Network Visualizer
