@@ -48,3 +48,8 @@ footer {
 footer a {
     text-decoration: none;
 }
+
+/* Fix overflow, so button and toc position is correct */
+html, body {
+    overflow-x: visible;
+}
