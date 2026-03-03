@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2025-09-01T15:59:10.636+02:00","updated":"2026-03-02T16:45:49.867+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-03-02T18:15:39.324+01:00","updated":"2026-03-03T15:07:03.861+01:00"}
 ---
 
 <div>
@@ -128,7 +128,13 @@
 	.top-button { position: fixed; bottom: 16px; right: 16px; padding: 8px 16px; background: var(--background-secondary); border-radius: var(--radius-m); text-decoration: none; z-index: 9 }
 	.top-button:hover { background-color: var(--link-color-hover); color: white; text-decoration: none }
 </style>
-<a href="#projects-grid" class="top-button"> ↑ </a>
+<!-- Up arrow symbol ↑ from Inter font at 18px size converted to svg -->
+<a href="#projects-grid" class="top-button">
+  <svg viewBox="0 0 12 14" style="width: 12px; height: 14px; fill: currentColor;">
+    <path d="M 5.3032671,13.583807 V 3.0752843 L 1.2634944,7.1278411 0.26633527,6.1434661 6.0063921,0.41619336 11.733665,6.1434661 10.762074,7.1278411 6.7095171,3.0752843 V 13.583807 Z" />
+  </svg>
+</a>
+
 ## Programming
 
 ### Network Visualizer
