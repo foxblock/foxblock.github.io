@@ -3,14 +3,14 @@
     <title>janek.ing</title>
     <link href="https://janek.ing/feed.xml" rel="self" >
     <link href="https://janek.ing" >
-    <updated>2026-03-02T15:48:08Z</updated>
+    <updated>2026-03-03T14:07:33Z</updated>
     <id>https://janek.ing</id>
         <entry>
             <title>
                 Projects Home
                 
             </title>
-            <updated>2026-03-02T15:45:49.867Z</updated>
+            <updated>2026-03-03T14:07:03.861Z</updated>
             <id>https://janek.ing/projects/</id>
             <content type="html">
                 &lt;div&gt;
@@ -139,8 +139,13 @@
 	.top-button { position: fixed; bottom: 16px; right: 16px; padding: 8px 16px; background: var(--background-secondary); border-radius: var(--radius-m); text-decoration: none; z-index: 9 }
 	.top-button:hover { background-color: var(--link-color-hover); color: white; text-decoration: none }
 &lt;/style&gt;
-&lt;a href=&quot;https://janek.ing/#projects-grid&quot; class=&quot;top-button&quot;&gt; ↑ &lt;/a&gt;
-## Programming
+&lt;!-- Up arrow symbol ↑ from Inter font at 18px size converted to svg --&gt;
+&lt;a href=&quot;https://janek.ing/#projects-grid&quot; class=&quot;top-button&quot;&gt;
+  &lt;svg viewBox=&quot;0 0 12 14&quot; style=&quot;width: 12px; height: 14px; fill: currentColor;&quot;&gt;
+    &lt;path d=&quot;M 5.3032671,13.583807 V 3.0752843 L 1.2634944,7.1278411 0.26633527,6.1434661 6.0063921,0.41619336 11.733665,6.1434661 10.762074,7.1278411 6.7095171,3.0752843 V 13.583807 Z&quot;&gt;&lt;/path&gt;
+  &lt;/svg&gt;
+&lt;/a&gt;
+&lt;h2 id=&quot;programming&quot; tabindex=&quot;-1&quot;&gt;Programming&lt;/h2&gt;
 &lt;h3 id=&quot;network-visualizer&quot; tabindex=&quot;-1&quot;&gt;Network Visualizer&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/2025-05-23%2012_21_03-Network%20Visualizer%20(v0.3.1-dev).png&quot; alt=&quot;2025-05-23 12_21_03-Network Visualizer (v0.3.1-dev).png&quot; /&gt;&lt;br /&gt;
 &lt;em&gt;2024-2025 • C&lt;/em&gt;&lt;br /&gt;
