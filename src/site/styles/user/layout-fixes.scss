@@ -50,6 +50,8 @@ footer a {
 }
 
 /* Fix overflow, so button and toc position is correct */
+/* also smooth scroll */
 html, body {
     overflow: visible;
+    scroll-behavior: smooth;
 }
