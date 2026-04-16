@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Garden Home.md","dg-permalink":"garden","permalink":"/garden/","title":"Digital Garden","created":"2025-08-22T22:09:49.872+02:00","updated":"2025-08-22T14:12:07.276+02:00"}
+{"dg-publish":true,"dg-path":"Garden Home.md","dg-permalink":"garden","permalink":"/garden/","title":"Digital Garden","created":"2025-08-22T22:09:49.872+02:00","updated":"2026-04-16T11:54:45.755+02:00","dg-note-properties":{"title":"Digital Garden"}}
 ---
 
 This is my collection of notes and ideas. I write these for myself, so they might be gibberish for anybody else. I decided to publish them anyway as an experiment and I hope you find something worthwhile. If not that's okay, too.
@@ -10,6 +10,7 @@ Some starting points that might be of higher quality:
 - [[Code/Langauges/Go\|Go]] - my cheatsheet for learning the programming language go
 - [[Code/Rules for Code Comments\|Rules for Code Comments]] - flowchart and my approach to comments in code
 - [[Technik/LoRaWAN\|LoRaWAN]] - learnings from my professional experience with LoRaWAN
+- [[Design/UI - UX\|UI - UX]] - my thoughts on good user interface design
 
 Generally many notes are collections of knowledge I find on the internet (like what a LLM would spit out, only in this case it was curated by a human, which might be good or bad, depending on your stance). Some notes include my own opinion or experience from working on that topic.
 

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/LoRaWAN.md","permalink":"/tech/lo-ra-wan/","tags":["experience","knowledge-base"],"created":"2025-12-04T19:17:13.863+01:00","updated":"2025-12-04T14:51:58.940+01:00"}
+{"dg-publish":true,"dg-path":"Tech/LoRaWAN.md","permalink":"/tech/lo-ra-wan/","tags":["experience","knowledge-base"],"created":"2025-12-04T19:17:13.863+01:00","updated":"2025-12-04T14:51:58.940+01:00","dg-note-properties":{"tags":["experience","knowledge-base"]}}
 ---
 
 ## SF12 the sweet poison
@@ -26,7 +26,7 @@ Talk from Semtech about nbTrans: [LoRaWAN and the IoT - Olivier Seller (Semtech)
 	- that means the downlink for a confirmed uplink blocks the whole gateway for a period of time, essentially slashing the throughput by up to 1/16x
 		- though the downlink blocks only one gateway, while any uplink might block one channel of any gateway in range
 - in my testing, confirmed uplinks may be lost still, so you cannot even rely on this for 100% coverage
-- it's a better idea to use `nbTrans`, if you just want to reduce loss (see [[#SF12 the sweet poison]])
+- it's a better idea to use `nbTrans`, if you just want to reduce loss (see [[Technik/LoRaWAN#SF12 the sweet poison\|#SF12 the sweet poison]])
 - can use confirmed uplinks to test network access, record (approx.) time of dropped connection (to retransmit dater later), and start join process again
 	- transmit every 10th or 20th uplink as confirmed (ideally make this available as a setting based on uplink count OR time - count works well with periodic uplinks, time works well with sporadic events)
 	- can also use [LinkCheckReq](https://learn.semtech.com/mod/book/view.php?id=172&chapterid=108) network messages for this purpose, which are more lightweight (but they also incur a downlink!)
@@ -49,7 +49,7 @@ My wishlist for a device firmware:
 	- if your LNS or application server does not track the current config, it is helpful to quickly get the state of a sensor
 - make everything configurable via downlink
 	- especially the periodic update interval
-	- no need for SF settings though, Lora can handle that with MAC commands ([[#ADR]])
+	- no need for SF settings though, Lora can handle that with MAC commands ([[Technik/LoRaWAN#ADR\|#ADR]])
 - make the sensor confirm each configuration by sending the new values back
 - keep the configuration simple. It will make the operators and decoder developers job much easier.
 	- again Milesight is doing a good job in this regard
@@ -62,7 +62,7 @@ My wishlist for a device firmware:
 	- use the port! It is transmitted every time, so you essentially get one uint8 for free (or rather pay the cost anyway if you don't use it)
 - properly implement all the system messages (MAC commands): [3 - Receiving Messages: Handling MAC Commands | Semtech Learning Center](https://learn.semtech.com/mod/book/view.php?id=173&chapterid=138)
 	- there is a quite a bit important functionality there, that you will not have to implement in custom parameters
-	- `LinkADRReq`: change ADR and nbTrans as requested by the server. Makes it possible to set SF/DR values from the server. nbTrans is also very useful to decrease loss (see [[#SF12 the sweet poison]])
+	- `LinkADRReq`: change ADR and nbTrans as requested by the server. Makes it possible to set SF/DR values from the server. nbTrans is also very useful to decrease loss (see [[Technik/LoRaWAN#SF12 the sweet poison\|#SF12 the sweet poison]])
 	- `DeviceTimeAns`: Get UTC time from the server
 	- `DevStatusReq`: Transmit battery and network info, so it can be displayed on the server (countless devices implement this wrong, leading to all kinds of horrible workarounds)
 	- `LinkCheckAns`: Get link margin and number of gateways in reach from server. Useful to adjust SF/DR when ADR is on.
@@ -272,7 +272,7 @@ curl -sSL -o docker-compose.yml https://www.thethingsindustries.com/docs/enterpr
 - Install everything by running `docker compose pull`
 
 **Time to configure The Things Stack**
-- At this point you have to chose, whether to address the Pi via IP or a domain (if you did setup DNS previously). IP will always work without further setup, but comes with some [[#Changing the IP|caveats]] (i.e. I strongly recommend setting a static IP for the Raspberry Pi). If you have a domain to use, that is probably preferrable. 
+- At this point you have to chose, whether to address the Pi via IP or a domain (if you did setup DNS previously). IP will always work without further setup, but comes with some [[Technik/LoRaWAN#Changing the IP\|caveats]] (i.e. I strongly recommend setting a static IP for the Raspberry Pi). If you have a domain to use, that is probably preferrable. 
 - NOTE: The mDNS address (xyz.local) will not work here! Logging in would result in OAuth errors for me.
 - Enter one of the following to set an environment variable, we are going to use later:
 ```
@@ -380,7 +380,7 @@ Using [Basic Station](https://www.thethingsindustries.com/docs/hardware/gateways
 Installation of the [UDP Package Forwarders](https://knowledgehub.tektelic.com/connecting-kona-gateways-to-3rd-party-network-servers) worked instead (Tektelik calls is "Kona Package Forwarder", installation instructions for TTN further down the page linked above). To setup you will need the KonaFT tool. Chose the "SNMP V2c" protocol. Username and password can be found on the "KONA Test Summary Certificate" which comes with the gateway.
 ### Troubleshooting
 If you are getting "OAuth" errors when trying to login to the ThingsStack GUI, there probably is a mismatch between the IP you are accessing the GUI on and the one setup for the auth-service in the `stack.env` file. 
-Solution: Confirm the IP of the Raspberry Pi is the same as the one in `stack.env`, change it if necessary and restart the docker container. See [[#Changing the IP|below]] for caveats.
+Solution: Confirm the IP of the Raspberry Pi is the same as the one in `stack.env`, change it if necessary and restart the docker container. See [[Technik/LoRaWAN#Changing the IP\|below]] for caveats.
 ### Changing the IP
 If the IP of the RaspberryPi ever changes, you need to change the IPs in the `stack.env` file, close the application with `docker compose down` (if it is running) and restart it with `docker compose up -d stack` (`docker compose restart` did not work for me). 
 

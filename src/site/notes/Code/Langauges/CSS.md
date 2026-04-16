@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/css/","tags":["knowledge-base"],"created":"2024-03-12T16:42:12.683+01:00","updated":"2025-05-23T14:53:37.739+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/css/","tags":["knowledge-base"],"created":"2024-03-12T16:42:12.683+01:00","updated":"2025-05-23T14:53:37.739+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Selectors

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Privacy.md","dg-permalink":"privacy","permalink":"/privacy/","title":"janek.ing - Privacy Policy","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-02-02T19:21:27.165+01:00","updated":"2026-02-10T19:17:36.905+01:00"}
+{"dg-publish":true,"dg-path":"Privacy.md","dg-permalink":"privacy","permalink":"/privacy/","title":"janek.ing - Privacy Policy","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-02-02T19:21:27.165+01:00","updated":"2026-02-10T19:17:36.905+01:00","dg-note-properties":{"title":"janek.ing - Privacy Policy"}}
 ---
 
 ### Verantwortlicher im Sinne der DSGVO

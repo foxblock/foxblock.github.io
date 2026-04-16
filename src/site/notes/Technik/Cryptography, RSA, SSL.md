@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Cryptography, RSA, SSL.md","permalink":"/tech/cryptography-rsa-ssl/","tags":["knowledge-base","german"],"created":"2024-12-06T15:30:53.740+01:00","updated":"2025-05-24T12:53:57.515+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Cryptography, RSA, SSL.md","permalink":"/tech/cryptography-rsa-ssl/","tags":["knowledge-base","german"],"created":"2024-12-06T15:30:53.740+01:00","updated":"2025-05-24T12:53:57.515+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## Allgemeines

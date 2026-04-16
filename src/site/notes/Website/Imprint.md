@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Imprint.md","dg-permalink":"imprint","permalink":"/imprint/","title":"janek.ing - Imprint","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-02-02T19:21:27.165+01:00","updated":"2026-02-10T18:04:12.213+01:00"}
+{"dg-publish":true,"dg-path":"Imprint.md","dg-permalink":"imprint","permalink":"/imprint/","title":"janek.ing - Imprint","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-02-02T19:21:27.165+01:00","updated":"2026-02-10T18:04:12.213+01:00","dg-note-properties":{"title":"janek.ing - Imprint"}}
 ---
 
 **Angaben gemäß § 5 TMG:**

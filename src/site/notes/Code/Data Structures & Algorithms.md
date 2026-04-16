@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-08-22T22:09:49.908+02:00","updated":"2026-02-03T16:46:14.198+01:00"}
+{"dg-publish":true,"permalink":"/code/data-structures-and-algorithms/","tags":["knowledge-base","german"],"created":"2025-08-22T22:09:49.908+02:00","updated":"2026-02-03T16:46:14.198+01:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## Hash Tables

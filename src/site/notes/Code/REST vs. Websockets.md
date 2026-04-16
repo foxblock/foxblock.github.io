@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/rest-vs-websockets/","tags":["knowledge-base","german"],"created":"2024-04-04T17:15:39.935+02:00","updated":"2025-05-23T15:08:20.317+02:00"}
+{"dg-publish":true,"permalink":"/code/rest-vs-websockets/","tags":["knowledge-base","german"],"created":"2024-04-04T17:15:39.935+02:00","updated":"2025-05-23T15:08:20.317+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 [Don't Use Websockets (Until You Try This…) (youtube.com)](https://www.youtube.com/watch?v=6QnTNKOJk5A)

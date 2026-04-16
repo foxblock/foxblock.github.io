@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/NodeRed.md","permalink":"/tech/node-red/","tags":["knowledge-base","german"],"created":"2025-05-26T18:08:10.481+02:00","updated":"2025-05-26T14:51:52.521+02:00"}
+{"dg-publish":true,"dg-path":"Tech/NodeRed.md","permalink":"/tech/node-red/","tags":["knowledge-base","german"],"created":"2025-05-26T18:08:10.481+02:00","updated":"2025-05-26T14:51:52.521+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## Function node - Rückgabewert

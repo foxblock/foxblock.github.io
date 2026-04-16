@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Festplatten.md","permalink":"/tech/festplatten/","tags":["knowledge-base","german"],"created":"2025-12-04T19:17:13.864+01:00","updated":"2025-12-04T09:13:41.301+01:00"}
+{"dg-publish":true,"dg-path":"Tech/Festplatten.md","permalink":"/tech/festplatten/","tags":["knowledge-base","german"],"created":"2025-12-04T19:17:13.864+01:00","updated":"2025-12-04T09:13:41.301+01:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## HDD

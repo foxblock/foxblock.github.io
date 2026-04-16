@@ -1,13 +1,13 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/batch/","tags":["knowledge-base"],"created":"2025-05-08T19:24:07.675+02:00","updated":"2026-01-06T17:40:23.088+01:00"}
+{"dg-publish":true,"permalink":"/code/langauges/batch/","tags":["knowledge-base"],"created":"2025-05-08T19:24:07.675+02:00","updated":"2026-01-06T17:40:23.088+01:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Best practices
 - `@echo off` (disable echo by default)
 - when setting variables surround whole statement with quotes `set "var=value"` (this handles spaces and other special characters better)
-- Better not handle passwords, if you really need to see [[#Handle passwords]]
+- Better not handle passwords, if you really need to see [[Code/Langauges/Batch#Handle passwords\|#Handle passwords]]
 - surround whole script with `setlocal` and `endlocal` (to not pollute the variable space)
-- Use these instead of hard-coded paths: [[#Useful Windows variables]]
+- Use these instead of hard-coded paths: [[Code/Langauges/Batch#Useful Windows variables\|#Useful Windows variables]]
 - `for %%a in (%*) do (set "%%a=1")` is the simplest parser for flags
 - Keep conditions (if/else) to a minimum (many pitfalls: brackets may break comments, variables are expanded only once, code becomes less linear, etc. - goto avoids some of these, but makes the code even less linear)
 ## Cheatsheet

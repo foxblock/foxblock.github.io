@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2025-12-10T20:06:11.235+01:00","updated":"2026-02-10T19:32:11.400+01:00"}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2026-04-14T16:55:57.868+02:00","updated":"2026-04-14T16:34:10.260+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## strncpy, strncat
@@ -204,7 +204,7 @@ struct foo {
 ```
 Hides internal details, datamembers and functions of a struct from the user (i.e. only the struct name is known to the public API). Essentially this means: do not access the internals of this struct manually, only pass it to the accompanying API functions. Is the equivalent of making things protected/private in C++.
 Advantage: Implementation details of struct can change and user-code is unaffected.
-Allows multiple implementations of the same concept/interface (e.g. for [[#Platform Independent Code|platform specific code]])
+Allows multiple implementations of the same concept/interface (e.g. for [[Code/Langauges/C#Platform Independent Code\|platform specific code]])
 ## Bitshift
 ```C
 // >> shifts all bits right and fills with 0 (+int and uint) or 1 (-int, preserves sign bit, technically compiler dependant)
@@ -235,7 +235,7 @@ More info: https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E
  1.5 |    1 |    1.0 |    2.0 |  2.0
  1.9 |    1 |    1.0 |    2.0 |  2.0
 ```
-- (int)-cast not recommended for values that can be both positive and negative, since the range (-1,1) gets mapped to 0, basically introducing an off-by-one error whenever we cross 0 (e.g. when dealing with 2D/3D coordinates)
+- (int)-cast not recommended for values that can be both positive and negative, since the range (-1,1) gets mapped to 0, basically introducing an off-by-one error whenever we cross 0 (e.g. when dealing with float 2D/3D coordinates converted to integer pixels)
 - floorf and ceilf are more consistent and map the same amount of values to a single int across the whole range of float/double
 - roundf has the problem that both +0.5 and -0.5 get rounded away from zero and one has to deal with the fact, that the switch from one int to the next happens in the middle between two values
 ```C
@@ -252,15 +252,24 @@ int main()
     }
 }
 ```
-## int sizes
+## sign bit - integer demotion and shift
 ```C
 #include <stdint.h>
 int64_t test = -(1ULL << 32) - 2;
 int32_t test2 = test;
 printf("%lld %d\n", test, test2);
 // prints: -4294967298 -2
+
+int x = -16;
+printf("%d | %d\n", x >> 2, x >> 6);
+// prints -4 | -1
 ```
 - Casting a bigger int type to a smaller one will preserve the lower N-1 bits and the sign (or lower N bits for unsigned types)
+- Shifting a negative number left is undefined behavior!
+	- Source: https://stackoverflow.com/a/22734721
+	- The compilers I tested (MSVC and GCC) seem to implement this as a logical shift (i.e. the sign bit is not preserved so it might flip depending on the data)
+- Shifting right will move all bits over toward the LSB and then fill the gap with the value of the sign bit. Essentially this will divide the number by 2 and round towards negative infinity. The lowest you can get for negative numbers is -1 because it is all 1s in [Two's complement](https://en.wikipedia.org/wiki/Two%27s_complement). NOTE: This is actually [implementation dependent](https://stackoverflow.com/a/1857965), but the big compilers all seem to work this way.
+	- This is an arithmetic shift (preserving the sign bit)
 ## Implicit conversions
 [Implicit conversions - cppreference.com](https://en.cppreference.com/w/c/language/conversion)
 Breaking it down to practical rules (ignoring niche use-cases like complex and imaginary types).
@@ -413,8 +422,8 @@ Better approach:
 - Have a platform specific main.cpp with the platform specific program entry (e.g. win32_main.cpp with WinMain, linux_main.cpp with main, etc.)
 - Have that main function call a platform independent MainLoop() function, which starts up the actual (platform independent) program loop
 - Inside the MainLoop() call out to platform specific functions from the platform layer (e.g. for reading files). These functions need to have the same API on all platforms and are defined in one common header file and implemented in the platform specific cpp file(s).
-- You can chose to implement basic platform specific initialization (like creating a window) and loop code (like reading input or the message queue) directly in the platform specific main (i.e. wrapped around the MainLoop() call, passing messages and input in and getting video and sound data out) or abstract the code in functions and [[#Opaque struct|opaque structs]], which are called/passed from MainLoop() (like you would reading a file). The example below uses the former approach.
-- Selection of the desired platform code is done through passing the correct platform specific cpp file to the compiler (works well with [[#Unity build]])
+- You can chose to implement basic platform specific initialization (like creating a window) and loop code (like reading input or the message queue) directly in the platform specific main (i.e. wrapped around the MainLoop() call, passing messages and input in and getting video and sound data out) or abstract the code in functions and [[Code/Langauges/C#Opaque struct\|opaque structs]], which are called/passed from MainLoop() (like you would reading a file). The example below uses the former approach.
+- Selection of the desired platform code is done through passing the correct platform specific cpp file to the compiler (works well with [[Code/Langauges/C#Unity build\|#Unity build]])
 ```C
 // program.h - main header file
 void MainLoop();

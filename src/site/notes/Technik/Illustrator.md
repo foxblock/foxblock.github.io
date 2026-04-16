@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Illustrator.md","permalink":"/tech/illustrator/","tags":["knowledge-base","german"],"created":"2024-06-21T23:06:45.250+02:00","updated":"2025-12-13T19:48:22.040+01:00"}
+{"dg-publish":true,"dg-path":"Tech/Illustrator.md","permalink":"/tech/illustrator/","tags":["knowledge-base","german"],"created":"2024-06-21T23:06:45.250+02:00","updated":"2025-12-13T19:48:22.040+01:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 

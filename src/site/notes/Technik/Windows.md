@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2026-02-01T15:01:46.352+01:00"}
+{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2026-02-01T15:01:46.352+01:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## MD5, SHA berechnen

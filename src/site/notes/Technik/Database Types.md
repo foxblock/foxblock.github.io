@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Database Types.md","permalink":"/tech/database-types/","tags":["knowledge-base"],"created":"2024-08-09T07:54:46.863+02:00","updated":"2025-05-23T14:19:10.695+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Database Types.md","permalink":"/tech/database-types/","tags":["knowledge-base"],"created":"2024-08-09T07:54:46.863+02:00","updated":"2025-05-23T14:19:10.695+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 [7 Database Paradigms (youtube.com)](https://www.youtube.com/watch?v=W2Z7fbCLSTw)

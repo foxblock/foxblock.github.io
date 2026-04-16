@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Linux.md","permalink":"/tech/linux/","tags":["knowledge-base"],"created":"2025-05-18T12:02:24.706+02:00","updated":"2025-05-20T20:20:17.876+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Linux.md","permalink":"/tech/linux/","tags":["knowledge-base"],"created":"2025-05-18T12:02:24.706+02:00","updated":"2025-05-20T20:20:17.876+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Folder structure

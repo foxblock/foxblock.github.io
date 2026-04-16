@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2026-01-13T18:03:34.475+01:00","updated":"2026-02-12T18:24:27.032+01:00"}
+{"dg-publish":true,"permalink":"/code/architecture/","tags":["experience","opinion","german","knowledge-base"],"created":"2026-01-13T18:03:34.475+01:00","updated":"2026-02-12T18:24:27.032+01:00","dg-note-properties":{"tags":["experience","opinion","german","knowledge-base"]}}
 ---
 
 ## Golden Rules

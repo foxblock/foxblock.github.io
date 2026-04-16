@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/design/ui-ux/","tags":["opinion"],"created":"2026-01-14T19:41:44.668+01:00","updated":"2026-01-14T14:25:01.265+01:00"}
+{"dg-publish":true,"permalink":"/design/ui-ux/","tags":["opinion"],"created":"2026-01-14T19:41:44.668+01:00","updated":"2026-01-14T14:25:01.265+01:00","dg-note-properties":{"tags":["opinion"]}}
 ---
 
 ## General / Scattered thoughts

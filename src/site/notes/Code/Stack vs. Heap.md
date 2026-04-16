@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/stack-vs-heap/","tags":["knowledge-base"],"created":"2024-04-09T16:21:09.321+02:00","updated":"2025-05-24T12:52:56.435+02:00"}
+{"dg-publish":true,"permalink":"/code/stack-vs-heap/","tags":["knowledge-base"],"created":"2024-04-09T16:21:09.321+02:00","updated":"2025-05-24T12:52:56.435+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Fazit

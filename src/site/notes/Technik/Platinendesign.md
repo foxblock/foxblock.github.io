@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Platinendesign.md","permalink":"/tech/platinendesign/","tags":["experience","german"],"created":"2025-01-23T21:11:49.942+01:00","updated":"2025-05-24T12:56:00.745+02:00"}
+{"dg-publish":true,"dg-path":"Tech/Platinendesign.md","permalink":"/tech/platinendesign/","tags":["experience","german"],"created":"2025-01-23T21:11:49.942+01:00","updated":"2025-05-24T12:56:00.745+02:00","dg-note-properties":{"tags":["experience","german"]}}
 ---
 
 ## Lessons Learned

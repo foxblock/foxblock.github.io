@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/lua/","tags":["knowledge-base"],"created":"2024-03-24T18:22:43.259+01:00","updated":"2025-05-23T15:04:32.951+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/lua/","tags":["knowledge-base"],"created":"2024-03-24T18:22:43.259+01:00","updated":"2025-05-23T15:04:32.951+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Cheatsheet

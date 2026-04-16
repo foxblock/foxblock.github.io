@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/game-programming/","tags":["knowledge-base"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-05-28T16:57:26.066+02:00"}
+{"dg-publish":true,"permalink":"/code/game-programming/","tags":["knowledge-base"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-05-28T16:57:26.066+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Lerp Smoothing
@@ -57,7 +57,7 @@ https://youtu.be/drCnFueS4og?feature=shared&t=1740
 - For action games (Doom, C&C):
 	- There is some room of wiggle room, because players do not expect a very precise outcome (much more so in Doom than C&C though)
 - Store game state and render state in the same structure for simplicity.
-	- Basically follow the [[#Fat/Flat struct (behaviors)]] approach
+	- Basically follow the [[Code/Game Programming#Fat/Flat struct (behaviors)\|#Fat/Flat struct (behaviors)]] approach
 	- Maintain separate values for actual game state (e.g., health, ammo) and display state (e.g., display health, display ammo).
 	- Consider "two-sided death" for entities: logical removal from the game state and gradual removal through animation.
 	- DON'T: Have a lot separate classes and interfaces for this stuff. Game state and rendering is strongly linked. One has to be able to quickly add stuff to this, especially in the beginning prototype phase.
@@ -93,8 +93,8 @@ https://youtu.be/drCnFueS4og?feature=shared&t=1740
 	- TODO: Find more details
 ## Entity systems
 General approaches to a unit/entity system.
-Preferred way for moderately complex games: [[#Fat/Flat struct (behaviors)]]
-For simple games this can also work well (MathTD): [[#Naive fat/flat struct (entity types)]]
+Preferred way for moderately complex games: [[Code/Game Programming#Fat/Flat struct (behaviors)\|#Fat/Flat struct (behaviors)]]
+For simple games this can also work well (MathTD): [[Code/Game Programming#Naive fat/flat struct (entity types)\|#Naive fat/flat struct (entity types)]]
 ### OOP
 ``` C++
 class UnitBase {

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/powershell/","tags":["knowledge-base","german"],"created":"2025-04-26T13:30:21.511+02:00","updated":"2025-05-23T15:04:48.690+02:00"}
+{"dg-publish":true,"permalink":"/code/langauges/powershell/","tags":["knowledge-base","german"],"created":"2025-04-26T13:30:21.511+02:00","updated":"2025-05-23T15:04:48.690+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## Allgemeines

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-03-02T18:15:39.324+01:00","updated":"2026-03-03T17:22:56.219+01:00"}
+{"dg-publish":true,"dg-path":"Projects Home.md","dg-permalink":"projects","permalink":"/projects/","title":"janek.ing - Project Showcase","hide":true,"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":true,"created":"2026-03-02T18:15:39.324+01:00","updated":"2026-03-03T17:22:56.219+01:00","dg-note-properties":{"title":"janek.ing - Project Showcase"}}
 ---
 
 <div>
@@ -193,7 +193,7 @@ Play popular meme sounds at the press of the button. Annoy or delight your co-wo
 
 ## Woodworking and Jewlery
 ### Wooden Cube Shelf
-![DSC_2492.jpg|355](/img/user/_attachments/DSC_2492.jpg) ![DSC_2922.jpg|200](/img/user/_attachments/DSC_2922.jpg)
+![DSC_2492.jpg\|355](/img/user/_attachments/DSC_2492.jpg) ![DSC_2922.jpg\|200](/img/user/_attachments/DSC_2922.jpg)
 *2023 • Bamboo*
 LED-Strips for indirect lighting. Some cubes are compatible to IKEA Expedit accessories for additional storage options.
 ### Terrace Bench

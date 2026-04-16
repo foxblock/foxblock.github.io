@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/design/video-games/","tags":["knowledge-base","german","opinion"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-06-05T12:42:31.065+02:00"}
+{"dg-publish":true,"permalink":"/design/video-games/","tags":["knowledge-base","german","opinion"],"created":"2025-04-04T16:35:15.777+02:00","updated":"2025-06-05T12:42:31.065+02:00","dg-note-properties":{"tags":["knowledge-base","german","opinion"]}}
 ---
 
 ## 10 Lessons as per Mark Brown

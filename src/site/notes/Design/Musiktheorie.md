@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/design/musiktheorie/","tags":["knowledge-base","german"],"created":"2024-03-29T21:34:36.712+01:00","updated":"2025-05-24T12:50:50.494+02:00"}
+{"dg-publish":true,"permalink":"/design/musiktheorie/","tags":["knowledge-base","german"],"created":"2024-03-29T21:34:36.712+01:00","updated":"2025-05-24T12:50:50.494+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 https://www.youtube.com/watch?v=HAWUhboLW-0

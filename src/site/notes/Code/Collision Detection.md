@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/collision-detection/","tags":["knowledge-base","german"],"created":"2024-02-19T18:53:39.817+01:00","updated":"2025-05-23T15:06:13.098+02:00"}
+{"dg-publish":true,"permalink":"/code/collision-detection/","tags":["knowledge-base","german"],"created":"2024-02-19T18:53:39.817+01:00","updated":"2025-05-23T15:06:13.098+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 Bestes Buch zum Thema: Real Time Collision Detection von Christer Ericson

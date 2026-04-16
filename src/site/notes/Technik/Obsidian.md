@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Obsidian.md","permalink":"/tech/obsidian/","tags":["knowledge-base"],"created":"2025-04-26T13:30:21.505+02:00","updated":"2025-10-29T16:05:21.586+01:00"}
+{"dg-publish":true,"dg-path":"Tech/Obsidian.md","permalink":"/tech/obsidian/","tags":["knowledge-base"],"created":"2025-04-26T13:30:21.505+02:00","updated":"2025-10-29T16:05:21.586+01:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Callouts
@@ -115,8 +115,8 @@
 ````
 
 ## Links to page or heading with custom text
-[[#Callouts|Like this]]
-`[[#Callouts|Like this]]`
+[[Technik/Obsidian#Callouts\|Like this]]
+`[[Technik/Obsidian#Callouts\|Like this]]`
 
 ## Getting rid of unused properties
 Once you used a property it will always show up in auto-complete. Very annoying if you misspelled it and corrected it later.
@@ -147,7 +147,7 @@ int main() { return 0; }
 ```
 baz
 ````
-Link to heading: [[#Callouts]]
+Link to heading: [[Technik/Obsidian#Callouts\|#Callouts]]
 Link to document with &: [[Code/Data Structures & Algorithms\|Data Structures & Algorithms]]
 Link to document with & and heading: [[Code/Data Structures & Algorithms#Hash Tables\|Data Structures & Algorithms#Hash Tables]]
 # Heading 1

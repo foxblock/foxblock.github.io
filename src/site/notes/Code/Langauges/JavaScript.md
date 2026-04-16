@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/java-script/","tags":["knowledge-base","german"],"created":"2026-01-20T17:12:38.754+01:00","updated":"2026-01-20T16:15:51.571+01:00"}
+{"dg-publish":true,"permalink":"/code/langauges/java-script/","tags":["knowledge-base","german"],"created":"2026-01-20T17:12:38.754+01:00","updated":"2026-01-20T16:15:51.571+01:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## Achtung

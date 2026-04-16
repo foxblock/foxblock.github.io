@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/error-handling/","tags":["opinion"],"created":"2024-06-26T17:45:30.303+02:00","updated":"2025-05-23T15:07:08.858+02:00"}
+{"dg-publish":true,"permalink":"/code/error-handling/","tags":["opinion"],"created":"2024-06-26T17:45:30.303+02:00","updated":"2025-05-23T15:07:08.858+02:00","dg-note-properties":{"tags":["opinion"]}}
 ---
 
 - is error recoverable? -> if yes, do it!
