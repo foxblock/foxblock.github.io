@@ -89,6 +89,7 @@ function getAnchorAttributes(filePath, linkTitle) {
       noteIcon = frontMatter.data.noteIcon;
     }
   } catch {
+    console.log("getAnchorAttributes ERROR", error);
     deadLink = true;
   }
 
