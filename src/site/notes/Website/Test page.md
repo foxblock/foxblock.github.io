@@ -1,8 +1,8 @@
 ---
-{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T17:11:45.821+02:00","dg-note-properties":{"title":"Template test page"}}
+{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T17:22:45.607+02:00","dg-note-properties":{"title":"Template test page"}}
 ---
 
-[[Non-existant page\|Non-existant page]]
+[[Non-existent page\|Non-existent page]]
 Expected: Should link to static 404 page
 
 [[Website/Test page\|alternate Text]]
