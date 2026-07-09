@@ -3,7 +3,7 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-07-09T14:11:09Z</updated>
+  <updated>2026-07-09T14:23:01Z</updated>
   <id>https://janek.ing</id><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
@@ -2854,7 +2854,7 @@ table.insert(vtable, 1, elem) -- at start
 elem = table.remove(vtable, pos) -- no pos = last element
 -- Count entries in array, stops at first nil element
 table.getn(vtable)
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#vtable&quot;&gt;#vtable&lt;/a&gt; -- same as getn
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;vtable&quot;&gt;vtable&lt;/a&gt; -- same as getn
 table.setn(vtable, size) -- set size of array
 -- iterate over array
 for k, v in ipairs(vtable) do sum = sum + v end
@@ -4032,7 +4032,7 @@ h1[class~=&amp;quot;logo&amp;quot;] /* h1 element whose class contains logo */
 li.myClass /* only applies to li elements */
 .myClass.other /* only when both myClass and other present */
 /*** IDs ***/
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#test&quot;&gt;#test&lt;/a&gt; /* all elements with ID test */
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;test&quot;&gt;test&lt;/a&gt; /* all elements with ID test */
 [id=test] /* same thing */
 /*** universal ***/
 * /* all elements */
@@ -4149,8 +4149,8 @@ static_assert(offsetof(Vector2, x) == offsetof(Rectangle, x) &amp;amp;&amp;amp; 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;container_of() is part of the Linux kernel and basically does the reverse, pass in a pointer to a member and get a pointer for the surrounding type: &lt;a href=&quot;https://radek.io/2012/11/10/magical-container_of-macro/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://radek.io/2012/11/10/magical-container_of-macro/&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;macro-stringification&quot; tabindex=&quot;-1&quot;&gt;Macro stringification&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; MAKESTRING(n) STRING(n)
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; STRING(n) &lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#n&quot;&gt;#n&lt;/a&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; MAKESTRING(n) STRING(n)
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; STRING(n) &lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;n&quot;&gt;n&lt;/a&gt;
 
 // prints __LINE__ (not expanded)
 std::cout &amp;lt;&amp;lt; STRING(__LINE__) &amp;lt;&amp;lt; std::endl;
@@ -4161,20 +4161,20 @@ std::cout &amp;lt;&amp;lt; MAKESTRING(__LINE__) &amp;lt;&amp;lt; std::endl;
 &lt;h2 id=&quot;open-mp-simple-parallelisierung&quot; tabindex=&quot;-1&quot;&gt;OpenMP - Simple Parallelisierung&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://nullprogram.com/blog/2017/03/01/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;OpenMP and pwrite() (nullprogram.com)&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;/* schedule(dynamic, 1): treat the loop like a work queue */
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#pragma&quot;&gt;#pragma&lt;/a&gt; omp parallel for schedule(dynamic, 1)
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;pragma&quot;&gt;pragma&lt;/a&gt; omp parallel for schedule(dynamic, 1)
 for (int i = 0; i &amp;lt; num_frames; i++) {
     struct frame *frame = malloc(sizeof(*frame));
     float theta = compute_theta(i);
     compute_frame(frame, theta, beta);
     // only one thread at a time can be in the critical section
-    &lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#pragma&quot;&gt;#pragma&lt;/a&gt; omp critical
+    &lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;pragma&quot;&gt;pragma&lt;/a&gt; omp critical
     {
         write(STDOUT_FILENO, frame, sizeof(*frame));
     }
     free(frame);
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#pragma&quot;&gt;#pragma&lt;/a&gt;&lt;/code&gt; wird ignoriert, wenn OpenMP nicht unterstützt wird -&amp;gt; Code läuft normal ab, wird nur nicht parallelisiert.&lt;br /&gt;
+&lt;p&gt;&lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;pragma&quot;&gt;pragma&lt;/a&gt;&lt;/code&gt; wird ignoriert, wenn OpenMP nicht unterstützt wird -&amp;gt; Code läuft normal ab, wird nur nicht parallelisiert.&lt;br /&gt;
 Wird auch von Windows unterstützt (bis OpenMP 2.0)&lt;/p&gt;
 &lt;h2 id=&quot;switch&quot; tabindex=&quot;-1&quot;&gt;switch&lt;/h2&gt;
 &lt;p&gt;switch wird in Assembler als Jump-Table umgesetzt. Input wird in Speicheradresse umgerechnet, an der sich der Code für die korrekte Anweisung aus dem switch befindet.&lt;br /&gt;
@@ -4245,7 +4245,7 @@ enum EntityProperty {
 	EntityProperty_MAX
 }
 
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; EntityProperty_MAX 123
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; EntityProperty_MAX 123
 struct Entity {
 	u64 properties[(EntityProperty_MAX+63)/64];
 	// ...
@@ -4313,7 +4313,7 @@ printf(&amp;quot;%d %d&#92;n&amp;quot;, test &amp;lt;&amp;lt; 2, test &amp;gt;&a
 &lt;li&gt;floorf and ceilf are more consistent and map the same amount of values to a single int across the whole range of float/double&lt;/li&gt;
 &lt;li&gt;roundf has the problem that both +0.5 and -0.5 get rounded away from zero and one has to deal with the fact, that the switch from one int to the next happens in the middle between two values&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;lt;stdout.h&amp;gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;lt;stdout.h&amp;gt;
 
 int main()
 {
@@ -4327,7 +4327,7 @@ int main()
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;sign-bit-integer-demotion-and-shift&quot; tabindex=&quot;-1&quot;&gt;sign bit - integer demotion and shift&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;lt;stdint.h&amp;gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;lt;stdint.h&amp;gt;
 int64_t test = -(1ULL &amp;lt;&amp;lt; 32) - 2;
 int32_t test2 = test;
 printf(&amp;quot;%lld %d&#92;n&amp;quot;, test, test2);
@@ -4433,14 +4433,14 @@ FILE *b = fopen(&amp;quot;somefile.txt&amp;quot;, &amp;quot;r+b&amp;quot;); // b
 &lt;/ul&gt;
 &lt;h2 id=&quot;unity-build&quot; tabindex=&quot;-1&quot;&gt;Unity build&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt;&lt;/code&gt; all .c files in one file and only send that to the compiler&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt;&lt;/code&gt; all .c files in one file and only send that to the compiler&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://hereket.com/posts/cpp-unity-compile-inkscape/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Comparing C/C++ unity build with regular build on a large codebase | Hereket&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;Faster than non-incremental builds&lt;/li&gt;
 &lt;li&gt;Slower than &amp;quot;clever&amp;quot; incremental builds with tools like cmake+ninja (only compiling changed files)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/EpicGamesExt/raddebugger/blob/master/src/raddbg/raddbg_main.c#L196&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Is also what raddbg uses&lt;/a&gt; (main .c file &lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#includes&quot;&gt;#includes&lt;/a&gt;&lt;/code&gt; all .h and .c files - module .c files barely &lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt;&lt;/code&gt;anything on their own - not even the corresponding .h file)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/EpicGamesExt/raddebugger/blob/master/src/raddbg/raddbg_main.c#L196&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Is also what raddbg uses&lt;/a&gt; (main .c file &lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;includes&quot;&gt;includes&lt;/a&gt;&lt;/code&gt; all .h and .c files - module .c files barely &lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt;&lt;/code&gt;anything on their own - not even the corresponding .h file)&lt;/li&gt;
 &lt;li&gt;Very simple compiler call, no need for cmake or a complicated build system: only need to specify one file, never change the compiler call&lt;/li&gt;
 &lt;li&gt;Puts everything in one translation unit. This has advantages and disadvantages
 &lt;ul&gt;
@@ -4459,7 +4459,7 @@ FILE *b = fopen(&amp;quot;somefile.txt&amp;quot;, &amp;quot;r+b&amp;quot;); // b
 &lt;li&gt;For multiple statements: wrap in do ... while(0) loop&lt;/li&gt;
 &lt;li&gt;Rationale: This prevents incorrect usage in unbracketed if statements, which would most likely lead to unexpected results. Also statements require a semicolon at the end as delimiter.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; foo(x) bar(x); baz(x)
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; foo(x) bar(x); baz(x)
 if (x &amp;gt; 3)
 	foo(x)
 // will lead to
@@ -4467,17 +4467,17 @@ if (x &amp;gt; 3)
 	bar(x);
 baz(x);
 
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; foo_fix(x) do { bar(x); baz(x); } while(0)
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; foo_fix(x) do { bar(x); baz(x); } while(0)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;When a macro should not be defined in one case (e.g. debug builds), replace it with ((void)0) instead of leaving it blank&lt;/li&gt;
 &lt;li&gt;Rationale: This will still work if the macro is used with the comma expression or ternary operator&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#ifdef&quot;&gt;#ifdef&lt;/a&gt; NDEBUG
-	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; debug_print(s) printf(s)
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#else&quot;&gt;#else&lt;/a&gt;
-	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; debug_print(s) ((void)0)
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#endif&quot;&gt;#endif&lt;/a&gt;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;ifdef&quot;&gt;ifdef&lt;/a&gt; NDEBUG
+	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; debug_print(s) printf(s)
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;else&quot;&gt;else&lt;/a&gt;
+	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; debug_print(s) ((void)0)
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;endif&quot;&gt;endif&lt;/a&gt;
 
 for (int idx = 0; idx &amp;lt; len; ++idx, debug_print(&amp;quot;foo&amp;quot;)) { ... }
 x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;smaller&amp;quot;)
@@ -4485,7 +4485,7 @@ x &amp;gt; 0 ? debug_print(&amp;quot;greater&amp;quot;) : debug_print(&amp;quot;
 &lt;ul&gt;
 &lt;li&gt;For macros that return a value, which is not needed, consider explicitly discarding that value to avoid compiler warnings and misuse:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#define&quot;&gt;#define&lt;/a&gt; textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;define&quot;&gt;define&lt;/a&gt; textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;msvc-build-insights&quot; tabindex=&quot;-1&quot;&gt;MSVC Build Insights&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://devblogs.microsoft.com/cppblog/finding-build-bottlenecks-with-cpp-build-insights/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Finding build bottlenecks with C++ Build Insights - C++ Team Blog&lt;/a&gt;&lt;/p&gt;
@@ -4524,11 +4524,11 @@ Don&#39;t do this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;int main(int argc, char **argv)
 {
 	platformIndedependentCode1();
-	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#ifdef&quot;&gt;#ifdef&lt;/a&gt; _WIN32
+	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;ifdef&quot;&gt;ifdef&lt;/a&gt; _WIN32
 	doWindowsStuff();
-	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#elif&quot;&gt;#elif&lt;/a&gt; _LINUX
+	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;elif&quot;&gt;elif&lt;/a&gt; _LINUX
 	doLinuxStuff();
-	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#endif&quot;&gt;#endif&lt;/a&gt;
+	&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;endif&quot;&gt;endif&lt;/a&gt;
 	platformIndedependentCode2();
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -4550,7 +4550,7 @@ void MainLoop();
 void *loadFile(char *filepath);
 
 // program.cpp
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;program.h&amp;quot;
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;program.h&amp;quot;
 void MainLoop()
 {
 	// main program flow
@@ -4558,7 +4558,7 @@ void MainLoop()
 }
 
 // win32_main.cpp
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;program.cpp&amp;quot;
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;program.cpp&amp;quot;
 int WinMain(...)
 {
 	doWindowsInit();
@@ -5611,7 +5611,7 @@ siehe auch: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-
 -- Charles Cook&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Observation &lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#6&quot;&gt;#6&lt;/a&gt;: Software engineers have been led to believe that their time is more valuable than CPU time; therefore, wasting CPU cycles in order to reduce development time is always a win. They&#39;ve forgotten, however, that the application users&#39; time is more valuable than their time.&lt;/p&gt;
+&lt;p&gt;Observation &lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;6&quot;&gt;6&lt;/a&gt;: Software engineers have been led to believe that their time is more valuable than CPU time; therefore, wasting CPU cycles in order to reduce development time is always a win. They&#39;ve forgotten, however, that the application users&#39; time is more valuable than their time.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Quelle: &lt;a href=&quot;https://ubiquity.acm.org/article.cfm?id=1513451&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;The Fallacy of Premature Optimization (acm.org)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Performance lässt sich nicht magisch am Ende der Entwicklung herbeiführen. Insbesondere bei komplexen Systemen sind die Bottlenecks über das System verteilt, voneinander abhängig und bedingen Änderungen an der Architektur, welche am Ende sehr kostspielig und aufwendig sind.&lt;br /&gt;
@@ -5657,7 +5657,7 @@ Dies gilt für alle Binärdaten, eigene Datenformate oder Protokolle (Learning v
 &lt;a href=&quot;https://github.com/unclebob/cmuratori-discussion/blob/main/cleancodeqa-2.md&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;cmuratori-discussion/cleancodeqa-2.md at main · unclebob/cmuratori-discussion&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.rfleury.com/p/programmers-are-users-bad-performance&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.rfleury.com/p/programmers-are-users-bad-performance&lt;/a&gt;&lt;br /&gt;
 OOP Ansatz:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;raw_device.h&amp;quot;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;raw_device.h&amp;quot;
 class new_device : public raw_device {
 public: 
 	virtual file* open(char* name);
@@ -5707,11 +5707,11 @@ f3      /                       &#92; f3 code
 -&amp;gt; the more handler/passthrough layers you have, the more code you have to write/maintin in the OOP case
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;DO NOT DO:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;devids.h&amp;quot;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;console.h&amp;quot;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;paper_tape.h&amp;quot;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;...&amp;quot;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#include&quot;&gt;#include&lt;/a&gt; &amp;quot;...&amp;quot;
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;devids.h&amp;quot;
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;console.h&amp;quot;
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;paper_tape.h&amp;quot;
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;...&amp;quot;
+&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; &amp;quot;...&amp;quot;
 void read(file* f, char* buf, int n) {
 	switch(f-&amp;gt;id) {
 		case CONSOLE: read_console(f, buf, n); break;
