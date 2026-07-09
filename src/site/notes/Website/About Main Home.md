@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"About Main Home.md","permalink":"/about-main-home/","title":"janek.ing - Home","hide":true,"tags":["gardenEntry"],"dgShowFileTree":"false","dgShowToc":"false","created":"2026-01-26T16:48:14.170+01:00","updated":"2026-03-03T17:16:42.537+01:00","dg-note-properties":{"title":"janek.ing - Home"}}
+{"dg-publish":true,"dg-path":"About Main Home.md","permalink":"/about-main-home/","title":"janek.ing - Home","hide":true,"tags":["gardenEntry"],"dgShowInlineTitle":"false","dgShowFileTree":"false","dgShowToc":"false","created":"2026-01-26T16:48:14.170+01:00","updated":"2026-07-09T12:35:50.910+02:00","dg-note-properties":{"title":"janek.ing - Home"}}
 ---
 
 # Hi!
