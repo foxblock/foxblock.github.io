@@ -48,12 +48,12 @@ function transformImage(src, cls, alt, sizes, widths = ["500", "700", "auto"]) {
   return metadata;
 }
 
-function getAnchorLink(filePath, linkTitle) {
-  const { attributes, innerHTML } = getAnchorAttributes(filePath, linkTitle);
+function getAnchorLink(filePath, linkTitle, sourceFilePath) {
+  const { attributes, innerHTML } = getAnchorAttributes(filePath, linkTitle, sourceFilePath);
   return `<a ${Object.keys(attributes).map(key => `${key}="${attributes[key]}"`).join(" ")}>${innerHTML}</a>`;
 }
 
-function getAnchorAttributes(filePath, linkTitle) {
+function getAnchorAttributes(filePath, linkTitle, sourceFilePath) {
   let fileName = filePath.replaceAll("&amp;", "&");
   let header = "";
   let headerLinkPath = "";
@@ -66,8 +66,8 @@ function getAnchorAttributes(filePath, linkTitle) {
   const title = linkTitle ? linkTitle : fileName;
   let permalink = `/notes/${slugify(fileName)}`;
   let deadLink = false;
+  const startPath = "./src/site/notes/";
   try {
-    const startPath = "./src/site/notes/";
     let fullPath;
     if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
       fullPath = `${startPath}${fileName}`;
@@ -89,7 +89,7 @@ function getAnchorAttributes(filePath, linkTitle) {
       noteIcon = frontMatter.data.noteIcon;
     }
   } catch (error) {
-    console.log("getAnchorAttributes ERROR", error);
+    console.log("ERROR: dead link to file", startPath + fileName, "\n - filePath was", filePath, "\n - converting markdown file", sourceFilePath || "(unknown)");
     deadLink = true;
   }
 
@@ -363,6 +363,7 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addFilter("link", function(str) {
+    const currentSourceFilePath = this.page && this.page.inputPath;
     return (
       str &&
       str.replace(/\[\[(.*?\|.*?)\]\]/g, function(match, p1) {
@@ -372,7 +373,7 @@ module.exports = function(eleventyConfig) {
         }
         const [fileLink, linkTitle] = p1.split("|");
 
-        return getAnchorLink(fileLink, linkTitle);
+        return getAnchorLink(fileLink, linkTitle, currentSourceFilePath);
       })
     );
   });
@@ -443,7 +444,7 @@ module.exports = function(eleventyConfig) {
     for (const dataViewJsLink of parsed.querySelectorAll("a[data-href].internal-link")) {
       const notePath = dataViewJsLink.getAttribute("data-href");
       const title = dataViewJsLink.innerHTML;
-      const { attributes, innerHTML } = getAnchorAttributes(notePath, title);
+      const { attributes, innerHTML } = getAnchorAttributes(notePath, title, this.page && this.page.inputPath);
       for (const key in attributes) {
         dataViewJsLink.setAttribute(key, attributes[key]);
       }
@@ -616,7 +617,7 @@ module.exports = function(eleventyConfig) {
   });
 
   // Helper function to convert wiki-links in canvas text nodes (same logic as link filter)
-  function convertCanvasLinks(str) {
+  function convertCanvasLinks(str, sourceFilePath) {
     return (
       str &&
       str.replace(/\[\[(.*?\|.*?)\]\]/g, function(match, p1) {
@@ -624,7 +625,7 @@ module.exports = function(eleventyConfig) {
           return match;
         }
         const [fileLink, linkTitle] = p1.split("|");
-        return getAnchorLink(fileLink, linkTitle);
+        return getAnchorLink(fileLink, linkTitle, sourceFilePath);
       })
     );
   }
@@ -655,7 +656,7 @@ module.exports = function(eleventyConfig) {
             // Render markdown
             let rendered = markdownLib.render(markdown);
             // Apply wiki-link conversion (same as link filter)
-            rendered = convertCanvasLinks(rendered);
+            rendered = convertCanvasLinks(rendered, this.page && this.page.inputPath);
             // Apply tag conversion (same as taggify filter)
             rendered = convertCanvasTags(rendered);
             // Apply callout transformation (reuse shared helper)
