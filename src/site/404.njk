@@ -1,20 +1,17 @@
----
-permalink: 404.html 
----
+
 <!DOCTYPE html>
 <html lang="{{ meta.mainLanguage }}">
     <head>
         <title>Nothing here</title>
         <link href="/styles/digital-garden-base.css" rel="stylesheet">
-        <link href="/styles/obsidian-base.css" rel="stylesheet">
         {%-if meta.themeStyle%}
+            <link href="/styles/obsidian-base.css" rel="stylesheet">
     	    <link href="{{meta.themeStyle}}" rel="stylesheet">
         {% else %}
-            <!-- <link href="/styles/style.css" rel="stylesheet"> -->
+            <link href="/styles/style.css" rel="stylesheet">
         {%endif%}
 
         <link href="/styles/custom-style.css" rel="stylesheet">
-        
     </head>
     <body class="theme-{{meta.baseTheme}} markdown-preview-view">
         <div class="content centered">
