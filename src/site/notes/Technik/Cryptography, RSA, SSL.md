@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Cryptography, RSA, SSL.md","permalink":"/tech/cryptography-rsa-ssl/","tags":["knowledge-base","german"],"created":"2024-12-06T15:30:53.740+01:00","updated":"2025-05-24T12:53:57.515+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
+{"dg-publish":true,"dg-path":"Tech/Cryptography, RSA, SSL.md","permalink":"/tech/cryptography-rsa-ssl/","tags":["knowledge-base","german"],"created":"2026-06-03T17:41:43.024+02:00","updated":"2026-06-03T11:07:47.999+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## Allgemeines
@@ -10,7 +10,7 @@
 - Sign: Nutzt eigenen Private Key, um Nachricht (bzw. Hash der Nachricht wegen Längenbeschränkungen) zu verschlüsseln
 - Verify: Nutzt Public Key des Senders, um Nachricht=Hash zu entschlüsseln und vergleicht mit Hash der Nachricht. Jeder hat Zugang zum Public Key und kann so die Echtheit der Nachricht verifizieren.
 - RSA / DSA / EC (Elliptic Curve): unterschiedliche Methoden zur Generierung der Schlüssel
-- PKCS#8: Aktuelles Format für Private-Keys (in PEM erkennbar am Header `BEGIN PRIVATE KEY`)
+- PKCS#8: Aktuelles Format (Stand 2025) für Private-Keys (in PEM erkennbar am Header `BEGIN PRIVATE KEY`)
 - PKCS#1: Veraltetes Format für Keys (in PEM erkennbar am Header `BEGIN RSA PRIVATE KEY`)
 - Das Zertifikat einer RootCA reicht aus, um allen untergeordneten Zertifikaten von dieser RootCA zu vertrauen (so validiert der Browser bspw. auch LetsEncrypt Zertifikate - er kann nicht die Zertifikate aller Webseiten kennen)
 Mehr Info zu PKCS: https://crypto.stackexchange.com/a/103585

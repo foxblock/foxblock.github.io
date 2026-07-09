@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2026-04-14T16:55:57.868+02:00","updated":"2026-04-14T16:34:10.260+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
+{"dg-publish":true,"permalink":"/code/langauges/c/","tags":["knowledge-base","german"],"created":"2026-04-14T16:55:57.868+02:00","updated":"2026-04-22T18:59:14.314+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 ## strncpy, strncat
@@ -34,7 +34,7 @@ https://en.cppreference.com/w/c/language/operator_precedence
 
 
 > [!warning]
-> `<<` und `>>` werden nach `+-*/` evaluiert, aber vor den meisten anderen Operatoren
+> `<<` und `>>` werden nach `+ - * /` evaluiert, aber vor den meisten anderen Operatoren
 
 ## Dynamischer Array ohne Templates 
 https://github.com/tree-sitter/tree-sitter/blob/master/lib/src/array.h

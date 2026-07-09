@@ -1,8 +1,8 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2025-06-08T13:08:50.465+02:00","updated":"2026-02-01T15:01:46.352+01:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
+{"dg-publish":true,"dg-path":"Tech/Windows.md","permalink":"/tech/windows/","tags":["knowledge-base","german"],"created":"2026-06-03T17:41:43.024+02:00","updated":"2026-06-03T08:51:12.160+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
-## MD5, SHA berechnen
+## MD5, SHA checksums
 ```batch
 :: SHA1 by default
 certutil -hashfile filename
@@ -54,14 +54,15 @@ In Admin cmd:
 ```
 shutdown /r /fw /t 0
 ```
-## WLAN Schlüssel anzeigen
-```batch
-netsh wlan show profile WIFI_NAME key=clear
-netsh wlan show profile WIFI_NAME key=clear | findstr Schlüssel
+## Show WiFi Password
+```cmd
+netsh wlan show profile "Your WiFi SSID here" key=clear
+netsh wlan show profile "Your WiFi SSID here" key=clear | findstr Schlüsselinhalt
+netsh wlan show profile "Your WiFi SSID here" key=clear | findstr /C:"Key Content"
 ```
-## Nützliche Pfade
+## Useful Paths
 [[Code/Langauges/Batch#Useful Windows variables\|Batch#Useful Windows variables]]
-## Icons für Verknüpfungen
+## Icons for Filelinks
 - C:\Windows\System32\shell32.dll
 - C:\Windows\System32\imageres.dll
 - C:\Windows\System32\pifmgr.dll
@@ -179,3 +180,31 @@ Windows Registry Editor Version 5.00
 
 [-HKEY_CLASSES_ROOT\Drive\shell\runas]
 ```
+## Microsoft Family Safety deaktivieren
+Dienst "Jugendschutz" beenden und deaktivieren.
+![Pasted image 20260423124651.png](/img/user/_attachments/Pasted%20image%2020260423124651.png)
+
+Aufgabenplanung -> Microsoft/Windows/Shell -> Die 3 FamilySafety* Aufgaben deaktivieren
+![Pasted image 20260423124759.png](/img/user/_attachments/Pasted%20image%2020260423124759.png)
+## grep
+Search for the text `foo bar` in the output of `some-cmd`:
+```PowerShell
+some-cmd | Select-String "foo bar"
+some-cmd | sls "foo bar"
+```
+
+```cmd
+some-cmd | findstr /C:"foo bar"
+```
+
+> [!INFO] Case Sensitivity
+> `Select-String` is NOT case-senstive by default, but `findstr` is.
+> You can pass `-CaseSensitive` to `Select-String` and you can pass `/I` to `findstr` to make it case-insensitive.
+
+## Access and delete PowerShell history
+History is saved in a plain text file at the following location:
+```PowerShell
+(Get-PSReadlineOption).HistorySavePath
+```
+(prints something like `C:\Users\<USERNAME>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt`)
+You can edit or delete this file.

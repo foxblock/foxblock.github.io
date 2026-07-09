@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Tech/Linux.md","permalink":"/tech/linux/","tags":["knowledge-base"],"created":"2025-05-18T12:02:24.706+02:00","updated":"2025-05-20T20:20:17.876+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
+{"dg-publish":true,"dg-path":"Tech/Linux.md","permalink":"/tech/linux/","tags":["knowledge-base"],"created":"2025-05-18T12:02:24.706+02:00","updated":"2026-04-28T17:22:53.476+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Folder structure
@@ -43,11 +43,20 @@
 | 5      | r – x      | 4+0+1 |
 | 6      | r w –      | 4+2+0 |
 | 7      | r w x      | 4+2+1 |
+```shell
+chmod 760 some.file 
+```
 
 Three groups:
 1. One permission for the _owner,_ the person who created the file or folder.
 2. One permission for all of the people in the same primary _group_ of the owner.
 3. One permission for everyone else, which includes _unauthenticated and anonymous users_.
+
+## find
+Find all files named `.stignore` and change their permissions to read-write for all:
+```shell
+find . -type f -name ".stignore" -exec chmod 666 '{}' \;
+```
 
 To change all directories under the current path to 755 (`drwxr-xr-x`), excluding dotfiles (recursive):
 ```bash
@@ -58,10 +67,12 @@ To change all files in the current path to 644 (`-rw-r--r--`), excluding dotfile
 ```bash
 find . ! -path '*/.*' -type f -exec chmod 644 '{}' \;
 ```
+
 ## chown
 [Chown Command in Linux (File Ownership) | Linuxize](https://linuxize.com/post/linux-chown-command/)
+Change current folder and all files and folders inside it (recursive) to be owned by USER in GROUP:
 ```bash
-chown -R USER:GROUP ./ 
+chown -R USER:GROUP .
 ```
 ## which
 Find out where binary lives
@@ -138,10 +149,15 @@ ls -lisah
 - `-s`: Displays the size of each file in blocks.
 - `-a`: Includes all files, even those that are hidden (files starting with a dot `.`).
 - `-h`: Displays sizes in a human-readable format (e.g., KB, MB, GB).
+## List users and groups
+```
+getent passwd
+getent group 
+```
 ## Logrotate
 
 > [!WARNING]
-> Does not work properly on CentOS6, but seems to work as intended on Ubuntu 24.04
+> Does not work properly on CentOS 6, but seems to work as intended on Ubuntu 24.04
 
 https://linux.die.net/man/8/logrotate
 Put a file (usually named after the program/logfile you are rotating) in `/etc/logrotate.d/`. For example: `/etc/logrotate.d/mosquitto`

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Test page.md","permalink":"/test-page/","title":"Template test page","dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T17:29:05.132+02:00","dg-note-properties":{"title":"Template test page"}}
+{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T17:33:52.729+02:00","dg-note-properties":{"title":"Template test page"}}
 ---
 
 [[Non-existent page\|Non-existent page]]
