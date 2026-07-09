@@ -1,7 +1,7 @@
 /* Increase width of content (default is 700px)
    NOTE: Do not increase beyond 890px, because it will overlap garden sidebar on window width ~1400px) */
-.content {
-    max-width: 850px;
+body {
+    --dg-content-max-width: 850px;
 }
 
 /* make toc use all the available space */
@@ -44,4 +44,9 @@ html, body {
 /* Remove rounded corners on site logo */
 .site-logo {
     border-radius: 0;
+}
+
+/* Properly align site logo in navbar */
+.navbar .site-logo {
+    vertical-align: center;
 }
