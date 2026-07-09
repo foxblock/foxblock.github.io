@@ -50,3 +50,8 @@ html, body {
 .navbar .site-logo {
     vertical-align: center;
 }
+
+/* Fix mobile popout burger menu from navbar overlay scrolling */
+.fullpage-overlay {
+    position: fixed;
+}
