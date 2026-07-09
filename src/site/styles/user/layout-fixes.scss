@@ -51,6 +51,11 @@ html, body {
     vertical-align: center;
 }
 
+/* Add some space around logo in filetree */
+.filetree-sidebar .site-logo {
+    margin: 10px 0;
+}
+
 /* Fix mobile popout burger menu from navbar overlay scrolling */
 .fullpage-overlay {
     position: fixed;
