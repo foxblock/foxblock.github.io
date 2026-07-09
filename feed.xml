@@ -3,55 +3,8 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-07-09T15:29:36Z</updated>
+  <updated>2026-07-09T15:34:43Z</updated>
   <id>https://janek.ing</id><entry>
-    <title>Test page</title>
-    <updated>2026-07-09T15:29:05.132Z</updated>
-    <id>https://janek.ing/test-page/</id>
-    <content type="html">&lt;p&gt;&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;Non-existent page&lt;/a&gt;&lt;br /&gt;
-Expected: Should link to static 404 page&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/&quot;&gt;alternate Text&lt;/a&gt;&lt;br /&gt;
-Expected: shows as &amp;quot;alternate text&amp;quot; and links to current page&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#heading&quot;&gt;#Heading&lt;/a&gt;&lt;br /&gt;
-Expected: Links to heading below&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#heading&quot;&gt;Alternate text&lt;/a&gt;&lt;br /&gt;
-Expected: Links to heading below, but showing alternate text&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#a-more-complicated-heading-with-symbols&quot;&gt;#A more complicated / heading (with symbols)&lt;/a&gt;&lt;br /&gt;
-Expected: Links to second heading below&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#a-more-complicated-heading-with-symbols&quot;&gt;Alternate text&lt;/a&gt;&lt;br /&gt;
-Expected: Links to second heading below, but showing alternate text&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/data-structures-and-algorithms/&quot;&gt;Data Structures &amp;amp; Algorithms&lt;/a&gt;&lt;br /&gt;
-Expected: Correctly link to document with &amp;amp; in filename&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/langauges/go/#public-private-exported-names&quot;&gt;Go#Public / Private (exported names)&lt;/a&gt;&lt;br /&gt;
-Expected: Link to heading in other document&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/data-structures-and-algorithms/#multi-stage-tables&quot;&gt;Data Structures &amp;amp; Algorithms#Multi-stage Tables&lt;/a&gt;&lt;br /&gt;
-Expected: Link to heading in other document&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://qntm.org/clean&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Clean-Code&lt;/a&gt;&lt;br /&gt;
-Expected: Working link to external page with custom text&lt;/p&gt;
-&lt;p&gt;Testing links in code blocks (there should be 3 lines below):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; - this should not be converted to a clickable tag-link
-
-[[Test page]] - this should also not be converted to a link
-
-&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;link&lt;/a&gt; - same
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;include&quot;&gt;include&lt;/a&gt; - this should not be converted to a clickable tag-link
-
-[[Test page]] - this should also not be converted to a link
-
-&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;link&lt;/a&gt; - same
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;inline-code&quot;&gt;inline-code&lt;/a&gt;&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;[[Test page]]&lt;/code&gt;&lt;br /&gt;
-&lt;code&gt;&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;link&lt;/a&gt;&lt;/code&gt;&lt;br /&gt;
-Expected: There should be 3 inline codes above and none of these 3 should be converted&lt;/p&gt;
-&lt;h2 id=&quot;heading&quot; tabindex=&quot;-1&quot;&gt;Heading&lt;/h2&gt;
-&lt;p&gt;foo&lt;/p&gt;
-&lt;h3 id=&quot;a-more-complicated-heading-with-symbols&quot; tabindex=&quot;-1&quot;&gt;A more complicated / heading (with symbols)&lt;/h3&gt;
-&lt;p&gt;foo&lt;/p&gt;
-</content>
-    <link href="https://janek.ing/test-page/"/>
-  </entry><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
     <id>https://janek.ing/garden/</id>
@@ -83,9 +36,9 @@ Expected: There should be 3 inline codes above and none of these 3 should be con
     <link href="https://janek.ing/garden/"/>
   </entry><entry>
     <title>Windows</title>
-    <updated>2026-02-01T14:01:46.352Z</updated>
+    <updated>2026-06-03T06:51:12.160Z</updated>
     <id>https://janek.ing/tech/windows/</id>
-    <content type="html">&lt;h2 id=&quot;md-5-sha-berechnen&quot; tabindex=&quot;-1&quot;&gt;MD5, SHA berechnen&lt;/h2&gt;
+    <content type="html">&lt;h2 id=&quot;md-5-sha-checksums&quot; tabindex=&quot;-1&quot;&gt;MD5, SHA checksums&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;:: SHA1 by default
 certutil -hashfile filename
 certutil -hashfile filename MD5
@@ -134,13 +87,14 @@ Manchmal hilft dies nicht, dann aber das Folgende:&lt;br /&gt;
 &lt;p&gt;In Admin cmd:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;shutdown /r /fw /t 0
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;wlan-schluessel-anzeigen&quot; tabindex=&quot;-1&quot;&gt;WLAN Schlüssel anzeigen&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;netsh wlan show profile WIFI_NAME key=clear
-netsh wlan show profile WIFI_NAME key=clear | findstr Schlüssel
+&lt;h2 id=&quot;show-wi-fi-password&quot; tabindex=&quot;-1&quot;&gt;Show WiFi Password&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;netsh wlan show profile &amp;quot;Your WiFi SSID here&amp;quot; key=clear
+netsh wlan show profile &amp;quot;Your WiFi SSID here&amp;quot; key=clear | findstr Schlüsselinhalt
+netsh wlan show profile &amp;quot;Your WiFi SSID here&amp;quot; key=clear | findstr /C:&amp;quot;Key Content&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;nuetzliche-pfade&quot; tabindex=&quot;-1&quot;&gt;Nützliche Pfade&lt;/h2&gt;
+&lt;h2 id=&quot;useful-paths&quot; tabindex=&quot;-1&quot;&gt;Useful Paths&lt;/h2&gt;
 &lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/langauges/batch/#useful-windows-variables&quot;&gt;Batch#Useful Windows variables&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;icons-fuer-verknuepfungen&quot; tabindex=&quot;-1&quot;&gt;Icons für Verknüpfungen&lt;/h2&gt;
+&lt;h2 id=&quot;icons-for-filelinks&quot; tabindex=&quot;-1&quot;&gt;Icons for Filelinks&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;C:&#92;Windows&#92;System32&#92;shell32.dll&lt;/li&gt;
 &lt;li&gt;C:&#92;Windows&#92;System32&#92;imageres.dll&lt;/li&gt;
@@ -260,6 +214,29 @@ Als &lt;code&gt;.reg&lt;/code&gt; Datei abspeichern und ausführen.&lt;/p&gt;
 
 [-HKEY_CLASSES_ROOT&#92;Drive&#92;shell&#92;runas]
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;microsoft-family-safety-deaktivieren&quot; tabindex=&quot;-1&quot;&gt;Microsoft Family Safety deaktivieren&lt;/h2&gt;
+&lt;p&gt;Dienst &amp;quot;Jugendschutz&amp;quot; beenden und deaktivieren.&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260423124651.png&quot; alt=&quot;Pasted image 20260423124651.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Aufgabenplanung -&amp;gt; Microsoft/Windows/Shell -&amp;gt; Die 3 FamilySafety* Aufgaben deaktivieren&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260423124759.png&quot; alt=&quot;Pasted image 20260423124759.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;grep&quot; tabindex=&quot;-1&quot;&gt;grep&lt;/h2&gt;
+&lt;p&gt;Search for the text &lt;code&gt;foo bar&lt;/code&gt; in the output of &lt;code&gt;some-cmd&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-PowerShell&quot;&gt;some-cmd | Select-String &amp;quot;foo bar&amp;quot;
+some-cmd | sls &amp;quot;foo bar&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;some-cmd | findstr /C:&amp;quot;foo bar&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!INFO] Case Sensitivity&lt;br /&gt;
+&lt;code&gt;Select-String&lt;/code&gt; is NOT case-senstive by default, but &lt;code&gt;findstr&lt;/code&gt; is.&lt;br /&gt;
+You can pass &lt;code&gt;-CaseSensitive&lt;/code&gt; to &lt;code&gt;Select-String&lt;/code&gt; and you can pass &lt;code&gt;/I&lt;/code&gt; to &lt;code&gt;findstr&lt;/code&gt; to make it case-insensitive.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;access-and-delete-power-shell-history&quot; tabindex=&quot;-1&quot;&gt;Access and delete PowerShell history&lt;/h2&gt;
+&lt;p&gt;History is saved in a plain text file at the following location:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-PowerShell&quot;&gt;(Get-PSReadlineOption).HistorySavePath
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(prints something like &lt;code&gt;C:&#92;Users&#92;&amp;lt;USERNAME&amp;gt;&#92;AppData&#92;Roaming&#92;Microsoft&#92;Windows&#92;PowerShell&#92;PSReadLine&#92;ConsoleHost_history.txt&lt;/code&gt;)&lt;br /&gt;
+You can edit or delete this file.&lt;/p&gt;
 </content>
     <link href="https://janek.ing/tech/windows/"/>
   </entry><entry>
@@ -1113,7 +1090,7 @@ Devices will also need to be updated. However I have not found a way to do this.
     <link href="https://janek.ing/tech/lo-ra-wan/"/>
   </entry><entry>
     <title>Linux</title>
-    <updated>2025-05-20T18:20:17.876Z</updated>
+    <updated>2026-04-28T15:22:53.476Z</updated>
     <id>https://janek.ing/tech/linux/</id>
     <content type="html">&lt;h2 id=&quot;folder-structure&quot; tabindex=&quot;-1&quot;&gt;Folder structure&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;/bin - essential binaries for all users (like cd, bash)
@@ -1196,12 +1173,18 @@ Devices will also need to be updated. However I have not found a way to do this.
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;chmod 760 some.file 
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Three groups:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;One permission for the &lt;em&gt;owner,&lt;/em&gt; the person who created the file or folder.&lt;/li&gt;
 &lt;li&gt;One permission for all of the people in the same primary &lt;em&gt;group&lt;/em&gt; of the owner.&lt;/li&gt;
 &lt;li&gt;One permission for everyone else, which includes &lt;em&gt;unauthenticated and anonymous users&lt;/em&gt;.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&quot;find&quot; tabindex=&quot;-1&quot;&gt;find&lt;/h2&gt;
+&lt;p&gt;Find all files named &lt;code&gt;.stignore&lt;/code&gt; and change their permissions to read-write for all:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;find . -type f -name &amp;quot;.stignore&amp;quot; -exec chmod 666 &#39;{}&#39; &#92;;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To change all directories under the current path to 755 (&lt;code&gt;drwxr-xr-x&lt;/code&gt;), excluding dotfiles (recursive):&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;find . ! -path . ! -path &#39;*/.*&#39; -type d -exec chmod 755 &#39;{}&#39; &#92;;
 &lt;/code&gt;&lt;/pre&gt;
@@ -1209,8 +1192,9 @@ Devices will also need to be updated. However I have not found a way to do this.
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;find . ! -path &#39;*/.*&#39; -type f -exec chmod 644 &#39;{}&#39; &#92;;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;chown&quot; tabindex=&quot;-1&quot;&gt;chown&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://linuxize.com/post/linux-chown-command/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Chown Command in Linux (File Ownership) | Linuxize&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;chown -R USER:GROUP ./ 
+&lt;p&gt;&lt;a href=&quot;https://linuxize.com/post/linux-chown-command/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Chown Command in Linux (File Ownership) | Linuxize&lt;/a&gt;&lt;br /&gt;
+Change current folder and all files and folders inside it (recursive) to be owned by USER in GROUP:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;chown -R USER:GROUP .
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;which&quot; tabindex=&quot;-1&quot;&gt;which&lt;/h2&gt;
 &lt;p&gt;Find out where binary lives&lt;/p&gt;
@@ -1291,10 +1275,14 @@ tar -xzf [filename]
 &lt;li&gt;&lt;code&gt;-a&lt;/code&gt;: Includes all files, even those that are hidden (files starting with a dot &lt;code&gt;.&lt;/code&gt;).&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-h&lt;/code&gt;: Displays sizes in a human-readable format (e.g., KB, MB, GB).&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;list-users-and-groups&quot; tabindex=&quot;-1&quot;&gt;List users and groups&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;getent passwd
+getent group 
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;logrotate&quot; tabindex=&quot;-1&quot;&gt;Logrotate&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;[!WARNING]&lt;br /&gt;
-Does not work properly on CentOS6, but seems to work as intended on Ubuntu 24.04&lt;/p&gt;
+Does not work properly on CentOS 6, but seems to work as intended on Ubuntu 24.04&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;https://linux.die.net/man/8/logrotate&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://linux.die.net/man/8/logrotate&lt;/a&gt;&lt;br /&gt;
 Put a file (usually named after the program/logfile you are rotating) in &lt;code&gt;/etc/logrotate.d/&lt;/code&gt;. For example: &lt;code&gt;/etc/logrotate.d/mosquitto&lt;/code&gt;&lt;/p&gt;
@@ -1515,7 +1503,7 @@ Good for: Search&lt;/li&gt;
     <link href="https://janek.ing/tech/database-types/"/>
   </entry><entry>
     <title>Cryptography, RSA, SSL</title>
-    <updated>2025-05-24T10:53:57.515Z</updated>
+    <updated>2026-06-03T09:07:47.999Z</updated>
     <id>https://janek.ing/tech/cryptography-rsa-ssl/</id>
     <content type="html">&lt;h2 id=&quot;allgemeines&quot; tabindex=&quot;-1&quot;&gt;Allgemeines&lt;/h2&gt;
 &lt;ul&gt;
@@ -1526,7 +1514,7 @@ Good for: Search&lt;/li&gt;
 &lt;li&gt;Sign: Nutzt eigenen Private Key, um Nachricht (bzw. Hash der Nachricht wegen Längenbeschränkungen) zu verschlüsseln&lt;/li&gt;
 &lt;li&gt;Verify: Nutzt Public Key des Senders, um Nachricht=Hash zu entschlüsseln und vergleicht mit Hash der Nachricht. Jeder hat Zugang zum Public Key und kann so die Echtheit der Nachricht verifizieren.&lt;/li&gt;
 &lt;li&gt;RSA / DSA / EC (Elliptic Curve): unterschiedliche Methoden zur Generierung der Schlüssel&lt;/li&gt;
-&lt;li&gt;PKCS#8: Aktuelles Format für Private-Keys (in PEM erkennbar am Header &lt;code&gt;BEGIN PRIVATE KEY&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;PKCS#8: Aktuelles Format (Stand 2025) für Private-Keys (in PEM erkennbar am Header &lt;code&gt;BEGIN PRIVATE KEY&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;PKCS#1: Veraltetes Format für Keys (in PEM erkennbar am Header &lt;code&gt;BEGIN RSA PRIVATE KEY&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;Das Zertifikat einer RootCA reicht aus, um allen untergeordneten Zertifikaten von dieser RootCA zu vertrauen (so validiert der Browser bspw. auch LetsEncrypt Zertifikate - er kann nicht die Zertifikate aller Webseiten kennen)&lt;br /&gt;
 Mehr Info zu PKCS: &lt;a href=&quot;https://crypto.stackexchange.com/a/103585&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://crypto.stackexchange.com/a/103585&lt;/a&gt;&lt;/li&gt;
@@ -2295,7 +2283,7 @@ The best size can be determined by testing (measure performance with increasing 
 &lt;li&gt;Modern computers are really fast. Load times for most programs should be non-existent (SSDs load files at multiple GB/s, CPUs execute millions of instructions every second). You have no excuse.&lt;/li&gt;
 &lt;li&gt;Having invisible load times enables users to iterate and try features more quickly.&lt;/li&gt;
 &lt;li&gt;Waiting is annoying, nobody likes looking at a progress bar or spinner. Using a fast and snappy program just feels better and is more fun, generally a better UX.&lt;/li&gt;
-&lt;li&gt;&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;Bullshit detector&lt;/a&gt;: If your program does a simple task, it should not take hundreds of MiB of disk space. Bad example: Balena etcher (170MiB program for writing an image to a flash drive vs the GNU tool dd which is 68KiB and does the same job) &lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250626114023.png&quot; alt=&quot;Pasted image 20250626114023.png&quot; /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/bullshit-detector/&quot;&gt;Bullshit detector&lt;/a&gt;: If your program does a simple task, it should not take hundreds of MiB of disk space. Bad example: Balena etcher (170MiB program for writing an image to a flash drive vs the GNU tool dd which is 68KiB and does the same job) &lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250626114023.png&quot; alt=&quot;Pasted image 20250626114023.png&quot; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2632,7 +2620,7 @@ Pass-by-reference und pass-by-pointer in C++ produzieren denselben Assembler Cod
 &lt;ul&gt;
 &lt;li&gt;if you had to rewrite a piece of code 3 times before it worked, write about what made it so difficult&lt;/li&gt;
 &lt;li&gt;if you had to google or read documentations for a day before a piece of code worked, write about what made it so difficult and link the documentation/stack overflow result&lt;/li&gt;
-&lt;li&gt;if a piece of code is much more complex than expected (&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;Bullshit detector&lt;/a&gt;) write about the reason (or better: rewrite the code to be simpler)&lt;/li&gt;
+&lt;li&gt;if a piece of code is much more complex than expected (&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/bullshit-detector/&quot;&gt;Bullshit detector&lt;/a&gt;) write about the reason (or better: rewrite the code to be simpler)&lt;/li&gt;
 &lt;li&gt;if you had a profound insight or learning while writing some code, leave a comment about it&lt;/li&gt;
 &lt;li&gt;write about edge cases, that are easily missed (or better: &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/testing/&quot;&gt;write a test for that&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;include links to important external resources&lt;/li&gt;
@@ -4130,7 +4118,7 @@ span, div /* apply same style to both span and div */
     <link href="https://janek.ing/code/langauges/css/"/>
   </entry><entry>
     <title>C</title>
-    <updated>2026-04-14T14:34:10.260Z</updated>
+    <updated>2026-04-22T16:59:14.314Z</updated>
     <id>https://janek.ing/code/langauges/c/</id>
     <content type="html">&lt;h2 id=&quot;strncpy-strncat&quot; tabindex=&quot;-1&quot;&gt;strncpy, strncat&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;char * strncpy ( char * destination, const char * source, size_t num );
@@ -4162,7 +4150,7 @@ Evaluations Reihenfolge: (quasi alle Operatoren) -&amp;gt; &amp;amp; AND -&amp;g
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;[!warning]&lt;br /&gt;
-&lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt; und &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; werden nach &lt;code&gt;+-*/&lt;/code&gt; evaluiert, aber vor den meisten anderen Operatoren&lt;/p&gt;
+&lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt; und &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; werden nach &lt;code&gt;+ - * /&lt;/code&gt; evaluiert, aber vor den meisten anderen Operatoren&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;dynamischer-array-ohne-templates&quot; tabindex=&quot;-1&quot;&gt;Dynamischer Array ohne Templates&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/tree-sitter/tree-sitter/blob/master/lib/src/array.h&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://github.com/tree-sitter/tree-sitter/blob/master/lib/src/array.h&lt;/a&gt;&lt;br /&gt;
@@ -5463,6 +5451,14 @@ Branchless code like this will be slower when code in the branches is compute-in
 &lt;/ul&gt;
 </content>
     <link href="https://janek.ing/code/collision-detection/"/>
+  </entry><entry>
+    <title>Bullshit detector</title>
+    <updated>2026-07-09T14:38:08.168Z</updated>
+    <id>https://janek.ing/code/bullshit-detector/</id>
+    <content type="html">&lt;p&gt;Is the problem simple (as in: can it be described easily, solved on paper easily, etc.), then the solution in code should be simple as well.&lt;br /&gt;
+Be wary of overly complex solutions for simple problems. These often result in more complexity down the line, which will damage the overall product and productivity in the long run.&lt;/p&gt;
+</content>
+    <link href="https://janek.ing/code/bullshit-detector/"/>
   </entry><entry>
     <title>Architecture</title>
     <updated>2026-02-12T17:24:27.032Z</updated>

@@ -11,7 +11,7 @@
         
         <url>
             <loc>https://janek.ing/404/</loc>
-            <lastmod>2026-07-09T15:29:21.166Z</lastmod>
+            <lastmod>2026-07-09T15:34:25.833Z</lastmod>
         </url>
         
     
@@ -26,6 +26,13 @@
         <url>
             <loc>https://janek.ing/code/architecture/</loc>
             <lastmod>2026-02-12T17:24:27.032Z</lastmod>
+        </url>
+        
+    
+        
+        <url>
+            <loc>https://janek.ing/code/bullshit-detector/</loc>
+            <lastmod>2026-07-09T14:38:08.168Z</lastmod>
         </url>
         
     
@@ -67,7 +74,7 @@
         
         <url>
             <loc>https://janek.ing/code/langauges/c/</loc>
-            <lastmod>2026-04-14T14:34:10.260Z</lastmod>
+            <lastmod>2026-04-22T16:59:14.314Z</lastmod>
         </url>
         
     
@@ -172,7 +179,7 @@
         
         <url>
             <loc>https://janek.ing/tech/cryptography-rsa-ssl/</loc>
-            <lastmod>2025-05-24T10:53:57.515Z</lastmod>
+            <lastmod>2026-06-03T09:07:47.999Z</lastmod>
         </url>
         
     
@@ -200,7 +207,7 @@
         
         <url>
             <loc>https://janek.ing/tech/linux/</loc>
-            <lastmod>2025-05-20T18:20:17.876Z</lastmod>
+            <lastmod>2026-04-28T15:22:53.476Z</lastmod>
         </url>
         
     
@@ -242,7 +249,7 @@
         
         <url>
             <loc>https://janek.ing/tech/windows/</loc>
-            <lastmod>2026-02-01T14:01:46.352Z</lastmod>
+            <lastmod>2026-06-03T06:51:12.160Z</lastmod>
         </url>
         
     
@@ -261,11 +268,6 @@
     
         
     
-        
-        <url>
-            <loc>https://janek.ing/test-page/</loc>
-            <lastmod>2026-07-09T15:29:05.132Z</lastmod>
-        </url>
         
     
 </urlset>
