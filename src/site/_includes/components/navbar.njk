@@ -47,17 +47,19 @@
                 {%endif%}
             </nav>
             <div x-show="showNavMobile" @click="showNavMobile = false" style="display:none;" class="fullpage-overlay"></div>
-            <nav class="filetree-sidebar" x-show.important="showNavMobile" style="display: none;">
-                <a href="/" style="text-decoration: none;">
-                    <h2 style="margin: 15px !important;">About me</h2>
-                </a>
-                <a href="/projects" style="text-decoration: none;">
-                    <h2 style="margin: 15px !important;">Projects</h2>
-                </a>
-                <a href="/garden" style="text-decoration: none;">
-                    <h2 style="margin: 15px !important;">Digital Garden</h2>
-                </a>                    
-            </nav>
+            <div class="filetree-wrapper" x-show.important="showNavMobile" style="display: none;">
+                <nav class="filetree-sidebar">
+                    <a href="/" style="text-decoration: none;">
+                        <h2 style="margin: 15px !important;">About me</h2>
+                    </a>
+                    <a href="/projects" style="text-decoration: none;">
+                        <h2 style="margin: 15px !important;">Projects</h2>
+                    </a>
+                    <a href="/garden" style="text-decoration: none;">
+                        <h2 style="margin: 15px !important;">Digital Garden</h2>
+                    </a>                    
+                </nav>
+            </div>
         </div>
     </div>
 {%else%}
