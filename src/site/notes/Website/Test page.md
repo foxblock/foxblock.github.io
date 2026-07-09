@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T16:20:44.037+02:00","dg-note-properties":{"title":"Template test page"}}
+{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T17:11:45.821+02:00","dg-note-properties":{"title":"Template test page"}}
 ---
 
 [[Non-existant page\|Non-existant page]]
@@ -32,21 +32,27 @@ Expected: Link to heading in other document
 [Clean-Code](https://qntm.org/clean)
 Expected: Working link to external page with custom text
 
-Testing links in code blocks:
+Testing links in code blocks (there should be 3 lines below):
 ```
 #include - this should not be converted to a clickable tag-link
 
 [[Test page]] - this should also not be converted to a link
+
+[[another|link]] - same
 ```
 
 ```C
 #include - this should not be converted to a clickable tag-link
 
 [[Test page]] - this should also not be converted to a link
+
+[[another|link]] - same
 ```
 
 `#inline-code`
-Expected: Should not be converted to a clickable tag-link
+`[[Test page]]`
+`[[another|link]]`
+Expected: There should be 3 inline codes above and none of these 3 should be converted
 
 ## Heading
 
