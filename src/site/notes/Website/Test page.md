@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T14:29:15.932+02:00","dg-note-properties":{"title":"Template test page"}}
+{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T16:20:44.037+02:00","dg-note-properties":{"title":"Template test page"}}
 ---
 
 [[Non-existant page\|Non-existant page]]
@@ -47,6 +47,7 @@ Testing links in code blocks:
 
 `#inline-code`
 Expected: Should not be converted to a clickable tag-link
+
 ## Heading
 
 foo
