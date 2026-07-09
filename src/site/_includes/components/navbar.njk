@@ -1,60 +1,19 @@
 {%if settings.dgHomeLink === true%}
-    <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" 
-        x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" 
-        x-data="{isDesktop: true, showNavMobile: false}">
-        
-        <div x-show.important="isDesktop" style="display: none;">
-            <nav class="navbar">
-                <div class="navbar-inner">
-                    <a href="/" style="text-decoration: none;">
-                        <!--<h1 style="margin: 15px !important;">{{meta.siteName}}</h1>-->
-                        <img src="/img/logo.svg" style="height: 3.5em; margin: 12px 0; vertical-align: middle; border-radius: 0;">
-                    </a>
-                </div>
-                <div class="navbar-inner">
-                    <a href="/" style="text-decoration: none;">
-                        <h2 style="margin: 15px !important;">About me</h2>
-                    </a>
-                    <a href="/projects" style="text-decoration: none;">
-                        <h2 style="margin: 15px !important;">Projects</h2>
-                    </a>
-                    <a href="/garden" style="text-decoration: none;">
-                        <h2 style="margin: 15px !important;">Digital Garden</h2>
-                    </a>
-                </div>
-                {% if settings.dgEnableSearch === true%}
-                    {% include "components/searchButton.njk" %}
-                {%endif%}
-            </nav>
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="/" style="text-decoration: none;">
+                {% if meta.siteLogoPath %}
+                    <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}">
+                {% else %}
+                    <h1 style="margin: 15px !important;">{{meta.siteName}}</h1>
+                {% endif %}
+            </a>
         </div>
-        <div x-show.important="!isDesktop" style="display: none;">
-            <nav class="navbar">
-                <span style="font-size: 2rem; margin-right: 24px; color: var(--link-color)" @click="showNavMobile=!showNavMobile"><i icon-name="menu"></i></span>
-                <div class="navbar-inner" x-show.important="!showNavMobile" style="display: none;">
-                    <a href="/" style="text-decoration: none;">
-                        <!--<h1 style="margin: 15px !important;">{{meta.siteName}}</h1>-->
-                        <img src="/img/logo.svg" style="height: 3.5em; margin: 12px 0; vertical-align: middle; border-radius: 0;">
-                    </a>
-                </div>
-                {% if settings.dgEnableSearch === true%}
-                    {% include "components/searchButton.njk" %}
-                {%endif%}
-            </nav>
-            <div x-show="showNavMobile" @click="showNavMobile = false" style="display:none;" class="fullpage-overlay"></div>
-            <nav class="filetree-sidebar" x-show.important="showNavMobile" style="display: none;">
-                <a href="/" style="text-decoration: none;">
-                    <h2 style="margin: 15px !important;">About me</h2>
-                </a>
-                <a href="/projects" style="text-decoration: none;">
-                    <h2 style="margin: 15px !important;">Projects</h2>
-                </a>
-                <a href="/garden" style="text-decoration: none;">
-                    <h2 style="margin: 15px !important;">Digital Garden</h2>
-                </a>                    
-            </nav>
-        </div>
-    </div>
-{%else%}
+        {% if settings.dgEnableSearch === true%}
+            {% include "components/searchButton.njk" %}
+        {%endif%}
+    </nav>
+    {%else%}
     <div class="empty-navbar" >
         {% if settings.dgEnableSearch === true%}
             {% include "components/searchButton.njk" %}
