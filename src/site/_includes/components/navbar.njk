@@ -32,7 +32,7 @@
         </div>
         <div x-show.important="!isDesktop" style="display: none;">
             <nav class="navbar">
-                <span style="font-size: 2rem; margin-right: 24px; color: var(--link-color)" @click="showNavMobile=!showNavMobile"><i icon-name="menu"></i></span>
+                <span style="font-size: 2rem; margin-right: 24px; color: var(--link-color)" @click="showNavMobile=!showNavMobile"><i icon-name="menu" style="vertical-align: center;"></i></span>
                 <div class="navbar-inner" x-show.important="!showNavMobile" style="display: none;">
                     <a href="/" style="text-decoration: none;">
                         {% if meta.siteLogoPath %}
