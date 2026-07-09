@@ -4,35 +4,19 @@
     max-width: 850px;
 }
 
-/* fix searchbox size in filetree, so it does not look weird when window is small */
-.filetree-sidebar .search-button {
-    width: 150px;
-}
-
 /* make toc use all the available space */
 .toc-container {
     max-height: fit-content;
 }
 
-/* smaller padding on toc */
-.toc > ol {
-    padding-left: 8px;
-    margin-top: 0;
-}
-
-/* remove # before every toc element */
-.toc-container li::before {
-    content: none !important;
-}
-
 /* styling for the footer (for imprint and such) */
 .markdown-preview-view {
     padding: 0;
+    height: 100% !important;
 }
 body {
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 main {
     flex: 1;
@@ -55,4 +39,9 @@ footer a {
 html, body {
     overflow: visible;
     scroll-behavior: smooth;
+}
+
+/* Remove rounded corners on site logo */
+.site-logo {
+    border-radius: 0;
 }

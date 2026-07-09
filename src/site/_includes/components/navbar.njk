@@ -8,7 +8,7 @@
                 <div class="navbar-inner">
                     <a href="/" style="text-decoration: none;">
                         {% if meta.siteLogoPath %}
-                            <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}" style="border-radius: 0">
+                            <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}">
                         {% else %}
                             <h1 style="margin: 15px !important;">{{meta.siteName}}</h1>
                         {% endif %}
@@ -36,7 +36,7 @@
                 <div class="navbar-inner" x-show.important="!showNavMobile" style="display: none;">
                     <a href="/" style="text-decoration: none;">
                         {% if meta.siteLogoPath %}
-                            <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}" style="border-radius: 0">
+                            <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}">
                         {% else %}
                             <h1 style="margin: 15px !important;">{{meta.siteName}}</h1>
                         {% endif %}
