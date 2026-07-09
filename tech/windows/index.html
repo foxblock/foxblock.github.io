@@ -2,20 +2,30 @@
 <html lang="en">
 <head>
 <title>Windows</title>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
+<script type="importmap">
+{
+  "imports": {
+    "d3-force": "https://cdn.jsdelivr.net/npm/d3-force@3.0.0/+esm",
+    "d3-selection": "https://cdn.jsdelivr.net/npm/d3-selection@3.0.0/+esm",
+    "d3-zoom": "https://cdn.jsdelivr.net/npm/d3-zoom@3.0.0/+esm",
+    "d3-drag": "https://cdn.jsdelivr.net/npm/d3-drag@3.0.0/+esm"
+  }
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/dist/pixi.min.js"></script>
+<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:!0})</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script async src="https://cdn.jsdelivr.net/npm/lucide@0.115.0/dist/umd/lucide.min.js"></script>
-<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("icon-name",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
-<script async src="https://fastly.jsdelivr.net/npm/force-graph@1.43.0/dist/force-graph.min.js"></script>
-<script async src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
-<script src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js" async></script>
+<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("data-lucide",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
+<script defer="defer" src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script defer="defer" src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
 <script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+<link href="/styles/style.css" rel="stylesheet">
 <link href="/styles/digital-garden-base.css" rel="stylesheet">
-<link href="/styles/obsidian-base.css" rel="stylesheet">
-<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css" rel="stylesheet"><link href="/styles/user/layout-fixes.css" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-07-09T09:23:10.505Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-07-09T09:23:10.505Z" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -23,242 +33,267 @@
 <style></style>
 </head>
 <body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
-<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
+<div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
 <div x-show.important="!isDesktop" style="display:none">
 <nav class="navbar">
 <div class="navbar-inner">
-<span style="font-size:2rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
-<a href="/" style="text-decoration:none">
-<img src="/img/logo.svg" style="height:3.5em;margin:12px 24px;vertical-align:middle;border-radius:0">
+<span style="font-size:1.5rem;margin-right:10px" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span>
+<a href="/" style="text-decoration:none;text-align:center">
+<h1 style="margin:15px!important">janek.ing</h1>
 </a>
 </div>
 <div class="search-button align-icon" onclick="toggleSearch()">
 <span class="search-icon">
-<i icon-name="search"></i>
+<i data-lucide="search"></i>
 </span>
-<span class="search-text">
-<span>Search</span>
-<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
-CTRL + K
-</span>
-</span>
+<span class="search-text">Search</span>
+<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
 </div>
 </nav>
 </div>
 <div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
-<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
-<a href="/" style="text-decoration:none">
-<img src="/img/logo.svg" style="height:3.5em;margin:15px auto;display:block;border-radius:0">
+<div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<nav class="filetree-sidebar">
+<a href="/" style="text-decoration:none;text-align:center">
+<h1 style="text-align:center">janek.ing</h1>
 </a>
-<div style="display:flex;justify-content:center">
 <div class="search-button align-icon" onclick="toggleSearch()">
 <span class="search-icon">
-<i icon-name="search"></i>
+<i data-lucide="search"></i>
 </span>
-<span class="search-text">
-<span>Search</span>
-<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
-CTRL + K
-</span>
-</span>
-</div>
+<span class="search-text">Search</span>
+<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
 </div>
 <div class="folder" x-data="{isOpen: true}">
 <div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Arbeit')}" @click.stop="isOpen=!isOpen">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Arbeit&quot;)}" @click.stop="isOpen=!isOpen">
 <div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
-<i x-show="!isOpen" icon-name="chevron-right"></i>
+<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
+<i x-show="!isOpen" data-lucide="chevron-right"></i>
 <span class="foldername">Arbeit</span>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/arbeit/agile/">Agile </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/arbeit/agile/">Agile </a>
 </div>
 </div>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code')}" @click.stop="isOpen=!isOpen">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code&quot;)}" @click.stop="isOpen=!isOpen">
 <div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
-<i x-show="!isOpen" icon-name="chevron-right"></i>
+<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
+<i x-show="!isOpen" data-lucide="chevron-right"></i>
 <span class="foldername">Code</span>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Code/Langauges')}" @click.stop="isOpen=!isOpen">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code/Langauges&quot;)}" @click.stop="isOpen=!isOpen">
 <div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
-<i x-show="!isOpen" icon-name="chevron-right"></i>
+<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
+<i x-show="!isOpen" data-lucide="chevron-right"></i>
 <span class="foldername">Langauges</span>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
 </div>
 </div>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
 </div>
 </div>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Design')}" @click.stop="isOpen=!isOpen">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Design&quot;)}" @click.stop="isOpen=!isOpen">
 <div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
-<i x-show="!isOpen" icon-name="chevron-right"></i>
+<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
+<i x-show="!isOpen" data-lucide="chevron-right"></i>
 <span class="foldername">Design</span>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a>
 </div>
 </div>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Life')}" @click.stop="isOpen=!isOpen">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Life&quot;)}" @click.stop="isOpen=!isOpen">
 <div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
-<i x-show="!isOpen" icon-name="chevron-right"></i>
+<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
+<i x-show="!isOpen" data-lucide="chevron-right"></i>
 <span class="foldername">Life</span>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a>
 </div>
 </div>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Tech')}" @click.stop="isOpen=!isOpen">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Tech&quot;)}" @click.stop="isOpen=!isOpen">
 <div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
-<i x-show="!isOpen" icon-name="chevron-right"></i>
+<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
+<i x-show="!isOpen" data-lucide="chevron-right"></i>
 <span class="foldername">Tech</span>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a>
+<div @click.stop class="notelink active-note">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a>
 </div>
 </div>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('Writing')}" @click.stop="isOpen=!isOpen">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Writing&quot;)}" @click.stop="isOpen=!isOpen">
 <div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
-<i x-show="!isOpen" icon-name="chevron-right"></i>
+<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
+<i x-show="!isOpen" data-lucide="chevron-right"></i>
 <span class="foldername">Writing</span>
 </div>
 <div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a>
 </div>
 </div>
 </div>
@@ -266,7 +301,8 @@ CTRL + K
 <div x-show="isOpen" style="display:none" class="">
 </div>
 <div x-show="isOpen" style="display:none" class="">
-<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
+<div @click.stop class="notelink">
+<a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
 </div>
 </div>
 <div x-show="isOpen" style="display:none" class="">
@@ -278,28 +314,40 @@ CTRL + K
 </div>
 </nav>
 </div>
+</div>
 <div class="search-container" id="globalsearch" onclick="toggleSearch()">
-<div class="search-box">
+<div class="search-box" onclick="event.stopPropagation()">
+<div class="search-header">
 <input type="search" id="term" placeholder="Start typing...">
-<div id="search-results"></div>
+</div>
+<div class="search-layout no-preview" id="search-layout">
+<div class="search-results-panel" id="search-results">
+<span><i>Enter your search text in the box above</i></span>
+</div>
+<div class="search-preview-panel" id="search-preview">
+<div class="preview-placeholder">
+<i data-lucide="file-text"></i>
+<p>Select a result to preview</p>
+</div>
+<div class="preview-content" id="preview-content"></div>
+</div>
+</div>
 <footer class="search-box-footer">
 <div class="navigation-hint">
-<span>Enter to select</span>
-</div>
-<div class="navigation-hint align-icon">
-<i icon-name="arrow-up" aria-hidden="true"></i>
-<i icon-name="arrow-down" aria-hidden="true"></i>
-<span>to navigate</span>
+<span><code>Enter</code>&nbsp;to select</span>
 </div>
 <div class="navigation-hint">
-<span>ESC to close</span>
+<span><code>⇅</code>&nbsp;to navigate</span>
+</div>
+<div class="navigation-hint">
+<span><code>ESC</code>&nbsp;to close</span>
 </div>
 </footer>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
-<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2026-07-08T13:21:26.851Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2026-07-08T13:21:26.851Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2026-07-08T13:21:26.851Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
-<main class="content cm-s-obsidian">
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1);const previewCache=new Map;window.toggleSearch=function(){const e=document.getElementById("globalsearch");e.classList.contains("active")?e.classList.remove("active"):(e.classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){const t=e.textContent;t&&(document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <div style="display: flex; justify-content: center; padding: 40px;">\n        <svg width="40" height="40" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">\n            <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="8">\n                    <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n            </g>\n        </svg>\n    </div>';function debounce(e,t,n){var r;return function(){var i=this,a=arguments,s=n&&!r;clearTimeout(r),r=setTimeout((function(){r=null,n||e.apply(i,a)}),t),s&&e.apply(i,a)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="<code>⌘</code>&nbsp;+&nbsp;<code>K</code>"))}function tokenizeSearchTerms(e){const t=[],n=/"([^"]+)"|(\S+)/g;let r;for(;null!==(r=n.exec(e));){const e=(r[1]||r[2]).toLowerCase();e.length>1&&t.push(e)}return t.sort(((e,t)=>t.length-e.length))}function highlightTerms(e,t){if(!t||0===t.length||!e)return e;let n=e;return t.forEach((e=>{const t=e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=new RegExp(`(${t})`,"gi");n=n.replace(r,'<span class="search-highlight">$1</span>')})),n}function getContextualExcerpt(e,t,n=150){if(!e)return"";const r=e.replace(/<[^>]*>/g,"");if(!t||0===t.length)return truncateText(r,n);let i=r.length;if(t.forEach((e=>{const t=r.toLowerCase().indexOf(e.toLowerCase());-1!==t&&t<i&&(i=t)})),i===r.length)return truncateText(r,n);const a=Math.max(0,i-50),s=Math.min(r.length,a+n);let o=r.substring(a,s);return a>0&&(o="..."+o),s<r.length&&(o+="..."),o}function truncateText(e,t){return e?(e=e.replace(/<[^>]*>/g,"")).length<=t?e:e.substring(0,t-3)+"...":""}async function fetchPreviewContent(e){if(previewCache.has(e))return previewCache.get(e);try{const t=await fetch(e),n=await t.text(),r=new DOMParser,i=r.parseFromString(n,"text/html").querySelector(".content, .cm-s-obsidian, article, main"),a=i?i.innerHTML:"";return previewCache.set(e,a),a}catch(e){return console.error("Failed to fetch preview:",e),""}}function highlightTextNodes(e,t){if(!t||0===t.length)return;const n=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,!1),r=[];for(;n.nextNode();)r.push(n.currentNode);r.forEach((e=>{const n=e.textContent;let r=!1;if(t.forEach((e=>{n.toLowerCase().includes(e.toLowerCase())&&(r=!0)})),r){const r=document.createElement("span");r.innerHTML=highlightTerms(n,t),e.parentNode.replaceChild(r,e)}}))}async function showPreview(e){const t=window.searchResults;if(!t||!t[e])return;const n=t[e],r=document.getElementById("search-preview"),i=document.getElementById("preview-content"),a=r.querySelector(".preview-placeholder");if(!r||!i)return;document.querySelectorAll(".searchresult").forEach((e=>e.classList.remove("active")));const s=document.querySelector(`.searchresult[data-index="${e}"]`);s&&s.classList.add("active"),i.innerHTML=loadingSvg,i.classList.add("has-content"),a.style.display="none";const o=await fetchPreviewContent(n.url),c=n.tags&&n.tags.length>0?`<div class="preview-tags">${n.tags.map((e=>`<a class="tag" href="javascript:void(0);" onclick="toggleTagSearch(this)">#${e}</a>`)).join("")}</div>`:"";i.innerHTML=`\n            <div class="preview-title">${highlightTerms(n.title,window.searchTerms)}</div>\n            ${c}\n            <div class="preview-body">${o}</div>\n        `;const l=i.querySelector(".preview-body");l&&window.searchTerms&&highlightTextNodes(l,window.searchTerms),window.currentPreviewIndex=e}function hidePreview(){const e=document.getElementById("search-preview"),t=document.getElementById("preview-content"),n=e?.querySelector(".preview-placeholder");n&&(n.style.display="flex"),t&&(t.classList.remove("has-content"),t.innerHTML=""),window.currentPreviewIndex=-1}function createIndex(e){const t=e=>(e=>e.toLowerCase().normalize("NFD").replace(/n\u0303/g,"ñ").replace(/[\u0300-\u036f]/g,"").normalize("NFC"))(e).split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){const e=await fetch("/searchIndex.json?v=2026-07-09T09:23:10.505Z").then((e=>e.json())),t=createIndex(e);function n(e){const t=document.querySelectorAll(".searchresult");if(0===t.length)return;let n,r=-1;t.forEach(((e,t)=>{e.classList.contains("active")&&(r=t)})),-1===r?n=e>0?0:t.length-1:(n=r+e,n<0&&(n=t.length-1),n>=t.length&&(n=0)),t.forEach((e=>e.classList.remove("active"))),t[n].classList.add("active"),t[n].scrollIntoView({behavior:"smooth",block:"nearest"}),showPreview(parseInt(t[n].dataset.index))}window.docs=e,window.index=t,document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")&&("ArrowDown"===e.key&&(e.preventDefault(),n(1)),"ArrowUp"===e.key&&(e.preventDefault(),n(-1)),"Enter"===e.key)){e.preventDefault();const t=document.querySelector(".searchresult.active");if(t){const e=t.dataset.url;e&&(window.location.href=e)}}}));const r=debounce(search,200,!1);window.field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&"Enter"!==e.key&&r()})),window.resultsDiv=document.querySelector("#search-results");const i=new URL(location.href).searchParams;i.get("q")&&(field.setAttribute("value",i.get("q")),toggleSearch(),search())}async function search(){const e=field.value.trim(),t=document.getElementById("search-layout");if(!e)return resultsDiv.innerHTML="<span><i>Enter your search text in the box above</i></span>",hidePreview(),void(t&&t.classList.add("no-preview"));window.lastSearch=e,window.searchTerms=tokenizeSearchTerms(e),resultsDiv.innerHTML=loadingSvg,hidePreview();const n=offlineSearch(e);if(window.searchResults=n,!n.length)return t&&t.classList.add("no-preview"),void(resultsDiv.innerHTML=`\n                <div class="no-results">\n                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n                        <circle cx="11" cy="11" r="8"></circle>\n                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>\n                        <line x1="8" y1="11" x2="14" y2="11"></line>\n                    </svg>\n                    <p>No results for "${e}"</p>\n                </div>\n            `);t&&t.classList.remove("no-preview");let r="";n.forEach(((e,t)=>{const n=highlightTerms(getContextualExcerpt(e.content,window.searchTerms,120),window.searchTerms),i=highlightTerms(e.title,window.searchTerms),a=e.tags&&e.tags.length>0?`<div class="result-tags">${e.tags.map((e=>`<span class="tag">#${e}</span>`)).join("")}</div>`:"";r+=`\n                <div class="searchresult${0===t?" active":""}"\n                     data-index="${t}"\n                     data-url="${e.url}"\n                     onmouseenter="showPreview(${t})"\n                     onclick="window.location.href='${e.url}'">\n                    <span class="result-title">${i}</span>\n                    ${a}\n                    <div class="result-excerpt">${n}</div>\n                </div>\n            `})),resultsDiv.innerHTML=r,n.length>0&&showPreview(0),"undefined"!=typeof lucide&&lucide.createIcons()}function offlineSearch(e){const t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",limit:10}]),r=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...r("title"),...r("content"),...r("tags")])].map((e=>{const n={...t[e]};return n.tags=n.tags.filter((e=>"gardenEntry"!==e&&"note"!==e)),n}))}window.lastSearch="",window.searchResults=[],window.searchTerms=[],window.currentPreviewIndex=-1,window.search=search</script>
+<main class="content cm-s-obsidian print">
 <header>
 <h1 data-note-icon="">Windows</h1>
 <div class="header-meta">
@@ -311,7 +359,7 @@ CTRL + K
 #german
 </a>
 </div>
-<div class="timestamps"><div><i icon-name="calendar-plus"></i> <span class="human-date" data-date="2025-06-08T13:08:50.465+02:00"></span></div><div><i icon-name="calendar-clock"></i> <span class="human-date" data-date="2026-02-01T15:01:46.352+01:00"></span></div></div></div>
+<div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2025-06-08T13:08:50.465+02:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-02-01T15:01:46.352+01:00"></span></div></div></div>
 </header>
 <h2 id="md-5-sha-berechnen" tabindex="-1">MD5, SHA berechnen</h2>
 <pre><code class="language-batch">:: SHA1 by default
@@ -502,7 +550,7 @@ Als <code>.reg</code> Datei abspeichern und ausführen.</p>
 <div class="toc">
 <div class="toc-title-container">
 <div class="toc-title">
-On this page
+Windows
 </div>
 </div>
 <div class="toc-container">
@@ -536,6 +584,7 @@ On this page
 </nav>
 </div>
 </div>
+<script>!function(){const t=document.querySelectorAll('.toc-container a[href^="#"]');if(!t.length)return;const e=Array.from(t).map((t=>{const e=decodeURIComponent(t.getAttribute("href").slice(1));return{link:t,target:document.getElementById(e)}})).filter((t=>t.target));function n(){let n=e[0];for(const t of e)t.target.getBoundingClientRect().top<=100&&(n=t);t.forEach((t=>t.classList.remove("toc-active"))),n&&n.link.classList.add("toc-active")}window.addEventListener("scroll",n,{passive:!0}),n()}()</script>
 </div>
 </div>
 </aside>
@@ -547,5 +596,8 @@ On this page
 &nbsp;&nbsp;&middot;&nbsp;&nbsp;
 <a href="/privacy">Privacy Policy</a>
 </footer>
+<script defer="defer" src="https://unpkg.com/lucide@latest"></script>
+<script defer="defer">document.addEventListener("DOMContentLoaded",(()=>{lucide.createIcons({attrs:{class:["svg-icon"]}})}))</script>
+<script>document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".obsidian-bases-views").forEach((function(e){var t=e.querySelector(".obsidian-bases-active-view"),a=e.querySelector(".obsidian-bases-dropdown"),i=e.querySelectorAll(".obsidian-bases-dropdown-item"),n=e.querySelectorAll(".obsidian-bases-view-panel"),o=e.querySelector(".obsidian-bases-active-view-name"),r=e.querySelector(".obsidian-bases-count-value");t&&a&&(t.addEventListener("click",(function(e){e.stopPropagation();var i="none"!==a.style.display;a.style.display=i?"none":"block",t.setAttribute("aria-expanded",!i)})),document.addEventListener("click",(function(){a.style.display="none",t.setAttribute("aria-expanded","false")})),i.forEach((function(s){s.addEventListener("click",(function(s){s.stopPropagation();var d=this.getAttribute("data-view-index");i.forEach((function(e){e.classList.remove("active")})),this.classList.add("active"),n.forEach((function(e){e.style.display="none"}));var l=e.querySelector('.obsidian-bases-view-panel[data-view-index="'+d+'"]');l&&(l.style.display="block");var c=this.querySelector(".obsidian-bases-view-icon"),u=t.querySelector(".obsidian-bases-view-icon");if(c&&u&&u.replaceWith(c.cloneNode(!0)),o&&(o.textContent=this.textContent.trim()),r&&l){var b=l.querySelectorAll("tbody tr:not(.obsidian-base-group-row), .obsidian-base-card, .obsidian-base-list li");r.textContent=b.length}a.style.display="none",t.setAttribute("aria-expanded","false")}))})))})),document.querySelectorAll(".bases-dynamic-date").forEach((function(e){var t=e.getAttribute("data-type"),a=new Date;if("today"===t){var i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o}else if("now"===t){i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");var r=String(a.getHours()).padStart(2,"0"),s=String(a.getMinutes()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o+" "+r+":"+s}}))}))</script>
 </body>
 </html>
