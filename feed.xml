@@ -3,22 +3,22 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-07-09T15:23:24Z</updated>
+  <updated>2026-07-09T15:29:36Z</updated>
   <id>https://janek.ing</id><entry>
     <title>Test page</title>
-    <updated>2026-07-09T15:22:45.607Z</updated>
-    <id>https://janek.ing/test/</id>
+    <updated>2026-07-09T15:29:05.132Z</updated>
+    <id>https://janek.ing/test-page/</id>
     <content type="html">&lt;p&gt;&lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;Non-existent page&lt;/a&gt;&lt;br /&gt;
 Expected: Should link to static 404 page&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test/&quot;&gt;alternate Text&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/&quot;&gt;alternate Text&lt;/a&gt;&lt;br /&gt;
 Expected: shows as &amp;quot;alternate text&amp;quot; and links to current page&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test/#heading&quot;&gt;#Heading&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#heading&quot;&gt;#Heading&lt;/a&gt;&lt;br /&gt;
 Expected: Links to heading below&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test/#heading&quot;&gt;Alternate text&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#heading&quot;&gt;Alternate text&lt;/a&gt;&lt;br /&gt;
 Expected: Links to heading below, but showing alternate text&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test/#a-more-complicated-heading-with-symbols&quot;&gt;#A more complicated / heading (with symbols)&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#a-more-complicated-heading-with-symbols&quot;&gt;#A more complicated / heading (with symbols)&lt;/a&gt;&lt;br /&gt;
 Expected: Links to second heading below&lt;/p&gt;
-&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test/#a-more-complicated-heading-with-symbols&quot;&gt;Alternate text&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/test-page/#a-more-complicated-heading-with-symbols&quot;&gt;Alternate text&lt;/a&gt;&lt;br /&gt;
 Expected: Links to second heading below, but showing alternate text&lt;/p&gt;
 &lt;p&gt;&lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/data-structures-and-algorithms/&quot;&gt;Data Structures &amp;amp; Algorithms&lt;/a&gt;&lt;br /&gt;
 Expected: Correctly link to document with &amp;amp; in filename&lt;/p&gt;
@@ -50,7 +50,7 @@ Expected: There should be 3 inline codes above and none of these 3 should be con
 &lt;h3 id=&quot;a-more-complicated-heading-with-symbols&quot; tabindex=&quot;-1&quot;&gt;A more complicated / heading (with symbols)&lt;/h3&gt;
 &lt;p&gt;foo&lt;/p&gt;
 </content>
-    <link href="https://janek.ing/test/"/>
+    <link href="https://janek.ing/test-page/"/>
   </entry><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
