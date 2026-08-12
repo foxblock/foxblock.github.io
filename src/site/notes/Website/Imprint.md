@@ -1,8 +1,8 @@
 ---
-{"dg-publish":true,"dg-path":"Imprint.md","dg-permalink":"imprint","permalink":"/imprint/","title":"janek.ing - Imprint","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-02-02T19:21:27.165+01:00","updated":"2026-02-10T18:04:12.213+01:00","dg-note-properties":{"title":"janek.ing - Imprint"}}
+{"dg-publish":true,"dg-path":"Imprint.md","dg-permalink":"imprint","permalink":"/imprint/","title":"janek.ing - Imprint","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-02-02T19:21:27.165+01:00","updated":"2026-08-12T13:48:15.048+02:00","dg-note-properties":{"title":"janek.ing - Imprint"}}
 ---
 
-**Angaben gemäß § 5 TMG:**
+**Angaben gemäß § 5 DDG:**
 Janek Schäfer
 An den Birken 23
 50827 Köln
