@@ -17,6 +17,8 @@ const matterOptions = {
 };
 const faviconsPlugin = require("eleventy-plugin-gen-favicons");
 const normalizeFavicon = require("./src/site/normalize-favicon.js");
+const { convertMdHrefs } = require("./src/helpers/linkUtils");
+const nodePath = require("path");
 
 const FAVICON_SOURCE = "./src/site/favicon.svg";
 const FAVICON_NORMALIZED = "./.cache/favicon.normalized.svg";
@@ -34,7 +36,23 @@ const {
 const { basesPlugin } = require("./src/helpers/basesPlugin");
 
 const Image = require("@11ty/eleventy-img");
-function transformImage(src, cls, alt, sizes, widths = ["500", "700", "auto"]) {
+const { isDecodableImage } = require("./src/helpers/imageFormat.js");
+
+// Build containers have few CPUs and little memory; the default queue
+// concurrency of 10 holds ~10 decoded images in memory at once without
+// finishing any faster. Sharp already parallelizes within each job.
+Image.concurrency = 2;
+
+// Image generation is started fire-and-forget during transforms (the markup
+// only needs statsSync), but every pending job is awaited in the
+// eleventy.after hook below so the build doesn't linger — or get killed —
+// doing invisible work after Eleventy reports completion.
+const pendingImageJobs = [];
+
+// Note: fillPictureSourceSets only references the first two widths; the
+// full-size original is served via the <img src> fallback, so a full
+// resolution "auto" rendition would never be referenced by the markup.
+function transformImage(src, cls, alt, sizes, widths = ["500", "700"]) {
   let options = {
     widths: widths,
     formats: ["webp", "jpeg"],
@@ -42,8 +60,13 @@ function transformImage(src, cls, alt, sizes, widths = ["500", "700", "auto"]) {
     urlPath: "/img/optimized",
   };
 
-  // generate images, while this is async we don’t wait
-  Image(src, options);
+  // A rejection here (e.g. a corrupt file) must not become an unhandled
+  // rejection, which would fail the whole build.
+  pendingImageJobs.push(
+    Image(src, options).catch((err) => {
+      console.warn(`[image] Skipping optimization of ${src}: ${err.message}`);
+    })
+  );
   let metadata = Image.statsSync(src, options);
   return metadata;
 }
@@ -66,9 +89,8 @@ function getAnchorAttributes(filePath, linkTitle) {
   const title = linkTitle ? linkTitle : fileName;
   let permalink = `/notes/${slugify(fileName)}`;
   let deadLink = false;
-  const startPath = "./src/site/notes/";
-  console.log("Adding link to file", startPath + fileName, "(filePath is", filePath, ")...");
   try {
+    const startPath = "./src/site/notes/";
     let fullPath;
     if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
       fullPath = `${startPath}${fileName}`;
@@ -89,8 +111,7 @@ function getAnchorAttributes(filePath, linkTitle) {
     if (frontMatter.data.noteIcon) {
       noteIcon = frontMatter.data.noteIcon;
     }
-  } catch (error) {
-    console.log("ERROR: dead link to file", startPath + fileName, "\n - filePath was", filePath);
+  } catch {
     deadLink = true;
   }
 
@@ -115,10 +136,7 @@ function getAnchorAttributes(filePath, linkTitle) {
   }
 }
 
-// NOTE (JS, 24.05.25): Edited this to only match double hashes in the markdown file (e.g. ##test-tag)
-// This is a workaround for https://github.com/issues/created?issue=oleeskild%7Cdigitalgarden%7C315
-// Tags as properties are unaffected
-const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 const markdownFileTypeRegex = /\.(md|markdown)$/i;
 const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
@@ -151,6 +169,22 @@ module.exports = function(eleventyConfig) {
       options: {
         skipHtmlTags: { "[-]": ["pre"] },
       },
+    })
+    .use(function(md) {
+      // mathjax-full 3.2.2 throws on characters outside its operator
+      // dictionary (e.g. "€") — a stray $...€...$ span in prose would
+      // otherwise abort the entire build. Fall back to the raw text.
+      for (const rule of ["math_inline", "math_block"]) {
+        const original = md.renderer.rules[rule];
+        if (!original) continue;
+        md.renderer.rules[rule] = function(tokens, idx, options, env, self) {
+          try {
+            return original(tokens, idx, options, env, self);
+          } catch (e) {
+            return md.utils.escapeHtml(tokens[idx].content);
+          }
+        };
+      }
     })
     .use(require("markdown-it-attrs"))
     .use(require("markdown-it-task-checkbox"), {
@@ -378,12 +412,45 @@ module.exports = function(eleventyConfig) {
     );
   });
 
+  // Resolve markdown-style relative links to .md files (e.g. [X](../a/b.md))
+  // to their real permalinks. Obsidian resolves these in-app, but they reach
+  // the rendered HTML untouched, where trailing-slash page URLs make the
+  // browser resolve them one directory too deep.
+  // pageInputPath overrides this.page for contexts like the feed, where the
+  // rendered content belongs to a looped-over note rather than the current page.
+  eleventyConfig.addFilter("resolveMdLinks", function(str, pageInputPath) {
+    const inputPath = pageInputPath || (this.page && this.page.inputPath);
+    if (!str || !inputPath) {
+      return str;
+    }
+    const notesRoot = "src/site/notes/";
+    const normalizedInput = inputPath.replace(/^\.\//, "");
+    const rootIndex = normalizedInput.indexOf(notesRoot);
+    if (rootIndex === -1) {
+      return str;
+    }
+    const vaultFilePath = normalizedInput.slice(rootIndex + notesRoot.length);
+    const sourceDir = nodePath.posix.dirname(vaultFilePath);
+    return convertMdHrefs(str, sourceDir === "." ? "" : sourceDir, (candidates) => {
+      let firstAttempt = null;
+      for (const vaultPath of candidates) {
+        const { attributes } = getAnchorAttributes(vaultPath);
+        if (!attributes.class.includes("is-unresolved")) {
+          return attributes;
+        }
+        firstAttempt = firstAttempt || attributes;
+      }
+      // Unresolved targets keep getAnchorAttributes' /404 behavior, matching
+      // how dead wikilinks are handled.
+      return firstAttempt;
+    });
+  });
+
   eleventyConfig.addFilter("taggify", function(str) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        const doubleTagRemoved = tag.substring(1);
-        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
+        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag}">${tag}</a>`;
       })
     );
   });
@@ -401,7 +468,7 @@ module.exports = function(eleventyConfig) {
     if (match) {
       tags = match
         .map((m) => {
-          return `"${m.split("##")[1]}"`;
+          return `"${m.split("#")[1]}"`;
         })
         .join(", ");
     }
@@ -553,7 +620,7 @@ module.exports = function(eleventyConfig) {
   }
 
 
-  eleventyConfig.addTransform("picture", function(str) {
+  eleventyConfig.addTransform("picture", async function(str) {
     if (!isMarkdownPage(this.page.inputPath)) {
       return str;
     }
@@ -564,6 +631,15 @@ module.exports = function(eleventyConfig) {
     for (const imageTag of parsed.querySelectorAll(".cm-s-obsidian img")) {
       const src = imageTag.getAttribute("src");
       if (src && src.startsWith("/") && !src.endsWith(".svg")) {
+        // Files sharp can't decode (e.g. HEIC or a truncated AVIF renamed
+        // to .jpg) keep their original <img> tag instead of a <picture>
+        // pointing at optimized files that will never exist. This must be
+        // a real decode probe, not just a header check: feeding an
+        // undecodable file to eleventy-img fails the whole build via
+        // unhandled promise rejections in its internals.
+        if (!(await isDecodableImage("./src/site" + decodeURI(src)))) {
+          continue;
+        }
         const cls = imageTag.classList.value;
         const alt = imageTag.getAttribute("alt");
         const width = imageTag.getAttribute("width") || '';
@@ -728,6 +804,14 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/site/logo.*": "/" });
   eleventyConfig.on("eleventy.before", () => {
     normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
+  });
+  eleventyConfig.on("eleventy.after", async () => {
+    if (pendingImageJobs.length > 0) {
+      console.log(`[image] Waiting for ${pendingImageJobs.length} image optimization jobs...`);
+      await Promise.all(pendingImageJobs);
+      console.log(`[image] Image optimization complete`);
+      pendingImageJobs.length = 0;
+    }
   });
   eleventyConfig.addWatchTarget(FAVICON_SOURCE);
   eleventyConfig.addPlugin(faviconsPlugin, { outputDir: "dist" });
