@@ -1,0 +1,223 @@
+diff --git a/.eleventy.js b/.eleventy.js
+index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..fba51098721830424fb41efc99b806cb16bb7f32 100644
+--- a/.eleventy.js
++++ b/.eleventy.js
+@@ -66,8 +66,9 @@ function getAnchorAttributes(filePath, linkTitle) {
+   const title = linkTitle ? linkTitle : fileName;
+   let permalink = `/notes/${slugify(fileName)}`;
+   let deadLink = false;
++  const startPath = "./src/site/notes/";
++  console.log("Adding link to file", startPath + fileName, "(filePath is", filePath, ")...");
+   try {
+-    const startPath = "./src/site/notes/";
+     let fullPath;
+     if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
+       fullPath = `${startPath}${fileName}`;
+@@ -88,7 +89,8 @@ function getAnchorAttributes(filePath, linkTitle) {
+     if (frontMatter.data.noteIcon) {
+       noteIcon = frontMatter.data.noteIcon;
+     }
+-  } catch {
++  } catch (error) {
++    console.log("ERROR: dead link to file", startPath + fileName, "\n - filePath was", filePath);
+     deadLink = true;
+   }
+ 
+@@ -113,7 +115,10 @@ function getAnchorAttributes(filePath, linkTitle) {
+   }
+ }
+ 
+-const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
++// NOTE (JS, 24.05.25): Edited this to only match double hashes in the markdown file (e.g. ##test-tag)
++// This is a workaround for https://github.com/issues/created?issue=oleeskild%7Cdigitalgarden%7C315
++// Tags as properties are unaffected
++const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+ 
+ const markdownFileTypeRegex = /\.(md|markdown)$/i;
+ const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
+@@ -377,7 +382,8 @@ module.exports = function(eleventyConfig) {
+     return (
+       str &&
+       str.replace(tagRegex, function(match, precede, tag) {
+-        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag}">${tag}</a>`;
++        const doubleTagRemoved = tag.substring(1);
++        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
+       })
+     );
+   });
+@@ -395,7 +401,7 @@ module.exports = function(eleventyConfig) {
+     if (match) {
+       tags = match
+         .map((m) => {
+-          return `"${m.split("#")[1]}"`;
++          return `"${m.split("##")[1]}"`;
+         })
+         .join(", ");
+     }
+diff --git a/.env b/.env
+index 0bc58df97965e97b52d049bba2372afbf264f771..625ec642146016df74d75767843bca524c7627bd 100644
+--- a/.env
++++ b/.env
+@@ -21,4 +21,6 @@ dgShowFileTree=true
+ dgEnableSearch=true
+ dgShowToc=true
+ dgLinkPreview=false
+-dgShowTags=true
+\ No newline at end of file
++dgShowTags=true
++THEME=https://raw.githubusercontent.com/bluemoondragon07/Obsidian-Bolt/HEAD/theme.css
++BASE_THEME=dark
+\ No newline at end of file
+diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml
+index 556a64d55825f079675cc89430ef10df4037eeb8..38c8ee5b4ab2736179b826b84ad333e3b4a332a7 100644
+--- a/.github/workflows/build.yml
++++ b/.github/workflows/build.yml
+@@ -19,7 +19,7 @@ jobs:
+       - name: Setup Node
+         uses: actions/setup-node@v4
+         with:
+-          node-version: '20'
++          node-version: '24'
+           cache: 'npm'
+ 
+       - run: npm ci
+diff --git a/src/site/404.njk b/src/site/404.njk
+index c8d2026cfbd18da2ac30e0ad241311f9d8771465..49699b6c75d8ac32494482abb5de0999c037263f 100644
+--- a/src/site/404.njk
++++ b/src/site/404.njk
+@@ -1,4 +1,6 @@
+-
++---
++permalink: 404.html
++---
+ <!DOCTYPE html>
+ <html lang="{{ meta.mainLanguage }}">
+     <head>
+@@ -19,8 +21,9 @@
+             {%-if not meta.themeStyle%}
+                 <div class="font-bg"> &#x1F60E; </div>
+             {%endif%}
++            <h1>404<h1>
+             <h1>There is nothing here</h1>
+-            <p>If you got here from a link, this note is probably not made public</p>
++            <p>If you got here from a link, this note is probably not made (or no longer) public</p>
+             <a href="/">Go back home</a>
+         </div>
+     </body>
+diff --git a/src/site/_includes/components/filetreeNavbar.njk b/src/site/_includes/components/filetreeNavbar.njk
+index 1d19b3f0a5a8c413b908289e56962ab804601a23..dd52335a00ba81172eed6052b1c0401f9d4270e8 100644
+--- a/src/site/_includes/components/filetreeNavbar.njk
++++ b/src/site/_includes/components/filetreeNavbar.njk
+@@ -1,6 +1,6 @@
+ <nav class="navbar">
+     <div class="navbar-inner">
+-        <span style="font-size: 1.5rem; margin-right: 10px;" @click="showFilesMobile=!showFilesMobile"><i  data-lucide="menu"></i></span>
++        <span style="font-size: 1.5rem; margin-right: 10px; color: var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span>
+         {% for imp in dynamics.filetree.beforeTitle %}
+             {% include imp %}
+         {% endfor %}
+diff --git a/src/site/_includes/components/navbar.njk b/src/site/_includes/components/navbar.njk
+index 3c7f6aa14d462bad015d7ee73a046bc1f4311424..79f87f1b111539f3cbea7f06b8f5002c24797068 100644
+--- a/src/site/_includes/components/navbar.njk
++++ b/src/site/_includes/components/navbar.njk
+@@ -1,19 +1,68 @@
+ {%if settings.dgHomeLink === true%}
+-    <nav class="navbar">
+-        <div class="navbar-inner">
+-            <a href="/" style="text-decoration: none;">
+-                {% if meta.siteLogoPath %}
+-                    <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}">
+-                {% else %}
+-                    <h1 style="margin: 15px !important;">{{meta.siteName}}</h1>
+-                {% endif %}
+-            </a>
++    <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;"
++        x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;"
++        x-data="{isDesktop: true, showNavMobile: false}">
++
++        <div x-show.important="isDesktop" style="display: none;">
++            <nav class="navbar">
++                <div class="navbar-inner">
++                    <a href="/" style="text-decoration: none;">
++                        {% if meta.siteLogoPath %}
++                            <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}">
++                        {% else %}
++                            <h1 style="margin: 15px !important;">{{meta.siteName}}</h1>
++                        {% endif %}
++                    </a>
++                </div>
++                <div class="navbar-inner">
++                    <a href="/" style="text-decoration: none;">
++                        <h2 style="margin: 15px !important;">About me</h2>
++                    </a>
++                    <a href="/projects" style="text-decoration: none;">
++                        <h2 style="margin: 15px !important;">Projects</h2>
++                    </a>
++                    <a href="/garden" style="text-decoration: none;">
++                        <h2 style="margin: 15px !important;">Digital Garden</h2>
++                    </a>
++                </div>
++                {% if settings.dgEnableSearch === true%}
++                    {% include "components/searchButton.njk" %}
++                {%endif%}
++            </nav>
+         </div>
+-        {% if settings.dgEnableSearch === true%}
+-            {% include "components/searchButton.njk" %}
+-        {%endif%}
+-    </nav>
+-    {%else%}
++        <div x-show.important="!isDesktop" style="display: none;">
++            <nav class="navbar">
++                <span style="font-size: 2rem; margin-right: 24px; color: var(--link-color)" @click="showNavMobile=!showNavMobile"><i icon-name="menu" style="vertical-align: center;"></i></span>
++                <div class="navbar-inner" x-show.important="!showNavMobile" style="display: none;">
++                    <a href="/" style="text-decoration: none;">
++                        {% if meta.siteLogoPath %}
++                            <img class="site-logo" src="{{meta.siteLogoPath}}" alt="{{meta.siteName}}">
++                        {% else %}
++                            <h1 style="margin: 15px !important;">{{meta.siteName}}</h1>
++                        {% endif %}
++                    </a>
++                </div>
++                {% if settings.dgEnableSearch === true%}
++                    {% include "components/searchButton.njk" %}
++                {%endif%}
++            </nav>
++            <div x-show="showNavMobile" @click="showNavMobile = false" style="display:none;" class="fullpage-overlay"></div>
++            <div class="filetree-wrapper" x-show.important="showNavMobile" style="display: none;">
++                <nav class="filetree-sidebar">
++                    <a href="/" style="text-decoration: none;">
++                        <h2 style="margin: 15px !important;">About me</h2>
++                    </a>
++                    <a href="/projects" style="text-decoration: none;">
++                        <h2 style="margin: 15px !important;">Projects</h2>
++                    </a>
++                    <a href="/garden" style="text-decoration: none;">
++                        <h2 style="margin: 15px !important;">Digital Garden</h2>
++                    </a>
++                </nav>
++            </div>
++        </div>
++    </div>
++{%else%}
+     <div class="empty-navbar" >
+         {% if settings.dgEnableSearch === true%}
+             {% include "components/searchButton.njk" %}
+diff --git a/src/site/_includes/components/pageheader.njk b/src/site/_includes/components/pageheader.njk
+index 7101e216364e5193539933553fc87484f284343e..79dfe2e29571039ac1e77b6545a596638d719c74 100644
+--- a/src/site/_includes/components/pageheader.njk
++++ b/src/site/_includes/components/pageheader.njk
+@@ -38,12 +38,7 @@
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async/>
+ <script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+ 
+-{%-if meta.themeStyle%}
+-    <link href="/styles/obsidian-base.css" rel="stylesheet">
+-    <link href="{{meta.themeStyle}}" rel="stylesheet">
+-{% else %}
+-    <link href="/styles/style.css" rel="stylesheet">
+-{%endif%}
++<link href="/styles/obsidian-base.css" rel="stylesheet">
+ <link href="/styles/digital-garden-base.css" rel="stylesheet">
+ 
+ <link href="/styles/custom-style.css" rel="stylesheet">
