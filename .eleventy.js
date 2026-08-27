@@ -89,8 +89,9 @@ function getAnchorAttributes(filePath, linkTitle) {
   const title = linkTitle ? linkTitle : fileName;
   let permalink = `/notes/${slugify(fileName)}`;
   let deadLink = false;
+  const startPath = "./src/site/notes/";
+  console.log("Adding link to file", startPath + fileName, "(filePath is", filePath, ")...");
   try {
-    const startPath = "./src/site/notes/";
     let fullPath;
     if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
       fullPath = `${startPath}${fileName}`;
@@ -111,7 +112,8 @@ function getAnchorAttributes(filePath, linkTitle) {
     if (frontMatter.data.noteIcon) {
       noteIcon = frontMatter.data.noteIcon;
     }
-  } catch {
+  } catch (error) {
+    console.log("ERROR: dead link to file", startPath + fileName, "\n - filePath was", filePath);
     deadLink = true;
   }
 
@@ -136,7 +138,10 @@ function getAnchorAttributes(filePath, linkTitle) {
   }
 }
 
-const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+// NOTE (JS, 24.05.25): Edited this to only match double hashes in the markdown file (e.g. ##test-tag)
+// This is a workaround for https://github.com/issues/created?issue=oleeskild%7Cdigitalgarden%7C315
+// Tags as properties are unaffected
+const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 const markdownFileTypeRegex = /\.(md|markdown)$/i;
 const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
@@ -450,7 +455,8 @@ module.exports = function(eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag}">${tag}</a>`;
+        const doubleTagRemoved = tag.substring(1);
+        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
       })
     );
   });
@@ -468,7 +474,7 @@ module.exports = function(eleventyConfig) {
     if (match) {
       tags = match
         .map((m) => {
-          return `"${m.split("#")[1]}"`;
+          return `"${m.split("##")[1]}"`;
         })
         .join(", ");
     }
