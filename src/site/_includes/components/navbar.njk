@@ -1,6 +1,6 @@
 {%if settings.dgHomeLink === true%}
-    <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" 
-        x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" 
+    <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;"
+        x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;"
         x-data="{isDesktop: true, showNavMobile: false}">
 
         <div x-show.important="isDesktop" style="display: none;">
@@ -57,7 +57,7 @@
                     </a>
                     <a href="/garden" style="text-decoration: none;">
                         <h2 style="margin: 15px !important;">Digital Garden</h2>
-                    </a>                    
+                    </a>
                 </nav>
             </div>
         </div>
