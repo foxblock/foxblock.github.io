@@ -808,7 +808,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/site/scripts");
   eleventyConfig.addPassthroughCopy("src/site/styles/_theme.*.css");
   eleventyConfig.addPassthroughCopy({ "src/site/logo.*": "/" });
+  let faviconPromise;
   eleventyConfig.on("eleventy.before", () => {
+    faviconPromise = undefined;
     normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
   });
   eleventyConfig.on("eleventy.after", async () => {
@@ -820,7 +822,18 @@ module.exports = function(eleventyConfig) {
     }
   });
   eleventyConfig.addWatchTarget(FAVICON_SOURCE);
-  eleventyConfig.addPlugin(faviconsPlugin, { outputDir: "dist" });
+  // All pages share one favicon. Cache the in-flight promise as well as its HTML
+  // so parallel templates cannot write the same files (EBUSY on Windows).
+  faviconsPlugin({
+    addAsyncShortcode(name, generate) {
+      eleventyConfig.addAsyncShortcode(name, function () {
+        faviconPromise ??= Promise.resolve().then(() => generate.call(this,
+          FAVICON_NORMALIZED, { appleIconBgColor: "#123" }));
+        return faviconPromise;
+      });
+    },
+  // Our per-build cache owns reuse; regenerate even if dist was cleaned.
+  }, { outputDir: "dist", skipCache: true });
   eleventyConfig.addPlugin(tocPlugin, {
     ul: true,
     tags: ["h1", "h2", "h3", "h4", "h5", "h6"],

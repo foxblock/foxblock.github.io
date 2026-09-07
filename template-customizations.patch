@@ -1,5 +1,5 @@
 diff --git a/.eleventy.js b/.eleventy.js
-index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..fba51098721830424fb41efc99b806cb16bb7f32 100644
+index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..1dc461bac8a6d17d8ff9a6ef909c6b11c9928142 100644
 --- a/.eleventy.js
 +++ b/.eleventy.js
 @@ -66,8 +66,9 @@ function getAnchorAttributes(filePath, linkTitle) {
@@ -54,6 +54,32 @@ index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..fba51098721830424fb41efc99b806cb
          })
          .join(", ");
      }
+@@ -720,11 +726,24 @@
+   eleventyConfig.addPassthroughCopy("src/site/scripts");
+   eleventyConfig.addPassthroughCopy("src/site/styles/_theme.*.css");
+   eleventyConfig.addPassthroughCopy({ "src/site/logo.*": "/" });
++  let faviconPromise;
+   eleventyConfig.on("eleventy.before", () => {
++    faviconPromise = undefined;
+     normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
+   });
+   eleventyConfig.addWatchTarget(FAVICON_SOURCE);
+-  eleventyConfig.addPlugin(faviconsPlugin, { outputDir: "dist" });
++  // All pages share one favicon. Cache the in-flight promise as well as its HTML
++  // so parallel templates cannot write the same files (EBUSY on Windows).
++  faviconsPlugin({
++    addAsyncShortcode(name, generate) {
++      eleventyConfig.addAsyncShortcode(name, function () {
++        faviconPromise ??= Promise.resolve().then(() => generate.call(this,
++          FAVICON_NORMALIZED, { appleIconBgColor: "#123" }));
++        return faviconPromise;
++      });
++    },
++  // Our per-build cache owns reuse; regenerate even if dist was cleaned.
++  }, { outputDir: "dist", skipCache: true });
+   eleventyConfig.addPlugin(tocPlugin, {
+     ul: true,
+     tags: ["h1", "h2", "h3", "h4", "h5", "h6"],
 diff --git a/.env b/.env
 index 0bc58df97965e97b52d049bba2372afbf264f771..625ec642146016df74d75767843bca524c7627bd 100644
 --- a/.env
@@ -204,7 +230,7 @@ index 3c7f6aa14d462bad015d7ee73a046bc1f4311424..79f87f1b111539f3cbea7f06b8f5002c
          {% if settings.dgEnableSearch === true%}
              {% include "components/searchButton.njk" %}
 diff --git a/src/site/_includes/components/pageheader.njk b/src/site/_includes/components/pageheader.njk
-index 7101e216364e5193539933553fc87484f284343e..79dfe2e29571039ac1e77b6545a596638d719c74 100644
+index 7101e216364e5193539933553fc87484f284343e..e1a17e9632aa27dfc9733e983145727d7c459e35 100644
 --- a/src/site/_includes/components/pageheader.njk
 +++ b/src/site/_includes/components/pageheader.njk
 @@ -38,12 +38,7 @@
@@ -221,3 +247,12 @@ index 7101e216364e5193539933553fc87484f284343e..79dfe2e29571039ac1e77b6545a59663
  <link href="/styles/digital-garden-base.css" rel="stylesheet">
  
  <link href="/styles/custom-style.css" rel="stylesheet">
+@@ -51,7 +46,7 @@
+ <link href="{{style}}?v={{meta.buildDate|isoDate}}" rel="stylesheet">
+ {%- endfor -%}
+ 
+-{% favicons './.cache/favicon.normalized.svg', appleIconBgColor='#123' %}
++{% favicons %}
+ 
+ {% if meta.styleSettingsCss %}
+     <style>
