@@ -1,8 +1,49 @@
 diff --git a/.eleventy.js b/.eleventy.js
-index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..1dc461bac8a6d17d8ff9a6ef909c6b11c9928142 100644
+index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..982a6a945fe21ebdbfee7c951ab27b52c7cac0a4 100644
 --- a/.eleventy.js
 +++ b/.eleventy.js
-@@ -66,8 +66,9 @@ function getAnchorAttributes(filePath, linkTitle) {
+@@ -1,4 +1,4 @@
+-const slugify = require("@sindresorhus/slugify");
++const slugify = require("@sindresorhus/slugify").default;
+ const markdownIt = require("markdown-it");
+ const fs = require("fs");
+ const matter = require("gray-matter");
+@@ -24,7 +24,7 @@ normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
+ const tocPlugin = require("eleventy-plugin-nesting-toc");
+ const { parse } = require("node-html-parser");
+ const htmlMinifier = require("html-minifier-terser");
+-const pluginRss = require("@11ty/eleventy-plugin-rss");
++const pluginRss = require("@11ty/eleventy-plugin-rss").default;
+ 
+ const { headerToId, namedHeadingsFilter } = require("./src/helpers/utils");
+ const {
+@@ -33,19 +33,15 @@ const {
+ } = require("./src/helpers/userSetup");
+ const { basesPlugin } = require("./src/helpers/basesPlugin");
+ 
+-const Image = require("@11ty/eleventy-img");
+-function transformImage(src, cls, alt, sizes, widths = ["500", "700", "auto"]) {
+-  let options = {
+-    widths: widths,
++const Image = require("@11ty/eleventy-img").default;
++// Generate only referenced sizes and await writes before emitting their URLs.
++async function transformImage(src, widths = [500, 700]) {
++  return Image(src, {
++    widths,
+     formats: ["webp", "jpeg"],
+     outputDir: "./dist/img/optimized",
+     urlPath: "/img/optimized",
+-  };
+-
+-  // generate images, while this is async we don’t wait
+-  Image(src, options);
+-  let metadata = Image.statsSync(src, options);
+-  return metadata;
++  });
+ }
+ 
+ function getAnchorLink(filePath, linkTitle) {
+@@ -66,8 +62,9 @@ function getAnchorAttributes(filePath, linkTitle) {
    const title = linkTitle ? linkTitle : fileName;
    let permalink = `/notes/${slugify(fileName)}`;
    let deadLink = false;
@@ -13,7 +54,7 @@ index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..1dc461bac8a6d17d8ff9a6ef909c6b11
      let fullPath;
      if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
        fullPath = `${startPath}${fileName}`;
-@@ -88,7 +89,8 @@ function getAnchorAttributes(filePath, linkTitle) {
+@@ -88,7 +85,8 @@ function getAnchorAttributes(filePath, linkTitle) {
      if (frontMatter.data.noteIcon) {
        noteIcon = frontMatter.data.noteIcon;
      }
@@ -23,7 +64,7 @@ index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..1dc461bac8a6d17d8ff9a6ef909c6b11
      deadLink = true;
    }
  
-@@ -113,7 +115,10 @@ function getAnchorAttributes(filePath, linkTitle) {
+@@ -113,12 +111,18 @@ function getAnchorAttributes(filePath, linkTitle) {
    }
  }
  
@@ -35,7 +76,25 @@ index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..1dc461bac8a6d17d8ff9a6ef909c6b11
  
  const markdownFileTypeRegex = /\.(md|markdown)$/i;
  const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
-@@ -377,7 +382,8 @@ module.exports = function(eleventyConfig) {
+ 
+-module.exports = function(eleventyConfig) {
++module.exports = async function(eleventyConfig) {
++  // The CommonJS math plugin uses deasync; import its ESM entry to avoid
++  // blocking Eleventy's async config loader and exhausting the Node heap.
++  const { default: mathjaxPlugin } = await import("markdown-it-mathjax3");
+   eleventyConfig.setLiquidOptions({
+     dynamicPartials: true,
+   });
+@@ -139,7 +143,7 @@ module.exports = function(eleventyConfig) {
+         return '<a class="tag" onclick="toggleTagSearch(this)">';
+       };
+     })
+-    .use(require("markdown-it-mathjax3"), {
++    .use(mathjaxPlugin, {
+       tex: {
+         inlineMath: [["$", "$"]],
+       },
+@@ -377,7 +381,8 @@ module.exports = function(eleventyConfig) {
      return (
        str &&
        str.replace(tagRegex, function(match, precede, tag) {
@@ -45,7 +104,7 @@ index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..1dc461bac8a6d17d8ff9a6ef909c6b11
        })
      );
    });
-@@ -395,7 +401,7 @@ module.exports = function(eleventyConfig) {
+@@ -395,7 +400,7 @@ module.exports = function(eleventyConfig) {
      if (match) {
        tags = match
          .map((m) => {
@@ -54,7 +113,29 @@ index d6ba326751491e6c69ab8bfb4e0f29e7cf3008f1..1dc461bac8a6d17d8ff9a6ef909c6b11
          })
          .join(", ");
      }
-@@ -720,11 +726,24 @@
+@@ -563,18 +568,13 @@ module.exports = function(eleventyConfig) {
+         const width = imageTag.getAttribute("width") || '';
+ 
+         try {
+-          const meta = transformImage(
+-            "./src/site" + decodeURI(imageTag.getAttribute("src")),
+-            cls.toString(),
+-            alt,
+-            ["(max-width: 480px)", "(max-width: 1024px)"]
+-          );
++          const meta = await transformImage("./src/site" + decodeURI(src));
+ 
+           if (meta) {
+             fillPictureSourceSets(src, cls, alt, meta, width, imageTag);
+           }
+-        } catch {
+-          // Make it fault tolarent.
++        } catch (error) {
++          console.warn(`[image] Skipping optimization of ${src}: ${error.message}`);
+         }
+       }
+     }
+@@ -720,11 +720,24 @@ module.exports = function(eleventyConfig) {
    eleventyConfig.addPassthroughCopy("src/site/scripts");
    eleventyConfig.addPassthroughCopy("src/site/styles/_theme.*.css");
    eleventyConfig.addPassthroughCopy({ "src/site/logo.*": "/" });
@@ -274,3 +355,23 @@ index ba0a6a8e7536903f85cbae982c263f06e6ff85f1..d0583486406257b1e8332dfece8922e4
    let logoPath = "";
    if (logoFiles.length > 0) {
      // Use the first match and convert to site-relative path
+diff --git a/src/helpers/utils.js b/src/helpers/utils.js
+index 50de97adca8bbc30a8c5841498e76a44dbb00107..4a0b0ed6fcbdaa36f5b65dd3cc3338dfa8a474d7 100644
+--- a/src/helpers/utils.js
++++ b/src/helpers/utils.js
+@@ -1,4 +1,4 @@
+-const slugify = require("@sindresorhus/slugify");
++const slugify = require("@sindresorhus/slugify").default;
+ 
+ function headerToId(heading) {
+     var slugifiedHeader = slugify(heading);
+diff --git a/src/site/_data/dynamics.js b/src/site/_data/dynamics.js
+index 13128c9660f41e46c6ce96d13c9f0e3cdfbf0689..655250f305a62b72f2c329ca268c832b58ea0f49 100644
+--- a/src/site/_data/dynamics.js
++++ b/src/site/_data/dynamics.js
+@@ -1,4 +1,4 @@
+-const fsFileTree = require("fs-file-tree");
++const fsFileTree = require("fs-file-tree").default;
+ 
+ const BASE_PATH = "src/site/_includes/components/user";
+ const STYLE_PATH = "src/site/styles/user";

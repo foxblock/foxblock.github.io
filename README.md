@@ -4,6 +4,24 @@ See the README in the plugin repo for information on how to set it up.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/oleeskild/digitalgarden)
 
+## Local development and dependency updates
+
+Use Node.js 24 and run `npm ci`, then `npm run dev` for a local preview.
+Run `npm run build` for production output in `dist`, and `npm test` for
+image, favicon, math, and path compatibility checks. Stop the development
+server before a production build because both write to `dist`.
+
+The `eleventy-plugin-gen-favicons` override uses `sharp` 0.35.4 or newer to
+avoid the vulnerable libvips bundled by its declared `sharp` 0.33 dependency
+([advisory](https://github.com/advisories/GHSA-f88m-g3jw-g9cj)). The regression
+tests exercise favicon SVG, ICO, PNG, and manifest output with this override.
+Keep it until the plugin declares a patched version itself.
+
+After updating the upstream template, check and apply
+`template-customizations.patch`, then run `npm install` to reconcile the
+lockfile with its dependency changes. Verify `npm audit`, `npm test`, and
+`npm run build` before committing the updated lockfile.
+
 ---
 ## Docs
 Docs are available at [docs.forestry.md](https://docs.forestry.md/)

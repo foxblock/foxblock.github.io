@@ -1,4 +1,4 @@
-const slugify = require("@sindresorhus/slugify");
+const slugify = require("@sindresorhus/slugify").default;
 const markdownIt = require("markdown-it");
 const fs = require("fs");
 const matter = require("gray-matter");
@@ -26,7 +26,7 @@ normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
 const tocPlugin = require("eleventy-plugin-nesting-toc");
 const { parse } = require("node-html-parser");
 const htmlMinifier = require("html-minifier-terser");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginRss = require("@11ty/eleventy-plugin-rss").default;
 
 const { headerToId, namedHeadingsFilter } = require("./src/helpers/utils");
 const {
@@ -35,7 +35,7 @@ const {
 } = require("./src/helpers/userSetup");
 const { basesPlugin } = require("./src/helpers/basesPlugin");
 
-const Image = require("@11ty/eleventy-img");
+const Image = require("@11ty/eleventy-img").default;
 const { isDecodableImage } = require("./src/helpers/imageFormat.js");
 
 // Build containers have few CPUs and little memory; the default queue
@@ -43,32 +43,14 @@ const { isDecodableImage } = require("./src/helpers/imageFormat.js");
 // finishing any faster. Sharp already parallelizes within each job.
 Image.concurrency = 2;
 
-// Image generation is started fire-and-forget during transforms (the markup
-// only needs statsSync), but every pending job is awaited in the
-// eleventy.after hook below so the build doesn't linger — or get killed —
-// doing invisible work after Eleventy reports completion.
-const pendingImageJobs = [];
-
-// Note: fillPictureSourceSets only references the first two widths; the
-// full-size original is served via the <img src> fallback, so a full
-// resolution "auto" rendition would never be referenced by the markup.
-function transformImage(src, cls, alt, sizes, widths = ["500", "700"]) {
-  let options = {
-    widths: widths,
+// Generate only referenced sizes and await writes before emitting their URLs.
+async function transformImage(src, widths = [500, 700]) {
+  return Image(src, {
+    widths,
     formats: ["webp", "jpeg"],
     outputDir: "./dist/img/optimized",
     urlPath: "/img/optimized",
-  };
-
-  // A rejection here (e.g. a corrupt file) must not become an unhandled
-  // rejection, which would fail the whole build.
-  pendingImageJobs.push(
-    Image(src, options).catch((err) => {
-      console.warn(`[image] Skipping optimization of ${src}: ${err.message}`);
-    })
-  );
-  let metadata = Image.statsSync(src, options);
-  return metadata;
+  });
 }
 
 function getAnchorLink(filePath, linkTitle) {
@@ -146,7 +128,10 @@ const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 const markdownFileTypeRegex = /\.(md|markdown)$/i;
 const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
 
-module.exports = function(eleventyConfig) {
+module.exports = async function(eleventyConfig) {
+  // The CommonJS math plugin uses deasync; import its ESM entry to avoid
+  // blocking Eleventy's async config loader and exhausting the Node heap.
+  const { default: mathjaxPlugin } = await import("markdown-it-mathjax3");
   eleventyConfig.setLiquidOptions({
     dynamicPartials: true,
   });
@@ -167,7 +152,7 @@ module.exports = function(eleventyConfig) {
         return '<a class="tag" onclick="toggleTagSearch(this)">';
       };
     })
-    .use(require("markdown-it-mathjax3"), {
+    .use(mathjaxPlugin, {
       tex: {
         inlineMath: [["$", "$"]],
       },
@@ -651,18 +636,13 @@ module.exports = function(eleventyConfig) {
         const width = imageTag.getAttribute("width") || '';
 
         try {
-          const meta = transformImage(
-            "./src/site" + decodeURI(imageTag.getAttribute("src")),
-            cls.toString(),
-            alt,
-            ["(max-width: 480px)", "(max-width: 1024px)"]
-          );
+          const meta = await transformImage("./src/site" + decodeURI(src));
 
           if (meta) {
             fillPictureSourceSets(src, cls, alt, meta, width, imageTag);
           }
-        } catch {
-          // Make it fault tolarent.
+        } catch (error) {
+          console.warn(`[image] Skipping optimization of ${src}: ${error.message}`);
         }
       }
     }
@@ -812,14 +792,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.on("eleventy.before", () => {
     faviconPromise = undefined;
     normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
-  });
-  eleventyConfig.on("eleventy.after", async () => {
-    if (pendingImageJobs.length > 0) {
-      console.log(`[image] Waiting for ${pendingImageJobs.length} image optimization jobs...`);
-      await Promise.all(pendingImageJobs);
-      console.log(`[image] Image optimization complete`);
-      pendingImageJobs.length = 0;
-    }
   });
   eleventyConfig.addWatchTarget(FAVICON_SOURCE);
   // All pages share one favicon. Cache the in-flight promise as well as its HTML

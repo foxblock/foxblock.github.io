@@ -12,7 +12,7 @@
         "build:sass": "sass src/site/styles:dist/styles --style compressed",
         "get-theme": "node src/site/get-theme.js",
         "build": "npm-run-all get-theme build:*",
-        "test": "vitest run"
+        "test": "vitest run --dir src"
     },
     "keywords": [],
     "author": "",
@@ -22,34 +22,39 @@
     },
     "devDependencies": {
         "@11ty/eleventy": "^3.1.6",
-        "@11ty/eleventy-plugin-rss": "^2.0.4",
+        "@11ty/eleventy-plugin-rss": "^3.0.0",
         "cross-env": "^10.1.0",
         "html-minifier-terser": "^7.2.0",
-        "node-html-parser": "^9.0.0",
-        "sass": "^1.49.9",
-        "vitest": "^4.1.0"
+        "node-html-parser": "^9.0.4",
+        "sass": "^1.104.0",
+        "vitest": "^5.0.0"
     },
     "dependencies": {
-        "@11ty/eleventy-img": "^4.0.2",
-        "@sindresorhus/slugify": "^1.1.0",
-        "axios": "^1.2.2",
+        "@11ty/eleventy-img": "^7.0.0",
+        "@sindresorhus/slugify": "^3.0.1",
+        "axios": "^1.20.0",
         "dotenv": "^17.4.2",
-        "eleventy-plugin-gen-favicons": "^1.1.2",
+        "eleventy-plugin-gen-favicons": "^1.1.3",
         "eleventy-plugin-nesting-toc": "^1.3.0",
-        "fs-file-tree": "^1.1.1",
+        "fs-file-tree": "^2.0.0",
         "glob": "^13.0.6",
         "gray-matter": "^4.0.3",
         "jsep": "^1.4.0",
-        "markdown-it": "^15.0.0",
-        "markdown-it-anchor": "^9.0.1",
-        "markdown-it-attrs": "^5.0.0",
+        "markdown-it": "^15.0.1",
+        "markdown-it-anchor": "^10.0.0",
+        "markdown-it-attrs": "^5.0.1",
         "markdown-it-footnote": "^4.0.0",
         "markdown-it-mark": "^4.0.0",
-        "markdown-it-mathjax3": "^4.3.1",
+        "markdown-it-mathjax3": "^5.2.0",
         "markdown-it-plantuml": "^1.4.1",
         "markdown-it-task-checkbox": "^1.0.6",
         "npm-run-all": "^4.1.5",
         "rimraf": "^6.1.3",
-        "yaml": "^2.8.3"
+        "yaml": "^2.9.0"
+    },
+    "overrides": {
+        "eleventy-plugin-gen-favicons": {
+            "sharp": "^0.35.4"
+        }
     }
 }
