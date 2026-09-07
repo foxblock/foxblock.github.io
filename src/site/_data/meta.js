@@ -6,10 +6,11 @@ module.exports = async (data) => {
   if (baseUrl && !baseUrl.startsWith("http")) {
     baseUrl = "https://" + baseUrl;
   }
-  let themeStyle = globSync("src/site/styles/_theme.*.css")[0] || "";
+  // These paths become browser URLs and need forward slashes; glob otherwise returns backslashes on Windows.
+  let themeStyle = globSync("src/site/styles/_theme.*.css", { posix: true })[0] || "";
 
   // Check for logo file (supports multiple image formats)
-  const logoFiles = globSync("src/site/logo.{png,jpg,jpeg,gif,svg,webp}");
+  const logoFiles = globSync("src/site/logo.{png,jpg,jpeg,gif,svg,webp}", { posix: true });
   let logoPath = "";
   if (logoFiles.length > 0) {
     // Use the first match and convert to site-relative path
