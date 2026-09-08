@@ -3,7 +3,7 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-09-08T18:15:41Z</updated>
+  <updated>2026-09-08T18:18:02Z</updated>
   <id>https://janek.ing</id><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
@@ -3369,7 +3369,7 @@ Shift Operatoren konvertieren den Input in 32-bit signed int.&lt;/p&gt;
     <link href="https://janek.ing/code/langauges/java-script/"/>
   </entry><entry>
     <title>Go</title>
-    <updated>2026-09-08T16:52:10.921Z</updated>
+    <updated>2026-09-08T18:15:32.975Z</updated>
     <id>https://janek.ing/code/langauges/go/</id>
     <content type="html">&lt;h2 id=&quot;cheatsheet&quot; tabindex=&quot;-1&quot;&gt;Cheatsheet&lt;/h2&gt;
 &lt;h3 id=&quot;types-and-zero-values&quot; tabindex=&quot;-1&quot;&gt;Types and Zero-Values&lt;/h3&gt;
@@ -3702,10 +3702,10 @@ const (
 )
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;json&quot; tabindex=&quot;-1&quot;&gt;JSON&lt;/h2&gt;
-&lt;p&gt;Use &lt;code&gt;`json:&amp;quot;...&amp;quot;`&lt;/code&gt;  strings to add compile time encoding information. First argument is the exported name of the member. &lt;code&gt;omitempty&lt;/code&gt; can be used to remove null values from the export.&lt;/p&gt;
+&lt;p&gt;Use  &lt;code&gt;json:&amp;quot;...&amp;quot;&lt;/code&gt; strings to add compile time encoding information. First argument is the exported name of the member. &lt;code&gt;omitempty&lt;/code&gt; can be used to remove null values from the export.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;[!IMPORTANT]&lt;br /&gt;
-You need to rename fields, if you want to have lowercase starting letters for fields, since only &lt;a class=&quot;internal-link is-unresolved&quot; href=&quot;https://janek.ing/404&quot; target=&quot;&quot;&gt;exported fields&lt;/a&gt; are included in the marshalling process and exported fields need to start with a capital letter.&lt;/p&gt;
+You need to rename fields, if you want to have lowercase starting letters for fields, since only &lt;a class=&quot;internal-link&quot; target=&quot;&quot; data-note-icon=&quot;&quot; href=&quot;https://janek.ing/code/langauges/go/#public-private-exported-names&quot;&gt;exported fields&lt;/a&gt; are included in the marshalling process and exported fields need to start with a capital letter.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;[!WARNING] nil slices ≠ empty slices in JSON&lt;br /&gt;
