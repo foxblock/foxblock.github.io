@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-07-09T17:33:52.729+02:00","dg-note-properties":{"title":"Template test page"}}
+{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-09-08T18:31:09.126+02:00","dg-note-properties":{"title":"Template test page"}}
 ---
 
 [[Non-existent page\|Non-existent page]]
@@ -32,7 +32,28 @@ Expected: Link to heading in other document
 [Clean-Code](https://qntm.org/clean)
 Expected: Working link to external page with custom text
 
-Testing links in code blocks (there should be 3 lines below):
+
+> [!NOTE] Links inside of callouts
+> [[Website/Test page#A more complicated / heading (with symbols)\|#A more complicated / heading (with symbols)]]
+> Expected: Links to second heading below
+> 
+> [[Website/Test page#A more complicated / heading (with symbols)\|Alternate text]]
+> Expected: Links to second heading below, but showing alternate text
+> 
+> [[Code/Data Structures & Algorithms\|Data Structures & Algorithms]]
+> Expected: Correctly link to document with & in filename
+> 
+> [[Code/Langauges/Go#Public / Private (exported names)\|Go#Public / Private (exported names)]]
+> Expected: Link to heading in other document
+> 
+> [[Code/Data Structures & Algorithms#Multi-stage Tables\|Data Structures & Algorithms#Multi-stage Tables]]
+> Expected: Link to heading in other document
+> 
+> [Clean-Code](https://qntm.org/clean)
+> Expected: Working link to external page with custom text
+
+
+Testing links in code blocks (there should be 3 lines below and no links whatsoever):
 ```
 #include - this should not be converted to a clickable tag-link
 
