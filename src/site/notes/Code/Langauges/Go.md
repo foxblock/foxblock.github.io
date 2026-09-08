@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2025-08-12T19:49:27.936+02:00","updated":"2025-08-12T09:45:41.396+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
+{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2025-08-12T19:49:27.936+02:00","updated":"2026-09-08T18:52:10.921+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Cheatsheet
