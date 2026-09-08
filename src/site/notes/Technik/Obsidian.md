@@ -116,7 +116,7 @@
 
 ## Links to page or heading with custom text
 [[Technik/Obsidian#Callouts\|Like this]]
-`[[Technik/Obsidian#Callouts\|Like this]]`
+`[[#Callouts|Like this]]`
 
 ## Getting rid of unused properties
 Once you used a property it will always show up in auto-complete. Very annoying if you misspelled it and corrected it later.

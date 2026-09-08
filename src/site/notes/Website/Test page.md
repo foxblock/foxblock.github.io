@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-09-08T20:14:55.679+02:00","dg-note-properties":{"title":"Template test page"}}
+{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-09-08T20:17:24.898+02:00","dg-note-properties":{"title":"Template test page"}}
 ---
 
 [[Non-existent page\|Non-existent page]]
@@ -82,7 +82,7 @@ Testing links in code blocks (there should be 3 lines below and no links whatsoe
 `#inline-code`
 `[[Test page]]`
 `[[another|link]]`
-Expected: There should be 3 inline codes above and none of these 3 should be converted
+Expected: There should be 3 inline codes above and none of these 3 should be converted to a link
 
 ## Heading
 
