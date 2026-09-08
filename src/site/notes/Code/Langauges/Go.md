@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2025-08-12T19:49:27.936+02:00","updated":"2026-09-08T18:52:10.921+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
+{"dg-publish":true,"permalink":"/code/langauges/go/","tags":["knowledge-base"],"created":"2025-08-12T19:49:27.936+02:00","updated":"2026-09-08T20:15:32.975+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 ## Cheatsheet
@@ -351,10 +351,10 @@ const (
 )
 ```
 ## JSON
-Use ``` `json:"..."` ```  strings to add compile time encoding information. First argument is the exported name of the member. `omitempty` can be used to remove null values from the export. 
+Use  `json:"..."` strings to add compile time encoding information. First argument is the exported name of the member. `omitempty` can be used to remove null values from the export. 
 
 > [!IMPORTANT]
-> You need to rename fields, if you want to have lowercase starting letters for fields, since only [[#Public / Private (exported names)|exported fields]] are included in the marshalling process and exported fields need to start with a capital letter.
+> You need to rename fields, if you want to have lowercase starting letters for fields, since only [[Code/Langauges/Go#Public / Private (exported names)\|exported fields]] are included in the marshalling process and exported fields need to start with a capital letter.
 
 > [!WARNING] nil slices ≠ empty slices in JSON
 > Nil slices (unitialized slices) are exported as "null", while empty slices (len=0, cap=0) are exported as empty array \[\]. Other than that they behave mostly the same in Go. See [null - nil slices vs non-nil slices vs empty slices in Go language - Stack Overflow](https://stackoverflow.com/questions/44305170/nil-slices-vs-non-nil-slices-vs-empty-slices-in-go-language)
