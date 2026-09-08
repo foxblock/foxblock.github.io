@@ -1,9 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<title>CPU</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <title>CPU</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
 <script type="importmap">
 {
   "imports": {
@@ -15,452 +18,1342 @@
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/dist/pixi.min.js"></script>
-<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:!0})</script>
+
+<script async type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+</script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>window.addEventListener("load",()=>{document.querySelectorAll(".callout").forEach(e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("data-lucide",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}}),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach(e=>{e.querySelector(".callout-title").addEventListener("click",t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")})})})</script>
-<script defer="defer" src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
-<script defer="defer" src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
+
+<script>
+    // Create callout icons
+    window.addEventListener("load", () => {
+        document.querySelectorAll(".callout").forEach((elem) => {
+            const icon = getComputedStyle(elem).getPropertyValue('--callout-icon');
+            const iconName = icon && icon.trim().replace(/^lucide-/, "");
+
+            if (iconName) {
+                const calloutTitle = elem.querySelector(".callout-title");
+
+                if (calloutTitle) {
+                    const calloutIconContainer = document.createElement("div");
+                    const calloutIcon = document.createElement("i");
+
+                    calloutIconContainer.appendChild(calloutIcon);
+                    calloutIcon.setAttribute("data-lucide", iconName);
+                    calloutIconContainer.setAttribute("class", "callout-icon");
+                    calloutTitle.insertBefore(calloutIconContainer, calloutTitle.firstChild);
+                }
+            }
+        });
+
+        lucide.createIcons();
+
+        // Collapse callouts
+        Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((elem) => {
+            elem.querySelector('.callout-title').addEventListener("click", (event) => {
+                if (elem.classList.contains("is-collapsed")) {
+                    elem.classList.remove("is-collapsed");
+                } else {
+                    elem.classList.add("is-collapsed");
+                }
+            });
+        });
+    });
+</script>
+
+
+<script defer src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script defer src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
 <script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+
 <link href="/styles/obsidian-base.css" rel="stylesheet">
 <link href="/styles/digital-garden-base.css" rel="stylesheet">
-<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-09-08T18:18:01.505Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-09-08T18:18:01.505Z" rel="stylesheet">
+
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-09-08T18:22:34.850Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-09-08T18:22:34.850Z" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
+
+
+
 <style></style>
-</head>
-<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
-<div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
-<div x-show.important="!isDesktop" style="display:none">
-<nav class="navbar">
-<div class="navbar-inner">
-<span style="font-size:1.5rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span>
-<a href="/" style="text-decoration:none;flex:1;display:flex;justify-content:center">
-<img class="site-logo" src="/logo.svg" alt="janek.ing">
-</a>
+
+    
+    
+  </head>
+  <body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section   ">
+    
+    
+    
+      
+    
+    <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;"
+            x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;"
+            x-data="{isDesktop: true, showFilesMobile: false}">
+
+        <div x-show.important="!isDesktop" style="display: none;">
+            <nav class="navbar">
+    <div class="navbar-inner">
+        <span style="font-size: 1.5rem; margin-right: 10px; color: var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span>
+        
+        
+        <a href="/" style="text-decoration: none; flex: 1; display: flex; justify-content: center;">
+                <img class="site-logo" src="/logo.svg" alt="janek.ing">
+        </a>
+        
+        
+    </div>
+
+    
+        <div class="search-button align-icon" onclick="toggleSearch()">
+    <span class="search-icon">
+        <i data-lucide="search"></i>
+    </span>
+    <span class="search-text">Search</span>
+    <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
 </div>
-<div class="search-button align-icon" onclick="toggleSearch()">
-<span class="search-icon">
-<i data-lucide="search"></i>
-</span>
-<span class="search-text">Search</span>
-<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
-</div>
+    
 </nav>
-</div>
-<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
-<div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display:none">
-<nav class="filetree-sidebar">
-<a href="/" style="text-decoration:none;display:flex;justify-content:center">
-<img class="site-logo" src="/logo.svg" alt="janek.ing">
-</a>
-<div class="search-button align-icon" onclick="toggleSearch()">
-<span class="search-icon">
-<i data-lucide="search"></i>
-</span>
-<span class="search-text">Search</span>
-<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
-</div>
-<div class="folder" x-data="{isOpen: true}">
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Arbeit&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Arbeit</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/arbeit/agile/">Agile </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Code</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code/Langauges&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Langauges</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/bullshit-detector/">Bullshit detector </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Design&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Design</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Life&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Life</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Tech&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Tech</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Writing&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Writing</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-</div>
-</nav>
-</div>
-</div>
-<div class="search-container" id="globalsearch" onclick="toggleSearch()">
-<div class="search-box" onclick="event.stopPropagation()">
-<div class="search-header">
-<input type="search" id="term" placeholder="Start typing...">
-</div>
-<div class="search-layout no-preview" id="search-layout">
-<div class="search-results-panel" id="search-results">
-<span><i>Enter your search text in the box above</i></span>
-</div>
-<div class="search-preview-panel" id="search-preview">
-<div class="preview-placeholder">
-<i data-lucide="file-text"></i>
-<p>Select a result to preview</p>
-</div>
-<div class="preview-content" id="preview-content"></div>
-</div>
-</div>
-<footer class="search-box-footer">
-<div class="navigation-hint">
-<span><code>Enter</code>&nbsp;to select</span>
-</div>
-<div class="navigation-hint">
-<span><code>⇅</code>&nbsp;to navigate</span>
-</div>
-<div class="navigation-hint">
-<span><code>ESC</code>&nbsp;to close</span>
-</div>
-</footer>
-</div>
+        </div>
+        
+        <div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none;" class="fullpage-overlay"></div>
+
+      <div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display: none;">
+      <nav class="filetree-sidebar">
+        
+         
+         <a href="/" style="text-decoration: none; display: flex; justify-content: center;">
+                   <img class="site-logo" src="/logo.svg" alt="janek.ing">
+         </a>
+         
+         
+        
+            <div class="search-button align-icon" onclick="toggleSearch()">
+    <span class="search-icon">
+        <i data-lucide="search"></i>
+    </span>
+    <span class="search-text">Search</span>
+    <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
+</div>
+        
+         <div class="folder" x-data="{isOpen: true}">
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+                <div class="folder inner-folder"  x-data="{isOpen: $persist(false).as(&quot;Arbeit&quot;)}" @click.stop="isOpen=!isOpen">
+                    <div class="foldername-wrapper align-icon">
+                    <i x-show="isOpen" style="display: none;"  data-lucide="chevron-down"></i>
+                    <i x-show="!isOpen"  data-lucide="chevron-right"></i>
+                    <span class="foldername">Arbeit</span>
+                    </div>
+                    
+                        
+    
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/arbeit/agile/">Agile </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                </div>
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+                <div class="folder inner-folder"  x-data="{isOpen: $persist(false).as(&quot;Code&quot;)}" @click.stop="isOpen=!isOpen">
+                    <div class="foldername-wrapper align-icon">
+                    <i x-show="isOpen" style="display: none;"  data-lucide="chevron-down"></i>
+                    <i x-show="!isOpen"  data-lucide="chevron-right"></i>
+                    <span class="foldername">Code</span>
+                    </div>
+                    
+                        
+    
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div class="folder inner-folder"  x-data="{isOpen: $persist(false).as(&quot;Code/Langauges&quot;)}" @click.stop="isOpen=!isOpen">
+                    <div class="foldername-wrapper align-icon">
+                    <i x-show="isOpen" style="display: none;"  data-lucide="chevron-down"></i>
+                    <i x-show="!isOpen"  data-lucide="chevron-right"></i>
+                    <span class="foldername">Langauges</span>
+                    </div>
+                    
+                        
+    
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/langauges/batch/">Batch </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/langauges/c/">C </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/langauges/css/">CSS </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/langauges/go/">Go </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/langauges/java-script/">JavaScript </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/langauges/lua/">Lua </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/langauges/powershell/">Powershell </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/architecture/">Architecture </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/bullshit-detector/">Bullshit detector </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/collision-detection/">Collision Detection </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/error-handling/">Error handling </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/game-programming/">Game Programming </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/code/testing/">Testing </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                </div>
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+                <div class="folder inner-folder"  x-data="{isOpen: $persist(false).as(&quot;Design&quot;)}" @click.stop="isOpen=!isOpen">
+                    <div class="foldername-wrapper align-icon">
+                    <i x-show="isOpen" style="display: none;"  data-lucide="chevron-down"></i>
+                    <i x-show="!isOpen"  data-lucide="chevron-right"></i>
+                    <span class="foldername">Design</span>
+                    </div>
+                    
+                        
+    
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/design/ui-ux/">UI - UX </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/design/video-games/">Video Games </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                </div>
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+                <div class="folder inner-folder"  x-data="{isOpen: $persist(false).as(&quot;Life&quot;)}" @click.stop="isOpen=!isOpen">
+                    <div class="foldername-wrapper align-icon">
+                    <i x-show="isOpen" style="display: none;"  data-lucide="chevron-down"></i>
+                    <i x-show="!isOpen"  data-lucide="chevron-right"></i>
+                    <span class="foldername">Life</span>
+                    </div>
+                    
+                        
+    
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/life/schlaf/">Schlaf </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                </div>
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+                <div class="folder inner-folder"  x-data="{isOpen: $persist(false).as(&quot;Tech&quot;)}" @click.stop="isOpen=!isOpen">
+                    <div class="foldername-wrapper align-icon">
+                    <i x-show="isOpen" style="display: none;"  data-lucide="chevron-down"></i>
+                    <i x-show="!isOpen"  data-lucide="chevron-right"></i>
+                    <span class="foldername">Tech</span>
+                    </div>
+                    
+                        
+    
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink active-note">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/cpu/">CPU </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/database-types/">Database Types </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/festplatten/">Festplatten </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/illustrator/">Illustrator </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/linux/">Linux </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/node-red/">NodeRed </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/obsidian/">Obsidian </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/op-amps/">Op-Amps </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/platinendesign/">Platinendesign </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/tech/windows/">Windows </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                </div>
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+                <div class="folder inner-folder"  x-data="{isOpen: $persist(false).as(&quot;Writing&quot;)}" @click.stop="isOpen=!isOpen">
+                    <div class="foldername-wrapper align-icon">
+                    <i x-show="isOpen" style="display: none;"  data-lucide="chevron-down"></i>
+                    <i x-show="!isOpen"  data-lucide="chevron-right"></i>
+                    <span class="foldername">Writing</span>
+                    </div>
+                    
+                        
+    
+    
+                    
+                        
+    
+        <div x-show="isOpen" style="display:none" class="filelist">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a>
+                </div>
+            
+        </div>
+        
+    
+                    
+                </div>
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+                <div @click.stop class="notelink ">
+                    <a data-note-icon="" style="text-decoration: none;" class="filename" href="/garden/">Digital Garden </a>
+                </div>
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+        </div>
+        
+    
+    
+        <div x-show="isOpen" style="display:none" class="">
+            
+        </div>
+        
+    </div>
+      </nav>
+      </div>
+    </div>
+
+    
+
+    
+      <div class="search-container" id="globalsearch" onclick="toggleSearch()">
+    <div class="search-box" onclick="event.stopPropagation()">
+        <div class="search-header">
+            <input type="search" id="term" placeholder="Start typing...">
+        </div>
+
+        <div class="search-layout no-preview" id="search-layout">
+            
+            <div class="search-results-panel" id="search-results">
+                
+                <span><i>Enter your search text in the box above</i></span>
+            </div>
+
+            
+            <div class="search-preview-panel" id="search-preview">
+                <div class="preview-placeholder">
+                    <i data-lucide="file-text"></i>
+                    <p>Select a result to preview</p>
+                </div>
+                <div class="preview-content" id="preview-content"></div>
+            </div>
+        </div>
+
+        <footer class="search-box-footer">
+            <div class="navigation-hint">
+                <span><code>Enter</code>&nbsp;to select</span>
+            </div>
+
+            <div class="navigation-hint">
+                <span><code>⇅</code>&nbsp;to navigate</span>
+            </div>
+
+            <div class="navigation-hint">
+                <span><code>ESC</code>&nbsp;to close</span>
+            </div>
+        </footer>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
-<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1);const previewCache=new Map;window.toggleSearch=function(){const e=document.getElementById("globalsearch");e.classList.contains("active")?e.classList.remove("active"):(e.classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){const t=e.textContent;t&&(document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <div style="display: flex; justify-content: center; padding: 40px;">\n        <svg width="40" height="40" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">\n            <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="8">\n                    <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n            </g>\n        </svg>\n    </div>';function debounce(e,t,n){var r;return function(){var i=this,a=arguments,s=n&&!r;clearTimeout(r),r=setTimeout(function(){r=null,n||e.apply(i,a)},t),s&&e.apply(i,a)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach(e=>e.innerHTML="<code>⌘</code>&nbsp;+&nbsp;<code>K</code>")}function tokenizeSearchTerms(e){const t=[],n=/"([^"]+)"|(\S+)/g;let r;for(;null!==(r=n.exec(e));){const e=(r[1]||r[2]).toLowerCase();e.length>1&&t.push(e)}return t.sort((e,t)=>t.length-e.length)}function highlightTerms(e,t){if(!t||0===t.length||!e)return e;let n=e;return t.forEach(e=>{const t=e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=new RegExp(`(${t})`,"gi");n=n.replace(r,'<span class="search-highlight">$1</span>')}),n}function getContextualExcerpt(e,t,n=150){if(!e)return"";const r=e.replace(/<[^>]*>/g,"");if(!t||0===t.length)return truncateText(r,n);let i=r.length;if(t.forEach(e=>{const t=r.toLowerCase().indexOf(e.toLowerCase());-1!==t&&t<i&&(i=t)}),i===r.length)return truncateText(r,n);const a=Math.max(0,i-50),s=Math.min(r.length,a+n);let o=r.substring(a,s);return a>0&&(o="..."+o),s<r.length&&(o+="..."),o}function truncateText(e,t){return e?(e=e.replace(/<[^>]*>/g,"")).length<=t?e:e.substring(0,t-3)+"...":""}async function fetchPreviewContent(e){if(previewCache.has(e))return previewCache.get(e);try{const t=await fetch(e),n=await t.text(),r=new DOMParser,i=r.parseFromString(n,"text/html").querySelector(".content, .cm-s-obsidian, article, main"),a=i?i.innerHTML:"";return previewCache.set(e,a),a}catch(e){return console.error("Failed to fetch preview:",e),""}}function highlightTextNodes(e,t){if(!t||0===t.length)return;const n=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,!1),r=[];for(;n.nextNode();)r.push(n.currentNode);r.forEach(e=>{const n=e.textContent;let r=!1;if(t.forEach(e=>{n.toLowerCase().includes(e.toLowerCase())&&(r=!0)}),r){const r=document.createElement("span");r.innerHTML=highlightTerms(n,t),e.parentNode.replaceChild(r,e)}})}async function showPreview(e){const t=window.searchResults;if(!t||!t[e])return;const n=t[e],r=document.getElementById("search-preview"),i=document.getElementById("preview-content"),a=r.querySelector(".preview-placeholder");if(!r||!i)return;document.querySelectorAll(".searchresult").forEach(e=>e.classList.remove("active"));const s=document.querySelector(`.searchresult[data-index="${e}"]`);s&&s.classList.add("active"),i.innerHTML=loadingSvg,i.classList.add("has-content"),a.style.display="none";const o=await fetchPreviewContent(n.url),c=n.tags&&n.tags.length>0?`<div class="preview-tags">${n.tags.map(e=>`<a class="tag" href="javascript:void(0);" onclick="toggleTagSearch(this)">#${e}</a>`).join("")}</div>`:"";i.innerHTML=`\n            <div class="preview-title">${highlightTerms(n.title,window.searchTerms)}</div>\n            ${c}\n            <div class="preview-body">${o}</div>\n        `;const l=i.querySelector(".preview-body");l&&window.searchTerms&&highlightTextNodes(l,window.searchTerms),window.currentPreviewIndex=e}function hidePreview(){const e=document.getElementById("search-preview"),t=document.getElementById("preview-content"),n=e?.querySelector(".preview-placeholder");n&&(n.style.display="flex"),t&&(t.classList.remove("has-content"),t.innerHTML=""),window.currentPreviewIndex=-1}function createIndex(e){const t=e=>(e=>e.toLowerCase().normalize("NFD").replace(/n\u0303/g,"ñ").replace(/[\u0300-\u036f]/g,"").normalize("NFC"))(e).split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})}),n}async function init(){const e=await fetch("/searchIndex.json?v=2026-09-08T18:18:01.505Z").then(e=>e.json()),t=createIndex(e);function n(e){const t=document.querySelectorAll(".searchresult");if(0===t.length)return;let n,r=-1;t.forEach((e,t)=>{e.classList.contains("active")&&(r=t)}),-1===r?n=e>0?0:t.length-1:(n=r+e,n<0&&(n=t.length-1),n>=t.length&&(n=0)),t.forEach(e=>e.classList.remove("active")),t[n].classList.add("active"),t[n].scrollIntoView({behavior:"smooth",block:"nearest"}),showPreview(parseInt(t[n].dataset.index))}window.docs=e,window.index=t,document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")&&("ArrowDown"===e.key&&(e.preventDefault(),n(1)),"ArrowUp"===e.key&&(e.preventDefault(),n(-1)),"Enter"===e.key)){e.preventDefault();const t=document.querySelector(".searchresult.active");if(t){const e=t.dataset.url;e&&(window.location.href=e)}}});const r=debounce(search,200,!1);window.field=document.querySelector("#term"),field.addEventListener("keydown",e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&"Enter"!==e.key&&r()}),window.resultsDiv=document.querySelector("#search-results");const i=new URL(location.href).searchParams;i.get("q")&&(field.setAttribute("value",i.get("q")),toggleSearch(),search())}async function search(){const e=field.value.trim(),t=document.getElementById("search-layout");if(!e)return resultsDiv.innerHTML="<span><i>Enter your search text in the box above</i></span>",hidePreview(),void(t&&t.classList.add("no-preview"));window.lastSearch=e,window.searchTerms=tokenizeSearchTerms(e),resultsDiv.innerHTML=loadingSvg,hidePreview();const n=offlineSearch(e);if(window.searchResults=n,!n.length)return t&&t.classList.add("no-preview"),void(resultsDiv.innerHTML=`\n                <div class="no-results">\n                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n                        <circle cx="11" cy="11" r="8"></circle>\n                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>\n                        <line x1="8" y1="11" x2="14" y2="11"></line>\n                    </svg>\n                    <p>No results for "${e}"</p>\n                </div>\n            `);t&&t.classList.remove("no-preview");let r="";n.forEach((e,t)=>{const n=highlightTerms(getContextualExcerpt(e.content,window.searchTerms,120),window.searchTerms),i=highlightTerms(e.title,window.searchTerms),a=e.tags&&e.tags.length>0?`<div class="result-tags">${e.tags.map(e=>`<span class="tag">#${e}</span>`).join("")}</div>`:"";r+=`\n                <div class="searchresult${0===t?" active":""}"\n                     data-index="${t}"\n                     data-url="${e.url}"\n                     onmouseenter="showPreview(${t})"\n                     onclick="window.location.href='${e.url}'">\n                    <span class="result-title">${i}</span>\n                    ${a}\n                    <div class="result-excerpt">${n}</div>\n                </div>\n            `}),resultsDiv.innerHTML=r,n.length>0&&showPreview(0),"undefined"!=typeof lucide&&lucide.createIcons()}function offlineSearch(e){const t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",limit:10}]),r=e=>{const t=n.filter(t=>t.field===e);return 0===t.length?[]:[...t[0].result]};return[...new Set([...r("title"),...r("content"),...r("tags")])].map(e=>{const n={...t[e]};return n.tags=n.tags.filter(e=>"gardenEntry"!==e&&"note"!==e),n})}window.lastSearch="",window.searchResults=[],window.searchTerms=[],window.currentPreviewIndex=-1,window.search=search</script>
-<main class="content cm-s-obsidian print">
-<header>
-<h1 data-note-icon="">CPU</h1>
-<div class="header-meta">
-<div class="header-tags">
-<a class="tag" onclick="toggleTagSearch(this)">
-#knowledge-base
-</a>
-<a class="tag" onclick="toggleTagSearch(this)">
-#german
-</a>
-</div>
-<div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2025-11-19T16:55:16.658+01:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-01-28T13:15:27.494+01:00"></span></div></div></div>
-</header>
-<h2 id="cache" tabindex="-1">Cache</h2>
-<style>.container{font-family:sans-serif;text-align:center}.button-wrapper button{z-index:1;height:40px;width:100px;margin:10px;padding:5px}.excalidraw .App-menu_top .buttonList{display:flex}.excalidraw-wrapper{height:800px;margin:50px;position:relative}:root[dir=ltr] .excalidraw .layer-ui__wrapper .zen-mode-transition.App-menu_bottom--transition-left{transform:none}</style><script src="https://cdn.jsdelivr.net/npm/react@17/umd/react.production.min.js"></script><script src="https://cdn.jsdelivr.net/npm/react-dom@17/umd/react-dom.production.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@excalidraw/excalidraw@0/dist/excalidraw.production.min.js"></script><div id="CPU_2025-06-16_1436.43.excalidraw.md1"></div><script>!function(){const e={type:"excalidraw",version:2,source:"https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.10.1",elements:[{id:"gyedlUdVOe1lWZESllevz",type:"rectangle",x:-143.25,y:-442.4375,width:217,height:78.99999999999999,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a0",roundness:null,seed:611096473,version:78,versionNonce:1953808889,isDeleted:!1,boundElements:[{type:"text",id:"dOspa53y"}],updated:1750077562181,link:null,locked:!1},{id:"dOspa53y",type:"text",x:-81.6899642944336,y:-415.4375,width:93.87992858886719,height:25,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a0V",roundness:null,seed:156604217,version:55,versionNonce:1462393655,isDeleted:!1,boundElements:[],updated:1750077562182,link:null,locked:!1,text:"CPU Core",rawText:"CPU Core",fontSize:20,fontFamily:1,textAlign:"center",verticalAlign:"middle",containerId:"gyedlUdVOe1lWZESllevz",originalText:"CPU Core",autoResize:!0,lineHeight:1.25},{id:"S8utcE7MmnPfNn26Nl0Si",type:"rectangle",x:-143.25,y:-345.4375,width:101,height:90,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a2",roundness:null,seed:1138830039,version:59,versionNonce:2147282809,isDeleted:!1,boundElements:[{type:"text",id:"AzBfpRdT"},{id:"dYwhU30RHy5B9_sKL3Ayv",type:"arrow"},{id:"ARea4BZIirmaonP-X_aMK",type:"arrow"}],updated:1750077617047,link:null,locked:!1},{id:"AzBfpRdT",type:"text",x:-125.1419906616211,y:-320.4375,width:64.78398132324219,height:40,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a3",roundness:null,seed:15028025,version:60,versionNonce:1854474297,isDeleted:!1,boundElements:[],updated:1750077599328,link:null,locked:!1,text:"L1 Data\nCache",rawText:"L1 Data Cache",fontSize:16,fontFamily:1,textAlign:"center",verticalAlign:"middle",containerId:"S8utcE7MmnPfNn26Nl0Si",originalText:"L1 Data Cache",autoResize:!0,lineHeight:1.25},{id:"LYD78UzUbNLhMDmeb95Rt",type:"rectangle",x:-25.75,y:-344.4375,width:101,height:90,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a4",roundness:null,seed:688204601,version:69,versionNonce:1832294615,isDeleted:!1,boundElements:[{type:"text",id:"raExnH1H"},{id:"JJNRNK3UJgMyrpl2tkI3P",type:"arrow"},{id:"oNcnPcyIqsJQrExZY0I6b",type:"arrow"}],updated:1750077627035,link:null,locked:!1},{id:"raExnH1H",type:"text",x:-18.64997100830078,y:-329.4375,width:86.79994201660156,height:60,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a5",roundness:null,seed:831347737,version:81,versionNonce:195189561,isDeleted:!1,boundElements:[],updated:1750077601857,link:null,locked:!1,text:"L1\nInstruction\nCache",rawText:"L1 Instruction Cache",fontSize:16,fontFamily:1,textAlign:"center",verticalAlign:"middle",containerId:"LYD78UzUbNLhMDmeb95Rt",originalText:"L1 Instruction Cache",autoResize:!0,lineHeight:1.25},{id:"CNMSkJAJBPWmMGNK1Yanm",type:"rectangle",x:-142.25,y:-229.4375,width:217,height:93,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a6",roundness:null,seed:2096011415,version:37,versionNonce:664313175,isDeleted:!1,boundElements:[{type:"text",id:"QCezkKEN"},{id:"E58u8BQRQa45VZwZ2cRFp",type:"arrow"},{id:"dYwhU30RHy5B9_sKL3Ayv",type:"arrow"},{id:"JJNRNK3UJgMyrpl2tkI3P",type:"arrow"}],updated:1750077592024,link:null,locked:!1},{id:"QCezkKEN",type:"text",x:-80.39997100830078,y:-195.4375,width:93.29994201660156,height:25,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a6V",roundness:null,seed:1491153113,version:15,versionNonce:1065838839,isDeleted:!1,boundElements:[],updated:1750077502249,link:null,locked:!1,text:"L2 Cache",rawText:"L2 Cache",fontSize:20,fontFamily:1,textAlign:"center",verticalAlign:"middle",containerId:"CNMSkJAJBPWmMGNK1Yanm",originalText:"L2 Cache",autoResize:!0,lineHeight:1.25},{id:"20VWaX8jbJAQoiouonA4_",type:"rectangle",x:-142.75,y:-106.9375,width:341,height:93,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a8",roundness:null,seed:905737431,version:80,versionNonce:351346231,isDeleted:!1,boundElements:[{type:"text",id:"6Zo9cVhF"},{id:"ioFtoWpYHoaxTMxAsnHhO",type:"arrow"},{id:"E58u8BQRQa45VZwZ2cRFp",type:"arrow"},{id:"4n95tARKb3p2sGvEk2tOU",type:"arrow"}],updated:1750077724173,link:null,locked:!1},{id:"6Zo9cVhF",type:"text",x:-18.58997344970703,y:-72.9375,width:92.67994689941406,height:25,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"a9",roundness:null,seed:1248182775,version:67,versionNonce:208744375,isDeleted:!1,boundElements:[],updated:1750077520963,link:null,locked:!1,text:"L3 Cache",rawText:"L3 Cache",fontSize:20,fontFamily:1,textAlign:"center",verticalAlign:"middle",containerId:"20VWaX8jbJAQoiouonA4_",originalText:"L3 Cache",autoResize:!0,lineHeight:1.25},{id:"-x_mZYHq3TxKctIOQluBv",type:"rectangle",x:-142.75,y:13.0625,width:341,height:93,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aA",roundness:null,seed:1018238743,version:102,versionNonce:983526103,isDeleted:!1,boundElements:[{type:"text",id:"FtC5JPDC"},{id:"B1gv1CCrE_u-i0wtkxpD0",type:"arrow"},{id:"ioFtoWpYHoaxTMxAsnHhO",type:"arrow"}],updated:1750077572113,link:null,locked:!1},{id:"FtC5JPDC",type:"text",x:-32.429954528808594,y:47.0625,width:120.35990905761719,height:25,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aB",roundness:null,seed:1321999415,version:102,versionNonce:501271351,isDeleted:!1,boundElements:[],updated:1750077528704,link:null,locked:!1,text:"Main Memory",rawText:"Main Memory",fontSize:20,fontFamily:1,textAlign:"center",verticalAlign:"middle",containerId:"-x_mZYHq3TxKctIOQluBv",originalText:"Main Memory",autoResize:!0,lineHeight:1.25},{id:"fRTk-vM9EkPsV9ObAsQd4",type:"rectangle",x:-141.75,y:135.0625,width:341,height:93,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aC",roundness:null,seed:1479303831,version:135,versionNonce:947631225,isDeleted:!1,boundElements:[{type:"text",id:"2Fx6vIXo"},{id:"B1gv1CCrE_u-i0wtkxpD0",type:"arrow"}],updated:1750077566076,link:null,locked:!1},{id:"2Fx6vIXo",type:"text",x:-31.129966735839844,y:169.0625,width:119.75993347167969,height:25,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aD",roundness:null,seed:64092087,version:147,versionNonce:1421674071,isDeleted:!1,boundElements:[],updated:1750077536854,link:null,locked:!1,text:"HDD / Swap",rawText:"HDD / Swap",fontSize:20,fontFamily:1,textAlign:"center",verticalAlign:"middle",containerId:"fRTk-vM9EkPsV9ObAsQd4",originalText:"HDD / Swap",autoResize:!0,lineHeight:1.25},{id:"B1gv1CCrE_u-i0wtkxpD0",type:"arrow",x:25.75,y:132.56249999999997,width:3552713678800501e-30,height:24.999999999999957,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aH",roundness:{type:2},seed:324548983,version:18,versionNonce:1278744473,isDeleted:!1,boundElements:[],updated:1750077718385,link:null,locked:!1,points:[[0,0],[-3552713678800501e-30,-24.999999999999957]],lastCommittedPoint:null,startBinding:{elementId:"fRTk-vM9EkPsV9ObAsQd4",focus:-.017595307917888554,gap:2.5},endBinding:{elementId:"-x_mZYHq3TxKctIOQluBv",focus:.011730205278592377,gap:1.5},startArrowhead:null,endArrowhead:"arrow",elbowed:!1},{id:"ioFtoWpYHoaxTMxAsnHhO",type:"arrow",x:27.75,y:10.5625,width:0,height:22,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aI",roundness:{type:2},seed:1987157751,version:15,versionNonce:893474489,isDeleted:!1,boundElements:[],updated:1750077718384,link:null,locked:!1,points:[[0,0],[0,-22]],lastCommittedPoint:null,startBinding:{elementId:"-x_mZYHq3TxKctIOQluBv",focus:0,gap:2.5},endBinding:{elementId:"20VWaX8jbJAQoiouonA4_",focus:0,gap:2.5},startArrowhead:null,endArrowhead:"arrow",elbowed:!1},{id:"E58u8BQRQa45VZwZ2cRFp",type:"arrow",x:-36.25,y:-109.4375,width:2,height:23,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aJ",roundness:{type:2},seed:1160133817,version:20,versionNonce:1236566265,isDeleted:!1,boundElements:[],updated:1750077718383,link:null,locked:!1,points:[[0,0],[2,-23]],lastCommittedPoint:null,startBinding:{elementId:"20VWaX8jbJAQoiouonA4_",focus:-.39108232656619757,gap:2.5},endBinding:{elementId:"CNMSkJAJBPWmMGNK1Yanm",focus:-.034576009271779076,gap:4},startArrowhead:null,endArrowhead:"arrow",elbowed:!1},{id:"dYwhU30RHy5B9_sKL3Ayv",type:"arrow",x:-94.01581074068753,y:-233.43750000000003,width:.8594786715067215,height:20,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aK",roundness:{type:2},seed:1234092057,version:85,versionNonce:1512992345,isDeleted:!1,boundElements:[],updated:1750077718382,link:null,locked:!1,points:[[0,0],[.8594786715067215,-20]],lastCommittedPoint:null,startBinding:{elementId:"CNMSkJAJBPWmMGNK1Yanm",focus:-.5650403781494566,gap:4.000000000000028},endBinding:{elementId:"S8utcE7MmnPfNn26Nl0Si",focus:-.03077102894901965,gap:1.9999999999999716},startArrowhead:null,endArrowhead:"arrow",elbowed:!1},{id:"JJNRNK3UJgMyrpl2tkI3P",type:"arrow",x:29.76850917872352,y:-230.4375,width:1.5168620569681863,height:19,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aL",roundness:{type:2},seed:1878069177,version:31,versionNonce:1860254521,isDeleted:!1,boundElements:[],updated:1750077718383,link:null,locked:!1,points:[[0,0],[-1.5168620569681863,-19]],lastCommittedPoint:null,startBinding:{elementId:"CNMSkJAJBPWmMGNK1Yanm",focus:.60092717790226,gap:1},endBinding:{elementId:"LYD78UzUbNLhMDmeb95Rt",focus:.008789452656811287,gap:5},startArrowhead:null,endArrowhead:"arrow",elbowed:!1},{id:"ARea4BZIirmaonP-X_aMK",type:"arrow",x:-96.24999999999991,y:-346.4375,width:14.999999999999915,height:14,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aM",roundness:{type:2},seed:1061032825,version:63,versionNonce:1431249625,isDeleted:!1,boundElements:[],updated:1750077718380,link:null,locked:!1,points:[[0,0],[14.999999999999915,-14]],lastCommittedPoint:null,startBinding:{elementId:"S8utcE7MmnPfNn26Nl0Si",focus:-.5347322720694645,gap:1},endBinding:null,startArrowhead:null,endArrowhead:"arrow",elbowed:!1},{id:"oNcnPcyIqsJQrExZY0I6b",type:"arrow",x:23.749999999999982,y:-345.4375,width:7.999999999999982,height:17,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aN",roundness:{type:2},seed:189441751,version:31,versionNonce:1111818393,isDeleted:!1,boundElements:[],updated:1750077718381,link:null,locked:!1,points:[[0,0],[-7.999999999999982,-17]],lastCommittedPoint:null,startBinding:{elementId:"LYD78UzUbNLhMDmeb95Rt",focus:.28805908904390654,gap:1},endBinding:null,startArrowhead:null,endArrowhead:"arrow",elbowed:!1},{id:"pLxvck75",type:"text",x:80.75,y:-297.4375,width:128.55990600585938,height:20,angle:4.71238898038469,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aO",roundness:null,seed:476679959,version:79,versionNonce:1188531767,isDeleted:!1,boundElements:[],updated:1750077655204,link:null,locked:!1,text:"... for each core",rawText:"... for each core",fontSize:16,fontFamily:1,textAlign:"left",verticalAlign:"top",containerId:null,originalText:"... for each core",autoResize:!0,lineHeight:1.25},{id:"kLzeJ3CNIuaqWWI-R6GrB",type:"freedraw",x:149.75,y:-360.4375,width:27,height:86,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:.5,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aR",roundness:null,seed:1880993047,version:45,versionNonce:1280723737,isDeleted:!1,boundElements:[],updated:1750077672046,link:null,locked:!1,points:[[0,0],[0,-1],[0,-6],[0,-16],[0,-21],[0,-29],[0,-37],[0,-44],[0,-46],[0,-51],[0,-52],[0,-54],[0,-56],[0,-58],[0,-60],[0,-66],[0,-68],[0,-71],[0,-74],[0,-75],[-1,-76],[-1,-78],[-2,-79],[-3,-80],[-5,-82],[-6,-83],[-6,-84],[-8,-85],[-10,-85],[-12,-85],[-13,-86],[-15,-86],[-16,-86],[-17,-86],[-18,-86],[-19,-86],[-20,-86],[-21,-86],[-22,-86],[-23,-86],[-24,-86],[-26,-85],[-27,-85],[-27,-85]],pressures:[],simulatePressure:!0,lastCommittedPoint:null},{id:"jf9pankU4FhTW64RaQ9B3",type:"freedraw",x:144.75,y:-215.4375,width:25,height:82,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:.5,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aT",roundness:null,seed:564681207,version:43,versionNonce:1741559641,isDeleted:!1,boundElements:[],updated:1750077679389,link:null,locked:!1,points:[[0,0],[0,1],[0,5],[0,7],[-1,10],[-1,19],[-1,22],[-1,25],[-1,26],[-1,29],[-1,31],[-1,37],[-1,39],[-1,40],[-1,45],[-1,48],[-1,50],[-1,56],[-1,59],[-1,62],[-1,66],[-2,68],[-2,71],[-2,72],[-3,73],[-3,75],[-4,76],[-5,78],[-7,79],[-8,80],[-9,81],[-10,81],[-12,82],[-13,82],[-14,82],[-17,82],[-20,82],[-21,81],[-23,81],[-24,80],[-25,80],[-25,80]],pressures:[],simulatePressure:!0,lastCommittedPoint:null},{id:"4n95tARKb3p2sGvEk2tOU",type:"arrow",x:132.21893383625167,y:-108.34266428472557,width:0,height:23.790573742127492,angle:0,strokeColor:"#1e1e1e",backgroundColor:"transparent",fillStyle:"solid",strokeWidth:2,strokeStyle:"solid",roughness:0,opacity:100,groupIds:[],frameId:null,index:"aU",roundness:{type:2},seed:1550040185,version:29,versionNonce:1286578233,isDeleted:!1,boundElements:null,updated:1750077730581,link:null,locked:!1,points:[[0,0],[0,-23.790573742127492]],lastCommittedPoint:null,startBinding:{elementId:"20VWaX8jbJAQoiouonA4_",focus:.6127210195674583,gap:1.405164284725572},endBinding:null,startArrowhead:null,endArrowhead:"arrow",elbowed:!1}],appState:{theme:"dark",viewBackgroundColor:"#ffffff",currentItemStrokeColor:"#1e1e1e",currentItemBackgroundColor:"transparent",currentItemFillStyle:"solid",currentItemStrokeWidth:2,currentItemStrokeStyle:"solid",currentItemRoughness:0,currentItemOpacity:100,currentItemFontFamily:1,currentItemFontSize:16,currentItemTextAlign:"left",currentItemStartArrowhead:null,currentItemEndArrowhead:"arrow",currentItemArrowType:"round",scrollX:224.36932486677279,scrollY:464.1874675583085,zoom:{value:1},currentItemRoundness:"sharp",gridSize:20,gridStep:5,gridModeEnabled:!1,gridColor:{Bold:"rgba(217, 217, 217, 0.5)",Regular:"rgba(230, 230, 230, 0.5)"},currentStrokeOptions:null,frameRendering:{enabled:!0,clip:!0,name:!0,outline:!0},objectsSnapModeEnabled:!1,activeTool:{type:"selection",customType:null,locked:!1,fromSelection:!1,lastActiveTool:null}},files:{},scrollToContent:!0};App=()=>{const t=React.useRef(null),n=React.useRef(null),[o,l]=React.useState({width:void 0,height:void 0});return React.useEffect(()=>{l({width:n.current.getBoundingClientRect().width,height:n.current.getBoundingClientRect().height});const e=()=>{l({width:n.current.getBoundingClientRect().width,height:n.current.getBoundingClientRect().height})};return window.addEventListener("resize",e),()=>window.removeEventListener("resize",e)},[n]),React.createElement(React.Fragment,null,React.createElement("div",{className:"excalidraw-wrapper",ref:n},React.createElement(ExcalidrawLib.Excalidraw,{ref:t,width:o.width,height:o.height,initialData:e,viewModeEnabled:!0,zenModeEnabled:!0,gridModeEnabled:!1})))},excalidrawWrapper=document.getElementById("CPU_2025-06-16_1436.43.excalidraw.md1"),ReactDOM.render(React.createElement(App),excalidrawWrapper)}()</script>
-<ul>
-<li>Register &lt;-&gt; L1-Cache &lt;-&gt; L2(L3/L4)-Cache &lt;-&gt; Main memory (RAM)&lt;-&gt;HDD (Swap)
-<ul>
-<li>L1-Cache oftmals unterteilt in &quot;data&quot; und &quot;instruction cache&quot;</li>
-<li>L1 oftmals pro Core</li>
-<li>L1: Größe bei aktuellen Prozessoren &lt;100kB (pro Kern)
-<ul>
-<li><a href="https://www.techpowerup.com/cpu-specs/ryzen-7-5700x.c2755" target="_blank" class="external-link">5700X</a>: 32KB (instruction) + 32KB (data)</li>
-<li><a href="https://www.techpowerup.com/review/amd-ryzen-9-9950x3d/2.html" target="_blank" class="external-link">9950X3D</a>: 32KB (instruction) + 48KB (data)</li>
-<li><a href="https://theapplewiki.com/wiki/M5" target="_blank" class="external-link">Apple M5</a>: P-Core: 192 KB (instruction) + 128 KB (data), E-Core: 128 + 64 KB</li>
-</ul>
-</li>
-<li>L2-Cache wird unter Windows &quot;unified cache&quot; genannt</li>
-<li>L2 oftmals pro Core, manchmal geteilt mit mehreren Cores oder gesamter CPU
-<ul>
-<li>bei x64: pro Core, Apple Silicon (mindestens bis M5): für gesamten Chip</li>
-</ul>
-</li>
-<li>L2: Größe bei aktuellen Prozessoren &lt; 1MB (pro Kern)
-<ul>
-<li>5700X: 512KB</li>
-<li>9950X3D: 1MB</li>
-<li>Apple M5: P-Cores: 16 MB (geteilt), E-Cores: 6 MB (geteilt)</li>
-</ul>
-</li>
-<li>L3/L4 cache meist für gesamte CPU, Größe &lt; 100MB
-<ul>
-<li>5700X: 32MB</li>
-<li>9950X3D: 128MB</li>
-<li>Apple M5: nicht vorhanden</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache (bei modernen x64 CPUs)
-<ul>
-<li>ESP32: 32 Bytes</li>
-<li>ARM Cortex M0..4: kein Cache</li>
-<li>ARM Cortex M7+: 32 Bytes</li>
-</ul>
-</li>
-<li>Cache Miss: Programm fordert Daten an, welche nicht im L1+L2-Cache sind und daher aus dem RAM geladen werden müssen</li>
-<li>Viele Operationen sind schneller, als das Laden aus dem RAM -&gt; Performance wird von Nutzung des Caches dominiert
-<ul>
-<li><a href="https://igoro.com/archive/gallery-of-processor-cache-effects/" target="_blank" class="external-link">Gallery of Processor Cache Effects (igoro.com)</a>
-<ul>
-<li>Graphen welche den Effekt von CPU Cache, Cache Lines, Cache Aufbau, etc. verdeutlichen</li>
-</ul>
-</li>
-<li><a href="https://www.7-cpu.com/cpu/Zen.html" target="_blank" class="external-link">Zen 1 timings</a>
-<ul>
-<li>L1 Cache: 4-5 cycles (1ns)</li>
-<li>L2 Cache: 17 cycles (4-5ns)</li>
-<li>L3 Cache: ~40 cycles (10ns)</li>
-<li>RAM: 40 cycles + 90ns (100ns)</li>
-<li>1 Cycle ~ 0.25ns (@4GHz)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>(L1) Cache Aufbau
-<ul>
-<li><a href="https://youtu.be/rLWeHpzAYhg?feature=shared&amp;t=1855" target="_blank" class="external-link">https://youtu.be/rLWeHpzAYhg?feature=shared&amp;t=1855</a></li>
-<li>Cache funktioniert grundsätzlich wie hash table, wobei als key ein Teil der Speicheradresse genutzt wird</li>
-<li>Cache Line ist 64 Bytes</li>
-<li>Pointer-Adresse sind 64bit, von denen meist 48bit für Speicheradresse genutzt werden</li>
-<li>Speicheradressen sind virtuell und müssen übersetzt werden. Virtuell, damit bspw swap funktioniert.</li>
-<li>Übersetzung läuft über anderen cache den Translation Lookaside Buffer. Dieser Cache mappt bei x64 12bit große &quot;pages&quot; (4096 Bytes) zwischen physischem und virtuellem Speicher.</li>
-<li>6 LSB eines pointers sind offset in cache line</li>
-<li>12 LSB sind offset in page</li>
-<li>wir wollen nicht auf Übersetzung der Adresse warten. Daher läuft beides parallel. Cache access ist sehr schnell (&lt;5 cycles)</li>
-<li>zur Adressierung in Cache muss also Teil des pointers genutzt werden, welcher von Übersetzung nicht verändert wird = 12 LSB.</li>
-<li>unteren 6 bits davon helfen nicht, da sie nur offset in cache line sind und nicht zur Unterscheidung von cache lines helfen können.</li>
-<li>Bleiben 6 bits übrig, was maximal 64 sets im Cache ergibt</li>
-<li>Daten im cache sind entweder mit virtueller oder physischer Adresse getaggt.</li>
-<li>nach Zugriff und paralleler Übersetzung wird überprüft, ob daten zu gewünschter Adresse gehören, da viele Speicherbereiche dieselben 12 LSB haben könnten</li>
-<li>Somit sind alle Adressen mit einem ähnlichen Bit-Aufbau immer im selben Set zu finden.</li>
-</ul>
-</li>
-<li>Typischer Aufbau: N-way Associative Cache
-<ul>
-<li>es werden N cache lines pro cache set gespeichert, gleichzeitig abgerufen und dann verglichen (mit getaggter Adresse), ob richtige Daten dabei sind</li>
-<li>größere Anzahl cache lines pro set bedeutet, dass mehr unterschiedliche Speicherbereiche mit gleicher bit Struktur im Cache Platz finden und Kollisionen verringert werden</li>
-<li>Beispiel Zen 4: 8-way Set, 64 sets, je line 64 Bytes also 8*64*64 Bytes = 32KByte (Architektur Limit)</li>
-<li>Zen 5: 12-way = 48KByte</li>
-<li>Beispiel Apple M1/M2: 12-way Set, jedes Set hat also 12 Plätze je 128 Bytes (eine L2-Cache Line) = 1,5KB pro Set = ~10.900 Sets bei 16MB Cache</li>
-<li>Apple M-chips haben größere pages (64K)</li>
-</ul>
-</li>
-</ul>
-<div class="callout" data-callout="tip"><div class="callout-title"><div class="callout-title-inner"> Block sizes in code<br></div></div>
+<script>
+    document.addEventListener('DOMContentLoaded', init, false);
+    document.addEventListener('DOMContentLoaded', setCorrectShortcut, false);
+
+    // Preview content cache
+    const previewCache = new Map();
+
+    window.toggleSearch = function () {
+        const searchContainer = document.getElementById('globalsearch');
+        if (searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+        } else {
+            searchContainer.classList.add('active');
+            document.getElementById('term').focus();
+        }
+    }
+
+    window.toggleTagSearch = function (evt) {
+        const term = evt.textContent;
+        if (term) {
+            document.getElementById('term').value = term.trim();
+            window.toggleSearch();
+            window.search();
+        }
+    }
+
+    const loadingSvg = `
+    <div style="display: flex; justify-content: center; padding: 40px;">
+        <svg width="40" height="40" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+            <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">
+                <circle cx="22" cy="22" r="6" stroke-opacity="0">
+                    <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />
+                    <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />
+                    <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />
+                </circle>
+                <circle cx="22" cy="22" r="6" stroke-opacity="0">
+                    <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />
+                    <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />
+                    <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />
+                </circle>
+                <circle cx="22" cy="22" r="8">
+                    <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite" />
+                </circle>
+            </g>
+        </svg>
+    </div>`;
+
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this, args = arguments;
+            var later = function () {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    }
+
+    function setCorrectShortcut() {
+        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+            document.querySelectorAll(".search-keys").forEach(x => x.innerHTML = "<code>⌘</code>&nbsp;+&nbsp;<code>K</code>");
+        }
+    }
+
+    // ===== Highlighting Utilities =====
+
+    function tokenizeSearchTerms(query) {
+        const terms = [];
+        const regex = /"([^"]+)"|(\S+)/g;
+        let match;
+        while ((match = regex.exec(query)) !== null) {
+            const term = (match[1] || match[2]).toLowerCase();
+            if (term.length > 1) {
+                terms.push(term);
+            }
+        }
+        return terms.sort((a, b) => b.length - a.length);
+    }
+
+    function highlightTerms(text, terms) {
+        if (!terms || terms.length === 0 || !text) return text;
+        let result = text;
+        terms.forEach(term => {
+            const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escaped})`, 'gi');
+            result = result.replace(regex, '<span class="search-highlight">$1</span>');
+        });
+        return result;
+    }
+
+    function getContextualExcerpt(content, terms, maxLength = 150) {
+        if (!content) return '';
+        const plainText = content.replace(/<[^>]*>/g, '');
+
+        if (!terms || terms.length === 0) {
+            return truncateText(plainText, maxLength);
+        }
+
+        let firstMatchIndex = plainText.length;
+        terms.forEach(term => {
+            const index = plainText.toLowerCase().indexOf(term.toLowerCase());
+            if (index !== -1 && index < firstMatchIndex) {
+                firstMatchIndex = index;
+            }
+        });
+
+        if (firstMatchIndex === plainText.length) {
+            return truncateText(plainText, maxLength);
+        }
+
+        const contextBefore = 50;
+        const start = Math.max(0, firstMatchIndex - contextBefore);
+        const end = Math.min(plainText.length, start + maxLength);
+
+        let excerpt = plainText.substring(start, end);
+        if (start > 0) excerpt = '...' + excerpt;
+        if (end < plainText.length) excerpt = excerpt + '...';
+
+        return excerpt;
+    }
+
+    function truncateText(str, size) {
+        if (!str) return '';
+        str = str.replace(/<[^>]*>/g, '');
+        if (str.length <= size) return str;
+        return str.substring(0, size - 3) + '...';
+    }
+
+    // ===== Preview Functions =====
+
+    async function fetchPreviewContent(url) {
+        if (previewCache.has(url)) {
+            return previewCache.get(url);
+        }
+
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            const content = doc.querySelector('.content, .cm-s-obsidian, article, main');
+            const htmlContent = content ? content.innerHTML : '';
+            previewCache.set(url, htmlContent);
+            return htmlContent;
+        } catch (error) {
+            console.error('Failed to fetch preview:', error);
+            return '';
+        }
+    }
+
+    function highlightTextNodes(element, terms) {
+        if (!terms || terms.length === 0) return;
+
+        const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+        const textNodes = [];
+
+        while (walker.nextNode()) {
+            textNodes.push(walker.currentNode);
+        }
+
+        textNodes.forEach(node => {
+            const text = node.textContent;
+            let hasMatch = false;
+
+            terms.forEach(term => {
+                if (text.toLowerCase().includes(term.toLowerCase())) {
+                    hasMatch = true;
+                }
+            });
+
+            if (hasMatch) {
+                const span = document.createElement('span');
+                span.innerHTML = highlightTerms(text, terms);
+                node.parentNode.replaceChild(span, node);
+            }
+        });
+    }
+
+    async function showPreview(index) {
+        const results = window.searchResults;
+        if (!results || !results[index]) return;
+
+        const result = results[index];
+        const previewPanel = document.getElementById('search-preview');
+        const previewContent = document.getElementById('preview-content');
+        const placeholder = previewPanel.querySelector('.preview-placeholder');
+
+        if (!previewPanel || !previewContent) return;
+
+        // Update active state on results
+        document.querySelectorAll('.searchresult').forEach(el => el.classList.remove('active'));
+        const activeResult = document.querySelector(`.searchresult[data-index="${index}"]`);
+        if (activeResult) {
+            activeResult.classList.add('active');
+        }
+
+        // Show loading state in preview
+        previewContent.innerHTML = loadingSvg;
+        previewContent.classList.add('has-content');
+        placeholder.style.display = 'none';
+
+        // Fetch the content
+        const htmlContent = await fetchPreviewContent(result.url);
+
+        const tagsHTML = result.tags && result.tags.length > 0
+            ? `<div class="preview-tags">${result.tags.map(tag =>
+                `<a class="tag" href="javascript:void(0);" onclick="toggleTagSearch(this)">#${tag}</a>`).join('')}</div>`
+            : '';
+
+        previewContent.innerHTML = `
+            <div class="preview-title">${highlightTerms(result.title, window.searchTerms)}</div>
+            ${tagsHTML}
+            <div class="preview-body">${htmlContent}</div>
+        `;
+
+        // Highlight search terms in the preview body
+        const previewBody = previewContent.querySelector('.preview-body');
+        if (previewBody && window.searchTerms) {
+            highlightTextNodes(previewBody, window.searchTerms);
+        }
+
+        window.currentPreviewIndex = index;
+    }
+
+    function hidePreview() {
+        const previewPanel = document.getElementById('search-preview');
+        const previewContent = document.getElementById('preview-content');
+        const placeholder = previewPanel?.querySelector('.preview-placeholder');
+
+        if (placeholder) placeholder.style.display = 'flex';
+        if (previewContent) {
+            previewContent.classList.remove('has-content');
+            previewContent.innerHTML = '';
+        }
+        window.currentPreviewIndex = -1;
+    }
+
+    // ===== FlexSearch Index =====
+
+    function createIndex(posts) {
+        const normalizeForSearch = (str) => str
+            .toLowerCase()
+            // á -> a +  ́
+            .normalize("NFD")
+            // n~ -> ñ
+            .replace(/n\u0303/g, "ñ")
+            // áéíóúü -> aeiouu
+            .replace(/[\u0300-\u036f]/g, "")
+            // Recompose Unicode
+            .normalize("NFC");
+
+        const encoder = (str) => normalizeForSearch(str)
+            .split(/([^a-z]|[^\x00-\x7F])/);
+        const contentIndex = new FlexSearch.Document({
+            cache: true,
+            charset: "latin:extra",
+            optimize: true,
+            index: [
+                { field: "content", tokenize: "reverse", encode: encoder },
+                { field: "title", tokenize: "forward", encode: encoder },
+                { field: "tags", tokenize: "forward", encode: encoder }
+            ]
+        });
+        posts.forEach((p, idx) => {
+            contentIndex.add({ id: idx, title: p.title, content: p.content, tags: p.tags });
+        });
+        return contentIndex;
+    }
+
+    // ===== Initialization =====
+
+    async function init() {
+        // Fetch search index (browser caches based on query param)
+        const docs = await fetch('/searchIndex.json?v=2026-09-08T18:22:34.850Z').then(r => r.json());
+        const index = createIndex(docs);
+        window.docs = docs;
+        window.index = index;
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                toggleSearch();
+            }
+            if (e.key === 'Escape') {
+                document.getElementById('globalsearch').classList.remove('active');
+            }
+
+            // Navigate search results with arrow keys
+            if (document.getElementById('globalsearch').classList.contains('active')) {
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    navigateResults(1);
+                }
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    navigateResults(-1);
+                }
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const active = document.querySelector('.searchresult.active');
+                    if (active) {
+                        const url = active.dataset.url;
+                        if (url) window.location.href = url;
+                    }
+                }
+            }
+        });
+
+        function navigateResults(direction) {
+            const results = document.querySelectorAll('.searchresult');
+            if (results.length === 0) return;
+
+            let currentIndex = -1;
+            results.forEach((el, i) => {
+                if (el.classList.contains('active')) {
+                    currentIndex = i;
+                }
+            });
+
+            let newIndex;
+            if (currentIndex === -1) {
+                newIndex = direction > 0 ? 0 : results.length - 1;
+            } else {
+                newIndex = currentIndex + direction;
+                if (newIndex < 0) newIndex = results.length - 1;
+                if (newIndex >= results.length) newIndex = 0;
+            }
+
+            results.forEach(el => el.classList.remove('active'));
+            results[newIndex].classList.add('active');
+            results[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Sync preview with selection
+            showPreview(parseInt(results[newIndex].dataset.index));
+        }
+
+        const debouncedSearch = debounce(search, 200, false);
+        window.field = document.querySelector('#term');
+        field.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Enter') {
+                debouncedSearch();
+            }
+        });
+        window.resultsDiv = document.querySelector('#search-results');
+
+        const params = new URL(location.href).searchParams;
+        if (params.get('q')) {
+            field.setAttribute('value', params.get('q'));
+            toggleSearch();
+            search();
+        }
+    }
+
+    // ===== Search Function =====
+
+    window.lastSearch = '';
+    window.searchResults = [];
+    window.searchTerms = [];
+    window.currentPreviewIndex = -1;
+
+    async function search() {
+        const searchQuery = field.value.trim();
+        const searchLayout = document.getElementById('search-layout');
+
+        if (!searchQuery) {
+            resultsDiv.innerHTML = `<span><i>Enter your search text in the box above</i></span>`;
+            hidePreview();
+            if (searchLayout) searchLayout.classList.add('no-preview');
+            return;
+        }
+
+        window.lastSearch = searchQuery;
+        window.searchTerms = tokenizeSearchTerms(searchQuery);
+
+        resultsDiv.innerHTML = loadingSvg;
+        hidePreview();
+
+        const results = offlineSearch(searchQuery);
+        window.searchResults = results;
+
+        if (!results.length) {
+            if (searchLayout) searchLayout.classList.add('no-preview');
+            resultsDiv.innerHTML = `
+                <div class="no-results">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                    <p>No results for "${searchQuery}"</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Show preview panel when we have results
+        if (searchLayout) searchLayout.classList.remove('no-preview');
+
+        let resultsHTML = '';
+        results.forEach((r, index) => {
+            const excerpt = getContextualExcerpt(r.content, window.searchTerms, 120);
+            const highlightedExcerpt = highlightTerms(excerpt, window.searchTerms);
+            const highlightedTitle = highlightTerms(r.title, window.searchTerms);
+
+            const tagsHTML = r.tags && r.tags.length > 0
+                ? `<div class="result-tags">${r.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}</div>`
+                : '';
+
+            resultsHTML += `
+                <div class="searchresult${index === 0 ? ' active' : ''}"
+                     data-index="${index}"
+                     data-url="${r.url}"
+                     onmouseenter="showPreview(${index})"
+                     onclick="window.location.href='${r.url}'">
+                    <span class="result-title">${highlightedTitle}</span>
+                    ${tagsHTML}
+                    <div class="result-excerpt">${highlightedExcerpt}</div>
+                </div>
+            `;
+        });
+
+        resultsDiv.innerHTML = resultsHTML;
+
+        // Auto-show preview for first result
+        if (results.length > 0) {
+            showPreview(0);
+        }
+
+        // Reinitialize Lucide icons if available
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }
+
+    window.search = search;
+
+    // ===== Offline Search =====
+
+    function offlineSearch(searchQuery) {
+        const data = window.docs;
+        const isTagSearch = searchQuery[0] === "#" && searchQuery.length > 1;
+
+        const searchResults = isTagSearch
+            ? index.search(searchQuery.substring(1), [{ field: "tags" }])
+            : index.search(searchQuery, [
+                { field: "title", limit: 5 },
+                { field: "content", limit: 10 }
+            ]);
+
+        const getByField = (field) => {
+            const results = searchResults.filter((x) => x.field === field);
+            if (results.length === 0) return [];
+            return [...results[0].result];
+        };
+
+        const allIds = new Set([
+            ...getByField("title"),
+            ...getByField("content"),
+            ...getByField("tags")
+        ]);
+
+        const dataIds = [...allIds];
+        const finalResults = dataIds.map((id) => {
+            const result = { ...data[id] };
+            result.tags = result.tags.filter((x) => x !== "gardenEntry" && x !== "note");
+            return result;
+        });
+
+        return finalResults;
+    }
+</script>
+
+
+    
+
+    <main class="content cm-s-obsidian print ">
+      <header>
+        
+          <h1 data-note-icon="">CPU</h1>
+        
+        <div class="header-meta">
+          
+            <div class="header-tags">
+              
+                
+              
+                
+                  <a class="tag" onclick="toggleTagSearch(this)">
+                    #knowledge-base
+                  </a>
+                
+              
+                
+                  <a class="tag" onclick="toggleTagSearch(this)">
+                    #german
+                  </a>
+                
+              
+            </div>
+          <div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2025-11-19T16:55:16.658+01:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-01-28T13:15:27.494+01:00"></span></div></div></div>
+      
+        
+      
+      
+      </header>
+      
+      
+      <h2 id="cache" tabindex="-1">Cache</h2>
+<div class="excalidraw-svg"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 362.5 694.5" width="362.5" height="694.5" class="excalidraw-svg" style="max-width: 100%; height: auto;"><metadata></metadata><defs><style class="style-fonts">      @font-face { font-family: Virgil; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="362.5" height="694.5" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(10 14) rotate(0 108.5 39.5)"><path d="M0 0 C51.53 0, 103.07 0, 217 0 M0 0 C50.03 0, 100.05 0, 217 0 M217 0 C217 25.04, 217 50.08, 217 79 M217 0 C217 16.04, 217 32.07, 217 79 M217 79 C159.99 79, 102.98 79, 0 79 M217 79 C152.16 79, 87.32 79, 0 79 M0 79 C0 57.92, 0 36.84, 0 0 M0 79 C0 57.33, 0 35.67, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(71.5600357055664 41) rotate(0 46.939964294433594 12.5)"><text x="46.939964294433594" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">CPU Core</text></g><g stroke-linecap="round" transform="translate(10 111) rotate(0 50.5 45)"><path d="M0 0 C31.28 0, 62.57 0, 101 0 M0 0 C27.67 0, 55.34 0, 101 0 M101 0 C101 21.23, 101 42.46, 101 90 M101 0 C101 30.79, 101 61.57, 101 90 M101 90 C70.68 90, 40.35 90, 0 90 M101 90 C70.91 90, 40.83 90, 0 90 M0 90 C0 57.19, 0 24.39, 0 0 M0 90 C0 62.52, 0 35.04, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(28.108009338378906 136) rotate(0 32.391990661621094 20)"><text x="32.391990661621094" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L1 Data</text><text x="32.391990661621094" y="34.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Cache</text></g><g stroke-linecap="round" transform="translate(127.5 112) rotate(0 50.5 45)"><path d="M0 0 C28.66 0, 57.33 0, 101 0 M0 0 C21.14 0, 42.27 0, 101 0 M101 0 C101 35.04, 101 70.08, 101 90 M101 0 C101 24.78, 101 49.57, 101 90 M101 90 C65.6 90, 30.19 90, 0 90 M101 90 C64.29 90, 27.58 90, 0 90 M0 90 C0 66.54, 0 43.08, 0 0 M0 90 C0 59.7, 0 29.4, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(134.60002899169922 127) rotate(0 43.39997100830078 30)"><text x="43.39997100830078" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L1</text><text x="43.39997100830078" y="34.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Instruction</text><text x="43.39997100830078" y="54.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Cache</text></g><g stroke-linecap="round" transform="translate(11 227) rotate(0 108.5 46.5)"><path d="M0 0 C43.85 0, 87.71 0, 217 0 M0 0 C71.33 0, 142.66 0, 217 0 M217 0 C217 18.68, 217 37.35, 217 93 M217 0 C217 27.53, 217 55.06, 217 93 M217 93 C166.89 93, 116.77 93, 0 93 M217 93 C166.33 93, 115.66 93, 0 93 M0 93 C0 63.53, 0 34.05, 0 0 M0 93 C0 66.1, 0 39.2, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(72.85002899169922 261) rotate(0 46.64997100830078 12.5)"><text x="46.64997100830078" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L2 Cache</text></g><g stroke-linecap="round" transform="translate(10.5 349.5) rotate(0 170.5 46.5)"><path d="M0 0 C75.57 0, 151.13 0, 341 0 M0 0 C117.48 0, 234.95 0, 341 0 M341 0 C341 20.52, 341 41.03, 341 93 M341 0 C341 20.04, 341 40.08, 341 93 M341 93 C259.59 93, 178.17 93, 0 93 M341 93 C269.53 93, 198.06 93, 0 93 M0 93 C0 70.44, 0 47.88, 0 0 M0 93 C0 64.08, 0 35.15, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(134.66002655029297 383.5) rotate(0 46.33997344970703 12.5)"><text x="46.33997344970703" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L3 Cache</text></g><g stroke-linecap="round" transform="translate(10.5 469.5) rotate(0 170.5 46.5)"><path d="M0 0 C129.94 0, 259.88 0, 341 0 M0 0 C102.13 0, 204.26 0, 341 0 M341 0 C341 30.66, 341 61.31, 341 93 M341 0 C341 33.51, 341 67.01, 341 93 M341 93 C220.37 93, 99.73 93, 0 93 M341 93 C266.56 93, 192.11 93, 0 93 M0 93 C0 60.94, 0 28.88, 0 0 M0 93 C0 57.09, 0 21.17, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(120.8200454711914 503.5) rotate(0 60.179954528808594 12.5)"><text x="60.179954528808594" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Main Memory</text></g><g stroke-linecap="round" transform="translate(11.5 591.5) rotate(0 170.5 46.5)"><path d="M0 0 C115.72 0, 231.45 0, 341 0 M0 0 C70.01 0, 140.03 0, 341 0 M341 0 C341 21.53, 341 43.07, 341 93 M341 0 C341 23.27, 341 46.54, 341 93 M341 93 C231.72 93, 122.44 93, 0 93 M341 93 C250.19 93, 159.38 93, 0 93 M0 93 C0 71.11, 0 49.23, 0 0 M0 93 C0 63.06, 0 33.11, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(122.12003326416016 625.5) rotate(0 59.879966735839844 12.5)"><text x="59.879966735839844" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">HDD / Swap</text></g><g stroke-linecap="round"><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M0 0 C0 -4.17, 0 -20.83, 0 -25 M0 0 C0 -4.17, 0 -20.83, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M4.28 -13.25 C3.26 -16.05, 2.24 -18.85, 0 -25 M4.28 -13.25 C2.73 -17.51, 1.18 -21.77, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M-4.28 -13.25 C-3.26 -16.05, -2.24 -18.85, 0 -25 M-4.28 -13.25 C-2.73 -17.51, -1.18 -21.77, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(181 467) rotate(0 0 -11)"><path d="M0 0 C0 -3.67, 0 -18.33, 0 -22 M0 0 C0 -3.67, 0 -18.33, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181 467) rotate(0 0 -11)"><path d="M3.76 -11.66 C2.86 -14.15, 1.95 -16.64, 0 -22 M3.76 -11.66 C2.74 -14.48, 1.71 -17.3, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181 467) rotate(0 0 -11)"><path d="M-3.76 -11.66 C-2.86 -14.15, -1.95 -16.64, 0 -22 M-3.76 -11.66 C-2.74 -14.48, -1.71 -17.3, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M0 0 C0.33 -3.83, 1.67 -19.17, 2 -23 M0 0 C0.33 -3.83, 1.67 -19.17, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M4.99 -11.85 C4.15 -15, 3.3 -18.16, 2 -23 M4.99 -11.85 C3.95 -15.72, 2.91 -19.59, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M-2.87 -12.54 C-1.5 -15.49, -0.12 -18.45, 2 -23 M-2.87 -12.54 C-1.18 -16.17, 0.51 -19.8, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M0 0 C0.14 -3.33, 0.72 -16.67, 0.86 -20 M0 0 C0.14 -3.33, 0.72 -16.67, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M3.88 -10.46 C2.76 -13.97, 1.65 -17.49, 0.86 -20 M3.88 -10.46 C3.06 -13.02, 2.25 -15.59, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M-2.96 -10.75 C-1.56 -14.16, -0.15 -17.57, 0.86 -20 M-2.96 -10.75 C-1.94 -13.24, -0.91 -15.72, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M0 0 C-0.25 -3.17, -1.26 -15.83, -1.52 -19 M0 0 C-0.25 -3.17, -1.26 -15.83, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M2.45 -10.33 C1.56 -12.27, 0.67 -14.21, -1.52 -19 M2.45 -10.33 C1.06 -13.36, -0.32 -16.39, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M-4.05 -9.81 C-3.49 -11.87, -2.92 -13.92, -1.52 -19 M-4.05 -9.81 C-3.17 -13.02, -2.28 -16.23, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M0 0 C2.5 -2.33, 12.5 -11.67, 15 -14 M0 0 C2.5 -2.33, 12.5 -11.67, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M10.35 -4.86 C12.05 -8.2, 13.75 -11.54, 15 -14 M10.35 -4.86 C12.04 -8.19, 13.74 -11.52, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M5.56 -9.99 C9.01 -11.45, 12.46 -12.92, 15 -14 M5.56 -9.99 C9 -11.45, 12.44 -12.91, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M0 0 C-1.33 -2.83, -6.67 -14.17, -8 -17 M0 0 C-1.33 -2.83, -6.67 -14.17, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M-1.33 -10.38 C-3.01 -12.05, -4.69 -13.72, -8 -17 M-1.33 -10.38 C-3.75 -12.78, -6.17 -15.18, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M-7.15 -7.64 C-7.36 -10, -7.58 -12.36, -8 -17 M-7.15 -7.64 C-7.46 -11.04, -7.77 -14.43, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g transform="translate(234 159) rotate(270 64.27995300292969 10)"><text x="0" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">... for each core</text></g><g transform="translate(303 96) rotate(0 -13.5 -43)" stroke="none"><path fill="#1e1e1e" d="M -0.78,0 Q -0.78,0 -0.76,-1.72 -0.74,-3.44 -0.73,-7.05 -0.72,-10.66 -0.71,-13.63 -0.70,-16.60 -0.69,-20.17 -0.69,-23.73 -0.68,-27.54 -0.68,-31.36 -0.67,-34.99 -0.67,-38.62 -0.67,-40.74 -0.66,-42.86 -0.66,-45.20 -0.66,-47.54 -0.66,-48.82 -0.66,-50.10 -0.66,-51.22 -0.66,-52.34 -0.66,-53.39 -0.66,-54.44 -0.67,-55.46 -0.68,-56.48 -0.69,-57.49 -0.70,-58.50 -0.69,-60.66 -0.68,-62.81 -0.68,-64.30 -0.67,-65.79 -0.67,-67.29 -0.67,-68.78 -0.67,-70.28 -0.66,-71.78 -0.69,-72.69 -0.72,-73.61 -1.02,-74.14 -1.33,-74.68 -1.49,-75.63 -1.66,-76.58 -1.99,-77.09 -2.32,-77.60 -2.73,-78.08 -3.14,-78.56 -3.84,-79.37 -4.53,-80.18 -5.15,-80.81 -5.76,-81.44 -6.12,-82.07 -6.48,-82.71 -7.02,-83.06 -7.56,-83.41 -8.26,-83.56 -8.96,-83.71 -9.84,-83.81 -10.71,-83.91 -11.56,-84.26 -12.40,-84.61 -13.13,-84.71 -13.87,-84.81 -14.49,-84.83 -15.12,-84.86 -15.66,-84.85 -16.21,-84.84 -17.23,-84.80 -18.25,-84.76 -19.25,-84.73 -20.25,-84.69 -21.26,-84.66 -22.26,-84.63 -24.49,-84.12 -26.72,-83.61 -26.95,-83.60 -27.18,-83.59 -27.40,-83.66 -27.62,-83.72 -27.80,-83.86 -27.99,-83.99 -28.13,-84.18 -28.26,-84.36 -28.33,-84.58 -28.40,-84.80 -28.39,-85.03 -28.39,-85.26 -28.31,-85.47 -28.23,-85.69 -28.09,-85.87 -27.94,-86.04 -27.75,-86.17 -27.56,-86.29 -27.34,-86.35 -27.12,-86.40 -26.89,-86.39 -26.66,-86.37 -26.45,-86.28 -26.24,-86.19 -26.07,-86.04 -25.90,-85.89 -25.78,-85.69 -25.67,-85.49 -25.63,-85.26 -25.58,-85.04 -25.61,-84.81 -25.64,-84.59 -25.74,-84.38 -25.84,-84.17 -26.00,-84.01 -26.16,-83.85 -26.37,-83.75 -26.57,-83.64 -26.80,-83.61 -27.03,-83.58 -27.25,-83.62 -27.48,-83.67 -27.68,-83.78 -27.88,-83.89 -28.03,-84.06 -28.18,-84.23 -28.28,-84.44 -28.37,-84.65 -28.39,-84.88 -28.41,-85.10 -28.35,-85.33 -28.30,-85.55 -28.17,-85.74 -28.05,-85.94 -27.87,-86.08 -27.70,-86.22 -27.48,-86.30 -27.27,-86.38 -27.27,-86.38 -27.27,-86.38 -25.28,-86.88 -23.28,-87.38 -22.27,-87.36 -21.25,-87.33 -20.25,-87.30 -19.24,-87.26 -18.22,-87.21 -17.19,-87.15 -16.65,-87.11 -16.11,-87.07 -15.52,-87.01 -14.93,-86.96 -14.24,-86.86 -13.56,-86.77 -12.56,-86.59 -11.56,-86.42 -11.02,-86.11 -10.49,-85.80 -9.48,-85.71 -8.47,-85.62 -7.44,-85.32 -6.40,-85.03 -5.41,-83.85 -4.42,-82.68 -3.82,-82.04 -3.22,-81.40 -2.39,-80.58 -1.57,-79.76 -1.12,-79.11 -0.67,-78.46 -0.32,-77.65 0.02,-76.85 0.10,-76.08 0.18,-75.30 0.45,-74.48 0.72,-73.65 0.69,-72.72 0.66,-71.78 0.67,-70.28 0.67,-68.78 0.67,-67.29 0.67,-65.79 0.68,-64.30 0.68,-62.81 0.69,-60.66 0.70,-58.50 0.69,-57.49 0.68,-56.48 0.67,-55.46 0.66,-54.44 0.66,-53.39 0.66,-52.34 0.66,-51.22 0.66,-50.10 0.66,-48.82 0.66,-47.54 0.66,-45.20 0.66,-42.86 0.67,-40.74 0.67,-38.62 0.67,-34.99 0.68,-31.36 0.68,-27.54 0.69,-23.73 0.69,-20.17 0.70,-16.60 0.71,-13.63 0.72,-10.66 0.73,-7.05 0.74,-3.44 0.76,-1.72 0.78,0 0.76,0.09 0.75,0.18 0.72,0.27 0.69,0.36 0.63,0.44 0.58,0.51 0.51,0.58 0.44,0.64 0.36,0.68 0.27,0.73 0.18,0.75 0.09,0.77 -0.00,0.77 -0.09,0.77 -0.18,0.75 -0.27,0.73 -0.36,0.68 -0.44,0.64 -0.51,0.58 -0.58,0.51 -0.63,0.44 -0.69,0.36 -0.72,0.27 -0.75,0.18 -0.76,0.09 -0.78,-0.00 -0.78,-0.00 L -0.78,0 Z"></path></g><g transform="translate(298 241) rotate(0 -12.5 41)" stroke="none"><path fill="#1e1e1e" d="M 0.78,0 Q 0.78,0 0.76,1.43 0.74,2.87 0.73,4.06 0.72,5.25 0.41,6.68 0.11,8.12 -0.00,11.23 -0.12,14.34 -0.18,16.54 -0.24,18.75 -0.26,20.54 -0.29,22.34 -0.30,23.39 -0.31,24.44 -0.31,25.75 -0.32,27.06 -0.32,28.19 -0.33,29.32 -0.33,31.53 -0.33,33.73 -0.33,35.25 -0.33,36.76 -0.31,37.69 -0.28,38.62 -0.29,40.45 -0.29,42.29 -0.30,43.93 -0.31,45.57 -0.31,46.84 -0.32,48.11 -0.32,50.38 -0.32,52.65 -0.32,54.47 -0.33,56.30 -0.33,57.93 -0.33,59.57 -0.33,61.42 -0.33,63.27 -0.63,64.69 -0.92,66.12 -1.04,67.52 -1.16,68.92 -1.18,69.82 -1.20,70.73 -1.49,71.53 -1.79,72.34 -1.87,73.11 -1.95,73.87 -2.31,74.67 -2.67,75.46 -3.11,76.31 -3.56,77.17 -4.43,77.93 -5.31,78.70 -5.89,79.26 -6.47,79.83 -7.00,80.38 -7.54,80.92 -8.17,81.27 -8.81,81.62 -9.60,81.99 -10.38,82.35 -11.09,82.58 -11.80,82.80 -12.42,82.91 -13.04,83.02 -14.19,82.99 -15.35,82.96 -16.69,82.93 -18.04,82.89 -19.03,82.59 -20.02,82.29 -20.88,82.18 -21.74,82.07 -23.49,81.52 -25.24,80.97 -25.39,80.90 -25.53,80.84 -25.65,80.73 -25.78,80.62 -25.85,80.48 -25.93,80.34 -25.97,80.18 -26.00,80.02 -25.97,79.86 -25.95,79.70 -25.88,79.56 -25.81,79.41 -25.69,79.30 -25.58,79.18 -25.43,79.11 -25.29,79.04 -25.13,79.02 -24.97,78.99 -24.81,79.02 -24.65,79.06 -24.51,79.13 -24.37,79.21 -24.26,79.34 -24.15,79.46 -24.09,79.60 -24.02,79.75 -24.01,79.91 -24.00,80.08 -24.04,80.23 -24.08,80.39 -24.16,80.53 -24.25,80.66 -24.38,80.77 -24.50,80.87 -24.65,80.92 -24.81,80.98 -24.97,80.98 -25.13,80.99 -25.28,80.94 -25.44,80.89 -25.57,80.80 -25.70,80.70 -25.80,80.57 -25.89,80.44 -25.94,80.28 -25.99,80.13 -25.98,79.97 -25.98,79.81 -25.92,79.65 -25.87,79.50 -25.77,79.38 -25.66,79.25 -25.53,79.16 -25.39,79.08 -25.23,79.04 -25.08,79.00 -24.91,79.01 -24.75,79.02 -24.75,79.02 -24.75,79.02 -23.12,79.65 -21.48,80.27 -20.46,80.40 -19.45,80.53 -18.74,80.80 -18.02,81.06 -16.71,81.00 -15.40,80.94 -13.87,80.82 -12.34,80.71 -11.80,80.61 -11.26,80.50 -10.05,80.01 -8.84,79.51 -8.27,79.00 -7.71,78.49 -7.08,77.93 -6.44,77.37 -5.79,76.84 -5.15,76.30 -4.73,75.45 -4.31,74.60 -3.98,74.09 -3.65,73.58 -3.47,72.62 -3.29,71.67 -2.96,71.14 -2.64,70.60 -2.56,69.71 -2.47,68.81 -2.34,67.33 -2.22,65.85 -1.94,64.56 -1.66,63.26 -1.66,61.42 -1.66,59.57 -1.66,57.93 -1.66,56.30 -1.67,54.47 -1.67,52.65 -1.67,50.38 -1.67,48.11 -1.68,46.84 -1.68,45.57 -1.69,43.93 -1.70,42.29 -1.70,40.45 -1.71,38.62 -1.68,37.69 -1.66,36.76 -1.66,35.25 -1.66,33.73 -1.66,31.53 -1.66,29.32 -1.66,28.19 -1.66,27.06 -1.66,25.74 -1.66,24.43 -1.65,23.38 -1.64,22.32 -1.62,20.52 -1.60,18.71 -1.55,16.50 -1.51,14.28 -1.38,11.06 -1.26,7.83 -0.99,6.54 -0.72,5.24 -0.73,4.05 -0.74,2.87 -0.76,1.43 -0.78,0 -0.77,-0.09 -0.76,-0.18 -0.72,-0.27 -0.69,-0.36 -0.63,-0.44 -0.58,-0.51 -0.51,-0.58 -0.44,-0.64 -0.36,-0.68 -0.27,-0.73 -0.18,-0.75 -0.09,-0.77 0.00,-0.77 0.09,-0.77 0.18,-0.75 0.27,-0.73 0.36,-0.68 0.44,-0.64 0.51,-0.58 0.58,-0.51 0.63,-0.44 0.69,-0.36 0.72,-0.27 0.76,-0.18 0.77,-0.09 0.78,0.00 0.78,0.00 L 0.78,0 Z"></path></g><g stroke-linecap="round"><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M0 0 C0 -3.97, 0 -19.83, 0 -23.79 M0 0 C0 -3.97, 0 -19.83, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M4.07 -12.61 C2.68 -16.42, 1.3 -20.23, 0 -23.79 M4.07 -12.61 C3.01 -15.51, 1.96 -18.41, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M-4.07 -12.61 C-2.68 -16.42, -1.3 -20.23, 0 -23.79 M-4.07 -12.61 C-3.01 -15.51, -1.96 -18.41, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask></svg></div>
+- Register <-> L1-Cache <-> L2(L3/L4)-Cache <-> Main memory (RAM)<->HDD (Swap)
+	- L1-Cache oftmals unterteilt in "data" und "instruction cache"
+	- L1 oftmals pro Core
+	- L1: Größe bei aktuellen Prozessoren <100kB (pro Kern)
+		- [5700X](https://www.techpowerup.com/cpu-specs/ryzen-7-5700x.c2755): 32KB (instruction) + 32KB (data)
+		- [9950X3D](https://www.techpowerup.com/review/amd-ryzen-9-9950x3d/2.html): 32KB (instruction) + 48KB (data)
+		- [Apple M5](https://theapplewiki.com/wiki/M5): P-Core: 192 KB (instruction) + 128 KB (data), E-Core: 128 + 64 KB
+	- L2-Cache wird unter Windows "unified cache" genannt
+	- L2 oftmals pro Core, manchmal geteilt mit mehreren Cores oder gesamter CPU
+		- bei x64: pro Core, Apple Silicon (mindestens bis M5): für gesamten Chip
+	- L2: Größe bei aktuellen Prozessoren < 1MB (pro Kern)
+		- 5700X: 512KB
+		- 9950X3D: 1MB
+		- Apple M5: P-Cores: 16 MB (geteilt), E-Cores: 6 MB (geteilt)
+	- L3/L4 cache meist für gesamte CPU, Größe < 100MB
+		- 5700X: 32MB
+		- 9950X3D: 128MB
+		- Apple M5: nicht vorhanden
+- Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache (bei modernen x64 CPUs)
+	- ESP32: 32 Bytes
+	- ARM Cortex M0..4: kein Cache
+	- ARM Cortex M7+: 32 Bytes
+- Cache Miss: Programm fordert Daten an, welche nicht im L1+L2-Cache sind und daher aus dem RAM geladen werden müssen
+- Viele Operationen sind schneller, als das Laden aus dem RAM -> Performance wird von Nutzung des Caches dominiert
+	- [Gallery of Processor Cache Effects (igoro.com)](https://igoro.com/archive/gallery-of-processor-cache-effects/)
+		- Graphen welche den Effekt von CPU Cache, Cache Lines, Cache Aufbau, etc. verdeutlichen
+	- [Zen 1 timings](https://www.7-cpu.com/cpu/Zen.html)
+		- L1 Cache: 4-5 cycles (1ns)
+		- L2 Cache: 17 cycles (4-5ns)
+		- L3 Cache: ~40 cycles (10ns)
+		- RAM: 40 cycles + 90ns (100ns)
+		- 1 Cycle ~ 0.25ns (@4GHz)
+- (L1) Cache Aufbau 
+	- https://youtu.be/rLWeHpzAYhg?feature=shared&t=1855
+	- Cache funktioniert grundsätzlich wie hash table, wobei als key ein Teil der Speicheradresse genutzt wird
+	- Cache Line ist 64 Bytes
+	- Pointer-Adresse sind 64bit, von denen meist 48bit für Speicheradresse genutzt werden 
+	- Speicheradressen sind virtuell und müssen übersetzt werden. Virtuell, damit bspw swap funktioniert.
+	- Übersetzung läuft über anderen cache den Translation Lookaside Buffer. Dieser Cache mappt bei x64 12bit große "pages" (4096 Bytes) zwischen physischem und virtuellem Speicher.
+	- 6 LSB eines pointers sind offset in cache line
+	- 12 LSB sind offset in page
+	- wir wollen nicht auf Übersetzung der Adresse warten. Daher läuft beides parallel. Cache access ist sehr schnell (<5 cycles)
+	- zur Adressierung in Cache muss also Teil des pointers genutzt werden, welcher von Übersetzung nicht verändert wird = 12 LSB. 
+	- unteren 6 bits davon helfen nicht, da sie nur offset in cache line sind und nicht zur Unterscheidung von cache lines helfen können.
+	- Bleiben 6 bits übrig, was maximal 64 sets im Cache ergibt
+	- Daten im cache sind entweder mit virtueller oder physischer Adresse getaggt.
+	- nach Zugriff und paralleler Übersetzung wird überprüft, ob daten zu gewünschter Adresse gehören, da viele Speicherbereiche dieselben 12 LSB haben könnten 
+	- Somit sind alle Adressen mit einem ähnlichen Bit-Aufbau immer im selben Set zu finden.
+- Typischer Aufbau: N-way Associative Cache
+	- es werden N cache lines pro cache set gespeichert, gleichzeitig abgerufen und dann verglichen (mit getaggter Adresse), ob richtige Daten dabei sind
+	- größere Anzahl cache lines pro set bedeutet, dass mehr unterschiedliche Speicherbereiche mit gleicher bit Struktur im Cache Platz finden und Kollisionen verringert werden 
+	- Beispiel Zen 4: 8-way Set, 64 sets, je line 64 Bytes also 8\*64\*64 Bytes = 32KByte (Architektur Limit)
+	- Zen 5: 12-way = 48KByte
+	- Beispiel Apple M1/M2: 12-way Set, jedes Set hat also 12 Plätze je 128 Bytes (eine L2-Cache Line) = 1,5KB pro Set = ~10.900 Sets bei 16MB Cache
+	- Apple M-chips haben größere pages (64K)
+<div class="callout " data-callout="tip"><div class="callout-title"><div class="callout-title-inner"> Block sizes in code<br></div></div>
 <div class="callout-content">
 <p>
 When choosing a block size in your code (i.e. when reading a file in chunks), make it smaller than the L2 or L3 cache. This way the block will more likely stay in cache while you do operations on it. If you make the block too big, the CPU will need to continuously swap parts of it between the CPU cache and RAM making things <em>much</em> slower.<br>
@@ -605,48 +1498,254 @@ The best size can be determined by testing (measure performance with increasing 
 <p>Cost of CPU operations: <a href="http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/" target="_blank" class="external-link">Infographics: Operation Costs in CPU Clock Cycles - IT Hare on Soft.ware</a></p>
 <p>GitHub repo with programming related &quot;ballpark&quot; numbers: <a href="https://github.com/sirupsen/napkin-math" target="_blank" class="external-link">GitHub - sirupsen/napkin-math: Techniques and numbers for estimating system's performance from first-principles</a></p>
 <p>Great visualization of latency numbers (with historical data): <a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html" target="_blank" class="external-link">https://colin-scott.github.io/personal_website/research/interactive_latency.html</a></p>
-<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
-</main>
-<aside>
-<div class="sidebar">
-<div class="sidebar-container">
-<div class="toc">
-<div class="toc-title-container">
-<div class="toc-title">
-CPU
-</div>
-</div>
-<div class="toc-container">
-<nav class="toc">
-<ol>
-<li><a href="#cache">Cache</a>
-</li>
-<li><a href="#pointers">Pointers</a>
-</li>
-<li><a href="#assembly">Assembly</a>
-</li>
-<li><a href="#modulus">Modulus (%)</a>
-</li>
-<li><a href="#napkin-math">Napkin Math</a>
-</li>
-</ol>
-</nav>
-</div>
-</div>
-<script>!function(){const t=document.querySelectorAll('.toc-container a[href^="#"]');if(!t.length)return;const e=Array.from(t).map(t=>{const e=decodeURIComponent(t.getAttribute("href").slice(1));return{link:t,target:document.getElementById(e)}}).filter(t=>t.target);function n(){let n=e[0];for(const t of e)t.target.getBoundingClientRect().top<=100&&(n=t);t.forEach(t=>t.classList.remove("toc-active")),n&&n.link.classList.add("toc-active")}window.addEventListener("scroll",n,{passive:!0}),n()}()</script>
-</div>
-</div>
+
+      
+      
+        <script src="https://giscus.app/client.js"
+        data-repo="foxblock/foxblock.github.io"
+        data-repo-id="R_kgDOOeV4dw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOOeV4d84CpYMI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async></script>
+
+      
+    </main>
+
+    
+      <aside>
+      <div class="sidebar">
+            <div class="sidebar-container">
+                  
+                  
+
+                  
+                        
+                        
+                              <div class="toc">
+                                    <div class="toc-title-container">
+                                          <div class="toc-title">
+                                                CPU
+                                          </div>
+                                    </div>
+                                    <div class="toc-container">
+                                          <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#cache">Cache</a>
+            		</li>
+
+                    <li><a href="#pointers">Pointers</a>
+            		</li>
+
+                    <li><a href="#assembly">Assembly</a>
+            		</li>
+
+                    <li><a href="#modulus">Modulus (%)</a>
+            		</li>
+
+                    <li><a href="#napkin-math">Napkin Math</a>
+            		</li>
+                </ol>
+            </nav>
+                                    </div>
+                              </div>
+                              <script>
+                                    (function() {
+                                          const tocLinks = document.querySelectorAll('.toc-container a[href^="#"]');
+                                          if (!tocLinks.length) return;
+
+                                          const headings = Array.from(tocLinks).map(link => {
+                                                const id = decodeURIComponent(link.getAttribute('href').slice(1));
+                                                return { link, target: document.getElementById(id) };
+                                          }).filter(h => h.target);
+
+                                          function updateActive() {
+                                                let current = headings[0];
+                                                for (const h of headings) {
+                                                      if (h.target.getBoundingClientRect().top <= 100) {
+                                                            current = h;
+                                                      }
+                                                }
+                                                tocLinks.forEach(l => l.classList.remove('toc-active'));
+                                                if (current) current.link.classList.add('toc-active');
+                                          }
+
+                                          window.addEventListener('scroll', updateActive, { passive: true });
+                                          updateActive();
+                                    })();
+                              </script>
+                        
+
+                  
+
+                        
+                  
+            </div>
+      </div>
 </aside>
-<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")},!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}})</script>
-<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
-<script defer="defer">TIMESTAMP_FORMAT="dd. MMM yyyy",DATE_FORMAT="MMM dd, yyyy",document.querySelectorAll(".human-date").forEach(function(e){try{date=e.getAttribute("data-date")||e.innerText,format=/^\d{4}-\d{2}-\d{2}$/.test(date.trim())?DATE_FORMAT:TIMESTAMP_FORMAT,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTTP(date)),null==parsed_date.invalid&&(e.innerHTML=parsed_date.toFormat(format))}catch(e){}})</script>
-<footer>
-<a href="/imprint">Imprint</a>
-&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="/privacy">Privacy Policy</a>
+    
+
+    
+        <script>
+      if (window.location.hash) {
+        document.getElementById(window.location.hash.slice(1)).classList.add('referred');
+      }
+      window.addEventListener('hashchange', (evt) => {
+        const oldParts = evt.oldURL.split("#");
+        if (oldParts[1]) {
+          document.getElementById(oldParts[1]).classList.remove('referred');
+        }
+        const newParts = evt.newURL.split("#");
+        if (newParts[1]) {
+          document.getElementById(newParts[1]).classList.add('referred');
+        }
+      }, false);
+      const url_parts = window.location.href.split("#")
+      const url = url_parts[0];
+      const referrence = url_parts[1];
+      document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function (el) {
+        el.ondblclick = function(evt) {
+          const ref_url = url + '#' + evt.target.id
+          navigator.clipboard.writeText(ref_url);
+      }
+      });
+
+      
+    </script>
+    <script src=" https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js "></script>
+<script defer>
+  TIMESTAMP_FORMAT = "dd. MMM yyyy";
+  DATE_FORMAT = "MMM dd, yyyy";
+  document.querySelectorAll('.human-date').forEach(function (el) {
+    // One malformed date must not abort formatting of the remaining dates
+    try {
+      date = el.getAttribute('data-date') || el.innerText
+      // A value with no time component (e.g. "1707-04-17") gets the
+      // date-only format — the timestamp format would show it as
+      // "Apr 17, 1707 12:00 AM"
+      format = /^\d{4}-\d{2}-\d{2}$/.test(date.trim()) ? DATE_FORMAT : TIMESTAMP_FORMAT
+      parsed_date = luxon.DateTime.fromISO(date)
+      if (parsed_date.invalid != null){
+        // Date cannot be parsed
+        parsed_date = luxon.DateTime.fromSQL(date)
+      }
+      if (parsed_date.invalid != null){
+        // Date still cannot be parsed
+        parsed_date = luxon.DateTime.fromHTTP(date)
+      }
+      if (parsed_date.invalid == null){
+        el.innerHTML = parsed_date.toFormat(format);
+      }
+    } catch (e) {}
+  })
+</script>
+    
+      <footer>
+  <a href="/imprint">Imprint</a>
+  &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+  <a href="/privacy">Privacy Policy</a>
 </footer>
-<script defer="defer" src="https://unpkg.com/lucide@latest"></script>
-<script defer="defer">document.addEventListener("DOMContentLoaded",()=>{lucide.createIcons({attrs:{class:["svg-icon"]}})})</script>
-<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".obsidian-bases-views").forEach(function(e){var t=e.querySelector(".obsidian-bases-active-view"),a=e.querySelector(".obsidian-bases-dropdown"),i=e.querySelectorAll(".obsidian-bases-dropdown-item"),n=e.querySelectorAll(".obsidian-bases-view-panel"),o=e.querySelector(".obsidian-bases-active-view-name"),r=e.querySelector(".obsidian-bases-count-value");t&&a&&(t.addEventListener("click",function(e){e.stopPropagation();var i="none"!==a.style.display;a.style.display=i?"none":"block",t.setAttribute("aria-expanded",!i)}),document.addEventListener("click",function(){a.style.display="none",t.setAttribute("aria-expanded","false")}),i.forEach(function(s){s.addEventListener("click",function(s){s.stopPropagation();var d=this.getAttribute("data-view-index");i.forEach(function(e){e.classList.remove("active")}),this.classList.add("active"),n.forEach(function(e){e.style.display="none"});var l=e.querySelector('.obsidian-bases-view-panel[data-view-index="'+d+'"]');l&&(l.style.display="block");var c=this.querySelector(".obsidian-bases-view-icon"),u=t.querySelector(".obsidian-bases-view-icon");if(c&&u&&u.replaceWith(c.cloneNode(!0)),o&&(o.textContent=this.textContent.trim()),r&&l){var b=l.querySelectorAll("tbody tr:not(.obsidian-base-group-row), .obsidian-base-card, .obsidian-base-list li");r.textContent=b.length}a.style.display="none",t.setAttribute("aria-expanded","false")})}))}),document.querySelectorAll(".bases-dynamic-date").forEach(function(e){var t=e.getAttribute("data-type"),a=new Date;if("today"===t){var i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o}else if("now"===t){i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");var r=String(a.getHours()).padStart(2,"0"),s=String(a.getMinutes()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o+" "+r+":"+s}})})</script>
-</body>
+    
+    
+    <script defer src="https://unpkg.com/lucide@latest"></script>
+<script defer>
+  document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons({
+      attrs: { class: ['svg-icon'] }
+    });
+  });
+</script>
+
+    
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".obsidian-bases-views").forEach(function(container) {
+    var toggle = container.querySelector(".obsidian-bases-active-view");
+    var dropdown = container.querySelector(".obsidian-bases-dropdown");
+    var items = container.querySelectorAll(".obsidian-bases-dropdown-item");
+    var panels = container.querySelectorAll(".obsidian-bases-view-panel");
+    var nameEl = container.querySelector(".obsidian-bases-active-view-name");
+    var countEl = container.querySelector(".obsidian-bases-count-value");
+
+    if (!toggle || !dropdown) return;
+
+    // Toggle dropdown on click
+    toggle.addEventListener("click", function(e) {
+      e.stopPropagation();
+      var open = dropdown.style.display !== "none";
+      dropdown.style.display = open ? "none" : "block";
+      toggle.setAttribute("aria-expanded", !open);
+    });
+
+    // Close dropdown on outside click
+    document.addEventListener("click", function() {
+      dropdown.style.display = "none";
+      toggle.setAttribute("aria-expanded", "false");
+    });
+
+    // Switch view on item click
+    items.forEach(function(item) {
+      item.addEventListener("click", function(e) {
+        e.stopPropagation();
+        var idx = this.getAttribute("data-view-index");
+
+        // Update active states
+        items.forEach(function(el) { el.classList.remove("active"); });
+        this.classList.add("active");
+
+        // Switch panels
+        panels.forEach(function(p) { p.style.display = "none"; });
+        var target = container.querySelector('.obsidian-bases-view-panel[data-view-index="' + idx + '"]');
+        if (target) target.style.display = "block";
+
+        // Update toolbar button text and icon
+        var icon = this.querySelector(".obsidian-bases-view-icon");
+        var activeIcon = toggle.querySelector(".obsidian-bases-view-icon");
+        if (icon && activeIcon) activeIcon.replaceWith(icon.cloneNode(true));
+        if (nameEl) nameEl.textContent = this.textContent.trim();
+
+        // Update result count
+        if (countEl && target) {
+          var rows = target.querySelectorAll("tbody tr:not(.obsidian-base-group-row), .obsidian-base-card, .obsidian-base-list li");
+          countEl.textContent = rows.length;
+        }
+
+        // Close dropdown
+        dropdown.style.display = "none";
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  });
+
+  // Fill in dynamic date placeholders (today/now)
+  document.querySelectorAll(".bases-dynamic-date").forEach(function(el) {
+    var type = el.getAttribute("data-type");
+    var now = new Date();
+    if (type === "today") {
+      var y = now.getFullYear();
+      var m = String(now.getMonth() + 1).padStart(2, "0");
+      var d = String(now.getDate()).padStart(2, "0");
+      el.textContent = y + "-" + m + "-" + d;
+    } else if (type === "now") {
+      var y = now.getFullYear();
+      var m = String(now.getMonth() + 1).padStart(2, "0");
+      var d = String(now.getDate()).padStart(2, "0");
+      var h = String(now.getHours()).padStart(2, "0");
+      var min = String(now.getMinutes()).padStart(2, "0");
+      el.textContent = y + "-" + m + "-" + d + " " + h + ":" + min;
+    }
+  });
+});
+</script>
+
+  </body>
 </html>
