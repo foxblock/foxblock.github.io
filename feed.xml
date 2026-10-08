@@ -3,7 +3,7 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-10-08T08:57:29Z</updated>
+  <updated>2026-10-08T10:44:47Z</updated>
   <id>https://janek.ing</id><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
@@ -18,10 +18,10 @@
 &lt;/ul&gt;
 &lt;p&gt;Generally many notes are collections of knowledge I find on the internet (like what a LLM would spit out, only in this case it was curated by a human, which might be good or bad, depending on your stance). Some notes include my own opinion or experience from working on that topic.&lt;/p&gt;
 &lt;p&gt;In general I will try to add the following tags:&lt;br /&gt;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#knowledge-base&quot;&gt;#knowledge-base&lt;/a&gt; for collections of technical information&lt;br /&gt;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#opinion&quot;&gt;#opinion&lt;/a&gt; for when texts contain my personal opinion&lt;br /&gt;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#experience&quot;&gt;#experience&lt;/a&gt; for when I am talking from professional experience&lt;br /&gt;
-&lt;a class=&quot;tag&quot; onclick=&quot;toggleTagSearch(this)&quot; data-content=&quot;#german&quot;&gt;#german&lt;/a&gt; some notes I take in English (usually when the subject matter is also English), some are in German, some are mixed (oh no...). I apply this tag to notes which are at least partially German.&lt;/p&gt;
+&lt;a class=&quot;tag&quot; data-content=&quot;#knowledge-base&quot;&gt;#knowledge-base&lt;/a&gt; for collections of technical information&lt;br /&gt;
+&lt;a class=&quot;tag&quot; data-content=&quot;#opinion&quot;&gt;#opinion&lt;/a&gt; for when texts contain my personal opinion&lt;br /&gt;
+&lt;a class=&quot;tag&quot; data-content=&quot;#experience&quot;&gt;#experience&lt;/a&gt; for when I am talking from professional experience&lt;br /&gt;
+&lt;a class=&quot;tag&quot; data-content=&quot;#german&quot;&gt;#german&lt;/a&gt; some notes I take in English (usually when the subject matter is also English), some are in German, some are mixed (oh no...). I apply this tag to notes which are at least partially German.&lt;/p&gt;
 &lt;h2 id=&quot;some-backstory&quot; tabindex=&quot;-1&quot;&gt;Some backstory&lt;/h2&gt;
 &lt;p&gt;I used to have a pencil-on-paper notebook, which I tried to take everywhere. In 2024 I discovered Obsidian and quickly moved my whole process over to it. I was looking at Evernote for a while, but did not like the idea of putting all my notes in someone&#39;s cloud. 1,5 years later my vault grew to 200+ notes and I have it synced between all my devices. I still miss sketching with the pencil, but digital notes are just superior in several ways.&lt;/p&gt;
 &lt;p&gt;This garden will include some, but not all of my notes. I do not like publishing very rough stuff. Writing is not my strong suit, but this is an effort in getting better at it. Notes will probably start off as a list of bullet points and might grow into a more refined text later.&lt;/p&gt;

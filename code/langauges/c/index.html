@@ -1,385 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-<title>C</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<script type="importmap">
-{
+<!doctype html> <html lang="en"> <head> <title>C</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <script type="importmap"> {
   "imports": {
     "d3-force": "https://cdn.jsdelivr.net/npm/d3-force@3.0.0/+esm",
     "d3-selection": "https://cdn.jsdelivr.net/npm/d3-selection@3.0.0/+esm",
     "d3-zoom": "https://cdn.jsdelivr.net/npm/d3-zoom@3.0.0/+esm",
     "d3-drag": "https://cdn.jsdelivr.net/npm/d3-drag@3.0.0/+esm"
   }
-}
-</script>
-<script src="https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/dist/pixi.min.js"></script>
-<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:!0})</script>
-<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>window.addEventListener("load",()=>{document.querySelectorAll(".callout").forEach(e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("data-lucide",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}}),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach(e=>{e.querySelector(".callout-title").addEventListener("click",t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")})})})</script>
-<script defer="defer" src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
-<script defer="defer" src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
-<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
-<link href="/styles/obsidian-base.css" rel="stylesheet">
-<link href="/styles/digital-garden-base.css" rel="stylesheet">
-<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-08T08:57:28.308Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-08T08:57:28.308Z" rel="stylesheet">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/manifest.webmanifest">
-<style></style>
-</head>
-<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
-<div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
-<div x-show.important="!isDesktop" style="display:none">
-<nav class="navbar">
-<div class="navbar-inner">
-<span style="font-size:1.5rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span>
-<a href="/" style="text-decoration:none;flex:1;display:flex;justify-content:center">
-<img class="site-logo" src="/logo.svg" alt="janek.ing">
-</a>
-</div>
-<div class="search-button align-icon" onclick="toggleSearch()">
-<span class="search-icon">
-<i data-lucide="search"></i>
-</span>
-<span class="search-text">Search</span>
-<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
-</div>
-</nav>
-</div>
-<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
-<div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display:none">
-<nav class="filetree-sidebar">
-<a href="/" style="text-decoration:none;display:flex;justify-content:center">
-<img class="site-logo" src="/logo.svg" alt="janek.ing">
-</a>
-<div class="search-button align-icon" onclick="toggleSearch()">
-<span class="search-icon">
-<i data-lucide="search"></i>
-</span>
-<span class="search-text">Search</span>
-<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
-</div>
-<div class="folder" x-data="{isOpen: true}">
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Arbeit&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Arbeit</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/arbeit/agile/">Agile </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Code</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code/Langauges&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Langauges</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/bullshit-detector/">Bullshit detector </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Design&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Design</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Life&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Life</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Tech&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Tech</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Writing&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Writing</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-</div>
-</nav>
-</div>
-</div>
-<div class="search-container" id="globalsearch" onclick="toggleSearch()">
-<div class="search-box" onclick="event.stopPropagation()">
-<div class="search-header">
-<input type="search" id="term" placeholder="Start typing...">
-</div>
-<div class="search-layout no-preview" id="search-layout">
-<div class="search-results-panel" id="search-results">
-<span><i>Enter your search text in the box above</i></span>
-</div>
-<div class="search-preview-panel" id="search-preview">
-<div class="preview-placeholder">
-<i data-lucide="file-text"></i>
-<p>Select a result to preview</p>
-</div>
-<div class="preview-content" id="preview-content"></div>
-</div>
-</div>
-<footer class="search-box-footer">
-<div class="navigation-hint">
-<span><code>Enter</code>&nbsp;to select</span>
-</div>
-<div class="navigation-hint">
-<span><code>⇅</code>&nbsp;to navigate</span>
-</div>
-<div class="navigation-hint">
-<span><code>ESC</code>&nbsp;to close</span>
-</div>
-</footer>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
-<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1);const previewCache=new Map;window.toggleSearch=function(){const e=document.getElementById("globalsearch");e.classList.contains("active")?e.classList.remove("active"):(e.classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){const t=e.textContent;t&&(document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <div style="display: flex; justify-content: center; padding: 40px;">\n        <svg width="40" height="40" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">\n            <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="8">\n                    <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n            </g>\n        </svg>\n    </div>';function debounce(e,t,n){var r;return function(){var i=this,a=arguments,s=n&&!r;clearTimeout(r),r=setTimeout(function(){r=null,n||e.apply(i,a)},t),s&&e.apply(i,a)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach(e=>e.innerHTML="<code>⌘</code>&nbsp;+&nbsp;<code>K</code>")}function tokenizeSearchTerms(e){const t=[],n=/"([^"]+)"|(\S+)/g;let r;for(;null!==(r=n.exec(e));){const e=(r[1]||r[2]).toLowerCase();e.length>1&&t.push(e)}return t.sort((e,t)=>t.length-e.length)}function highlightTerms(e,t){if(!t||0===t.length||!e)return e;let n=e;return t.forEach(e=>{const t=e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=new RegExp(`(${t})`,"gi");n=n.replace(r,'<span class="search-highlight">$1</span>')}),n}function getContextualExcerpt(e,t,n=150){if(!e)return"";const r=e.replace(/<[^>]*>/g,"");if(!t||0===t.length)return truncateText(r,n);let i=r.length;if(t.forEach(e=>{const t=r.toLowerCase().indexOf(e.toLowerCase());-1!==t&&t<i&&(i=t)}),i===r.length)return truncateText(r,n);const a=Math.max(0,i-50),s=Math.min(r.length,a+n);let o=r.substring(a,s);return a>0&&(o="..."+o),s<r.length&&(o+="..."),o}function truncateText(e,t){return e?(e=e.replace(/<[^>]*>/g,"")).length<=t?e:e.substring(0,t-3)+"...":""}async function fetchPreviewContent(e){if(previewCache.has(e))return previewCache.get(e);try{const t=await fetch(e),n=await t.text(),r=new DOMParser,i=r.parseFromString(n,"text/html").querySelector(".content, .cm-s-obsidian, article, main"),a=i?i.innerHTML:"";return previewCache.set(e,a),a}catch(e){return console.error("Failed to fetch preview:",e),""}}function highlightTextNodes(e,t){if(!t||0===t.length)return;const n=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,!1),r=[];for(;n.nextNode();)r.push(n.currentNode);r.forEach(e=>{const n=e.textContent;let r=!1;if(t.forEach(e=>{n.toLowerCase().includes(e.toLowerCase())&&(r=!0)}),r){const r=document.createElement("span");r.innerHTML=highlightTerms(n,t),e.parentNode.replaceChild(r,e)}})}async function showPreview(e){const t=window.searchResults;if(!t||!t[e])return;const n=t[e],r=document.getElementById("search-preview"),i=document.getElementById("preview-content"),a=r.querySelector(".preview-placeholder");if(!r||!i)return;document.querySelectorAll(".searchresult").forEach(e=>e.classList.remove("active"));const s=document.querySelector(`.searchresult[data-index="${e}"]`);s&&s.classList.add("active"),i.innerHTML=loadingSvg,i.classList.add("has-content"),a.style.display="none";const o=await fetchPreviewContent(n.url),c=n.tags&&n.tags.length>0?`<div class="preview-tags">${n.tags.map(e=>`<a class="tag" href="javascript:void(0);" onclick="toggleTagSearch(this)">#${e}</a>`).join("")}</div>`:"";i.innerHTML=`\n            <div class="preview-title">${highlightTerms(n.title,window.searchTerms)}</div>\n            ${c}\n            <div class="preview-body">${o}</div>\n        `;const l=i.querySelector(".preview-body");l&&window.searchTerms&&highlightTextNodes(l,window.searchTerms),window.currentPreviewIndex=e}function hidePreview(){const e=document.getElementById("search-preview"),t=document.getElementById("preview-content"),n=e?.querySelector(".preview-placeholder");n&&(n.style.display="flex"),t&&(t.classList.remove("has-content"),t.innerHTML=""),window.currentPreviewIndex=-1}function createIndex(e){const t=e=>(e=>e.toLowerCase().normalize("NFD").replace(/n\u0303/g,"ñ").replace(/[\u0300-\u036f]/g,"").normalize("NFC"))(e).split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})}),n}async function init(){const e=await fetch("/searchIndex.json?v=2026-10-08T08:57:28.308Z").then(e=>e.json()),t=createIndex(e);function n(e){const t=document.querySelectorAll(".searchresult");if(0===t.length)return;let n,r=-1;t.forEach((e,t)=>{e.classList.contains("active")&&(r=t)}),-1===r?n=e>0?0:t.length-1:(n=r+e,n<0&&(n=t.length-1),n>=t.length&&(n=0)),t.forEach(e=>e.classList.remove("active")),t[n].classList.add("active"),t[n].scrollIntoView({behavior:"smooth",block:"nearest"}),showPreview(parseInt(t[n].dataset.index))}window.docs=e,window.index=t,document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")&&("ArrowDown"===e.key&&(e.preventDefault(),n(1)),"ArrowUp"===e.key&&(e.preventDefault(),n(-1)),"Enter"===e.key)){e.preventDefault();const t=document.querySelector(".searchresult.active");if(t){const e=t.dataset.url;e&&(window.location.href=e)}}});const r=debounce(search,200,!1);window.field=document.querySelector("#term"),field.addEventListener("keydown",e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&"Enter"!==e.key&&r()}),window.resultsDiv=document.querySelector("#search-results");const i=new URL(location.href).searchParams;i.get("q")&&(field.setAttribute("value",i.get("q")),toggleSearch(),search())}async function search(){const e=field.value.trim(),t=document.getElementById("search-layout");if(!e)return resultsDiv.innerHTML="<span><i>Enter your search text in the box above</i></span>",hidePreview(),void(t&&t.classList.add("no-preview"));window.lastSearch=e,window.searchTerms=tokenizeSearchTerms(e),resultsDiv.innerHTML=loadingSvg,hidePreview();const n=offlineSearch(e);if(window.searchResults=n,!n.length)return t&&t.classList.add("no-preview"),void(resultsDiv.innerHTML=`\n                <div class="no-results">\n                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n                        <circle cx="11" cy="11" r="8"></circle>\n                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>\n                        <line x1="8" y1="11" x2="14" y2="11"></line>\n                    </svg>\n                    <p>No results for "${e}"</p>\n                </div>\n            `);t&&t.classList.remove("no-preview");let r="";n.forEach((e,t)=>{const n=highlightTerms(getContextualExcerpt(e.content,window.searchTerms,120),window.searchTerms),i=highlightTerms(e.title,window.searchTerms),a=e.tags&&e.tags.length>0?`<div class="result-tags">${e.tags.map(e=>`<span class="tag">#${e}</span>`).join("")}</div>`:"";r+=`\n                <div class="searchresult${0===t?" active":""}"\n                     data-index="${t}"\n                     data-url="${e.url}"\n                     onmouseenter="showPreview(${t})"\n                     onclick="window.location.href='${e.url}'">\n                    <span class="result-title">${i}</span>\n                    ${a}\n                    <div class="result-excerpt">${n}</div>\n                </div>\n            `}),resultsDiv.innerHTML=r,n.length>0&&showPreview(0),"undefined"!=typeof lucide&&lucide.createIcons()}function offlineSearch(e){const t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",limit:10}]),r=e=>{const t=n.filter(t=>t.field===e);return 0===t.length?[]:[...t[0].result]};return[...new Set([...r("title"),...r("content"),...r("tags")])].map(e=>{const n={...t[e]};return n.tags=n.tags.filter(e=>"gardenEntry"!==e&&"note"!==e),n})}window.lastSearch="",window.searchResults=[],window.searchTerms=[],window.currentPreviewIndex=-1,window.search=search</script>
-<main class="content cm-s-obsidian print">
-<header>
-<h1 data-note-icon="">C</h1>
-<div class="header-meta">
-<div class="header-tags">
-<a class="tag" onclick="toggleTagSearch(this)">
-#knowledge-base
-</a>
-<a class="tag" onclick="toggleTagSearch(this)">
-#german
-</a>
-</div>
-<div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2026-04-14T16:55:57.868+02:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-04-22T18:59:14.314+02:00"></span></div></div></div>
-</header>
-<h2 id="strncpy-strncat" tabindex="-1">strncpy, strncat</h2>
-<pre><code class="language-C">char * strncpy ( char * destination, const char * source, size_t num );
+} </script> <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/dist/pixi.min.js"></script> <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:!0})</script> <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> <script>window.addEventListener("load",()=>{document.querySelectorAll(".callout").forEach(e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("data-lucide",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}}),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach(e=>{e.querySelector(".callout-title").addEventListener("click",t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")})})})</script> <script defer="defer" src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script> <script defer="defer" src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async> <script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script> <link href="/styles/obsidian-base.css" rel="stylesheet"> <link href="/styles/digital-garden-base.css" rel="stylesheet"> <link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-08T10:44:46.817Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-08T10:44:46.817Z" rel="stylesheet"> <link rel="icon" href="/favicon.ico" sizes="any"> <link rel="icon" href="/favicon.svg" type="image/svg+xml"> <link rel="apple-touch-icon" href="/apple-touch-icon.png"> <link rel="manifest" href="/manifest.webmanifest"> <style></style> </head> <body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section"> <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}"> <div x-show.important="!isDesktop" style="display:none"> <nav class="navbar"> <div class="navbar-inner"> <span style="font-size:1.5rem;margin-right:10px" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span> <a href="/" style="text-decoration:none;flex:1;display:flex;justify-content:center"> <img class="site-logo" src="/logo.svg" alt="janek.ing"> </a> </div> <div class="navbar-actions"> <div class="search-button align-icon" onclick="toggleSearch()"> <span class="search-icon"> <i data-lucide="search"></i> </span> <span class="search-text">Search</span> <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span> </div> <button type="button" class="page-panel-toggle" aria-controls="page-panel" aria-expanded="false" aria-label="On this page" title="On this page"> <i data-lucide="panel-right"></i> </button> </div> </nav> </div> <div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div> <div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display:none"> <nav class="filetree-sidebar"> <a href="/" style="text-decoration:none;display:flex;justify-content:center"> <img class="site-logo" src="/logo.svg" alt="janek.ing"> </a> <div class="search-button align-icon" onclick="toggleSearch()"> <span class="search-icon"> <i data-lucide="search"></i> </span> <span class="search-text">Search</span> <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span> </div> <div class="folder" x-data="{isOpen: true}"> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Arbeit&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Arbeit</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/arbeit/agile/">Agile </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Code</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code/Langauges&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Langauges</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink active-note"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/bullshit-detector/">Bullshit detector </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Design&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Design</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Life&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Life</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Tech&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Tech</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Writing&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Writing</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a> </div> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> </div> </div> </nav> </div> </div> <main class="content cm-s-obsidian print"> <header> <h1 data-note-icon="">C</h1> <div class="header-meta"> <div class="header-tags"> <a class="tag"> #knowledge-base </a> <a class="tag"> #german </a> </div> </div> <div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2026-04-14T16:55:57.868+02:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-04-22T18:59:14.314+02:00"></span></div></div> </header> <h2 id="strncpy-strncat" tabindex="-1">strncpy, strncat</h2> <pre><code class="language-C">char * strncpy ( char * destination, const char * source, size_t num );
 
 char * strncat ( char * destination, const char * source, size_t num );
-</code></pre>
-<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> warning<br></div></div>
-<div class="callout-content">
-<p>
-destination ist nicht null-terminiert, wenn <code>strlen(source) &gt;= num</code></p>
-</div></div>
-<p>Besser ist Folgendes:</p>
-<pre><code class="language-C">// Ineffizient wenn src deutlich kürzer, weil Rest von dest mit 0 gefüllt wird
+</code></pre> <div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> warning<br></div></div> <div class="callout-content"> <p> destination ist nicht null-terminiert, wenn <code>strlen(source) &gt;= num</code></p> </div></div> <p>Besser ist Folgendes:</p> <pre><code class="language-C">// Ineffizient wenn src deutlich kürzer, weil Rest von dest mit 0 gefüllt wird
 char dest[64] = &quot;&quot;;
 strncpy(dest, src, sizeof(dest) - 1);
 dest[sizeof(dest)-1] = 0
@@ -388,26 +17,7 @@ dest[0] = 0;
 strncat(dest, src, sizeof(dest) - 1);
 // Anhängen an Vorhandenes
 strncat(dest, src, sizeof(dest) - strlen(dest) - 1);
-</code></pre>
-<p>strncpy füllt Buffer komplett mit 0 auf, wenn <code>strlen(source) &lt; num</code>, daher bei strings mit deutlich unterschiedlicher Länger als Alternative strncat oder memmove in Betracht ziehen!</p>
-<h2 id="operator-precedence" tabindex="-1">Operator Precedence</h2>
-<p><a href="https://en.cppreference.com/w/c/language/operator_precedence" target="_blank" class="external-link">https://en.cppreference.com/w/c/language/operator_precedence</a></p>
-<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> warning<br></div></div>
-<div class="callout-content">
-<p>
-<code>a &amp; b == c</code> wird als <code>a &amp; (b == c)</code> evaluiert (gleiches gilt für die anderen bitwise Operatoren <code>^ |</code> und Vergleiche <code>&lt; &gt; &lt;= &gt;=</code>).<br>
-Evaluations Reihenfolge: (quasi alle Operatoren) -&gt; &amp; AND -&gt; ^ XOR -&gt; | OR -&gt; Logical -&gt; ternary -&gt; assignment -&gt; comma operator</p>
-</div></div>
-<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner">Warning</div></div>
-<div class="callout-content">
-<p>
-<code>&lt;&lt;</code> und <code>&gt;&gt;</code> werden nach <code>+ - * /</code> evaluiert, aber vor den meisten anderen Operatoren</p>
-</div></div>
-<h2 id="dynamischer-array-ohne-templates" tabindex="-1">Dynamischer Array ohne Templates</h2>
-<p><a href="https://github.com/tree-sitter/tree-sitter/blob/master/lib/src/array.h" target="_blank" class="external-link">https://github.com/tree-sitter/tree-sitter/blob/master/lib/src/array.h</a><br>
-Nutzt macro zur Definition eines eigenen structs pro Type.</p>
-<h2 id="malloc-sizeof" tabindex="-1">malloc + sizeof</h2>
-<pre><code class="language-C">struct someStruct *var = malloc(sizeof(struct someStruct));
+</code></pre> <p>strncpy füllt Buffer komplett mit 0 auf, wenn <code>strlen(source) &lt; num</code>, daher bei strings mit deutlich unterschiedlicher Länger als Alternative strncat oder memmove in Betracht ziehen!</p> <h2 id="operator-precedence" tabindex="-1">Operator Precedence</h2> <p><a href="https://en.cppreference.com/w/c/language/operator_precedence" target="_blank" class="external-link">https://en.cppreference.com/w/c/language/operator_precedence</a></p> <div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> warning<br></div></div> <div class="callout-content"> <p> <code>a &amp; b == c</code> wird als <code>a &amp; (b == c)</code> evaluiert (gleiches gilt für die anderen bitwise Operatoren <code>^ |</code> und Vergleiche <code>&lt; &gt; &lt;= &gt;=</code>).<br> Evaluations Reihenfolge: (quasi alle Operatoren) -&gt; &amp; AND -&gt; ^ XOR -&gt; | OR -&gt; Logical -&gt; ternary -&gt; assignment -&gt; comma operator</p> </div></div> <div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner">Warning</div></div> <div class="callout-content"> <p> <code>&lt;&lt;</code> und <code>&gt;&gt;</code> werden nach <code>+ - * /</code> evaluiert, aber vor den meisten anderen Operatoren</p> </div></div> <h2 id="dynamischer-array-ohne-templates" tabindex="-1">Dynamischer Array ohne Templates</h2> <p><a href="https://github.com/tree-sitter/tree-sitter/blob/master/lib/src/array.h" target="_blank" class="external-link">https://github.com/tree-sitter/tree-sitter/blob/master/lib/src/array.h</a><br> Nutzt macro zur Definition eines eigenen structs pro Type.</p> <h2 id="malloc-sizeof" tabindex="-1">malloc + sizeof</h2> <pre><code class="language-C">struct someStruct *var = malloc(sizeof(struct someStruct));
 // better (code does not need to change if type changes):
 struct someStruct *var = malloc(sizeof(*var));
 // usually even better (fills with 0)
@@ -416,37 +26,17 @@ struct someStruct *var = calloc(1, sizeof(*var));
 // NOTE: inits to default values in C++ (0 if no defaults given)
 struct someStruct var = {.member = 1, ...};
 struct someStruct var = {0};
-</code></pre>
-<p><a href="https://felipec.wordpress.com/2024/03/03/c-skill-issue-how-the-white-house-is-wrong/" target="_blank" class="external-link">https://felipec.wordpress.com/2024/03/03/c-skill-issue-how-the-white-house-is-wrong/</a></p>
-<h2 id="malloc-calloc-realloc-pitfalls" tabindex="-1">malloc / calloc / realloc pitfalls</h2>
-<ul>
-<li>malloc and realloc take NUMBER OF BYTES as argument, calloc takes NUMBER OF ELEMENTS and ELEMENT SIZE</li>
-<li>do not call realloc with size 0 instead of free. Behavior is implementation defined and not necessarily equivalent (<a href="https://en.cppreference.com/w/c/memory/realloc.html" target="_blank" class="external-link">source</a>) - in C23 it is even undefined behavior!</li>
-<li>realloc is not guaranteed to re-use the existing block of memory (even if new size is smaller), so do not rely on it (e.g. you need to update pointers to this variable)</li>
-<li>calloc 0-initializes the memory, malloc and realloc do NOT</li>
-<li>it IS OK to call realloc with a nullptr argument, it behaves the same as malloc then</li>
-<li>do NOT call free twice on the same pointr. It IS OK to call free on a nullptr.</li>
-</ul>
-<h2 id="offsetof-container-of-macro" tabindex="-1">offsetof, container_of macro</h2>
-<p><a href="https://en.cppreference.com/w/c/types/offsetof" target="_blank" class="external-link">offsetof</a> gets the byte offset for a member in a struct:</p>
-<pre><code class="language-C">// Check if order of memers in two structs are equal
+</code></pre> <p><a href="https://felipec.wordpress.com/2024/03/03/c-skill-issue-how-the-white-house-is-wrong/" target="_blank" class="external-link">https://felipec.wordpress.com/2024/03/03/c-skill-issue-how-the-white-house-is-wrong/</a></p> <h2 id="malloc-calloc-realloc-pitfalls" tabindex="-1">malloc / calloc / realloc pitfalls</h2> <ul> <li>malloc and realloc take NUMBER OF BYTES as argument, calloc takes NUMBER OF ELEMENTS and ELEMENT SIZE</li> <li>do not call realloc with size 0 instead of free. Behavior is implementation defined and not necessarily equivalent (<a href="https://en.cppreference.com/w/c/memory/realloc.html" target="_blank" class="external-link">source</a>) - in C23 it is even undefined behavior!</li> <li>realloc is not guaranteed to re-use the existing block of memory (even if new size is smaller), so do not rely on it (e.g. you need to update pointers to this variable)</li> <li>calloc 0-initializes the memory, malloc and realloc do NOT</li> <li>it IS OK to call realloc with a nullptr argument, it behaves the same as malloc then</li> <li>do NOT call free twice on the same pointr. It IS OK to call free on a nullptr.</li> </ul> <h2 id="offsetof-container-of-macro" tabindex="-1">offsetof, container_of macro</h2> <p><a href="https://en.cppreference.com/w/c/types/offsetof" target="_blank" class="external-link">offsetof</a> gets the byte offset for a member in a struct:</p> <pre><code class="language-C">// Check if order of memers in two structs are equal
 // So one can be casted into the other
 static_assert(offsetof(Vector2, x) == offsetof(Rectangle, x) &amp;&amp; offsetof(Vector2, y) == offsetof(Rectangle, y));
-</code></pre>
-<p>container_of() is part of the Linux kernel and basically does the reverse, pass in a pointer to a member and get a pointer for the surrounding type: <a href="https://radek.io/2012/11/10/magical-container_of-macro/" target="_blank" class="external-link">https://radek.io/2012/11/10/magical-container_of-macro/</a></p>
-<h2 id="macro-stringification" tabindex="-1">Macro stringification</h2>
-<pre><code class="language-C">#define MAKESTRING(n) STRING(n)
+</code></pre> <p>container_of() is part of the Linux kernel and basically does the reverse, pass in a pointer to a member and get a pointer for the surrounding type: <a href="https://radek.io/2012/11/10/magical-container_of-macro/" target="_blank" class="external-link">https://radek.io/2012/11/10/magical-container_of-macro/</a></p> <h2 id="macro-stringification" tabindex="-1">Macro stringification</h2> <pre><code class="language-C">#define MAKESTRING(n) STRING(n)
 #define STRING(n) #n
 
 // prints __LINE__ (not expanded)
 std::cout &lt;&lt; STRING(__LINE__) &lt;&lt; std::endl;
 // prints 42 (line number)
 std::cout &lt;&lt; MAKESTRING(__LINE__) &lt;&lt; std::endl;
-</code></pre>
-<p>This is the stringize operation, it will produce a string literal from macro parameter (<code>n</code>). Two lines are required to allow extra expansion of macro parameter. (<a href="https://stackoverflow.com/a/48464280" target="_blank" class="external-link">https://stackoverflow.com/a/48464280</a>)</p>
-<h2 id="open-mp-simple-parallelisierung" tabindex="-1">OpenMP - Simple Parallelisierung</h2>
-<p><a href="https://nullprogram.com/blog/2017/03/01/" target="_blank" class="external-link">OpenMP and pwrite() (nullprogram.com)</a></p>
-<pre><code class="language-C">/* schedule(dynamic, 1): treat the loop like a work queue */
+</code></pre> <p>This is the stringize operation, it will produce a string literal from macro parameter (<code>n</code>). Two lines are required to allow extra expansion of macro parameter. (<a href="https://stackoverflow.com/a/48464280" target="_blank" class="external-link">https://stackoverflow.com/a/48464280</a>)</p> <h2 id="open-mp-simple-parallelisierung" tabindex="-1">OpenMP - Simple Parallelisierung</h2> <p><a href="https://nullprogram.com/blog/2017/03/01/" target="_blank" class="external-link">OpenMP and pwrite() (nullprogram.com)</a></p> <pre><code class="language-C">/* schedule(dynamic, 1): treat the loop like a work queue */
 #pragma omp parallel for schedule(dynamic, 1)
 for (int i = 0; i &lt; num_frames; i++) {
     struct frame *frame = malloc(sizeof(*frame));
@@ -459,17 +49,7 @@ for (int i = 0; i &lt; num_frames; i++) {
     }
     free(frame);
 }
-</code></pre>
-<p><code>#pragma</code> wird ignoriert, wenn OpenMP nicht unterstützt wird -&gt; Code läuft normal ab, wird nur nicht parallelisiert.<br>
-Wird auch von Windows unterstützt (bis OpenMP 2.0)</p>
-<h2 id="switch" tabindex="-1">switch</h2>
-<p>switch wird in Assembler als Jump-Table umgesetzt. Input wird in Speicheradresse umgerechnet, an der sich der Code für die korrekte Anweisung aus dem switch befindet.<br>
-Complexity: O(1) + C<br>
-if-tree Complexity: O(n) + K | K &lt; C<br>
--&gt; schneller als if-tree wenn man viele Bedingungen hat<br>
-<a href="https://www.youtube.com/watch?v=fjUG_y5ZaL4" target="_blank" class="external-link">https://www.youtube.com/watch?v=fjUG_y5ZaL4</a></p>
-<h2 id="compiler-linker" tabindex="-1">Compiler, Linker</h2>
-<pre><code>Preprocessor only:
+</code></pre> <p><code>#pragma</code> wird ignoriert, wenn OpenMP nicht unterstützt wird -&gt; Code läuft normal ab, wird nur nicht parallelisiert.<br> Wird auch von Windows unterstützt (bis OpenMP 2.0)</p> <h2 id="switch" tabindex="-1">switch</h2> <p>switch wird in Assembler als Jump-Table umgesetzt. Input wird in Speicheradresse umgerechnet, an der sich der Code für die korrekte Anweisung aus dem switch befindet.<br> Complexity: O(1) + C<br> if-tree Complexity: O(n) + K | K &lt; C<br> -&gt; schneller als if-tree wenn man viele Bedingungen hat<br> <a href="https://www.youtube.com/watch?v=fjUG_y5ZaL4" target="_blank" class="external-link">https://www.youtube.com/watch?v=fjUG_y5ZaL4</a></p> <h2 id="compiler-linker" tabindex="-1">Compiler, Linker</h2> <pre><code>Preprocessor only:
 &gt; gcc -E main.c -o main.i
 Compiler:
 &gt; gcc -S main.i -o main.s
@@ -481,10 +61,7 @@ Linker:
 &gt; ld obj1.o /usr/lib/obj2.o -lc main.o -dynamic-linker dynamiclib.so -o main.exe
 Full pipeline:
 &gt; gcc -o out.exe ./main.c -llibraryname -LLibrary/directory
-</code></pre>
-<p>Compiler generiert Object-Datei (.o, .obj). Diese enthält Assembler + Informationen zu Abhängigkeiten und Aufbau für Linker.<br>
-Linker verbindet mehrere Objekt-Dateien zu einer Executable.</p>
-<pre><code>Dump Assembler:
+</code></pre> <p>Compiler generiert Object-Datei (.o, .obj). Diese enthält Assembler + Informationen zu Abhängigkeiten und Aufbau für Linker.<br> Linker verbindet mehrere Objekt-Dateien zu einer Executable.</p> <pre><code>Dump Assembler:
 &gt; gcc -S file.c
 &gt; gcc -S -o asm_output.s file.c
 
@@ -499,19 +76,10 @@ https://stackoverflow.com/a/38552509
 
 Show dependencies:
 ldd main.exe
-</code></pre>
-<h2 id="p-null-vs-null-p" tabindex="-1">p == NULL vs NULL == p</h2>
-<pre><code class="language-C">void *p = malloc(8);
+</code></pre> <h2 id="p-null-vs-null-p" tabindex="-1">p == NULL vs NULL == p</h2> <pre><code class="language-C">void *p = malloc(8);
 if (p = NULL) {} // no error, p is assigned NULL
 if (NULL = p) {} // error, we wanted to write NULL == p
-</code></pre>
-<h2 id="main" tabindex="-1">main()</h2>
-<p>main() wird vom Compiler anders optimiert, da die Funktion nur einmal aufgerufen wird (Aussage irgendwo bei Stackoverflow gelesen)</p>
-<h2 id="bit-hacks" tabindex="-1">Bit Hacks</h2>
-<p><a href="https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel" target="_blank" class="external-link">https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel</a><br>
-Count set bits in an int32 and more...</p>
-<h2 id="bitmask-with-more-than-64-entries" tabindex="-1">Bitmask with more than 64 entries</h2>
-<pre><code class="language-C">internal b32
+</code></pre> <h2 id="main" tabindex="-1">main()</h2> <p>main() wird vom Compiler anders optimiert, da die Funktion nur einmal aufgerufen wird (Aussage irgendwo bei Stackoverflow gelesen)</p> <h2 id="bit-hacks" tabindex="-1">Bit Hacks</h2> <p><a href="https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel" target="_blank" class="external-link">https://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel</a><br> Count set bits in an int32 and more...</p> <h2 id="bitmask-with-more-than-64-entries" tabindex="-1">Bitmask with more than 64 entries</h2> <pre><code class="language-C">internal b32
 EntityHasProperty(Entity *entity, EntityProperty property)
 {
     return !!(entity-&gt;properties[property / 64] &amp; (1ull &lt;&lt; (property % 64)));
@@ -536,22 +104,7 @@ struct Entity {
 	u64 properties[(EntityProperty_MAX+63)/64];
 	// ...
 }
-</code></pre>
-<p>Simple solution of using an &quot;automatically&quot; scaling array (at compile time) and accessor functions, which target the right entry for a given value.</p>
-<h2 id="stack-space" tabindex="-1">Stack space</h2>
-<p>Stack space is limited and you can run out, especially if you place a large array on it.<br>
-Default limits</p>
-<ul>
-<li>MSVC: 1MB</li>
-<li>Linux: 8MB (defined by OS)<br>
-To increase the limit</li>
-<li>MSVC: <code>/F</code> compiler option <a href="https://learn.microsoft.com/en-us/cpp/build/reference/f-set-stack-size?view=msvc-170&amp;redirectedfrom=MSDN" target="_blank" class="external-link">Documentation</a></li>
-<li>GCC (Windows): <code>-Wl,--stack,&lt;bytes&gt;</code> option <a href="https://stackoverflow.com/a/54838059" target="_blank" class="external-link">Source</a></li>
-<li>Linux: <code>ulimit -s</code> (globally) or <a href="https://stackoverflow.com/questions/2275550/change-stack-size-for-a-c-application-in-linux-during-compilation-with-gnu-com" target="_blank" class="external-link">locally</a><br>
-If you run out of stack due to allocations, the program might crash directly after startup (usually without an error message). The error will be in the <code>chkstk.asm</code> module. <a href="https://stackoverflow.com/questions/38854133/app-crash-after-modifying-a-structure" target="_blank" class="external-link">c++ - App crash after modifying a structure - Stack Overflow</a></li>
-</ul>
-<h2 id="opaque-struct" tabindex="-1">Opaque struct</h2>
-<pre><code class="language-c">// foo.h
+</code></pre> <p>Simple solution of using an &quot;automatically&quot; scaling array (at compile time) and accessor functions, which target the right entry for a given value.</p> <h2 id="stack-space" tabindex="-1">Stack space</h2> <p>Stack space is limited and you can run out, especially if you place a large array on it.<br> Default limits</p> <ul> <li>MSVC: 1MB</li> <li>Linux: 8MB (defined by OS)<br> To increase the limit</li> <li>MSVC: <code>/F</code> compiler option <a href="https://learn.microsoft.com/en-us/cpp/build/reference/f-set-stack-size?view=msvc-170&amp;redirectedfrom=MSDN" target="_blank" class="external-link">Documentation</a></li> <li>GCC (Windows): <code>-Wl,--stack,&lt;bytes&gt;</code> option <a href="https://stackoverflow.com/a/54838059" target="_blank" class="external-link">Source</a></li> <li>Linux: <code>ulimit -s</code> (globally) or <a href="https://stackoverflow.com/questions/2275550/change-stack-size-for-a-c-application-in-linux-during-compilation-with-gnu-com" target="_blank" class="external-link">locally</a><br> If you run out of stack due to allocations, the program might crash directly after startup (usually without an error message). The error will be in the <code>chkstk.asm</code> module. <a href="https://stackoverflow.com/questions/38854133/app-crash-after-modifying-a-structure" target="_blank" class="external-link">c++ - App crash after modifying a structure - Stack Overflow</a></li> </ul> <h2 id="opaque-struct" tabindex="-1">Opaque struct</h2> <pre><code class="language-c">// foo.h
 typedef struct foo foo;
 foo *init();
 void doStuff(foo *f);
@@ -562,12 +115,7 @@ struct foo {
     int x;
     int y;
 };
-</code></pre>
-<p>Hides internal details, datamembers and functions of a struct from the user (i.e. only the struct name is known to the public API). Essentially this means: do not access the internals of this struct manually, only pass it to the accompanying API functions. Is the equivalent of making things protected/private in C++.<br>
-Advantage: Implementation details of struct can change and user-code is unaffected.<br>
-Allows multiple implementations of the same concept/interface (e.g. for <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#platform-independent-code">platform specific code</a>)</p>
-<h2 id="bitshift" tabindex="-1">Bitshift</h2>
-<pre><code class="language-C">// &gt;&gt; shifts all bits right and fills with 0 (+int and uint) or 1 (-int, preserves sign bit, technically compiler dependant)
+</code></pre> <p>Hides internal details, datamembers and functions of a struct from the user (i.e. only the struct name is known to the public API). Essentially this means: do not access the internals of this struct manually, only pass it to the accompanying API functions. Is the equivalent of making things protected/private in C++.<br> Advantage: Implementation details of struct can change and user-code is unaffected.<br> Allows multiple implementations of the same concept/interface (e.g. for <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#platform-independent-code">platform specific code</a>)</p> <h2 id="bitshift" tabindex="-1">Bitshift</h2> <pre><code class="language-C">// &gt;&gt; shifts all bits right and fills with 0 (+int and uint) or 1 (-int, preserves sign bit, technically compiler dependant)
 // -1 is all bits=1 in two's complement
 // &lt;&lt; always fills with 0 and preserves sign bit on int
 
@@ -577,10 +125,7 @@ printf(&quot;%d | %d\n&quot;, test &lt;&lt; 2, test &gt;&gt; 2);
 test = -1;
 printf(&quot;%d %d\n&quot;, test &lt;&lt; 2, test &gt;&gt; 2);
 // prints -4 | -1
-</code></pre>
-<p>More info: <a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E" target="_blank" class="external-link">https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_&gt;&gt;</a></p>
-<h2 id="rounding" tabindex="-1">Rounding</h2>
-<pre><code> val | cast | floorf | roundf | ceilf
+</code></pre> <p>More info: <a href="https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_%3E%3E" target="_blank" class="external-link">https://en.wikipedia.org/wiki/Bitwise_operations_in_C#Right_shift_&gt;&gt;</a></p> <h2 id="rounding" tabindex="-1">Rounding</h2> <pre><code> val | cast | floorf | roundf | ceilf
 -1.9 |   -1 |   -2.0 |   -2.0 | -1.0
 -1.5 |   -1 |   -2.0 |   -2.0 | -1.0
 -1.2 |   -1 |   -2.0 |   -1.0 | -1.0
@@ -593,13 +138,7 @@ printf(&quot;%d %d\n&quot;, test &lt;&lt; 2, test &gt;&gt; 2);
  1.2 |    1 |    1.0 |    1.0 |  2.0
  1.5 |    1 |    1.0 |    2.0 |  2.0
  1.9 |    1 |    1.0 |    2.0 |  2.0
-</code></pre>
-<ul>
-<li>(int)-cast not recommended for values that can be both positive and negative, since the range (-1,1) gets mapped to 0, basically introducing an off-by-one error whenever we cross 0 (e.g. when dealing with float 2D/3D coordinates converted to integer pixels)</li>
-<li>floorf and ceilf are more consistent and map the same amount of values to a single int across the whole range of float/double</li>
-<li>roundf has the problem that both +0.5 and -0.5 get rounded away from zero and one has to deal with the fact, that the switch from one int to the next happens in the middle between two values</li>
-</ul>
-<pre><code class="language-C">#include &lt;stdout.h&gt;
+</code></pre> <ul> <li>(int)-cast not recommended for values that can be both positive and negative, since the range (-1,1) gets mapped to 0, basically introducing an off-by-one error whenever we cross 0 (e.g. when dealing with float 2D/3D coordinates converted to integer pixels)</li> <li>floorf and ceilf are more consistent and map the same amount of values to a single int across the whole range of float/double</li> <li>roundf has the problem that both +0.5 and -0.5 get rounded away from zero and one has to deal with the fact, that the switch from one int to the next happens in the middle between two values</li> </ul> <pre><code class="language-C">#include &lt;stdout.h&gt;
 
 int main()
 {
@@ -611,9 +150,7 @@ int main()
         printf(&quot;% 4.1f | %4d | % 6.1f | % 6.1f | % 4.1f\n&quot;, v, (int)v, floorf(v), roundf(v), ceilf(v));
     }
 }
-</code></pre>
-<h2 id="sign-bit-integer-demotion-and-shift" tabindex="-1">sign bit - integer demotion and shift</h2>
-<pre><code class="language-C">#include &lt;stdint.h&gt;
+</code></pre> <h2 id="sign-bit-integer-demotion-and-shift" tabindex="-1">sign bit - integer demotion and shift</h2> <pre><code class="language-C">#include &lt;stdint.h&gt;
 int64_t test = -(1ULL &lt;&lt; 32) - 2;
 int32_t test2 = test;
 printf(&quot;%lld %d\n&quot;, test, test2);
@@ -622,32 +159,7 @@ printf(&quot;%lld %d\n&quot;, test, test2);
 int x = -16;
 printf(&quot;%d | %d\n&quot;, x &gt;&gt; 2, x &gt;&gt; 6);
 // prints -4 | -1
-</code></pre>
-<ul>
-<li>Casting a bigger int type to a smaller one will preserve the lower N-1 bits and the sign (or lower N bits for unsigned types)</li>
-<li>Shifting a negative number left is undefined behavior!
-<ul>
-<li>Source: <a href="https://stackoverflow.com/a/22734721" target="_blank" class="external-link">https://stackoverflow.com/a/22734721</a></li>
-<li>The compilers I tested (MSVC and GCC) seem to implement this as a logical shift (i.e. the sign bit is not preserved so it might flip depending on the data)</li>
-</ul>
-</li>
-<li>Shifting right will move all bits over toward the LSB and then fill the gap with the value of the sign bit. Essentially this will divide the number by 2 and round towards negative infinity. The lowest you can get for negative numbers is -1 because it is all 1s in <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank" class="external-link">Two's complement</a>. NOTE: This is actually <a href="https://stackoverflow.com/a/1857965" target="_blank" class="external-link">implementation dependent</a>, but the big compilers all seem to work this way.
-<ul>
-<li>This is an arithmetic shift (preserving the sign bit)</li>
-</ul>
-</li>
-</ul>
-<h2 id="implicit-conversions" tabindex="-1">Implicit conversions</h2>
-<p><a href="https://en.cppreference.com/w/c/language/conversion" target="_blank" class="external-link">Implicit conversions - cppreference.com</a><br>
-Breaking it down to practical rules (ignoring niche use-cases like complex and imaginary types).<br>
-Two different types as argument in an arithmetic operation are converted as follows:</p>
-<ol>
-<li>an integer is converted to match a floating type</li>
-<li>the smaller type is converted to match the larger type</li>
-<li>signed integers are converted to unsigned, unless the signed type can represent all possible values of the unsigned type (i.e. the signed type is bigger)<br>
-Examples:</li>
-</ol>
-<pre><code class="language-C">// rule 1
+</code></pre> <ul> <li>Casting a bigger int type to a smaller one will preserve the lower N-1 bits and the sign (or lower N bits for unsigned types)</li> <li>Shifting a negative number left is undefined behavior! <ul> <li>Source: <a href="https://stackoverflow.com/a/22734721" target="_blank" class="external-link">https://stackoverflow.com/a/22734721</a></li> <li>The compilers I tested (MSVC and GCC) seem to implement this as a logical shift (i.e. the sign bit is not preserved so it might flip depending on the data)</li> </ul> </li> <li>Shifting right will move all bits over toward the LSB and then fill the gap with the value of the sign bit. Essentially this will divide the number by 2 and round towards negative infinity. The lowest you can get for negative numbers is -1 because it is all 1s in <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank" class="external-link">Two's complement</a>. NOTE: This is actually <a href="https://stackoverflow.com/a/1857965" target="_blank" class="external-link">implementation dependent</a>, but the big compilers all seem to work this way. <ul> <li>This is an arithmetic shift (preserving the sign bit)</li> </ul> </li> </ul> <h2 id="implicit-conversions" tabindex="-1">Implicit conversions</h2> <p><a href="https://en.cppreference.com/w/c/language/conversion" target="_blank" class="external-link">Implicit conversions - cppreference.com</a><br> Breaking it down to practical rules (ignoring niche use-cases like complex and imaginary types).<br> Two different types as argument in an arithmetic operation are converted as follows:</p> <ol> <li>an integer is converted to match a floating type</li> <li>the smaller type is converted to match the larger type</li> <li>signed integers are converted to unsigned, unless the signed type can represent all possible values of the unsigned type (i.e. the signed type is bigger)<br> Examples:</li> </ol> <pre><code class="language-C">// rule 1
 1.f + 20000001 // 20000001 is converted to float 20000000.f
                // result after addition is float 20000000.f
                // (since 20000001.f is not representable)
@@ -667,85 +179,9 @@ Examples:</li>
                // NOTE: this example is different on 
                // cppreference and depends on the size of 
                // (unsigned) long which is 32-bits in my case
-</code></pre>
-<h2 id="files-text-vs-binary-mode" tabindex="-1">Files - text vs. binary mode</h2>
-<pre><code class="language-C">FILE *f = fopen(&quot;somefile.txt&quot;, &quot;r+&quot;); // text mode
+</code></pre> <h2 id="files-text-vs-binary-mode" tabindex="-1">Files - text vs. binary mode</h2> <pre><code class="language-C">FILE *f = fopen(&quot;somefile.txt&quot;, &quot;r+&quot;); // text mode
 FILE *b = fopen(&quot;somefile.txt&quot;, &quot;r+b&quot;); // binary mode
-</code></pre>
-<ul>
-<li>Text mode converts <code>\r\n</code> to <code>\n</code> on input and the other way around on output on a Windows machine (and maybe other characters too)</li>
-<li>because of this, fseek-ing into the middle of <code>\r\n</code> has some unexpected effects (probably undefined behavior)
-<ul>
-<li>reading might not produce the expected result and actually move the file pointer backwards before the <code>\r\n</code> sequence</li>
-</ul>
-</li>
-<li>this is one reason why fseek() should only be called with values of ftell() for text files (as per standard definition)</li>
-<li>reading from a text file or fseek-ing into it is slower than with a binary file
-<ul>
-<li>counting line breaks is about 2-3x faster with a binary file (using fread(), a for loop and a 65K buffer)</li>
-</ul>
-</li>
-<li>if the file is a text file fscanf, fgets, etc. work in both modes as expected (so if line endings do not matter, using binary mode can still be faster)</li>
-<li>Links
-<ul>
-<li><a href="https://stackoverflow.com/questions/20863959/difference-between-opening-a-file-in-binary-vs-text" target="_blank" class="external-link">c++ - Difference between opening a file in binary vs text - Stack Overflow</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="utf-8" tabindex="-1">UTF8</h3>
-<ul>
-<li>in both modes: watch out for <a href="https://stackoverflow.com/a/2223926" target="_blank" class="external-link">UTF8 BOM</a>
-<ul>
-<li>first 3 bytes</li>
-<li>hex: <code>0xEF, 0xBB, 0xBF</code></li>
-<li>uint: <code>239, 187, 191</code></li>
-<li>char: <code>-17, -69, -65</code></li>
-<li>Will probably not appear in a text editor and taken into account when calculating position (e.g. in Notepad++)</li>
-<li>Does appear in read chars in both text and binary mode and affects ftell()</li>
-</ul>
-</li>
-<li>UTF8 characters (which may be more than 1 Byte) can be read in both modes. Generally it is best to just treat them as bytes/char* and pass them unmodified to printf/puts/etc. (which &quot;just works&quot;), if looking into single characters is not required.
-<ul>
-<li>Note that strlen will not produce the &quot;expected&quot; results with multi-byte chars (i.e. count them as 2+)</li>
-<li>also the buffer holding them needs to account for this and potentially be bigger</li>
-</ul>
-</li>
-<li>Links
-<ul>
-<li><a href="https://stackoverflow.com/questions/21737906/how-to-read-write-utf8-text-files-in-c" target="_blank" class="external-link">linux - How to Read/Write UTF8 text files in C? - Stack Overflow</a></li>
-<li><a href="https://stackoverflow.com/questions/15528359/printing-utf-8-strings-with-printf-wide-vs-multibyte-string-literals" target="_blank" class="external-link">c - Printing UTF-8 strings with printf - wide vs. multibyte string literals - Stack Overflow</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="unity-build" tabindex="-1">Unity build</h2>
-<ul>
-<li><code>#include</code> all .c files in one file and only send that to the compiler</li>
-<li><a href="https://hereket.com/posts/cpp-unity-compile-inkscape/" target="_blank" class="external-link">Comparing C/C++ unity build with regular build on a large codebase | Hereket</a>
-<ul>
-<li>Faster than non-incremental builds</li>
-<li>Slower than &quot;clever&quot; incremental builds with tools like cmake+ninja (only compiling changed files)</li>
-</ul>
-</li>
-<li><a href="https://github.com/EpicGamesExt/raddebugger/blob/master/src/raddbg/raddbg_main.c#L196" target="_blank" class="external-link">Is also what raddbg uses</a> (main .c file <code>#includes</code> all .h and .c files - module .c files barely <code>#include</code>anything on their own - not even the corresponding .h file)</li>
-<li>Very simple compiler call, no need for cmake or a complicated build system: only need to specify one file, never change the compiler call</li>
-<li>Puts everything in one translation unit. This has advantages and disadvantages
-<ul>
-<li>Mostly no need for header files and forward declarations anymore. Define functions before use and it just works.</li>
-<li>Using invasive APIs like windows.h is tricky, because they pollute your whole environment. Most often it is the &quot;Rectangle&quot; definition in windows.h (e.g. conflicting with raylib). Getting libraries like this to work might still involve creating separate translation units for all code that uses the library/API (in NetworkMonitor there is a separate translation unit for code using windows API or curl, which includes the windows API internally, since these conflicted with raylib).
-<ul>
-<li>Using -DWIN32_LEAN_AND_MEAN can also help</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Sidenote: The C compiler is up to 10x faster than C++ compiler if templates and such are used in the C++ code</li>
-</ul>
-<h2 id="macro-best-practices" tabindex="-1">Macro best practices</h2>
-<ul>
-<li>For multiple statements: wrap in do ... while(0) loop</li>
-<li>Rationale: This prevents incorrect usage in unbracketed if statements, which would most likely lead to unexpected results. Also statements require a semicolon at the end as delimiter.</li>
-</ul>
-<pre><code class="language-C">#define foo(x) bar(x); baz(x)
+</code></pre> <ul> <li>Text mode converts <code>\r\n</code> to <code>\n</code> on input and the other way around on output on a Windows machine (and maybe other characters too)</li> <li>because of this, fseek-ing into the middle of <code>\r\n</code> has some unexpected effects (probably undefined behavior) <ul> <li>reading might not produce the expected result and actually move the file pointer backwards before the <code>\r\n</code> sequence</li> </ul> </li> <li>this is one reason why fseek() should only be called with values of ftell() for text files (as per standard definition)</li> <li>reading from a text file or fseek-ing into it is slower than with a binary file <ul> <li>counting line breaks is about 2-3x faster with a binary file (using fread(), a for loop and a 65K buffer)</li> </ul> </li> <li>if the file is a text file fscanf, fgets, etc. work in both modes as expected (so if line endings do not matter, using binary mode can still be faster)</li> <li>Links <ul> <li><a href="https://stackoverflow.com/questions/20863959/difference-between-opening-a-file-in-binary-vs-text" target="_blank" class="external-link">c++ - Difference between opening a file in binary vs text - Stack Overflow</a></li> </ul> </li> </ul> <h3 id="utf-8" tabindex="-1">UTF8</h3> <ul> <li>in both modes: watch out for <a href="https://stackoverflow.com/a/2223926" target="_blank" class="external-link">UTF8 BOM</a> <ul> <li>first 3 bytes</li> <li>hex: <code>0xEF, 0xBB, 0xBF</code></li> <li>uint: <code>239, 187, 191</code></li> <li>char: <code>-17, -69, -65</code></li> <li>Will probably not appear in a text editor and taken into account when calculating position (e.g. in Notepad++)</li> <li>Does appear in read chars in both text and binary mode and affects ftell()</li> </ul> </li> <li>UTF8 characters (which may be more than 1 Byte) can be read in both modes. Generally it is best to just treat them as bytes/char* and pass them unmodified to printf/puts/etc. (which &quot;just works&quot;), if looking into single characters is not required. <ul> <li>Note that strlen will not produce the &quot;expected&quot; results with multi-byte chars (i.e. count them as 2+)</li> <li>also the buffer holding them needs to account for this and potentially be bigger</li> </ul> </li> <li>Links <ul> <li><a href="https://stackoverflow.com/questions/21737906/how-to-read-write-utf8-text-files-in-c" target="_blank" class="external-link">linux - How to Read/Write UTF8 text files in C? - Stack Overflow</a></li> <li><a href="https://stackoverflow.com/questions/15528359/printing-utf-8-strings-with-printf-wide-vs-multibyte-string-literals" target="_blank" class="external-link">c - Printing UTF-8 strings with printf - wide vs. multibyte string literals - Stack Overflow</a></li> </ul> </li> </ul> <h2 id="unity-build" tabindex="-1">Unity build</h2> <ul> <li><code>#include</code> all .c files in one file and only send that to the compiler</li> <li><a href="https://hereket.com/posts/cpp-unity-compile-inkscape/" target="_blank" class="external-link">Comparing C/C++ unity build with regular build on a large codebase | Hereket</a> <ul> <li>Faster than non-incremental builds</li> <li>Slower than &quot;clever&quot; incremental builds with tools like cmake+ninja (only compiling changed files)</li> </ul> </li> <li><a href="https://github.com/EpicGamesExt/raddebugger/blob/master/src/raddbg/raddbg_main.c#L196" target="_blank" class="external-link">Is also what raddbg uses</a> (main .c file <code>#includes</code> all .h and .c files - module .c files barely <code>#include</code>anything on their own - not even the corresponding .h file)</li> <li>Very simple compiler call, no need for cmake or a complicated build system: only need to specify one file, never change the compiler call</li> <li>Puts everything in one translation unit. This has advantages and disadvantages <ul> <li>Mostly no need for header files and forward declarations anymore. Define functions before use and it just works.</li> <li>Using invasive APIs like windows.h is tricky, because they pollute your whole environment. Most often it is the &quot;Rectangle&quot; definition in windows.h (e.g. conflicting with raylib). Getting libraries like this to work might still involve creating separate translation units for all code that uses the library/API (in NetworkMonitor there is a separate translation unit for code using windows API or curl, which includes the windows API internally, since these conflicted with raylib). <ul> <li>Using -DWIN32_LEAN_AND_MEAN can also help</li> </ul> </li> </ul> </li> <li>Sidenote: The C compiler is up to 10x faster than C++ compiler if templates and such are used in the C++ code</li> </ul> <h2 id="macro-best-practices" tabindex="-1">Macro best practices</h2> <ul> <li>For multiple statements: wrap in do ... while(0) loop</li> <li>Rationale: This prevents incorrect usage in unbracketed if statements, which would most likely lead to unexpected results. Also statements require a semicolon at the end as delimiter.</li> </ul> <pre><code class="language-C">#define foo(x) bar(x); baz(x)
 if (x &gt; 3)
 	foo(x)
 // will lead to
@@ -754,12 +190,7 @@ if (x &gt; 3)
 baz(x);
 
 #define foo_fix(x) do { bar(x); baz(x); } while(0)
-</code></pre>
-<ul>
-<li>When a macro should not be defined in one case (e.g. debug builds), replace it with ((void)0) instead of leaving it blank</li>
-<li>Rationale: This will still work if the macro is used with the comma expression or ternary operator</li>
-</ul>
-<pre><code class="language-C">#ifdef NDEBUG
+</code></pre> <ul> <li>When a macro should not be defined in one case (e.g. debug builds), replace it with ((void)0) instead of leaving it blank</li> <li>Rationale: This will still work if the macro is used with the comma expression or ternary operator</li> </ul> <pre><code class="language-C">#ifdef NDEBUG
 	#define debug_print(s) printf(s)
 #else
 	#define debug_print(s) ((void)0)
@@ -767,53 +198,8 @@ baz(x);
 
 for (int idx = 0; idx &lt; len; ++idx, debug_print(&quot;foo&quot;)) { ... }
 x &gt; 0 ? debug_print(&quot;greater&quot;) : debug_print(&quot;smaller&quot;)
-</code></pre>
-<ul>
-<li>For macros that return a value, which is not needed, consider explicitly discarding that value to avoid compiler warnings and misuse:</li>
-</ul>
-<pre><code class="language-C">#define textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
-</code></pre>
-<h2 id="msvc-build-insights" tabindex="-1">MSVC Build Insights</h2>
-<p><a href="https://devblogs.microsoft.com/cppblog/finding-build-bottlenecks-with-cpp-build-insights/" target="_blank" class="external-link">Finding build bottlenecks with C++ Build Insights - C++ Team Blog</a></p>
-<p>Use the following to get insights into the build process of your C/C++ app. Find out which files are included way too often, which files take long to parse or compile.</p>
-<p><picture src="/img/user/_attachments/Pasted%20image%2020250528140213.png" alt="Pasted image 20250528140213.png"><source media="(max-width:480px)" srcset="/img/optimized/leu4eVO1TP-500.webp" type="image/webp">
-<source media="(max-width:480px)" srcset="/img/optimized/leu4eVO1TP-500.jpeg">
-<source media="(max-width:1920px)" srcset="/img/optimized/leu4eVO1TP-700.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/leu4eVO1TP-700.jpeg"><img class="" src="/img/user/_attachments/Pasted%20image%2020250528140213.png" alt="Pasted image 20250528140213.png" width=""></picture></p>
-<ol>
-<li>Download and install the latest <a href="https://visualstudio.microsoft.com/downloads/" target="_blank" class="external-link">Visual Studio 2019</a>. (vcperf seems to also be included in the Visual Studio Build Tools 2022)</li>
-<li>Obtain WPA by downloading and installing the <a href="https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install" target="_blank" class="external-link">latest Windows ADK</a>.</li>
-<li>NOTE: I do not remember doing the following two steps, so maybe they can be skipped as of 05/2025</li>
-<li>Copy the <em>perf_msvcbuildinsights.dll</em> file from your Visual Studio 2019’s MSVC installation directory to your newly installed WPA directory. This file is the C++ Build Insights WPA add-in, which must be available to WPA for correctly displaying the C++ Build Insights events.
-<ol>
-<li>MSVC’s installation directory is typically: <code>C:\Program Files (x86)\Microsoft Visual Studio\2019\{Edition}\VC\Tools\MSVC\{Version}\bin\Hostx64\x64</code>.</li>
-<li>WPA’s installation directory is typically: <code>C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit</code>.</li>
-</ol>
-</li>
-<li>Open the <em>perfcore.ini</em> file in your WPA installation directory and add an entry for the <em>perf_msvcbuildinsights.dll</em> file. This tells WPA to load the C++ Build Insights add-in on startup.</li>
-<li>Open an elevated <strong><em>x64 Native Tools Command Prompt for VS 20XX</em></strong>.</li>
-<li>Obtain a trace of your build:
-<ol>
-<li>Run the following command: <code>vcperf /start MySessionName</code>.</li>
-<li>Build your C++ project from anywhere, even from within Visual Studio (<em>vcperf</em> collects events system-wide).</li>
-<li>Run the following command: <code>vcperf /stop MySessionName outputFile.etl</code>. This command will stop the trace, analyze all events, and save everything in the <em>outputFile.etl</em> trace file.</li>
-</ol>
-</li>
-<li>Open the trace you just collected in WPA.</li>
-</ol>
-<h2 id="clockwise-spiral-rule" tabindex="-1">Clockwise Spiral Rule</h2>
-<p>How to read complex type declarations: <a href="https://c-faq.com/decl/spiral.anderson.html" target="_blank" class="external-link">https://c-faq.com/decl/spiral.anderson.html</a><br>
-<picture src="/img/user/_attachments/Pasted%20image%2020250902113417.png" alt="Pasted image 20250902113417.png"><source media="(max-width:480px)" srcset="/img/optimized/MMJABu7v8n-500.webp" type="image/webp">
-<source media="(max-width:480px)" srcset="/img/optimized/MMJABu7v8n-500.jpeg">
-<source media="(max-width:1920px)" srcset="/img/optimized/MMJABu7v8n-700.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/MMJABu7v8n-700.jpeg"><img class="" src="/img/user/_attachments/Pasted%20image%2020250902113417.png" alt="Pasted image 20250902113417.png" width=""></picture></p>
-<h2 id="macro-for-optional-function-parameters" tabindex="-1">Macro for optional function parameters</h2>
-<p><picture src="/img/user/_attachments/Pasted%20image%2020250902113438.png" alt="Pasted image 20250902113438.png"><source media="(max-width:480px)" srcset="/img/optimized/NPeH-qdFry-500.webp" type="image/webp">
-<source media="(max-width:480px)" srcset="/img/optimized/NPeH-qdFry-500.jpeg">
-<source media="(max-width:1920px)" srcset="/img/optimized/NPeH-qdFry-700.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/NPeH-qdFry-700.jpeg"><img class="" src="/img/user/_attachments/Pasted%20image%2020250902113438.png" alt="Pasted image 20250902113438.png" width=""></picture><br>
-NOTE: Might not be ideal for hot paths. Function arguments are usually put in registers, structs are put in memory (so the assembly has to work with memory addresses and offsets, which is slower).</p>
-<h2 id="platform-independent-code" tabindex="-1">Platform Independent Code</h2>
-<p><a href="https://guide.handmadehero.org/code/day011/" target="_blank" class="external-link">The Basics of Platform API Design  —  Handmade Hero  —  Episode Guide  —  Handmade Hero</a><br>
-Don't do this:</p>
-<pre><code class="language-C">int main(int argc, char **argv)
+</code></pre> <ul> <li>For macros that return a value, which is not needed, consider explicitly discarding that value to avoid compiler warnings and misuse:</li> </ul> <pre><code class="language-C">#define textf(f) ((void)snprintf(tempBuf, sizeof(tempBuf), f))
+</code></pre> <h2 id="msvc-build-insights" tabindex="-1">MSVC Build Insights</h2> <p><a href="https://devblogs.microsoft.com/cppblog/finding-build-bottlenecks-with-cpp-build-insights/" target="_blank" class="external-link">Finding build bottlenecks with C++ Build Insights - C++ Team Blog</a></p> <p>Use the following to get insights into the build process of your C/C++ app. Find out which files are included way too often, which files take long to parse or compile.</p> <p><img src="/img/user/_attachments/Pasted%20image%2020250528140213.png" alt="Pasted image 20250528140213.png"></p> <ol> <li>Download and install the latest <a href="https://visualstudio.microsoft.com/downloads/" target="_blank" class="external-link">Visual Studio 2019</a>. (vcperf seems to also be included in the Visual Studio Build Tools 2022)</li> <li>Obtain WPA by downloading and installing the <a href="https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install" target="_blank" class="external-link">latest Windows ADK</a>.</li> <li>NOTE: I do not remember doing the following two steps, so maybe they can be skipped as of 05/2025</li> <li>Copy the <em>perf_msvcbuildinsights.dll</em> file from your Visual Studio 2019’s MSVC installation directory to your newly installed WPA directory. This file is the C++ Build Insights WPA add-in, which must be available to WPA for correctly displaying the C++ Build Insights events. <ol> <li>MSVC’s installation directory is typically: <code>C:\Program Files (x86)\Microsoft Visual Studio\2019\{Edition}\VC\Tools\MSVC\{Version}\bin\Hostx64\x64</code>.</li> <li>WPA’s installation directory is typically: <code>C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit</code>.</li> </ol> </li> <li>Open the <em>perfcore.ini</em> file in your WPA installation directory and add an entry for the <em>perf_msvcbuildinsights.dll</em> file. This tells WPA to load the C++ Build Insights add-in on startup.</li> <li>Open an elevated <strong><em>x64 Native Tools Command Prompt for VS 20XX</em></strong>.</li> <li>Obtain a trace of your build: <ol> <li>Run the following command: <code>vcperf /start MySessionName</code>.</li> <li>Build your C++ project from anywhere, even from within Visual Studio (<em>vcperf</em> collects events system-wide).</li> <li>Run the following command: <code>vcperf /stop MySessionName outputFile.etl</code>. This command will stop the trace, analyze all events, and save everything in the <em>outputFile.etl</em> trace file.</li> </ol> </li> <li>Open the trace you just collected in WPA.</li> </ol> <h2 id="clockwise-spiral-rule" tabindex="-1">Clockwise Spiral Rule</h2> <p>How to read complex type declarations: <a href="https://c-faq.com/decl/spiral.anderson.html" target="_blank" class="external-link">https://c-faq.com/decl/spiral.anderson.html</a><br> <img src="/img/user/_attachments/Pasted%20image%2020250902113417.png" alt="Pasted image 20250902113417.png"></p> <h2 id="macro-for-optional-function-parameters" tabindex="-1">Macro for optional function parameters</h2> <p><img src="/img/user/_attachments/Pasted%20image%2020250902113438.png" alt="Pasted image 20250902113438.png"><br> NOTE: Might not be ideal for hot paths. Function arguments are usually put in registers, structs are put in memory (so the assembly has to work with memory addresses and offsets, which is slower).</p> <h2 id="platform-independent-code" tabindex="-1">Platform Independent Code</h2> <p><a href="https://guide.handmadehero.org/code/day011/" target="_blank" class="external-link">The Basics of Platform API Design  —  Handmade Hero  —  Episode Guide  —  Handmade Hero</a><br> Don't do this:</p> <pre><code class="language-C">int main(int argc, char **argv)
 {
 	platformIndedependentCode1();
 	#ifdef _WIN32
@@ -823,21 +209,7 @@ Don't do this:</p>
 	#endif
 	platformIndedependentCode2();
 }
-</code></pre>
-<ul>
-<li>Code will get very messy and unreadable fast (hard to follow the correct codepath for the current platform)</li>
-<li>Hard to maintain and extend. You need to search through all files to find all the ifdefs, if you want to add a platform</li>
-<li>Limits all platforms to the same control flow. Since only the smallest bits are abstracted, each platform has to follow the same basic structure.</li>
-</ul>
-<p>Better approach:</p>
-<ul>
-<li>Have a platform specific main.cpp with the platform specific program entry (e.g. win32_main.cpp with WinMain, linux_main.cpp with main, etc.)</li>
-<li>Have that main function call a platform independent MainLoop() function, which starts up the actual (platform independent) program loop</li>
-<li>Inside the MainLoop() call out to platform specific functions from the platform layer (e.g. for reading files). These functions need to have the same API on all platforms and are defined in one common header file and implemented in the platform specific cpp file(s).</li>
-<li>You can chose to implement basic platform specific initialization (like creating a window) and loop code (like reading input or the message queue) directly in the platform specific main (i.e. wrapped around the MainLoop() call, passing messages and input in and getting video and sound data out) or abstract the code in functions and <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#opaque-struct">opaque structs</a>, which are called/passed from MainLoop() (like you would reading a file). The example below uses the former approach.</li>
-<li>Selection of the desired platform code is done through passing the correct platform specific cpp file to the compiler (works well with <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#unity-build">#Unity build</a>)</li>
-</ul>
-<pre><code class="language-C">// program.h - main header file
+</code></pre> <ul> <li>Code will get very messy and unreadable fast (hard to follow the correct codepath for the current platform)</li> <li>Hard to maintain and extend. You need to search through all files to find all the ifdefs, if you want to add a platform</li> <li>Limits all platforms to the same control flow. Since only the smallest bits are abstracted, each platform has to follow the same basic structure.</li> </ul> <p>Better approach:</p> <ul> <li>Have a platform specific main.cpp with the platform specific program entry (e.g. win32_main.cpp with WinMain, linux_main.cpp with main, etc.)</li> <li>Have that main function call a platform independent MainLoop() function, which starts up the actual (platform independent) program loop</li> <li>Inside the MainLoop() call out to platform specific functions from the platform layer (e.g. for reading files). These functions need to have the same API on all platforms and are defined in one common header file and implemented in the platform specific cpp file(s).</li> <li>You can chose to implement basic platform specific initialization (like creating a window) and loop code (like reading input or the message queue) directly in the platform specific main (i.e. wrapped around the MainLoop() call, passing messages and input in and getting video and sound data out) or abstract the code in functions and <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#opaque-struct">opaque structs</a>, which are called/passed from MainLoop() (like you would reading a file). The example below uses the former approach.</li> <li>Selection of the desired platform code is done through passing the correct platform specific cpp file to the compiler (works well with <a class="internal-link" target="" data-note-icon="" href="/code/langauges/c/#unity-build">#Unity build</a>)</li> </ul> <pre><code class="language-C">// program.h - main header file
 void MainLoop();
 void *loadFile(char *filepath);
 
@@ -867,103 +239,4 @@ void *loadFile(char *filepath)
 {
 	// do load and return
 }
-</code></pre>
-<h2 id="weird-behavior-calling-into-external-library" tabindex="-1">Weird Behavior calling into external library</h2>
-<p>When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files).<br>
-Otherwise the behavior is undefined and you will get crashes or weird stuff due to the stack being not handled correctly.<br>
-In my case a boolean function was returning -256 (which evaluates to true), instead of false or 0, but otherwise the code would run and behave normally. Replacing the header files with the correct version fixed this.</p>
-<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
-</main>
-<aside>
-<div class="sidebar">
-<div class="sidebar-container">
-<div class="toc">
-<div class="toc-title-container">
-<div class="toc-title">
-C
-</div>
-</div>
-<div class="toc-container">
-<nav class="toc">
-<ol>
-<li><a href="#strncpy-strncat">strncpy, strncat</a>
-</li>
-<li><a href="#operator-precedence">Operator Precedence</a>
-</li>
-<li><a href="#dynamischer-array-ohne-templates">Dynamischer Array ohne Templates</a>
-</li>
-<li><a href="#malloc-sizeof">malloc + sizeof</a>
-</li>
-<li><a href="#malloc-calloc-realloc-pitfalls">malloc / calloc / realloc pitfalls</a>
-</li>
-<li><a href="#offsetof-container-of-macro">offsetof, container_of macro</a>
-</li>
-<li><a href="#macro-stringification">Macro stringification</a>
-</li>
-<li><a href="#open-mp-simple-parallelisierung">OpenMP - Simple Parallelisierung</a>
-</li>
-<li><a href="#switch">switch</a>
-</li>
-<li><a href="#compiler-linker">Compiler, Linker</a>
-</li>
-<li><a href="#p-null-vs-null-p">p == NULL vs NULL == p</a>
-</li>
-<li><a href="#main">main()</a>
-</li>
-<li><a href="#bit-hacks">Bit Hacks</a>
-</li>
-<li><a href="#bitmask-with-more-than-64-entries">Bitmask with more than 64 entries</a>
-</li>
-<li><a href="#stack-space">Stack space</a>
-</li>
-<li><a href="#opaque-struct">Opaque struct</a>
-</li>
-<li><a href="#bitshift">Bitshift</a>
-</li>
-<li><a href="#rounding">Rounding</a>
-</li>
-<li><a href="#sign-bit-integer-demotion-and-shift">sign bit - integer demotion and shift</a>
-</li>
-<li><a href="#implicit-conversions">Implicit conversions</a>
-</li>
-<li><a href="#files-text-vs-binary-mode">Files - text vs. binary mode</a>
-<ol>
-<li><a href="#utf-8">UTF8</a>
-</li>
-</ol>
-</li>
-<li><a href="#unity-build">Unity build</a>
-</li>
-<li><a href="#macro-best-practices">Macro best practices</a>
-</li>
-<li><a href="#msvc-build-insights">MSVC Build Insights</a>
-</li>
-<li><a href="#clockwise-spiral-rule">Clockwise Spiral Rule</a>
-</li>
-<li><a href="#macro-for-optional-function-parameters">Macro for optional function parameters</a>
-</li>
-<li><a href="#platform-independent-code">Platform Independent Code</a>
-</li>
-<li><a href="#weird-behavior-calling-into-external-library">Weird Behavior calling into external library</a>
-</li>
-</ol>
-</nav>
-</div>
-</div>
-<script>!function(){const t=document.querySelectorAll('.toc-container a[href^="#"]');if(!t.length)return;const e=Array.from(t).map(t=>{const e=decodeURIComponent(t.getAttribute("href").slice(1));return{link:t,target:document.getElementById(e)}}).filter(t=>t.target);function n(){let n=e[0];for(const t of e)t.target.getBoundingClientRect().top<=100&&(n=t);t.forEach(t=>t.classList.remove("toc-active")),n&&n.link.classList.add("toc-active")}window.addEventListener("scroll",n,{passive:!0}),n()}()</script>
-</div>
-</div>
-</aside>
-<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")},!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}})</script>
-<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
-<script defer="defer">TIMESTAMP_FORMAT="dd. MMM yyyy",DATE_FORMAT="MMM dd, yyyy",document.querySelectorAll(".human-date").forEach(function(e){try{date=e.getAttribute("data-date")||e.innerText,format=/^\d{4}-\d{2}-\d{2}$/.test(date.trim())?DATE_FORMAT:TIMESTAMP_FORMAT,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTTP(date)),null==parsed_date.invalid&&(e.innerHTML=parsed_date.toFormat(format))}catch(e){}})</script>
-<footer>
-<a href="/imprint">Imprint</a>
-&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="/privacy">Privacy Policy</a>
-</footer>
-<script defer="defer" src="https://unpkg.com/lucide@latest"></script>
-<script defer="defer">document.addEventListener("DOMContentLoaded",()=>{lucide.createIcons({attrs:{class:["svg-icon"]}})})</script>
-<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".obsidian-bases-views").forEach(function(e){var t=e.querySelector(".obsidian-bases-active-view"),a=e.querySelector(".obsidian-bases-dropdown"),i=e.querySelectorAll(".obsidian-bases-dropdown-item"),n=e.querySelectorAll(".obsidian-bases-view-panel"),o=e.querySelector(".obsidian-bases-active-view-name"),r=e.querySelector(".obsidian-bases-count-value");t&&a&&(t.addEventListener("click",function(e){e.stopPropagation();var i="none"!==a.style.display;a.style.display=i?"none":"block",t.setAttribute("aria-expanded",!i)}),document.addEventListener("click",function(){a.style.display="none",t.setAttribute("aria-expanded","false")}),i.forEach(function(s){s.addEventListener("click",function(s){s.stopPropagation();var d=this.getAttribute("data-view-index");i.forEach(function(e){e.classList.remove("active")}),this.classList.add("active"),n.forEach(function(e){e.style.display="none"});var l=e.querySelector('.obsidian-bases-view-panel[data-view-index="'+d+'"]');l&&(l.style.display="block");var c=this.querySelector(".obsidian-bases-view-icon"),u=t.querySelector(".obsidian-bases-view-icon");if(c&&u&&u.replaceWith(c.cloneNode(!0)),o&&(o.textContent=this.textContent.trim()),r&&l){var b=l.querySelectorAll("tbody tr:not(.obsidian-base-group-row), .obsidian-base-card, .obsidian-base-list li");r.textContent=b.length}a.style.display="none",t.setAttribute("aria-expanded","false")})}))}),document.querySelectorAll(".bases-dynamic-date").forEach(function(e){var t=e.getAttribute("data-type"),a=new Date;if("today"===t){var i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o}else if("now"===t){i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");var r=String(a.getHours()).padStart(2,"0"),s=String(a.getMinutes()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o+" "+r+":"+s}})})</script>
-</body>
-</html>
+</code></pre> <h2 id="weird-behavior-calling-into-external-library" tabindex="-1">Weird Behavior calling into external library</h2> <p>When you get weird behavior around calling into an external library, make sure the header files and the lib/dll files linked against from that library match! (i.e. include exactly the header files used to compile the library files).<br> Otherwise the behavior is undefined and you will get crashes or weird stuff due to the stack being not handled correctly.<br> In my case a boolean function was returning -256 (which evaluates to true), instead of false or 0, but otherwise the code would run and behave normally. Replacing the header files with the correct version fixed this.</p> <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </main> <aside> <div class="page-panel-backdrop" data-page-panel-close></div> <div class="sidebar" id="page-panel"> <div class="page-panel-header"> <span class="page-panel-handle" aria-hidden="true"></span> <button type="button" class="page-panel-close" data-page-panel-close aria-label="Close"> <i data-lucide="x"></i> </button> </div> <div class="sidebar-container"> <div class="toc"> <div class="toc-title-container"> <div class="toc-title"> C </div> </div> <div class="toc-container"> <nav class="toc"> <ol> <li><a href="#strncpy-strncat">strncpy, strncat</a> </li> <li><a href="#operator-precedence">Operator Precedence</a> </li> <li><a href="#dynamischer-array-ohne-templates">Dynamischer Array ohne Templates</a> </li> <li><a href="#malloc-sizeof">malloc + sizeof</a> </li> <li><a href="#malloc-calloc-realloc-pitfalls">malloc / calloc / realloc pitfalls</a> </li> <li><a href="#offsetof-container-of-macro">offsetof, container_of macro</a> </li> <li><a href="#macro-stringification">Macro stringification</a> </li> <li><a href="#open-mp-simple-parallelisierung">OpenMP - Simple Parallelisierung</a> </li> <li><a href="#switch">switch</a> </li> <li><a href="#compiler-linker">Compiler, Linker</a> </li> <li><a href="#p-null-vs-null-p">p == NULL vs NULL == p</a> </li> <li><a href="#main">main()</a> </li> <li><a href="#bit-hacks">Bit Hacks</a> </li> <li><a href="#bitmask-with-more-than-64-entries">Bitmask with more than 64 entries</a> </li> <li><a href="#stack-space">Stack space</a> </li> <li><a href="#opaque-struct">Opaque struct</a> </li> <li><a href="#bitshift">Bitshift</a> </li> <li><a href="#rounding">Rounding</a> </li> <li><a href="#sign-bit-integer-demotion-and-shift">sign bit - integer demotion and shift</a> </li> <li><a href="#implicit-conversions">Implicit conversions</a> </li> <li><a href="#files-text-vs-binary-mode">Files - text vs. binary mode</a> <ol> <li><a href="#utf-8">UTF8</a> </li> </ol> </li> <li><a href="#unity-build">Unity build</a> </li> <li><a href="#macro-best-practices">Macro best practices</a> </li> <li><a href="#msvc-build-insights">MSVC Build Insights</a> </li> <li><a href="#clockwise-spiral-rule">Clockwise Spiral Rule</a> </li> <li><a href="#macro-for-optional-function-parameters">Macro for optional function parameters</a> </li> <li><a href="#platform-independent-code">Platform Independent Code</a> </li> <li><a href="#weird-behavior-calling-into-external-library">Weird Behavior calling into external library</a> </li> </ol> </nav> </div> </div> <script>!function(){const t=document.querySelectorAll('.toc-container a[href^="#"]');if(!t.length)return;const e=Array.from(t).map(t=>{const e=decodeURIComponent(t.getAttribute("href").slice(1));return{link:t,target:document.getElementById(e)}}).filter(t=>t.target);function n(){let n=e[0];for(const t of e)t.target.getBoundingClientRect().top<=100&&(n=t);t.forEach(t=>t.classList.remove("toc-active")),n&&n.link.classList.add("toc-active")}window.addEventListener("scroll",n,{passive:!0}),n()}()</script> </div> </div> <script>!function(){const e=document.getElementById("page-panel");if(!e)return;const t=window.matchMedia("(max-width: 1400px)");function n(t){e.classList.toggle("is-open",t),document.body.classList.toggle("page-panel-open",t),document.querySelectorAll(".page-panel-toggle").forEach(e=>{e.setAttribute("aria-expanded",String(t))}),document.dispatchEvent(new CustomEvent(t?"page-panel:open":"page-panel:close"))}document.addEventListener("click",a=>{a.target.closest(".page-panel-toggle")?n(!e.classList.contains("is-open")):(a.target.closest("[data-page-panel-close]")||t.matches&&a.target.closest("#page-panel a[href]"))&&n(!1)}),document.addEventListener("keydown",t=>{"Escape"===t.key&&e.classList.contains("is-open")&&n(!1)}),t.addEventListener("change",e=>{e.matches||n(!1)})}()</script> </aside> <div class="floating-actions floating-bottom-right"> <button type="button" class="page-panel-toggle page-panel-fab" aria-controls="page-panel" aria-expanded="false" aria-label="On this page" title="On this page"> <i data-lucide="panel-right"></i> </button> </div> <script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")},!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}})</script> <div class="search-container" id="globalsearch" onclick="toggleSearch()"> <div class="search-box" onclick="event.stopPropagation()"> <div class="search-header"> <input type="search" id="term" placeholder="Start typing..."> </div> <div class="search-layout no-preview" id="search-layout"> <div class="search-results-panel" id="search-results"> <span><i>Enter your search text in the box above</i></span> </div> <div class="search-preview-panel" id="search-preview"> <div class="preview-placeholder"> <i data-lucide="file-text"></i> <p>Select a result to preview</p> </div> <div class="preview-content" id="preview-content"></div> </div> </div> <footer class="search-box-footer"> <div class="navigation-hint"> <span><code>Enter</code>&nbsp;to select</span> </div> <div class="navigation-hint"> <span><code>⇅</code>&nbsp;to navigate</span> </div> <div class="navigation-hint"> <span><code>ESC</code>&nbsp;to close</span> </div> </footer> </div> </div> <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script> <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1);const previewCache=new Map;window.toggleSearch=function(){const e=document.getElementById("globalsearch");e.classList.contains("active")?e.classList.remove("active"):(e.classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){const t=e.textContent;t&&(document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <div style="display: flex; justify-content: center; padding: 40px;">\n        <svg width="40" height="40" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">\n            <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="8">\n                    <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n            </g>\n        </svg>\n    </div>';function debounce(e,t,n){var r;return function(){var i=this,a=arguments,s=n&&!r;clearTimeout(r),r=setTimeout(function(){r=null,n||e.apply(i,a)},t),s&&e.apply(i,a)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach(e=>e.innerHTML="<code>⌘</code>&nbsp;+&nbsp;<code>K</code>")}function tokenizeSearchTerms(e){const t=[],n=/"([^"]+)"|(\S+)/g;let r;for(;null!==(r=n.exec(e));){const e=(r[1]||r[2]).toLowerCase();e.length>1&&t.push(e)}return t.sort((e,t)=>t.length-e.length)}function highlightTerms(e,t){if(!t||0===t.length||!e)return e;let n=e;return t.forEach(e=>{const t=e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=new RegExp(`(${t})`,"gi");n=n.replace(r,'<span class="search-highlight">$1</span>')}),n}function getContextualExcerpt(e,t,n=150){if(!e)return"";const r=e.replace(/<[^>]*>/g,"");if(!t||0===t.length)return truncateText(r,n);let i=r.length;if(t.forEach(e=>{const t=r.toLowerCase().indexOf(e.toLowerCase());-1!==t&&t<i&&(i=t)}),i===r.length)return truncateText(r,n);const a=Math.max(0,i-50),s=Math.min(r.length,a+n);let o=r.substring(a,s);return a>0&&(o="..."+o),s<r.length&&(o+="..."),o}function truncateText(e,t){return e?(e=e.replace(/<[^>]*>/g,"")).length<=t?e:e.substring(0,t-3)+"...":""}async function fetchPreviewContent(e){if(previewCache.has(e))return previewCache.get(e);try{const t=await fetch(e),n=await t.text(),r=new DOMParser,i=r.parseFromString(n,"text/html").querySelector(".content, .cm-s-obsidian, article, main"),a=i?i.innerHTML:"";return previewCache.set(e,a),a}catch(e){return console.error("Failed to fetch preview:",e),""}}function highlightTextNodes(e,t){if(!t||0===t.length)return;const n=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,!1),r=[];for(;n.nextNode();)r.push(n.currentNode);r.forEach(e=>{const n=e.textContent;let r=!1;if(t.forEach(e=>{n.toLowerCase().includes(e.toLowerCase())&&(r=!0)}),r){const r=document.createElement("span");r.innerHTML=highlightTerms(n,t),e.parentNode.replaceChild(r,e)}})}async function showPreview(e){const t=window.searchResults;if(!t||!t[e])return;const n=t[e],r=document.getElementById("search-preview"),i=document.getElementById("preview-content"),a=r.querySelector(".preview-placeholder");if(!r||!i)return;document.querySelectorAll(".searchresult").forEach(e=>e.classList.remove("active"));const s=document.querySelector(`.searchresult[data-index="${e}"]`);s&&s.classList.add("active"),i.innerHTML=loadingSvg,i.classList.add("has-content"),a.style.display="none";const o=await fetchPreviewContent(n.url),c=n.tags&&n.tags.length>0?`<div class="preview-tags">${n.tags.map(e=>`<a class="tag" href="javascript:void(0);" onclick="toggleTagSearch(this)">#${e}</a>`).join("")}</div>`:"";i.innerHTML=`\n            <div class="preview-title">${highlightTerms(n.title,window.searchTerms)}</div>\n            ${c}\n            <div class="preview-body">${o}</div>\n        `;const l=i.querySelector(".preview-body");l&&window.searchTerms&&highlightTextNodes(l,window.searchTerms),window.currentPreviewIndex=e}function hidePreview(){const e=document.getElementById("search-preview"),t=document.getElementById("preview-content"),n=e?.querySelector(".preview-placeholder");n&&(n.style.display="flex"),t&&(t.classList.remove("has-content"),t.innerHTML=""),window.currentPreviewIndex=-1}function createIndex(e){const t=e=>(e=>e.toLowerCase().normalize("NFD").replace(/n\u0303/g,"ñ").replace(/[\u0300-\u036f]/g,"").normalize("NFC"))(e).split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})}),n}async function init(){const e=await fetch("/searchIndex.json?v=2026-10-08T10:44:46.817Z").then(e=>e.json()),t=createIndex(e);function n(e){const t=document.querySelectorAll(".searchresult");if(0===t.length)return;let n,r=-1;t.forEach((e,t)=>{e.classList.contains("active")&&(r=t)}),-1===r?n=e>0?0:t.length-1:(n=r+e,n<0&&(n=t.length-1),n>=t.length&&(n=0)),t.forEach(e=>e.classList.remove("active")),t[n].classList.add("active"),t[n].scrollIntoView({behavior:"smooth",block:"nearest"}),showPreview(parseInt(t[n].dataset.index))}window.docs=e,window.index=t,document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")&&("ArrowDown"===e.key&&(e.preventDefault(),n(1)),"ArrowUp"===e.key&&(e.preventDefault(),n(-1)),"Enter"===e.key)){e.preventDefault();const t=document.querySelector(".searchresult.active");if(t){const e=t.dataset.url;e&&(window.location.href=e)}}});const r=debounce(search,200,!1);window.field=document.querySelector("#term"),field.addEventListener("keydown",e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&"Enter"!==e.key&&r()}),window.resultsDiv=document.querySelector("#search-results");const i=new URL(location.href).searchParams;i.get("q")&&(field.setAttribute("value",i.get("q")),toggleSearch(),search())}async function search(){const e=field.value.trim(),t=document.getElementById("search-layout");if(!e)return resultsDiv.innerHTML="<span><i>Enter your search text in the box above</i></span>",hidePreview(),void(t&&t.classList.add("no-preview"));window.lastSearch=e,window.searchTerms=tokenizeSearchTerms(e),resultsDiv.innerHTML=loadingSvg,hidePreview();const n=offlineSearch(e);if(window.searchResults=n,!n.length)return t&&t.classList.add("no-preview"),void(resultsDiv.innerHTML=`\n                <div class="no-results">\n                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n                        <circle cx="11" cy="11" r="8"></circle>\n                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>\n                        <line x1="8" y1="11" x2="14" y2="11"></line>\n                    </svg>\n                    <p>No results for "${e}"</p>\n                </div>\n            `);t&&t.classList.remove("no-preview");let r="";n.forEach((e,t)=>{const n=highlightTerms(getContextualExcerpt(e.content,window.searchTerms,120),window.searchTerms),i=highlightTerms(e.title,window.searchTerms),a=e.tags&&e.tags.length>0?`<div class="result-tags">${e.tags.map(e=>`<span class="tag">#${e}</span>`).join("")}</div>`:"";r+=`\n                <div class="searchresult${0===t?" active":""}"\n                     data-index="${t}"\n                     data-url="${e.url}"\n                     onmouseenter="showPreview(${t})"\n                     onclick="window.location.href='${e.url}'">\n                    <span class="result-title">${i}</span>\n                    ${a}\n                    <div class="result-excerpt">${n}</div>\n                </div>\n            `}),resultsDiv.innerHTML=r,n.length>0&&showPreview(0),"undefined"!=typeof lucide&&lucide.createIcons()}function offlineSearch(e){const t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",limit:10}]),r=e=>{const t=n.filter(t=>t.field===e);return 0===t.length?[]:[...t[0].result]};return[...new Set([...r("title"),...r("content"),...r("tags")])].map(e=>{const n={...t[e]};return n.tags=n.tags.filter(e=>"gardenEntry"!==e&&"note"!==e),n})}window.lastSearch="",window.searchResults=[],window.searchTerms=[],window.currentPreviewIndex=-1,window.search=search,document.addEventListener("click",function(e){const t=e.target.closest("a.tag");if(!t||t.closest("#globalsearch"))return;const n=t.getAttribute("href");n&&"javascript:void(0);"!==n||window.toggleTagSearch(t)})</script> <script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script> <script defer="defer">TIMESTAMP_FORMAT="dd. MMM yyyy",DATE_FORMAT="MMM dd, yyyy",document.querySelectorAll(".human-date").forEach(function(e){try{date=e.getAttribute("data-date")||e.innerText,format=/^\d{4}-\d{2}-\d{2}$/.test(date.trim())?DATE_FORMAT:TIMESTAMP_FORMAT,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTTP(date)),null==parsed_date.invalid&&(e.innerHTML=parsed_date.toFormat(format))}catch(e){}})</script> <footer> <a href="/imprint">Imprint</a> &nbsp;&nbsp;&middot;&nbsp;&nbsp; <a href="/privacy">Privacy Policy</a> </footer> <script defer="defer" src="https://unpkg.com/lucide@latest"></script> <script defer="defer">document.addEventListener("DOMContentLoaded",()=>{lucide.createIcons({attrs:{class:["svg-icon"]}})})</script> <script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".obsidian-bases-views").forEach(function(e){var t=e.querySelector(".obsidian-bases-active-view"),a=e.querySelector(".obsidian-bases-dropdown"),i=e.querySelectorAll(".obsidian-bases-dropdown-item"),n=e.querySelectorAll(".obsidian-bases-view-panel"),o=e.querySelector(".obsidian-bases-active-view-name"),r=e.querySelector(".obsidian-bases-count-value");t&&a&&(t.addEventListener("click",function(e){e.stopPropagation();var i="none"!==a.style.display;a.style.display=i?"none":"block",t.setAttribute("aria-expanded",!i)}),document.addEventListener("click",function(){a.style.display="none",t.setAttribute("aria-expanded","false")}),i.forEach(function(s){s.addEventListener("click",function(s){s.stopPropagation();var d=this.getAttribute("data-view-index");i.forEach(function(e){e.classList.remove("active")}),this.classList.add("active"),n.forEach(function(e){e.style.display="none"});var l=e.querySelector('.obsidian-bases-view-panel[data-view-index="'+d+'"]');l&&(l.style.display="block");var c=this.querySelector(".obsidian-bases-view-icon"),u=t.querySelector(".obsidian-bases-view-icon");if(c&&u&&u.replaceWith(c.cloneNode(!0)),o&&(o.textContent=this.textContent.trim()),r&&l){var b=l.querySelectorAll("tbody tr:not(.obsidian-base-group-row), .obsidian-base-card, .obsidian-base-list li");r.textContent=b.length}a.style.display="none",t.setAttribute("aria-expanded","false")})}))}),document.querySelectorAll(".bases-dynamic-date").forEach(function(e){var t=e.getAttribute("data-type"),a=new Date;if("today"===t){var i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o}else if("now"===t){i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");var r=String(a.getHours()).padStart(2,"0"),s=String(a.getMinutes()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o+" "+r+":"+s}})})</script> <style>.excalidraw-svg .excalidraw-embedded-note-content{width:100%;height:100%;overflow-y:auto;background:var(--background-primary);color:var(--text-normal);padding:.5em 1em;font-size:.8em;border:1px solid var(--background-modifier-border,#e3e3e3);border-radius:4px;box-sizing:border-box;unicode-bidi:plaintext}</style> <script>window.addEventListener("load",function(){document.querySelectorAll("iframe.excalidraw-embedded-note").forEach(function(e){function t(){var t;try{t=e.contentDocument}catch(e){return}if(t){var n=t.querySelector(".content");if(n){var c=document.createElement("div");c.className="excalidraw-embedded-note-content",c.innerHTML=n.innerHTML,e.parentNode.replaceChild(c,e)}}}e.contentDocument&&"complete"===e.contentDocument.readyState&&e.contentDocument.querySelector(".content")?t():e.addEventListener("load",t)})})</script> </body> </html> 

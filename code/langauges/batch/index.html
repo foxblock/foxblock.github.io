@@ -1,383 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-<title>Batch</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<script type="importmap">
-{
+<!doctype html> <html lang="en"> <head> <title>Batch</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <script type="importmap"> {
   "imports": {
     "d3-force": "https://cdn.jsdelivr.net/npm/d3-force@3.0.0/+esm",
     "d3-selection": "https://cdn.jsdelivr.net/npm/d3-selection@3.0.0/+esm",
     "d3-zoom": "https://cdn.jsdelivr.net/npm/d3-zoom@3.0.0/+esm",
     "d3-drag": "https://cdn.jsdelivr.net/npm/d3-drag@3.0.0/+esm"
   }
-}
-</script>
-<script src="https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/dist/pixi.min.js"></script>
-<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:!0})</script>
-<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>window.addEventListener("load",()=>{document.querySelectorAll(".callout").forEach(e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("data-lucide",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}}),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach(e=>{e.querySelector(".callout-title").addEventListener("click",t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")})})})</script>
-<script defer="defer" src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
-<script defer="defer" src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
-<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
-<link href="/styles/obsidian-base.css" rel="stylesheet">
-<link href="/styles/digital-garden-base.css" rel="stylesheet">
-<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-08T08:57:28.308Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-08T08:57:28.308Z" rel="stylesheet">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/manifest.webmanifest">
-<style></style>
-</head>
-<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
-<div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
-<div x-show.important="!isDesktop" style="display:none">
-<nav class="navbar">
-<div class="navbar-inner">
-<span style="font-size:1.5rem;margin-right:10px;color:var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span>
-<a href="/" style="text-decoration:none;flex:1;display:flex;justify-content:center">
-<img class="site-logo" src="/logo.svg" alt="janek.ing">
-</a>
-</div>
-<div class="search-button align-icon" onclick="toggleSearch()">
-<span class="search-icon">
-<i data-lucide="search"></i>
-</span>
-<span class="search-text">Search</span>
-<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
-</div>
-</nav>
-</div>
-<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
-<div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display:none">
-<nav class="filetree-sidebar">
-<a href="/" style="text-decoration:none;display:flex;justify-content:center">
-<img class="site-logo" src="/logo.svg" alt="janek.ing">
-</a>
-<div class="search-button align-icon" onclick="toggleSearch()">
-<span class="search-icon">
-<i data-lucide="search"></i>
-</span>
-<span class="search-text">Search</span>
-<span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
-</div>
-<div class="folder" x-data="{isOpen: true}">
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Arbeit&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Arbeit</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/arbeit/agile/">Agile </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Code</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code/Langauges&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Langauges</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink active-note">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/bullshit-detector/">Bullshit detector </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Design&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Design</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Life&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Life</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Tech&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Tech</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Writing&quot;)}" @click.stop="isOpen=!isOpen">
-<div class="foldername-wrapper align-icon">
-<i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i>
-<i x-show="!isOpen" data-lucide="chevron-right"></i>
-<span class="foldername">Writing</span>
-</div>
-<div x-show="isOpen" style="display:none" class="filelist">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a>
-</div>
-</div>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-<div @click.stop class="notelink">
-<a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a>
-</div>
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-<div x-show="isOpen" style="display:none" class="">
-</div>
-</div>
-</nav>
-</div>
-</div>
-<div class="search-container" id="globalsearch" onclick="toggleSearch()">
-<div class="search-box" onclick="event.stopPropagation()">
-<div class="search-header">
-<input type="search" id="term" placeholder="Start typing...">
-</div>
-<div class="search-layout no-preview" id="search-layout">
-<div class="search-results-panel" id="search-results">
-<span><i>Enter your search text in the box above</i></span>
-</div>
-<div class="search-preview-panel" id="search-preview">
-<div class="preview-placeholder">
-<i data-lucide="file-text"></i>
-<p>Select a result to preview</p>
-</div>
-<div class="preview-content" id="preview-content"></div>
-</div>
-</div>
-<footer class="search-box-footer">
-<div class="navigation-hint">
-<span><code>Enter</code>&nbsp;to select</span>
-</div>
-<div class="navigation-hint">
-<span><code>⇅</code>&nbsp;to navigate</span>
-</div>
-<div class="navigation-hint">
-<span><code>ESC</code>&nbsp;to close</span>
-</div>
-</footer>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
-<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1);const previewCache=new Map;window.toggleSearch=function(){const e=document.getElementById("globalsearch");e.classList.contains("active")?e.classList.remove("active"):(e.classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){const t=e.textContent;t&&(document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <div style="display: flex; justify-content: center; padding: 40px;">\n        <svg width="40" height="40" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">\n            <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="8">\n                    <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n            </g>\n        </svg>\n    </div>';function debounce(e,t,n){var r;return function(){var i=this,a=arguments,s=n&&!r;clearTimeout(r),r=setTimeout(function(){r=null,n||e.apply(i,a)},t),s&&e.apply(i,a)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach(e=>e.innerHTML="<code>⌘</code>&nbsp;+&nbsp;<code>K</code>")}function tokenizeSearchTerms(e){const t=[],n=/"([^"]+)"|(\S+)/g;let r;for(;null!==(r=n.exec(e));){const e=(r[1]||r[2]).toLowerCase();e.length>1&&t.push(e)}return t.sort((e,t)=>t.length-e.length)}function highlightTerms(e,t){if(!t||0===t.length||!e)return e;let n=e;return t.forEach(e=>{const t=e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=new RegExp(`(${t})`,"gi");n=n.replace(r,'<span class="search-highlight">$1</span>')}),n}function getContextualExcerpt(e,t,n=150){if(!e)return"";const r=e.replace(/<[^>]*>/g,"");if(!t||0===t.length)return truncateText(r,n);let i=r.length;if(t.forEach(e=>{const t=r.toLowerCase().indexOf(e.toLowerCase());-1!==t&&t<i&&(i=t)}),i===r.length)return truncateText(r,n);const a=Math.max(0,i-50),s=Math.min(r.length,a+n);let o=r.substring(a,s);return a>0&&(o="..."+o),s<r.length&&(o+="..."),o}function truncateText(e,t){return e?(e=e.replace(/<[^>]*>/g,"")).length<=t?e:e.substring(0,t-3)+"...":""}async function fetchPreviewContent(e){if(previewCache.has(e))return previewCache.get(e);try{const t=await fetch(e),n=await t.text(),r=new DOMParser,i=r.parseFromString(n,"text/html").querySelector(".content, .cm-s-obsidian, article, main"),a=i?i.innerHTML:"";return previewCache.set(e,a),a}catch(e){return console.error("Failed to fetch preview:",e),""}}function highlightTextNodes(e,t){if(!t||0===t.length)return;const n=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,!1),r=[];for(;n.nextNode();)r.push(n.currentNode);r.forEach(e=>{const n=e.textContent;let r=!1;if(t.forEach(e=>{n.toLowerCase().includes(e.toLowerCase())&&(r=!0)}),r){const r=document.createElement("span");r.innerHTML=highlightTerms(n,t),e.parentNode.replaceChild(r,e)}})}async function showPreview(e){const t=window.searchResults;if(!t||!t[e])return;const n=t[e],r=document.getElementById("search-preview"),i=document.getElementById("preview-content"),a=r.querySelector(".preview-placeholder");if(!r||!i)return;document.querySelectorAll(".searchresult").forEach(e=>e.classList.remove("active"));const s=document.querySelector(`.searchresult[data-index="${e}"]`);s&&s.classList.add("active"),i.innerHTML=loadingSvg,i.classList.add("has-content"),a.style.display="none";const o=await fetchPreviewContent(n.url),c=n.tags&&n.tags.length>0?`<div class="preview-tags">${n.tags.map(e=>`<a class="tag" href="javascript:void(0);" onclick="toggleTagSearch(this)">#${e}</a>`).join("")}</div>`:"";i.innerHTML=`\n            <div class="preview-title">${highlightTerms(n.title,window.searchTerms)}</div>\n            ${c}\n            <div class="preview-body">${o}</div>\n        `;const l=i.querySelector(".preview-body");l&&window.searchTerms&&highlightTextNodes(l,window.searchTerms),window.currentPreviewIndex=e}function hidePreview(){const e=document.getElementById("search-preview"),t=document.getElementById("preview-content"),n=e?.querySelector(".preview-placeholder");n&&(n.style.display="flex"),t&&(t.classList.remove("has-content"),t.innerHTML=""),window.currentPreviewIndex=-1}function createIndex(e){const t=e=>(e=>e.toLowerCase().normalize("NFD").replace(/n\u0303/g,"ñ").replace(/[\u0300-\u036f]/g,"").normalize("NFC"))(e).split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})}),n}async function init(){const e=await fetch("/searchIndex.json?v=2026-10-08T08:57:28.308Z").then(e=>e.json()),t=createIndex(e);function n(e){const t=document.querySelectorAll(".searchresult");if(0===t.length)return;let n,r=-1;t.forEach((e,t)=>{e.classList.contains("active")&&(r=t)}),-1===r?n=e>0?0:t.length-1:(n=r+e,n<0&&(n=t.length-1),n>=t.length&&(n=0)),t.forEach(e=>e.classList.remove("active")),t[n].classList.add("active"),t[n].scrollIntoView({behavior:"smooth",block:"nearest"}),showPreview(parseInt(t[n].dataset.index))}window.docs=e,window.index=t,document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")&&("ArrowDown"===e.key&&(e.preventDefault(),n(1)),"ArrowUp"===e.key&&(e.preventDefault(),n(-1)),"Enter"===e.key)){e.preventDefault();const t=document.querySelector(".searchresult.active");if(t){const e=t.dataset.url;e&&(window.location.href=e)}}});const r=debounce(search,200,!1);window.field=document.querySelector("#term"),field.addEventListener("keydown",e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&"Enter"!==e.key&&r()}),window.resultsDiv=document.querySelector("#search-results");const i=new URL(location.href).searchParams;i.get("q")&&(field.setAttribute("value",i.get("q")),toggleSearch(),search())}async function search(){const e=field.value.trim(),t=document.getElementById("search-layout");if(!e)return resultsDiv.innerHTML="<span><i>Enter your search text in the box above</i></span>",hidePreview(),void(t&&t.classList.add("no-preview"));window.lastSearch=e,window.searchTerms=tokenizeSearchTerms(e),resultsDiv.innerHTML=loadingSvg,hidePreview();const n=offlineSearch(e);if(window.searchResults=n,!n.length)return t&&t.classList.add("no-preview"),void(resultsDiv.innerHTML=`\n                <div class="no-results">\n                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n                        <circle cx="11" cy="11" r="8"></circle>\n                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>\n                        <line x1="8" y1="11" x2="14" y2="11"></line>\n                    </svg>\n                    <p>No results for "${e}"</p>\n                </div>\n            `);t&&t.classList.remove("no-preview");let r="";n.forEach((e,t)=>{const n=highlightTerms(getContextualExcerpt(e.content,window.searchTerms,120),window.searchTerms),i=highlightTerms(e.title,window.searchTerms),a=e.tags&&e.tags.length>0?`<div class="result-tags">${e.tags.map(e=>`<span class="tag">#${e}</span>`).join("")}</div>`:"";r+=`\n                <div class="searchresult${0===t?" active":""}"\n                     data-index="${t}"\n                     data-url="${e.url}"\n                     onmouseenter="showPreview(${t})"\n                     onclick="window.location.href='${e.url}'">\n                    <span class="result-title">${i}</span>\n                    ${a}\n                    <div class="result-excerpt">${n}</div>\n                </div>\n            `}),resultsDiv.innerHTML=r,n.length>0&&showPreview(0),"undefined"!=typeof lucide&&lucide.createIcons()}function offlineSearch(e){const t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",limit:10}]),r=e=>{const t=n.filter(t=>t.field===e);return 0===t.length?[]:[...t[0].result]};return[...new Set([...r("title"),...r("content"),...r("tags")])].map(e=>{const n={...t[e]};return n.tags=n.tags.filter(e=>"gardenEntry"!==e&&"note"!==e),n})}window.lastSearch="",window.searchResults=[],window.searchTerms=[],window.currentPreviewIndex=-1,window.search=search</script>
-<main class="content cm-s-obsidian print">
-<header>
-<h1 data-note-icon="">Batch</h1>
-<div class="header-meta">
-<div class="header-tags">
-<a class="tag" onclick="toggleTagSearch(this)">
-#knowledge-base
-</a>
-</div>
-<div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2025-05-08T19:24:07.675+02:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-01-06T17:40:23.088+01:00"></span></div></div></div>
-</header>
-<h2 id="best-practices" tabindex="-1">Best practices</h2>
-<ul>
-<li><code>@echo off</code> (disable echo by default)</li>
-<li>when setting variables surround whole statement with quotes <code>set &quot;var=value&quot;</code> (this handles spaces and other special characters better)</li>
-<li>Better not handle passwords, if you really need to see <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#handle-passwords">#Handle passwords</a></li>
-<li>surround whole script with <code>setlocal</code> and <code>endlocal</code> (to not pollute the variable space)</li>
-<li>Use these instead of hard-coded paths: <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#useful-windows-variables">#Useful Windows variables</a></li>
-<li><code>for %%a in (%*) do (set &quot;%%a=1&quot;)</code> is the simplest parser for flags</li>
-<li>Keep conditions (if/else) to a minimum (many pitfalls: brackets may break comments, variables are expanded only once, code becomes less linear, etc. - goto avoids some of these, but makes the code even less linear)</li>
-</ul>
-<h2 id="cheatsheet" tabindex="-1">Cheatsheet</h2>
-<h3 id="echo" tabindex="-1">echo</h3>
-<pre><code class="language-batch">:: turn off echoing all commands executed
+} </script> <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/dist/pixi.min.js"></script> <script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:!0})</script> <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> <script>window.addEventListener("load",()=>{document.querySelectorAll(".callout").forEach(e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("data-lucide",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}}),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach(e=>{e.querySelector(".callout-title").addEventListener("click",t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")})})})</script> <script defer="defer" src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script> <script defer="defer" src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async> <script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script> <link href="/styles/obsidian-base.css" rel="stylesheet"> <link href="/styles/digital-garden-base.css" rel="stylesheet"> <link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-08T10:44:46.817Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-08T10:44:46.817Z" rel="stylesheet"> <link rel="icon" href="/favicon.ico" sizes="any"> <link rel="icon" href="/favicon.svg" type="image/svg+xml"> <link rel="apple-touch-icon" href="/apple-touch-icon.png"> <link rel="manifest" href="/manifest.webmanifest"> <style></style> </head> <body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section"> <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}"> <div x-show.important="!isDesktop" style="display:none"> <nav class="navbar"> <div class="navbar-inner"> <span style="font-size:1.5rem;margin-right:10px" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span> <a href="/" style="text-decoration:none;flex:1;display:flex;justify-content:center"> <img class="site-logo" src="/logo.svg" alt="janek.ing"> </a> </div> <div class="navbar-actions"> <div class="search-button align-icon" onclick="toggleSearch()"> <span class="search-icon"> <i data-lucide="search"></i> </span> <span class="search-text">Search</span> <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span> </div> <button type="button" class="page-panel-toggle" aria-controls="page-panel" aria-expanded="false" aria-label="On this page" title="On this page"> <i data-lucide="panel-right"></i> </button> </div> </nav> </div> <div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div> <div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display:none"> <nav class="filetree-sidebar"> <a href="/" style="text-decoration:none;display:flex;justify-content:center"> <img class="site-logo" src="/logo.svg" alt="janek.ing"> </a> <div class="search-button align-icon" onclick="toggleSearch()"> <span class="search-icon"> <i data-lucide="search"></i> </span> <span class="search-text">Search</span> <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span> </div> <div class="folder" x-data="{isOpen: true}"> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Arbeit&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Arbeit</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/arbeit/agile/">Agile </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Code</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Code/Langauges&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Langauges</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink active-note"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/batch/">Batch </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/c/">C </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/css/">CSS </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/go/">Go </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/java-script/">JavaScript </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/lua/">Lua </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/langauges/powershell/">Powershell </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/architecture/">Architecture </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/bullshit-detector/">Bullshit detector </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/collision-detection/">Collision Detection </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/data-structures-and-algorithms/">Data Structures &amp; Algorithms </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/error-handling/">Error handling </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/game-programming/">Game Programming </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rest-vs-websockets/">REST vs. Websockets </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/rules-for-code-comments/">Rules for Code Comments </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/stack-vs-heap/">Stack vs. Heap </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/code/testing/">Testing </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Design&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Design</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/design/musiktheorie/">Musiktheorie </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/design/ui-ux/">UI - UX </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/design/video-games/">Video Games </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Life&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Life</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/life/schlaf/">Schlaf </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Tech&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Tech</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cpu/">CPU </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/cryptography-rsa-ssl/">Cryptography, RSA, SSL </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/database-types/">Database Types </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/festplatten/">Festplatten </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/illustrator/">Illustrator </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/linux/">Linux </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/lo-ra-wan/">LoRaWAN </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/node-red/">NodeRed </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/obsidian/">Obsidian </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/op-amps/">Op-Amps </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/platinendesign/">Platinendesign </a> </div> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/tech/windows/">Windows </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> <div class="folder inner-folder" x-data="{isOpen: $persist(false).as(&quot;Writing&quot;)}" @click.stop="isOpen=!isOpen"> <div class="foldername-wrapper align-icon"> <i x-show="isOpen" style="display:none" data-lucide="chevron-down"></i> <i x-show="!isOpen" data-lucide="chevron-right"></i> <span class="foldername">Writing</span> </div> <div x-show="isOpen" style="display:none" class="filelist"> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/writing/2026-04-15-ll-ms-are-keeping-you-from-learning/">2026-04-15 LLMs are keeping you from learning </a> </div> </div> </div> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> <div @click.stop class="notelink"> <a data-note-icon="" style="text-decoration:none" class="filename" href="/garden/">Digital Garden </a> </div> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> </div> <div x-show="isOpen" style="display:none" class=""> </div> </div> </nav> </div> </div> <main class="content cm-s-obsidian print"> <header> <h1 data-note-icon="">Batch</h1> <div class="header-meta"> <div class="header-tags"> <a class="tag"> #knowledge-base </a> </div> </div> <div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2025-05-08T19:24:07.675+02:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-01-06T17:40:23.088+01:00"></span></div></div> </header> <h2 id="best-practices" tabindex="-1">Best practices</h2> <ul> <li><code>@echo off</code> (disable echo by default)</li> <li>when setting variables surround whole statement with quotes <code>set &quot;var=value&quot;</code> (this handles spaces and other special characters better)</li> <li>Better not handle passwords, if you really need to see <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#handle-passwords">#Handle passwords</a></li> <li>surround whole script with <code>setlocal</code> and <code>endlocal</code> (to not pollute the variable space)</li> <li>Use these instead of hard-coded paths: <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#useful-windows-variables">#Useful Windows variables</a></li> <li><code>for %%a in (%*) do (set &quot;%%a=1&quot;)</code> is the simplest parser for flags</li> <li>Keep conditions (if/else) to a minimum (many pitfalls: brackets may break comments, variables are expanded only once, code becomes less linear, etc. - goto avoids some of these, but makes the code even less linear)</li> </ul> <h2 id="cheatsheet" tabindex="-1">Cheatsheet</h2> <h3 id="echo" tabindex="-1">echo</h3> <pre><code class="language-batch">:: turn off echoing all commands executed
 @echo off
 :: @-symbol: run one command without echo
 @set somevar=1
@@ -391,10 +19,7 @@ if condition (echo text ^(hint^))
 rem This is a comment
 :: This is also a comment, but causes problems in if/for blocks
 :: see: https://www.robvanderwoude.com/comments.php
-</code></pre>
-<h3 id="variables" tabindex="-1">Variables</h3>
-<h4 id="set" tabindex="-1">Set</h4>
-<pre><code class="language-batch">:: set without %, use surrounded with %
+</code></pre> <h3 id="variables" tabindex="-1">Variables</h3> <h4 id="set" tabindex="-1">Set</h4> <pre><code class="language-batch">:: set without %, use surrounded with %
 :: if value contains spaces, surround whole statement with &quot;&quot;
 set &quot;var=path\to\exe --whatever&quot;
 echo %var%
@@ -411,9 +36,7 @@ set /P &quot;uservar=just a comment, will be overwritten&quot;
 :: set multiple vars
 :: make sure to use &quot;&quot; else space before &amp; will be included in value
 set &quot;foo=bar&quot; &amp; set &quot;poo=bear&quot;
-</code></pre>
-<h4 id="compare" tabindex="-1">Compare</h4>
-<pre><code class="language-batch">:: Surround var to ensure correct behavior 
+</code></pre> <h4 id="compare" tabindex="-1">Compare</h4> <pre><code class="language-batch">:: Surround var to ensure correct behavior 
 :: use &quot;&quot; if value cannot contain &quot; (or it will error)
 :: use [] if value cannot contain spaces
 :: do not use single quotes ''
@@ -427,9 +50,7 @@ not &quot;%1&quot;==&quot;&quot;
 :: LSS, LEQ, GTR, GEQ
 if (3 gtr 1) (echo true)
 if (&quot;B3&quot; gtr &quot;b2&quot;) (echo compares char by char, case-insensitive, b&gt;a)
-</code></pre>
-<h4 id="test-existance" tabindex="-1">Test existance</h4>
-<pre><code class="language-batch">:: no % signs!
+</code></pre> <h4 id="test-existance" tabindex="-1">Test existance</h4> <pre><code class="language-batch">:: no % signs!
 if defined var (echo yay) else (echo nay)
 :: for arguments save to temp var first:
 set &quot;var=%~1&quot;
@@ -438,9 +59,7 @@ set test=foo
 if not defined %test% (echo foo not defined)
 :: alternative (test if empty)
 if &quot;%~1&quot;==&quot;&quot; (echo not defined or empty)
-</code></pre>
-<h4 id="replace-and-substring" tabindex="-1">Replace and Substring</h4>
-<pre><code>:: Replace &quot;to&quot; with &quot;from&quot;
+</code></pre> <h4 id="replace-and-substring" tabindex="-1">Replace and Substring</h4> <pre><code>:: Replace &quot;to&quot; with &quot;from&quot;
 set var3=%var:to=from%
 :: Substring -&gt; th\to\exe --whatev
 set var4=%var:~2,-2%
@@ -448,11 +67,7 @@ set var4=%var:~2,-2%
 set var5=%var:=%
 :: Remove quotes
 set &quot;var6=%var:&quot;=%&quot;
-</code></pre>
-<p><a href="https://ss64.com/nt/if.html" target="_blank" class="external-link">https://ss64.com/nt/if.html</a></p>
-<h3 id="useful-windows-variables" tabindex="-1">Useful Windows variables</h3>
-<p><a href="https://learn.microsoft.com/en-us/windows/deployment/usmt/usmt-recognized-environment-variables" target="_blank" class="external-link">Recognized environment variables - Windows Deployment | Microsoft Learn</a></p>
-<pre><code>%userprofile%        -&gt; C:\Users\schaja
+</code></pre> <p><a href="https://ss64.com/nt/if.html" target="_blank" class="external-link">https://ss64.com/nt/if.html</a></p> <h3 id="useful-windows-variables" tabindex="-1">Useful Windows variables</h3> <p><a href="https://learn.microsoft.com/en-us/windows/deployment/usmt/usmt-recognized-environment-variables" target="_blank" class="external-link">Recognized environment variables - Windows Deployment | Microsoft Learn</a></p> <pre><code>%userprofile%        -&gt; C:\Users\schaja
 %homepath%           -&gt; \Users\schaja
 %username%           -&gt; schaja
 %appdata%            -&gt; C:\Users\schaja\AppData\Roaming
@@ -460,10 +75,7 @@ set &quot;var6=%var:&quot;=%&quot;
 %systemroot%         -&gt; C:\Windows
 %programfiles%       -&gt; C:\Program Files
 %programfiles(x86)%  -&gt; C:\Program Files (x86)
-</code></pre>
-<h3 id="arguments-command-line-parameters" tabindex="-1">Arguments / Command Line Parameters</h3>
-<p><a href="https://learn.microsoft.com/de-de/windows-server/administration/windows-commands/call" target="_blank" class="external-link">Aufruf | Microsoft Learn</a></p>
-<pre><code>file.bat &quot;C:\path\to\big file.exe&quot; otherfile.wav -foo
+</code></pre> <h3 id="arguments-command-line-parameters" tabindex="-1">Arguments / Command Line Parameters</h3> <p><a href="https://learn.microsoft.com/de-de/windows-server/administration/windows-commands/call" target="_blank" class="external-link">Aufruf | Microsoft Learn</a></p> <pre><code>file.bat &quot;C:\path\to\big file.exe&quot; otherfile.wav -foo
 %0    -&gt; file.bat
 %1    -&gt; &quot;C:\path\to\big file.exe&quot;
 %~1   -&gt; C:\path\to\big file.exe [quotes removed]
@@ -484,24 +96,7 @@ set &quot;var6=%var:&quot;=%&quot;
 %~f2  -&gt; [drive+Path to current folder]\otherfile.wav
 %3    -&gt; -foo
 %*    -&gt; &quot;path/to/big file.exe&quot; otherfile.wav -foo
-</code></pre>
-<div class="callout" data-callout="info"><div class="callout-title"><div class="callout-title-inner"> Dropping files<br></div></div>
-<div class="callout-content">
-<p>
-When dropping a file onto a batch file (in Windows Explorer), the batch is called with the path to the dropped file as first argument <code>%1</code> (similar to how exes behave).</p>
-</div></div>
-<div class="callout" data-callout="info"><div class="callout-title"><div class="callout-title-inner"> Spaces<br></div></div>
-<div class="callout-content">
-<p>
-Paths values with spaces in them need to be quoted, otherwise they will be split into multiple arguments.</p>
-</div></div>
-<div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> Special values and PowerShell<br></div></div>
-<div class="callout-content">
-<p>
-Values with a <code>=</code> in them have to be quoted as well. If the batch script is executed from a PowerShell both single and double quotes are necessary! <code>'&quot;foo=bar&quot;'</code></p>
-</div></div>
-<h3 id="for-loop" tabindex="-1">for loop</h3>
-<pre><code class="language-batch">:: Variable name in loop has to be one letter
+</code></pre> <div class="callout" data-callout="info"><div class="callout-title"><div class="callout-title-inner"> Dropping files<br></div></div> <div class="callout-content"> <p> When dropping a file onto a batch file (in Windows Explorer), the batch is called with the path to the dropped file as first argument <code>%1</code> (similar to how exes behave).</p> </div></div> <div class="callout" data-callout="info"><div class="callout-title"><div class="callout-title-inner"> Spaces<br></div></div> <div class="callout-content"> <p> Paths values with spaces in them need to be quoted, otherwise they will be split into multiple arguments.</p> </div></div> <div class="callout" data-callout="warning"><div class="callout-title"><div class="callout-title-inner"> Special values and PowerShell<br></div></div> <div class="callout-content"> <p> Values with a <code>=</code> in them have to be quoted as well. If the batch script is executed from a PowerShell both single and double quotes are necessary! <code>'&quot;foo=bar&quot;'</code></p> </div></div> <h3 id="for-loop" tabindex="-1">for loop</h3> <pre><code class="language-batch">:: Variable name in loop has to be one letter
 :: but must not conflict with path parameters (see above)
 :: Loop over integer (start=1, increment=2, end&lt;=100)
 for /l %%i in (1, 2, 100) do (echo %%i)
@@ -532,11 +127,7 @@ for %%a in (%file%) do (echo %%~ta)
 
 :: for %%i -&gt; use in batch script
 :: for %i  -&gt; use in command line
-</code></pre>
-<p><a href="https://ss64.com/nt/for.html" target="_blank" class="external-link">https://ss64.com/nt/for.html</a></p>
-<h3 id="goto-vs-call" tabindex="-1">goto vs call</h3>
-<p><a href="https://stackoverflow.com/a/34402477" target="_blank" class="external-link">https://stackoverflow.com/a/34402477</a></p>
-<pre><code class="language-batch">call one
+</code></pre> <p><a href="https://ss64.com/nt/for.html" target="_blank" class="external-link">https://ss64.com/nt/for.html</a></p> <h3 id="goto-vs-call" tabindex="-1">goto vs call</h3> <p><a href="https://stackoverflow.com/a/34402477" target="_blank" class="external-link">https://stackoverflow.com/a/34402477</a></p> <pre><code class="language-batch">call one
 echo &quot;- &quot;
 goto two
 :one
@@ -544,21 +135,11 @@ echo &quot;1 &quot;
 :two
 echo &quot;2 &quot;
 :: Prints: 1 2 - 2
-</code></pre>
-<p>goto -&gt; Sprung zu Label<br>
-call -&gt; Sprung zu Label und Rücksprung zu call wenn Dateiende oder <code>exit</code> erreicht wird. Call kann Parameter übergeben bekommen. Sinnvoll bei for loops (goto springt aus dem Loop).</p>
-<h3 id="call-external-program" tabindex="-1">Call external program</h3>
-<p><code>call</code> -&gt; Andere batch Datei<br>
-<code>&quot;C:\path\to\a file.exe&quot; -params</code> -&gt; Aufruf des Programms (oder batch), blocking<br>
-<code>start &quot;window title&quot; &quot;file.exe&quot; -params</code>-&gt; Aufruf non-blocking (window title is bei manchen cmd Versionen optional)</p>
-<h3 id="exit" tabindex="-1">Exit</h3>
-<pre><code class="language-batch">:: exit current batch or call (usually what you want)
+</code></pre> <p>goto -&gt; Sprung zu Label<br> call -&gt; Sprung zu Label und Rücksprung zu call wenn Dateiende oder <code>exit</code> erreicht wird. Call kann Parameter übergeben bekommen. Sinnvoll bei for loops (goto springt aus dem Loop).</p> <h3 id="call-external-program" tabindex="-1">Call external program</h3> <p><code>call</code> -&gt; Andere batch Datei<br> <code>&quot;C:\path\to\a file.exe&quot; -params</code> -&gt; Aufruf des Programms (oder batch), blocking<br> <code>start &quot;window title&quot; &quot;file.exe&quot; -params</code>-&gt; Aufruf non-blocking (window title is bei manchen cmd Versionen optional)</p> <h3 id="exit" tabindex="-1">Exit</h3> <pre><code class="language-batch">:: exit current batch or call (usually what you want)
 exit /B
 :: exit whole cmd.exe process
 exit
-</code></pre>
-<h3 id="redirect-pipes" tabindex="-1">Redirect, pipes</h3>
-<pre><code class="language-batch">:: Redirect output to file
+</code></pre> <h3 id="redirect-pipes" tabindex="-1">Redirect, pipes</h3> <pre><code class="language-batch">:: Redirect output to file
 cl /? &gt; compiler_options.txt
 :: N&gt; - specify source (see N below)
 :: STDIN  = 0  Keyboard input
@@ -569,21 +150,14 @@ cl /? &gt; compiler_options.txt
 
 :: pipe output of cmd1 into cmd2
 cmd1 | cmd2 -paramforcmd2
-</code></pre>
-<p><a href="https://ss64.com/nt/syntax-redirection.html" target="_blank" class="external-link">https://ss64.com/nt/syntax-redirection.html</a></p>
-<h3 id="codepage" tabindex="-1">codepage</h3>
-<pre><code class="language-batch">:: By default cmd uses codepage 850 (DOS) on Win10
+</code></pre> <p><a href="https://ss64.com/nt/syntax-redirection.html" target="_blank" class="external-link">https://ss64.com/nt/syntax-redirection.html</a></p> <h3 id="codepage" tabindex="-1">codepage</h3> <pre><code class="language-batch">:: By default cmd uses codepage 850 (DOS) on Win10
 :: This will fail to properly transmit special chars like äöü
 :: Change codepage to UTF-8
 chcp 65001
-</code></pre>
-<h3 id="sequence" tabindex="-1">Sequence</h3>
-<pre><code>cmdA &amp; cmdB 	-&gt; Run cmdA and then run cmdB
+</code></pre> <h3 id="sequence" tabindex="-1">Sequence</h3> <pre><code>cmdA &amp; cmdB 	-&gt; Run cmdA and then run cmdB
 cmdA &amp;&amp; cmdB 	-&gt; Run cmdA, if it succeeds then run cmdB
 cmdA || cmdB 	-&gt; Run cmdA, if it fails then run cmdB
-</code></pre>
-<h2 id="find-program-file-or-folder" tabindex="-1">Find program, file or folder</h2>
-<pre><code class="language-batch">where /q cmake.exe
+</code></pre> <h2 id="find-program-file-or-folder" tabindex="-1">Find program, file or folder</h2> <pre><code class="language-batch">where /q cmake.exe
 if ERRORLEVEL 1 (
 	echo Cannot find cmake.exe! 
 ) else (
@@ -595,15 +169,8 @@ if exists &quot;%filepath%&quot; (echo File exists!)
 
 :: Check if folder exists
 if not exists &quot;Alter Ordner&quot; mkdir &quot;Alter Ordner&quot;
-</code></pre>
-<h2 id="handle-passwords" tabindex="-1">Handle passwords</h2>
-<pre><code>set /p &quot;TH_ADMIN_PW=Enter passowrd: &quot;
-</code></pre>
-<ul>
-<li>Password is shown as cleartext</li>
-<li>Password is only stored for the session duration (you can use up/down to retrieve last inputs, but is cleared when cmd ends)</li>
-</ul>
-<pre><code>@echo off
+</code></pre> <h2 id="handle-passwords" tabindex="-1">Handle passwords</h2> <pre><code>set /p &quot;TH_ADMIN_PW=Enter passowrd: &quot;
+</code></pre> <ul> <li>Password is shown as cleartext</li> <li>Password is only stored for the session duration (you can use up/down to retrieve last inputs, but is cleared when cmd ends)</li> </ul> <pre><code>@echo off
 setlocal
 
 :: Call PowerShell script to get masked password input
@@ -614,26 +181,7 @@ for /f &quot;delims=&quot; %%i in ('powershell -command &quot;$password = Read-H
 echo Password entered: &quot;%password%&quot;
 
 endlocal
-</code></pre>
-<ul>
-<li>Uses powershell for the masking</li>
-<li>Password is only stored in the variable</li>
-</ul>
-<p>In any case:</p>
-<ul>
-<li>Be aware of the <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#execution-order">#Execution order</a> and the context in which the password is used</li>
-<li>Quotes around the password variable are necessary if the password contains special characters such as <code>&lt;&gt;|^</code></li>
-<li>You can use DelayedExpansion to work around this, but then it will break if the password contains an <code>!</code></li>
-</ul>
-<h2 id="delayed-variable-expansion" tabindex="-1">Delayed Variable Expansion</h2>
-<ul>
-<li>variables are substitued when a line is parsed</li>
-<li>bracketed expressions such as <code>if condition (...)</code> count as one line even if written over multiple text lines</li>
-<li>when delayed expansion is turned on all variables in <code>!delayed!</code> form are substitued at execution time</li>
-<li>this also means that carets ^ and redirection chars like &gt; in variables and echo statements are not executed</li>
-<li>text coming from external sources is also treated more as-is (for why see <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#execution-order">#Execution order</a>)</li>
-</ul>
-<pre><code class="language-batch">set VAR=before
+</code></pre> <ul> <li>Uses powershell for the masking</li> <li>Password is only stored in the variable</li> </ul> <p>In any case:</p> <ul> <li>Be aware of the <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#execution-order">#Execution order</a> and the context in which the password is used</li> <li>Quotes around the password variable are necessary if the password contains special characters such as <code>&lt;&gt;|^</code></li> <li>You can use DelayedExpansion to work around this, but then it will break if the password contains an <code>!</code></li> </ul> <h2 id="delayed-variable-expansion" tabindex="-1">Delayed Variable Expansion</h2> <ul> <li>variables are substitued when a line is parsed</li> <li>bracketed expressions such as <code>if condition (...)</code> count as one line even if written over multiple text lines</li> <li>when delayed expansion is turned on all variables in <code>!delayed!</code> form are substitued at execution time</li> <li>this also means that carets ^ and redirection chars like &gt; in variables and echo statements are not executed</li> <li>text coming from external sources is also treated more as-is (for why see <a class="internal-link" target="" data-note-icon="" href="/code/langauges/batch/#execution-order">#Execution order</a>)</li> </ul> <pre><code class="language-batch">set VAR=before
 if &quot;%VAR%&quot; == &quot;before&quot; (
     set VAR=after
     if &quot;%VAR%&quot; == &quot;after&quot; @echo This is never shown
@@ -672,130 +220,13 @@ echo %var%
 :: prints Hello^World!
 
 endlocal
-</code></pre>
-<p><a href="https://ss64.com/nt/delayedexpansion.html" target="_blank" class="external-link">EnableDelayedExpansion - Windows CMD - SS64.com</a><br>
-<a href="https://stackoverflow.com/questions/6679907/how-do-setlocal-and-enabledelayedexpansion-work" target="_blank" class="external-link">batch file - How do SETLOCAL and ENABLEDELAYEDEXPANSION work? - Stack Overflow</a></p>
-<h3 id="pitfalls-of-enable-delayed-expansion" tabindex="-1">Pitfalls of EnableDelayedExpansion</h3>
-<ul>
-<li>! in strings will need to be escaped</li>
-</ul>
-<pre><code>echo &quot;Hello World^!&quot;
-</code></pre>
-<ul>
-<li>every line with a ! on it in the batch will lead to any carets on that line being treated as escape chars</li>
-</ul>
-<pre><code>echo &quot;^^Hello^World!foo^^^bar&quot;
+</code></pre> <p><a href="https://ss64.com/nt/delayedexpansion.html" target="_blank" class="external-link">EnableDelayedExpansion - Windows CMD - SS64.com</a><br> <a href="https://stackoverflow.com/questions/6679907/how-do-setlocal-and-enabledelayedexpansion-work" target="_blank" class="external-link">batch file - How do SETLOCAL and ENABLEDELAYEDEXPANSION work? - Stack Overflow</a></p> <h3 id="pitfalls-of-enable-delayed-expansion" tabindex="-1">Pitfalls of EnableDelayedExpansion</h3> <ul> <li>! in strings will need to be escaped</li> </ul> <pre><code>echo &quot;Hello World^!&quot;
+</code></pre> <ul> <li>every line with a ! on it in the batch will lead to any carets on that line being treated as escape chars</li> </ul> <pre><code>echo &quot;^^Hello^World!foo^^^bar&quot;
 :: Prints &quot;^^Hello^World!foo^^^bar&quot;
 setlocal EnableDelayedExpansion
 echo &quot;^^Hello^World!foo^^^bar&quot;
 :: Prints &quot;^HelloWorldfoo^bar&quot;
 endlocal
-</code></pre>
-<ul>
-<li>handling filenames with ! in them in a for loop will fail, because the string will be interpreted as a variable name</li>
-<li>same goes for the usual way of masking passwords using powershell, since a for loop is used a password with ! in them will not be passed properly</li>
-</ul>
-<h2 id="tidbits" tabindex="-1">Tidbits</h2>
-<pre><code class="language-batch">title My cool window title
+</code></pre> <ul> <li>handling filenames with ! in them in a for loop will fail, because the string will be interpreted as a variable name</li> <li>same goes for the usual way of masking passwords using powershell, since a for loop is used a password with ! in them will not be passed properly</li> </ul> <h2 id="tidbits" tabindex="-1">Tidbits</h2> <pre><code class="language-batch">title My cool window title
 pause
-</code></pre>
-<p><a href="https://administrator.de/tutorial/wie-arbeite-ich-mit-batch-umgebungsvariablen-erstellung-umgang-erweiterungen-veraenderungen-117069.html#toc13" target="_blank" class="external-link">Wie Arbeite ich mit Batch UmgebungsVariablen Erstellung Umgang Erweiterungen Veränderungen - Administrator</a></p>
-<h2 id="execution-order" tabindex="-1">Execution order</h2>
-<p><a href="https://stackoverflow.com/questions/4094699/how-does-the-windows-command-interpreter-cmd-exe-parse-scripts/4095133#4095133" target="_blank" class="external-link">parsing - How does the Windows Command Interpreter (CMD.EXE) parse scripts? - Stack Overflow</a><br>
-<strong>Phase 0) Read Line:</strong></p>
-<p><strong>Phase 1) Percent Expansion:</strong></p>
-<p><strong>Phase 2) Process special characters, tokenize, and build a cached command block:</strong> This is a complex process that is affected by things such as quotes, special characters, token delimiters, and caret escapes.</p>
-<p><strong>Phase 3) Echo the parsed command(s)</strong> Only if the command block did not begin with <code>@</code>, and ECHO was ON at the start of the preceding step.</p>
-<p><strong>Phase 4) FOR <code>%X</code> variable expansion:</strong> Only if a FOR command is active and the commands after DO are being processed.</p>
-<p><strong>Phase 5) Delayed Expansion:</strong> Only if delayed expansion is enabled</p>
-<p><strong>Phase 5.3) Pipe processing:</strong> Only if commands are on either side of a pipe</p>
-<p><strong>Phase 5.5) Execute Redirection:</strong></p>
-<p><strong>Phase 6) CALL processing/Caret doubling:</strong> Only if the command token is CALL</p>
-<p><strong>Phase 7) Execute:</strong> The command is executed</p>
-<script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script>
-</main>
-<aside>
-<div class="sidebar">
-<div class="sidebar-container">
-<div class="toc">
-<div class="toc-title-container">
-<div class="toc-title">
-Batch
-</div>
-</div>
-<div class="toc-container">
-<nav class="toc">
-<ol>
-<li><a href="#best-practices">Best practices</a>
-</li>
-<li><a href="#cheatsheet">Cheatsheet</a>
-<ol>
-<li><a href="#echo">echo</a>
-</li>
-<li><a href="#variables">Variables</a>
-<ol>
-<li><a href="#set">Set</a>
-</li>
-<li><a href="#compare">Compare</a>
-</li>
-<li><a href="#test-existance">Test existance</a>
-</li>
-<li><a href="#replace-and-substring">Replace and Substring</a>
-</li>
-</ol>
-</li>
-<li><a href="#useful-windows-variables">Useful Windows variables</a>
-</li>
-<li><a href="#arguments-command-line-parameters">Arguments / Command Line Parameters</a>
-</li>
-<li><a href="#for-loop">for loop</a>
-</li>
-<li><a href="#goto-vs-call">goto vs call</a>
-</li>
-<li><a href="#call-external-program">Call external program</a>
-</li>
-<li><a href="#exit">Exit</a>
-</li>
-<li><a href="#redirect-pipes">Redirect, pipes</a>
-</li>
-<li><a href="#codepage">codepage</a>
-</li>
-<li><a href="#sequence">Sequence</a>
-</li>
-</ol>
-</li>
-<li><a href="#find-program-file-or-folder">Find program, file or folder</a>
-</li>
-<li><a href="#handle-passwords">Handle passwords</a>
-</li>
-<li><a href="#delayed-variable-expansion">Delayed Variable Expansion</a>
-<ol>
-<li><a href="#pitfalls-of-enable-delayed-expansion">Pitfalls of EnableDelayedExpansion</a>
-</li>
-</ol>
-</li>
-<li><a href="#tidbits">Tidbits</a>
-</li>
-<li><a href="#execution-order">Execution order</a>
-</li>
-</ol>
-</nav>
-</div>
-</div>
-<script>!function(){const t=document.querySelectorAll('.toc-container a[href^="#"]');if(!t.length)return;const e=Array.from(t).map(t=>{const e=decodeURIComponent(t.getAttribute("href").slice(1));return{link:t,target:document.getElementById(e)}}).filter(t=>t.target);function n(){let n=e[0];for(const t of e)t.target.getBoundingClientRect().top<=100&&(n=t);t.forEach(t=>t.classList.remove("toc-active")),n&&n.link.classList.add("toc-active")}window.addEventListener("scroll",n,{passive:!0}),n()}()</script>
-</div>
-</div>
-</aside>
-<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")},!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}})</script>
-<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
-<script defer="defer">TIMESTAMP_FORMAT="dd. MMM yyyy",DATE_FORMAT="MMM dd, yyyy",document.querySelectorAll(".human-date").forEach(function(e){try{date=e.getAttribute("data-date")||e.innerText,format=/^\d{4}-\d{2}-\d{2}$/.test(date.trim())?DATE_FORMAT:TIMESTAMP_FORMAT,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTTP(date)),null==parsed_date.invalid&&(e.innerHTML=parsed_date.toFormat(format))}catch(e){}})</script>
-<footer>
-<a href="/imprint">Imprint</a>
-&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="/privacy">Privacy Policy</a>
-</footer>
-<script defer="defer" src="https://unpkg.com/lucide@latest"></script>
-<script defer="defer">document.addEventListener("DOMContentLoaded",()=>{lucide.createIcons({attrs:{class:["svg-icon"]}})})</script>
-<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".obsidian-bases-views").forEach(function(e){var t=e.querySelector(".obsidian-bases-active-view"),a=e.querySelector(".obsidian-bases-dropdown"),i=e.querySelectorAll(".obsidian-bases-dropdown-item"),n=e.querySelectorAll(".obsidian-bases-view-panel"),o=e.querySelector(".obsidian-bases-active-view-name"),r=e.querySelector(".obsidian-bases-count-value");t&&a&&(t.addEventListener("click",function(e){e.stopPropagation();var i="none"!==a.style.display;a.style.display=i?"none":"block",t.setAttribute("aria-expanded",!i)}),document.addEventListener("click",function(){a.style.display="none",t.setAttribute("aria-expanded","false")}),i.forEach(function(s){s.addEventListener("click",function(s){s.stopPropagation();var d=this.getAttribute("data-view-index");i.forEach(function(e){e.classList.remove("active")}),this.classList.add("active"),n.forEach(function(e){e.style.display="none"});var l=e.querySelector('.obsidian-bases-view-panel[data-view-index="'+d+'"]');l&&(l.style.display="block");var c=this.querySelector(".obsidian-bases-view-icon"),u=t.querySelector(".obsidian-bases-view-icon");if(c&&u&&u.replaceWith(c.cloneNode(!0)),o&&(o.textContent=this.textContent.trim()),r&&l){var b=l.querySelectorAll("tbody tr:not(.obsidian-base-group-row), .obsidian-base-card, .obsidian-base-list li");r.textContent=b.length}a.style.display="none",t.setAttribute("aria-expanded","false")})}))}),document.querySelectorAll(".bases-dynamic-date").forEach(function(e){var t=e.getAttribute("data-type"),a=new Date;if("today"===t){var i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o}else if("now"===t){i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");var r=String(a.getHours()).padStart(2,"0"),s=String(a.getMinutes()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o+" "+r+":"+s}})})</script>
-</body>
-</html>
+</code></pre> <p><a href="https://administrator.de/tutorial/wie-arbeite-ich-mit-batch-umgebungsvariablen-erstellung-umgang-erweiterungen-veraenderungen-117069.html#toc13" target="_blank" class="external-link">Wie Arbeite ich mit Batch UmgebungsVariablen Erstellung Umgang Erweiterungen Veränderungen - Administrator</a></p> <h2 id="execution-order" tabindex="-1">Execution order</h2> <p><a href="https://stackoverflow.com/questions/4094699/how-does-the-windows-command-interpreter-cmd-exe-parse-scripts/4095133#4095133" target="_blank" class="external-link">parsing - How does the Windows Command Interpreter (CMD.EXE) parse scripts? - Stack Overflow</a><br> <strong>Phase 0) Read Line:</strong></p> <p><strong>Phase 1) Percent Expansion:</strong></p> <p><strong>Phase 2) Process special characters, tokenize, and build a cached command block:</strong> This is a complex process that is affected by things such as quotes, special characters, token delimiters, and caret escapes.</p> <p><strong>Phase 3) Echo the parsed command(s)</strong> Only if the command block did not begin with <code>@</code>, and ECHO was ON at the start of the preceding step.</p> <p><strong>Phase 4) FOR <code>%X</code> variable expansion:</strong> Only if a FOR command is active and the commands after DO are being processed.</p> <p><strong>Phase 5) Delayed Expansion:</strong> Only if delayed expansion is enabled</p> <p><strong>Phase 5.3) Pipe processing:</strong> Only if commands are on either side of a pipe</p> <p><strong>Phase 5.5) Execute Redirection:</strong></p> <p><strong>Phase 6) CALL processing/Caret doubling:</strong> Only if the command token is CALL</p> <p><strong>Phase 7) Execute:</strong> The command is executed</p> <script src="https://giscus.app/client.js" data-repo="foxblock/foxblock.github.io" data-repo-id="R_kgDOOeV4dw" data-category="Announcements" data-category-id="DIC_kwDOOeV4d84CpYMI" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </main> <aside> <div class="page-panel-backdrop" data-page-panel-close></div> <div class="sidebar" id="page-panel"> <div class="page-panel-header"> <span class="page-panel-handle" aria-hidden="true"></span> <button type="button" class="page-panel-close" data-page-panel-close aria-label="Close"> <i data-lucide="x"></i> </button> </div> <div class="sidebar-container"> <div class="toc"> <div class="toc-title-container"> <div class="toc-title"> Batch </div> </div> <div class="toc-container"> <nav class="toc"> <ol> <li><a href="#best-practices">Best practices</a> </li> <li><a href="#cheatsheet">Cheatsheet</a> <ol> <li><a href="#echo">echo</a> </li> <li><a href="#variables">Variables</a> <ol> <li><a href="#set">Set</a> </li> <li><a href="#compare">Compare</a> </li> <li><a href="#test-existance">Test existance</a> </li> <li><a href="#replace-and-substring">Replace and Substring</a> </li> </ol> </li> <li><a href="#useful-windows-variables">Useful Windows variables</a> </li> <li><a href="#arguments-command-line-parameters">Arguments / Command Line Parameters</a> </li> <li><a href="#for-loop">for loop</a> </li> <li><a href="#goto-vs-call">goto vs call</a> </li> <li><a href="#call-external-program">Call external program</a> </li> <li><a href="#exit">Exit</a> </li> <li><a href="#redirect-pipes">Redirect, pipes</a> </li> <li><a href="#codepage">codepage</a> </li> <li><a href="#sequence">Sequence</a> </li> </ol> </li> <li><a href="#find-program-file-or-folder">Find program, file or folder</a> </li> <li><a href="#handle-passwords">Handle passwords</a> </li> <li><a href="#delayed-variable-expansion">Delayed Variable Expansion</a> <ol> <li><a href="#pitfalls-of-enable-delayed-expansion">Pitfalls of EnableDelayedExpansion</a> </li> </ol> </li> <li><a href="#tidbits">Tidbits</a> </li> <li><a href="#execution-order">Execution order</a> </li> </ol> </nav> </div> </div> <script>!function(){const t=document.querySelectorAll('.toc-container a[href^="#"]');if(!t.length)return;const e=Array.from(t).map(t=>{const e=decodeURIComponent(t.getAttribute("href").slice(1));return{link:t,target:document.getElementById(e)}}).filter(t=>t.target);function n(){let n=e[0];for(const t of e)t.target.getBoundingClientRect().top<=100&&(n=t);t.forEach(t=>t.classList.remove("toc-active")),n&&n.link.classList.add("toc-active")}window.addEventListener("scroll",n,{passive:!0}),n()}()</script> </div> </div> <script>!function(){const e=document.getElementById("page-panel");if(!e)return;const t=window.matchMedia("(max-width: 1400px)");function n(t){e.classList.toggle("is-open",t),document.body.classList.toggle("page-panel-open",t),document.querySelectorAll(".page-panel-toggle").forEach(e=>{e.setAttribute("aria-expanded",String(t))}),document.dispatchEvent(new CustomEvent(t?"page-panel:open":"page-panel:close"))}document.addEventListener("click",a=>{a.target.closest(".page-panel-toggle")?n(!e.classList.contains("is-open")):(a.target.closest("[data-page-panel-close]")||t.matches&&a.target.closest("#page-panel a[href]"))&&n(!1)}),document.addEventListener("keydown",t=>{"Escape"===t.key&&e.classList.contains("is-open")&&n(!1)}),t.addEventListener("change",e=>{e.matches||n(!1)})}()</script> </aside> <div class="floating-actions floating-bottom-right"> <button type="button" class="page-panel-toggle page-panel-fab" aria-controls="page-panel" aria-expanded="false" aria-label="On this page" title="On this page"> <i data-lucide="panel-right"></i> </button> </div> <script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")},!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}})</script> <div class="search-container" id="globalsearch" onclick="toggleSearch()"> <div class="search-box" onclick="event.stopPropagation()"> <div class="search-header"> <input type="search" id="term" placeholder="Start typing..."> </div> <div class="search-layout no-preview" id="search-layout"> <div class="search-results-panel" id="search-results"> <span><i>Enter your search text in the box above</i></span> </div> <div class="search-preview-panel" id="search-preview"> <div class="preview-placeholder"> <i data-lucide="file-text"></i> <p>Select a result to preview</p> </div> <div class="preview-content" id="preview-content"></div> </div> </div> <footer class="search-box-footer"> <div class="navigation-hint"> <span><code>Enter</code>&nbsp;to select</span> </div> <div class="navigation-hint"> <span><code>⇅</code>&nbsp;to navigate</span> </div> <div class="navigation-hint"> <span><code>ESC</code>&nbsp;to close</span> </div> </footer> </div> </div> <script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script> <script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1);const previewCache=new Map;window.toggleSearch=function(){const e=document.getElementById("globalsearch");e.classList.contains("active")?e.classList.remove("active"):(e.classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){const t=e.textContent;t&&(document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <div style="display: flex; justify-content: center; padding: 40px;">\n        <svg width="40" height="40" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">\n            <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="6" stroke-opacity="0">\n                    <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite" />\n                    <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n                <circle cx="22" cy="22" r="8">\n                    <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite" />\n                </circle>\n            </g>\n        </svg>\n    </div>';function debounce(e,t,n){var r;return function(){var i=this,a=arguments,s=n&&!r;clearTimeout(r),r=setTimeout(function(){r=null,n||e.apply(i,a)},t),s&&e.apply(i,a)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach(e=>e.innerHTML="<code>⌘</code>&nbsp;+&nbsp;<code>K</code>")}function tokenizeSearchTerms(e){const t=[],n=/"([^"]+)"|(\S+)/g;let r;for(;null!==(r=n.exec(e));){const e=(r[1]||r[2]).toLowerCase();e.length>1&&t.push(e)}return t.sort((e,t)=>t.length-e.length)}function highlightTerms(e,t){if(!t||0===t.length||!e)return e;let n=e;return t.forEach(e=>{const t=e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),r=new RegExp(`(${t})`,"gi");n=n.replace(r,'<span class="search-highlight">$1</span>')}),n}function getContextualExcerpt(e,t,n=150){if(!e)return"";const r=e.replace(/<[^>]*>/g,"");if(!t||0===t.length)return truncateText(r,n);let i=r.length;if(t.forEach(e=>{const t=r.toLowerCase().indexOf(e.toLowerCase());-1!==t&&t<i&&(i=t)}),i===r.length)return truncateText(r,n);const a=Math.max(0,i-50),s=Math.min(r.length,a+n);let o=r.substring(a,s);return a>0&&(o="..."+o),s<r.length&&(o+="..."),o}function truncateText(e,t){return e?(e=e.replace(/<[^>]*>/g,"")).length<=t?e:e.substring(0,t-3)+"...":""}async function fetchPreviewContent(e){if(previewCache.has(e))return previewCache.get(e);try{const t=await fetch(e),n=await t.text(),r=new DOMParser,i=r.parseFromString(n,"text/html").querySelector(".content, .cm-s-obsidian, article, main"),a=i?i.innerHTML:"";return previewCache.set(e,a),a}catch(e){return console.error("Failed to fetch preview:",e),""}}function highlightTextNodes(e,t){if(!t||0===t.length)return;const n=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,!1),r=[];for(;n.nextNode();)r.push(n.currentNode);r.forEach(e=>{const n=e.textContent;let r=!1;if(t.forEach(e=>{n.toLowerCase().includes(e.toLowerCase())&&(r=!0)}),r){const r=document.createElement("span");r.innerHTML=highlightTerms(n,t),e.parentNode.replaceChild(r,e)}})}async function showPreview(e){const t=window.searchResults;if(!t||!t[e])return;const n=t[e],r=document.getElementById("search-preview"),i=document.getElementById("preview-content"),a=r.querySelector(".preview-placeholder");if(!r||!i)return;document.querySelectorAll(".searchresult").forEach(e=>e.classList.remove("active"));const s=document.querySelector(`.searchresult[data-index="${e}"]`);s&&s.classList.add("active"),i.innerHTML=loadingSvg,i.classList.add("has-content"),a.style.display="none";const o=await fetchPreviewContent(n.url),c=n.tags&&n.tags.length>0?`<div class="preview-tags">${n.tags.map(e=>`<a class="tag" href="javascript:void(0);" onclick="toggleTagSearch(this)">#${e}</a>`).join("")}</div>`:"";i.innerHTML=`\n            <div class="preview-title">${highlightTerms(n.title,window.searchTerms)}</div>\n            ${c}\n            <div class="preview-body">${o}</div>\n        `;const l=i.querySelector(".preview-body");l&&window.searchTerms&&highlightTextNodes(l,window.searchTerms),window.currentPreviewIndex=e}function hidePreview(){const e=document.getElementById("search-preview"),t=document.getElementById("preview-content"),n=e?.querySelector(".preview-placeholder");n&&(n.style.display="flex"),t&&(t.classList.remove("has-content"),t.innerHTML=""),window.currentPreviewIndex=-1}function createIndex(e){const t=e=>(e=>e.toLowerCase().normalize("NFD").replace(/n\u0303/g,"ñ").replace(/[\u0300-\u036f]/g,"").normalize("NFC"))(e).split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})}),n}async function init(){const e=await fetch("/searchIndex.json?v=2026-10-08T10:44:46.817Z").then(e=>e.json()),t=createIndex(e);function n(e){const t=document.querySelectorAll(".searchresult");if(0===t.length)return;let n,r=-1;t.forEach((e,t)=>{e.classList.contains("active")&&(r=t)}),-1===r?n=e>0?0:t.length-1:(n=r+e,n<0&&(n=t.length-1),n>=t.length&&(n=0)),t.forEach(e=>e.classList.remove("active")),t[n].classList.add("active"),t[n].scrollIntoView({behavior:"smooth",block:"nearest"}),showPreview(parseInt(t[n].dataset.index))}window.docs=e,window.index=t,document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")&&("ArrowDown"===e.key&&(e.preventDefault(),n(1)),"ArrowUp"===e.key&&(e.preventDefault(),n(-1)),"Enter"===e.key)){e.preventDefault();const t=document.querySelector(".searchresult.active");if(t){const e=t.dataset.url;e&&(window.location.href=e)}}});const r=debounce(search,200,!1);window.field=document.querySelector("#term"),field.addEventListener("keydown",e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&"Enter"!==e.key&&r()}),window.resultsDiv=document.querySelector("#search-results");const i=new URL(location.href).searchParams;i.get("q")&&(field.setAttribute("value",i.get("q")),toggleSearch(),search())}async function search(){const e=field.value.trim(),t=document.getElementById("search-layout");if(!e)return resultsDiv.innerHTML="<span><i>Enter your search text in the box above</i></span>",hidePreview(),void(t&&t.classList.add("no-preview"));window.lastSearch=e,window.searchTerms=tokenizeSearchTerms(e),resultsDiv.innerHTML=loadingSvg,hidePreview();const n=offlineSearch(e);if(window.searchResults=n,!n.length)return t&&t.classList.add("no-preview"),void(resultsDiv.innerHTML=`\n                <div class="no-results">\n                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n                        <circle cx="11" cy="11" r="8"></circle>\n                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>\n                        <line x1="8" y1="11" x2="14" y2="11"></line>\n                    </svg>\n                    <p>No results for "${e}"</p>\n                </div>\n            `);t&&t.classList.remove("no-preview");let r="";n.forEach((e,t)=>{const n=highlightTerms(getContextualExcerpt(e.content,window.searchTerms,120),window.searchTerms),i=highlightTerms(e.title,window.searchTerms),a=e.tags&&e.tags.length>0?`<div class="result-tags">${e.tags.map(e=>`<span class="tag">#${e}</span>`).join("")}</div>`:"";r+=`\n                <div class="searchresult${0===t?" active":""}"\n                     data-index="${t}"\n                     data-url="${e.url}"\n                     onmouseenter="showPreview(${t})"\n                     onclick="window.location.href='${e.url}'">\n                    <span class="result-title">${i}</span>\n                    ${a}\n                    <div class="result-excerpt">${n}</div>\n                </div>\n            `}),resultsDiv.innerHTML=r,n.length>0&&showPreview(0),"undefined"!=typeof lucide&&lucide.createIcons()}function offlineSearch(e){const t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",limit:10}]),r=e=>{const t=n.filter(t=>t.field===e);return 0===t.length?[]:[...t[0].result]};return[...new Set([...r("title"),...r("content"),...r("tags")])].map(e=>{const n={...t[e]};return n.tags=n.tags.filter(e=>"gardenEntry"!==e&&"note"!==e),n})}window.lastSearch="",window.searchResults=[],window.searchTerms=[],window.currentPreviewIndex=-1,window.search=search,document.addEventListener("click",function(e){const t=e.target.closest("a.tag");if(!t||t.closest("#globalsearch"))return;const n=t.getAttribute("href");n&&"javascript:void(0);"!==n||window.toggleTagSearch(t)})</script> <script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script> <script defer="defer">TIMESTAMP_FORMAT="dd. MMM yyyy",DATE_FORMAT="MMM dd, yyyy",document.querySelectorAll(".human-date").forEach(function(e){try{date=e.getAttribute("data-date")||e.innerText,format=/^\d{4}-\d{2}-\d{2}$/.test(date.trim())?DATE_FORMAT:TIMESTAMP_FORMAT,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTTP(date)),null==parsed_date.invalid&&(e.innerHTML=parsed_date.toFormat(format))}catch(e){}})</script> <footer> <a href="/imprint">Imprint</a> &nbsp;&nbsp;&middot;&nbsp;&nbsp; <a href="/privacy">Privacy Policy</a> </footer> <script defer="defer" src="https://unpkg.com/lucide@latest"></script> <script defer="defer">document.addEventListener("DOMContentLoaded",()=>{lucide.createIcons({attrs:{class:["svg-icon"]}})})</script> <script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".obsidian-bases-views").forEach(function(e){var t=e.querySelector(".obsidian-bases-active-view"),a=e.querySelector(".obsidian-bases-dropdown"),i=e.querySelectorAll(".obsidian-bases-dropdown-item"),n=e.querySelectorAll(".obsidian-bases-view-panel"),o=e.querySelector(".obsidian-bases-active-view-name"),r=e.querySelector(".obsidian-bases-count-value");t&&a&&(t.addEventListener("click",function(e){e.stopPropagation();var i="none"!==a.style.display;a.style.display=i?"none":"block",t.setAttribute("aria-expanded",!i)}),document.addEventListener("click",function(){a.style.display="none",t.setAttribute("aria-expanded","false")}),i.forEach(function(s){s.addEventListener("click",function(s){s.stopPropagation();var d=this.getAttribute("data-view-index");i.forEach(function(e){e.classList.remove("active")}),this.classList.add("active"),n.forEach(function(e){e.style.display="none"});var l=e.querySelector('.obsidian-bases-view-panel[data-view-index="'+d+'"]');l&&(l.style.display="block");var c=this.querySelector(".obsidian-bases-view-icon"),u=t.querySelector(".obsidian-bases-view-icon");if(c&&u&&u.replaceWith(c.cloneNode(!0)),o&&(o.textContent=this.textContent.trim()),r&&l){var b=l.querySelectorAll("tbody tr:not(.obsidian-base-group-row), .obsidian-base-card, .obsidian-base-list li");r.textContent=b.length}a.style.display="none",t.setAttribute("aria-expanded","false")})}))}),document.querySelectorAll(".bases-dynamic-date").forEach(function(e){var t=e.getAttribute("data-type"),a=new Date;if("today"===t){var i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o}else if("now"===t){i=a.getFullYear(),n=String(a.getMonth()+1).padStart(2,"0"),o=String(a.getDate()).padStart(2,"0");var r=String(a.getHours()).padStart(2,"0"),s=String(a.getMinutes()).padStart(2,"0");e.textContent=i+"-"+n+"-"+o+" "+r+":"+s}})})</script> <style>.excalidraw-svg .excalidraw-embedded-note-content{width:100%;height:100%;overflow-y:auto;background:var(--background-primary);color:var(--text-normal);padding:.5em 1em;font-size:.8em;border:1px solid var(--background-modifier-border,#e3e3e3);border-radius:4px;box-sizing:border-box;unicode-bidi:plaintext}</style> <script>window.addEventListener("load",function(){document.querySelectorAll("iframe.excalidraw-embedded-note").forEach(function(e){function t(){var t;try{t=e.contentDocument}catch(e){return}if(t){var n=t.querySelector(".content");if(n){var c=document.createElement("div");c.className="excalidraw-embedded-note-content",c.innerHTML=n.innerHTML,e.parentNode.replaceChild(c,e)}}}e.contentDocument&&"complete"===e.contentDocument.readyState&&e.contentDocument.querySelector(".content")?t():e.addEventListener("load",t)})})</script> </body> </html> 

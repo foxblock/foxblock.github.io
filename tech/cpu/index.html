@@ -73,7 +73,7 @@
 <link href="/styles/obsidian-base.css" rel="stylesheet">
 <link href="/styles/digital-garden-base.css" rel="stylesheet">
 
-<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-08T08:57:28.308Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-08T08:57:28.308Z" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-08T10:44:46.817Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-08T10:44:46.817Z" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -81,46 +81,60 @@
 
 
 
+
 <style></style>
 
+    
+    
     
     
   </head>
   <body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section   ">
     
+
     
     
-      
     
+  
+  
+
     <div x-init="isDesktop = (window.innerWidth>=1000) ? true: false;"
             x-on:resize.window="isDesktop = (window.innerWidth>=1000) ? true : false;"
             x-data="{isDesktop: true, showFilesMobile: false}">
 
         <div x-show.important="!isDesktop" style="display: none;">
             <nav class="navbar">
-    <div class="navbar-inner">
-        <span style="font-size: 1.5rem; margin-right: 10px; color: var(--link-color)" @click="showFilesMobile=!showFilesMobile"><i data-lucide="menu"></i></span>
-        
-        
-        <a href="/" style="text-decoration: none; flex: 1; display: flex; justify-content: center;">
-                <img class="site-logo" src="/logo.svg" alt="janek.ing">
-        </a>
-        
-        
-    </div>
+                <div class="navbar-inner">
+                    <span style="font-size: 1.5rem; margin-right: 10px;" @click="showFilesMobile=!showFilesMobile"><i  data-lucide="menu"></i></span>
+                    
+                    
+                    <a href="/" style="text-decoration: none; flex: 1; display: flex; justify-content: center;">
+                            <img class="site-logo" src="/logo.svg" alt="janek.ing">
+                    </a>
+                    
+                    
+                </div>
 
-    
-        <div class="search-button align-icon" onclick="toggleSearch()">
+                <div class="navbar-actions">
+                    
+<div class="search-button align-icon" onclick="toggleSearch()">
     <span class="search-icon">
         <i data-lucide="search"></i>
     </span>
     <span class="search-text">Search</span>
     <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
 </div>
-    
-</nav>
+
+
+                    
+<button type="button" class="page-panel-toggle" aria-controls="page-panel" aria-expanded="false" aria-label="On this page" title="On this page">
+    <i data-lucide="panel-right"></i>
+</button>
+
+                </div>
+            </nav>
         </div>
-        
+
         <div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none;" class="fullpage-overlay"></div>
 
       <div class="filetree-wrapper" x-show.important="isDesktop || showFilesMobile" style="display: none;">
@@ -133,14 +147,15 @@
          
          
         
-            <div class="search-button align-icon" onclick="toggleSearch()">
+<div class="search-button align-icon" onclick="toggleSearch()">
     <span class="search-icon">
         <i data-lucide="search"></i>
     </span>
     <span class="search-text">Search</span>
     <span class="search-keys"><code>Ctrl</code>&nbsp;+&nbsp;<code>K</code></span>
 </div>
-        
+
+
          <div class="folder" x-data="{isOpen: true}">
     
         <div x-show="isOpen" style="display:none" class="">
@@ -741,10 +756,433 @@
       </div>
     </div>
 
-    
+
+
+
+
+    <main class="content cm-s-obsidian print ">
+      <header>
+        
+          <h1 data-note-icon="">CPU</h1>
+        
+        <div class="header-meta">
+          
+            <div class="header-tags">
+              
+                
+              
+                
+                  <a class="tag">
+                    #knowledge-base
+                  </a>
+                
+              
+                
+                  <a class="tag">
+                    #german
+                  </a>
+                
+              
+            </div>
+          
+        </div>
+      
+      <div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2025-11-19T16:55:16.658+01:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-01-28T13:15:27.494+01:00"></span></div></div>
+      
+        
+      
+      
+      </header>
+      
+      
+      
+      
+      <h2 id="cache" tabindex="-1">Cache</h2>
+<div class="excalidraw-svg"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 362.5 694.5" width="362.5" height="694.5" class="excalidraw-svg" style="max-width: 100%; height: auto;"><metadata></metadata><defs><style class="style-fonts">      @font-face { font-family: Virgil; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="362.5" height="694.5" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(10 14) rotate(0 108.5 39.5)"><path d="M0 0 C51.53 0, 103.07 0, 217 0 M0 0 C50.03 0, 100.05 0, 217 0 M217 0 C217 25.04, 217 50.08, 217 79 M217 0 C217 16.04, 217 32.07, 217 79 M217 79 C159.99 79, 102.98 79, 0 79 M217 79 C152.16 79, 87.32 79, 0 79 M0 79 C0 57.92, 0 36.84, 0 0 M0 79 C0 57.33, 0 35.67, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(71.5600357055664 41) rotate(0 46.939964294433594 12.5)"><text x="46.939964294433594" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">CPU Core</text></g><g stroke-linecap="round" transform="translate(10 111) rotate(0 50.5 45)"><path d="M0 0 C31.28 0, 62.57 0, 101 0 M0 0 C27.67 0, 55.34 0, 101 0 M101 0 C101 21.23, 101 42.46, 101 90 M101 0 C101 30.79, 101 61.57, 101 90 M101 90 C70.68 90, 40.35 90, 0 90 M101 90 C70.91 90, 40.83 90, 0 90 M0 90 C0 57.19, 0 24.39, 0 0 M0 90 C0 62.52, 0 35.04, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(28.108009338378906 136) rotate(0 32.391990661621094 20)"><text x="32.391990661621094" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L1 Data</text><text x="32.391990661621094" y="34.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Cache</text></g><g stroke-linecap="round" transform="translate(127.5 112) rotate(0 50.5 45)"><path d="M0 0 C28.66 0, 57.33 0, 101 0 M0 0 C21.14 0, 42.27 0, 101 0 M101 0 C101 35.04, 101 70.08, 101 90 M101 0 C101 24.78, 101 49.57, 101 90 M101 90 C65.6 90, 30.19 90, 0 90 M101 90 C64.29 90, 27.58 90, 0 90 M0 90 C0 66.54, 0 43.08, 0 0 M0 90 C0 59.7, 0 29.4, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(134.60002899169922 127) rotate(0 43.39997100830078 30)"><text x="43.39997100830078" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L1</text><text x="43.39997100830078" y="34.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Instruction</text><text x="43.39997100830078" y="54.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Cache</text></g><g stroke-linecap="round" transform="translate(11 227) rotate(0 108.5 46.5)"><path d="M0 0 C43.85 0, 87.71 0, 217 0 M0 0 C71.33 0, 142.66 0, 217 0 M217 0 C217 18.68, 217 37.35, 217 93 M217 0 C217 27.53, 217 55.06, 217 93 M217 93 C166.89 93, 116.77 93, 0 93 M217 93 C166.33 93, 115.66 93, 0 93 M0 93 C0 63.53, 0 34.05, 0 0 M0 93 C0 66.1, 0 39.2, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(72.85002899169922 261) rotate(0 46.64997100830078 12.5)"><text x="46.64997100830078" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L2 Cache</text></g><g stroke-linecap="round" transform="translate(10.5 349.5) rotate(0 170.5 46.5)"><path d="M0 0 C75.57 0, 151.13 0, 341 0 M0 0 C117.48 0, 234.95 0, 341 0 M341 0 C341 20.52, 341 41.03, 341 93 M341 0 C341 20.04, 341 40.08, 341 93 M341 93 C259.59 93, 178.17 93, 0 93 M341 93 C269.53 93, 198.06 93, 0 93 M0 93 C0 70.44, 0 47.88, 0 0 M0 93 C0 64.08, 0 35.15, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(134.66002655029297 383.5) rotate(0 46.33997344970703 12.5)"><text x="46.33997344970703" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L3 Cache</text></g><g stroke-linecap="round" transform="translate(10.5 469.5) rotate(0 170.5 46.5)"><path d="M0 0 C129.94 0, 259.88 0, 341 0 M0 0 C102.13 0, 204.26 0, 341 0 M341 0 C341 30.66, 341 61.31, 341 93 M341 0 C341 33.51, 341 67.01, 341 93 M341 93 C220.37 93, 99.73 93, 0 93 M341 93 C266.56 93, 192.11 93, 0 93 M0 93 C0 60.94, 0 28.88, 0 0 M0 93 C0 57.09, 0 21.17, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(120.8200454711914 503.5) rotate(0 60.179954528808594 12.5)"><text x="60.179954528808594" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Main Memory</text></g><g stroke-linecap="round" transform="translate(11.5 591.5) rotate(0 170.5 46.5)"><path d="M0 0 C115.72 0, 231.45 0, 341 0 M0 0 C70.01 0, 140.03 0, 341 0 M341 0 C341 21.53, 341 43.07, 341 93 M341 0 C341 23.27, 341 46.54, 341 93 M341 93 C231.72 93, 122.44 93, 0 93 M341 93 C250.19 93, 159.38 93, 0 93 M0 93 C0 71.11, 0 49.23, 0 0 M0 93 C0 63.06, 0 33.11, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(122.12003326416016 625.5) rotate(0 59.879966735839844 12.5)"><text x="59.879966735839844" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">HDD / Swap</text></g><g stroke-linecap="round"><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M0 0 C0 -4.17, 0 -20.83, 0 -25 M0 0 C0 -4.17, 0 -20.83, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M4.28 -13.25 C3.26 -16.05, 2.24 -18.85, 0 -25 M4.28 -13.25 C2.73 -17.51, 1.18 -21.77, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M-4.28 -13.25 C-3.26 -16.05, -2.24 -18.85, 0 -25 M-4.28 -13.25 C-2.73 -17.51, -1.18 -21.77, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(181 467) rotate(0 0 -11)"><path d="M0 0 C0 -3.67, 0 -18.33, 0 -22 M0 0 C0 -3.67, 0 -18.33, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181 467) rotate(0 0 -11)"><path d="M3.76 -11.66 C2.86 -14.15, 1.95 -16.64, 0 -22 M3.76 -11.66 C2.74 -14.48, 1.71 -17.3, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181 467) rotate(0 0 -11)"><path d="M-3.76 -11.66 C-2.86 -14.15, -1.95 -16.64, 0 -22 M-3.76 -11.66 C-2.74 -14.48, -1.71 -17.3, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M0 0 C0.33 -3.83, 1.67 -19.17, 2 -23 M0 0 C0.33 -3.83, 1.67 -19.17, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M4.99 -11.85 C4.15 -15, 3.3 -18.16, 2 -23 M4.99 -11.85 C3.95 -15.72, 2.91 -19.59, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M-2.87 -12.54 C-1.5 -15.49, -0.12 -18.45, 2 -23 M-2.87 -12.54 C-1.18 -16.17, 0.51 -19.8, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M0 0 C0.14 -3.33, 0.72 -16.67, 0.86 -20 M0 0 C0.14 -3.33, 0.72 -16.67, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M3.88 -10.46 C2.76 -13.97, 1.65 -17.49, 0.86 -20 M3.88 -10.46 C3.06 -13.02, 2.25 -15.59, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M-2.96 -10.75 C-1.56 -14.16, -0.15 -17.57, 0.86 -20 M-2.96 -10.75 C-1.94 -13.24, -0.91 -15.72, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M0 0 C-0.25 -3.17, -1.26 -15.83, -1.52 -19 M0 0 C-0.25 -3.17, -1.26 -15.83, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M2.45 -10.33 C1.56 -12.27, 0.67 -14.21, -1.52 -19 M2.45 -10.33 C1.06 -13.36, -0.32 -16.39, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M-4.05 -9.81 C-3.49 -11.87, -2.92 -13.92, -1.52 -19 M-4.05 -9.81 C-3.17 -13.02, -2.28 -16.23, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M0 0 C2.5 -2.33, 12.5 -11.67, 15 -14 M0 0 C2.5 -2.33, 12.5 -11.67, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M10.35 -4.86 C12.05 -8.2, 13.75 -11.54, 15 -14 M10.35 -4.86 C12.04 -8.19, 13.74 -11.52, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M5.56 -9.99 C9.01 -11.45, 12.46 -12.92, 15 -14 M5.56 -9.99 C9 -11.45, 12.44 -12.91, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M0 0 C-1.33 -2.83, -6.67 -14.17, -8 -17 M0 0 C-1.33 -2.83, -6.67 -14.17, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M-1.33 -10.38 C-3.01 -12.05, -4.69 -13.72, -8 -17 M-1.33 -10.38 C-3.75 -12.78, -6.17 -15.18, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M-7.15 -7.64 C-7.36 -10, -7.58 -12.36, -8 -17 M-7.15 -7.64 C-7.46 -11.04, -7.77 -14.43, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g transform="translate(234 159) rotate(270 64.27995300292969 10)"><text x="0" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">... for each core</text></g><g transform="translate(303 96) rotate(0 -13.5 -43)" stroke="none"><path fill="#1e1e1e" d="M -0.78,0 Q -0.78,0 -0.76,-1.72 -0.74,-3.44 -0.73,-7.05 -0.72,-10.66 -0.71,-13.63 -0.70,-16.60 -0.69,-20.17 -0.69,-23.73 -0.68,-27.54 -0.68,-31.36 -0.67,-34.99 -0.67,-38.62 -0.67,-40.74 -0.66,-42.86 -0.66,-45.20 -0.66,-47.54 -0.66,-48.82 -0.66,-50.10 -0.66,-51.22 -0.66,-52.34 -0.66,-53.39 -0.66,-54.44 -0.67,-55.46 -0.68,-56.48 -0.69,-57.49 -0.70,-58.50 -0.69,-60.66 -0.68,-62.81 -0.68,-64.30 -0.67,-65.79 -0.67,-67.29 -0.67,-68.78 -0.67,-70.28 -0.66,-71.78 -0.69,-72.69 -0.72,-73.61 -1.02,-74.14 -1.33,-74.68 -1.49,-75.63 -1.66,-76.58 -1.99,-77.09 -2.32,-77.60 -2.73,-78.08 -3.14,-78.56 -3.84,-79.37 -4.53,-80.18 -5.15,-80.81 -5.76,-81.44 -6.12,-82.07 -6.48,-82.71 -7.02,-83.06 -7.56,-83.41 -8.26,-83.56 -8.96,-83.71 -9.84,-83.81 -10.71,-83.91 -11.56,-84.26 -12.40,-84.61 -13.13,-84.71 -13.87,-84.81 -14.49,-84.83 -15.12,-84.86 -15.66,-84.85 -16.21,-84.84 -17.23,-84.80 -18.25,-84.76 -19.25,-84.73 -20.25,-84.69 -21.26,-84.66 -22.26,-84.63 -24.49,-84.12 -26.72,-83.61 -26.95,-83.60 -27.18,-83.59 -27.40,-83.66 -27.62,-83.72 -27.80,-83.86 -27.99,-83.99 -28.13,-84.18 -28.26,-84.36 -28.33,-84.58 -28.40,-84.80 -28.39,-85.03 -28.39,-85.26 -28.31,-85.47 -28.23,-85.69 -28.09,-85.87 -27.94,-86.04 -27.75,-86.17 -27.56,-86.29 -27.34,-86.35 -27.12,-86.40 -26.89,-86.39 -26.66,-86.37 -26.45,-86.28 -26.24,-86.19 -26.07,-86.04 -25.90,-85.89 -25.78,-85.69 -25.67,-85.49 -25.63,-85.26 -25.58,-85.04 -25.61,-84.81 -25.64,-84.59 -25.74,-84.38 -25.84,-84.17 -26.00,-84.01 -26.16,-83.85 -26.37,-83.75 -26.57,-83.64 -26.80,-83.61 -27.03,-83.58 -27.25,-83.62 -27.48,-83.67 -27.68,-83.78 -27.88,-83.89 -28.03,-84.06 -28.18,-84.23 -28.28,-84.44 -28.37,-84.65 -28.39,-84.88 -28.41,-85.10 -28.35,-85.33 -28.30,-85.55 -28.17,-85.74 -28.05,-85.94 -27.87,-86.08 -27.70,-86.22 -27.48,-86.30 -27.27,-86.38 -27.27,-86.38 -27.27,-86.38 -25.28,-86.88 -23.28,-87.38 -22.27,-87.36 -21.25,-87.33 -20.25,-87.30 -19.24,-87.26 -18.22,-87.21 -17.19,-87.15 -16.65,-87.11 -16.11,-87.07 -15.52,-87.01 -14.93,-86.96 -14.24,-86.86 -13.56,-86.77 -12.56,-86.59 -11.56,-86.42 -11.02,-86.11 -10.49,-85.80 -9.48,-85.71 -8.47,-85.62 -7.44,-85.32 -6.40,-85.03 -5.41,-83.85 -4.42,-82.68 -3.82,-82.04 -3.22,-81.40 -2.39,-80.58 -1.57,-79.76 -1.12,-79.11 -0.67,-78.46 -0.32,-77.65 0.02,-76.85 0.10,-76.08 0.18,-75.30 0.45,-74.48 0.72,-73.65 0.69,-72.72 0.66,-71.78 0.67,-70.28 0.67,-68.78 0.67,-67.29 0.67,-65.79 0.68,-64.30 0.68,-62.81 0.69,-60.66 0.70,-58.50 0.69,-57.49 0.68,-56.48 0.67,-55.46 0.66,-54.44 0.66,-53.39 0.66,-52.34 0.66,-51.22 0.66,-50.10 0.66,-48.82 0.66,-47.54 0.66,-45.20 0.66,-42.86 0.67,-40.74 0.67,-38.62 0.67,-34.99 0.68,-31.36 0.68,-27.54 0.69,-23.73 0.69,-20.17 0.70,-16.60 0.71,-13.63 0.72,-10.66 0.73,-7.05 0.74,-3.44 0.76,-1.72 0.78,0 0.76,0.09 0.75,0.18 0.72,0.27 0.69,0.36 0.63,0.44 0.58,0.51 0.51,0.58 0.44,0.64 0.36,0.68 0.27,0.73 0.18,0.75 0.09,0.77 -0.00,0.77 -0.09,0.77 -0.18,0.75 -0.27,0.73 -0.36,0.68 -0.44,0.64 -0.51,0.58 -0.58,0.51 -0.63,0.44 -0.69,0.36 -0.72,0.27 -0.75,0.18 -0.76,0.09 -0.78,-0.00 -0.78,-0.00 L -0.78,0 Z"></path></g><g transform="translate(298 241) rotate(0 -12.5 41)" stroke="none"><path fill="#1e1e1e" d="M 0.78,0 Q 0.78,0 0.76,1.43 0.74,2.87 0.73,4.06 0.72,5.25 0.41,6.68 0.11,8.12 -0.00,11.23 -0.12,14.34 -0.18,16.54 -0.24,18.75 -0.26,20.54 -0.29,22.34 -0.30,23.39 -0.31,24.44 -0.31,25.75 -0.32,27.06 -0.32,28.19 -0.33,29.32 -0.33,31.53 -0.33,33.73 -0.33,35.25 -0.33,36.76 -0.31,37.69 -0.28,38.62 -0.29,40.45 -0.29,42.29 -0.30,43.93 -0.31,45.57 -0.31,46.84 -0.32,48.11 -0.32,50.38 -0.32,52.65 -0.32,54.47 -0.33,56.30 -0.33,57.93 -0.33,59.57 -0.33,61.42 -0.33,63.27 -0.63,64.69 -0.92,66.12 -1.04,67.52 -1.16,68.92 -1.18,69.82 -1.20,70.73 -1.49,71.53 -1.79,72.34 -1.87,73.11 -1.95,73.87 -2.31,74.67 -2.67,75.46 -3.11,76.31 -3.56,77.17 -4.43,77.93 -5.31,78.70 -5.89,79.26 -6.47,79.83 -7.00,80.38 -7.54,80.92 -8.17,81.27 -8.81,81.62 -9.60,81.99 -10.38,82.35 -11.09,82.58 -11.80,82.80 -12.42,82.91 -13.04,83.02 -14.19,82.99 -15.35,82.96 -16.69,82.93 -18.04,82.89 -19.03,82.59 -20.02,82.29 -20.88,82.18 -21.74,82.07 -23.49,81.52 -25.24,80.97 -25.39,80.90 -25.53,80.84 -25.65,80.73 -25.78,80.62 -25.85,80.48 -25.93,80.34 -25.97,80.18 -26.00,80.02 -25.97,79.86 -25.95,79.70 -25.88,79.56 -25.81,79.41 -25.69,79.30 -25.58,79.18 -25.43,79.11 -25.29,79.04 -25.13,79.02 -24.97,78.99 -24.81,79.02 -24.65,79.06 -24.51,79.13 -24.37,79.21 -24.26,79.34 -24.15,79.46 -24.09,79.60 -24.02,79.75 -24.01,79.91 -24.00,80.08 -24.04,80.23 -24.08,80.39 -24.16,80.53 -24.25,80.66 -24.38,80.77 -24.50,80.87 -24.65,80.92 -24.81,80.98 -24.97,80.98 -25.13,80.99 -25.28,80.94 -25.44,80.89 -25.57,80.80 -25.70,80.70 -25.80,80.57 -25.89,80.44 -25.94,80.28 -25.99,80.13 -25.98,79.97 -25.98,79.81 -25.92,79.65 -25.87,79.50 -25.77,79.38 -25.66,79.25 -25.53,79.16 -25.39,79.08 -25.23,79.04 -25.08,79.00 -24.91,79.01 -24.75,79.02 -24.75,79.02 -24.75,79.02 -23.12,79.65 -21.48,80.27 -20.46,80.40 -19.45,80.53 -18.74,80.80 -18.02,81.06 -16.71,81.00 -15.40,80.94 -13.87,80.82 -12.34,80.71 -11.80,80.61 -11.26,80.50 -10.05,80.01 -8.84,79.51 -8.27,79.00 -7.71,78.49 -7.08,77.93 -6.44,77.37 -5.79,76.84 -5.15,76.30 -4.73,75.45 -4.31,74.60 -3.98,74.09 -3.65,73.58 -3.47,72.62 -3.29,71.67 -2.96,71.14 -2.64,70.60 -2.56,69.71 -2.47,68.81 -2.34,67.33 -2.22,65.85 -1.94,64.56 -1.66,63.26 -1.66,61.42 -1.66,59.57 -1.66,57.93 -1.66,56.30 -1.67,54.47 -1.67,52.65 -1.67,50.38 -1.67,48.11 -1.68,46.84 -1.68,45.57 -1.69,43.93 -1.70,42.29 -1.70,40.45 -1.71,38.62 -1.68,37.69 -1.66,36.76 -1.66,35.25 -1.66,33.73 -1.66,31.53 -1.66,29.32 -1.66,28.19 -1.66,27.06 -1.66,25.74 -1.66,24.43 -1.65,23.38 -1.64,22.32 -1.62,20.52 -1.60,18.71 -1.55,16.50 -1.51,14.28 -1.38,11.06 -1.26,7.83 -0.99,6.54 -0.72,5.24 -0.73,4.05 -0.74,2.87 -0.76,1.43 -0.78,0 -0.77,-0.09 -0.76,-0.18 -0.72,-0.27 -0.69,-0.36 -0.63,-0.44 -0.58,-0.51 -0.51,-0.58 -0.44,-0.64 -0.36,-0.68 -0.27,-0.73 -0.18,-0.75 -0.09,-0.77 0.00,-0.77 0.09,-0.77 0.18,-0.75 0.27,-0.73 0.36,-0.68 0.44,-0.64 0.51,-0.58 0.58,-0.51 0.63,-0.44 0.69,-0.36 0.72,-0.27 0.76,-0.18 0.77,-0.09 0.78,0.00 0.78,0.00 L 0.78,0 Z"></path></g><g stroke-linecap="round"><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M0 0 C0 -3.97, 0 -19.83, 0 -23.79 M0 0 C0 -3.97, 0 -19.83, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M4.07 -12.61 C2.68 -16.42, 1.3 -20.23, 0 -23.79 M4.07 -12.61 C3.01 -15.51, 1.96 -18.41, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M-4.07 -12.61 C-2.68 -16.42, -1.3 -20.23, 0 -23.79 M-4.07 -12.61 C-3.01 -15.51, -1.96 -18.41, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask></svg></div>
+- Register <-> L1-Cache <-> L2(L3/L4)-Cache <-> Main memory (RAM)<->HDD (Swap)
+	- L1-Cache oftmals unterteilt in "data" und "instruction cache"
+	- L1 oftmals pro Core
+	- L1: Größe bei aktuellen Prozessoren <100kB (pro Kern)
+		- [5700X](https://www.techpowerup.com/cpu-specs/ryzen-7-5700x.c2755): 32KB (instruction) + 32KB (data)
+		- [9950X3D](https://www.techpowerup.com/review/amd-ryzen-9-9950x3d/2.html): 32KB (instruction) + 48KB (data)
+		- [Apple M5](https://theapplewiki.com/wiki/M5): P-Core: 192 KB (instruction) + 128 KB (data), E-Core: 128 + 64 KB
+	- L2-Cache wird unter Windows "unified cache" genannt
+	- L2 oftmals pro Core, manchmal geteilt mit mehreren Cores oder gesamter CPU
+		- bei x64: pro Core, Apple Silicon (mindestens bis M5): für gesamten Chip
+	- L2: Größe bei aktuellen Prozessoren < 1MB (pro Kern)
+		- 5700X: 512KB
+		- 9950X3D: 1MB
+		- Apple M5: P-Cores: 16 MB (geteilt), E-Cores: 6 MB (geteilt)
+	- L3/L4 cache meist für gesamte CPU, Größe < 100MB
+		- 5700X: 32MB
+		- 9950X3D: 128MB
+		- Apple M5: nicht vorhanden
+- Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache (bei modernen x64 CPUs)
+	- ESP32: 32 Bytes
+	- ARM Cortex M0..4: kein Cache
+	- ARM Cortex M7+: 32 Bytes
+- Cache Miss: Programm fordert Daten an, welche nicht im L1+L2-Cache sind und daher aus dem RAM geladen werden müssen
+- Viele Operationen sind schneller, als das Laden aus dem RAM -> Performance wird von Nutzung des Caches dominiert
+	- [Gallery of Processor Cache Effects (igoro.com)](https://igoro.com/archive/gallery-of-processor-cache-effects/)
+		- Graphen welche den Effekt von CPU Cache, Cache Lines, Cache Aufbau, etc. verdeutlichen
+	- [Zen 1 timings](https://www.7-cpu.com/cpu/Zen.html)
+		- L1 Cache: 4-5 cycles (1ns)
+		- L2 Cache: 17 cycles (4-5ns)
+		- L3 Cache: ~40 cycles (10ns)
+		- RAM: 40 cycles + 90ns (100ns)
+		- 1 Cycle ~ 0.25ns (@4GHz)
+- (L1) Cache Aufbau 
+	- https://youtu.be/rLWeHpzAYhg?feature=shared&t=1855
+	- Cache funktioniert grundsätzlich wie hash table, wobei als key ein Teil der Speicheradresse genutzt wird
+	- Cache Line ist 64 Bytes
+	- Pointer-Adresse sind 64bit, von denen meist 48bit für Speicheradresse genutzt werden 
+	- Speicheradressen sind virtuell und müssen übersetzt werden. Virtuell, damit bspw swap funktioniert.
+	- Übersetzung läuft über anderen cache den Translation Lookaside Buffer. Dieser Cache mappt bei x64 12bit große "pages" (4096 Bytes) zwischen physischem und virtuellem Speicher.
+	- 6 LSB eines pointers sind offset in cache line
+	- 12 LSB sind offset in page
+	- wir wollen nicht auf Übersetzung der Adresse warten. Daher läuft beides parallel. Cache access ist sehr schnell (<5 cycles)
+	- zur Adressierung in Cache muss also Teil des pointers genutzt werden, welcher von Übersetzung nicht verändert wird = 12 LSB. 
+	- unteren 6 bits davon helfen nicht, da sie nur offset in cache line sind und nicht zur Unterscheidung von cache lines helfen können.
+	- Bleiben 6 bits übrig, was maximal 64 sets im Cache ergibt
+	- Daten im cache sind entweder mit virtueller oder physischer Adresse getaggt.
+	- nach Zugriff und paralleler Übersetzung wird überprüft, ob daten zu gewünschter Adresse gehören, da viele Speicherbereiche dieselben 12 LSB haben könnten 
+	- Somit sind alle Adressen mit einem ähnlichen Bit-Aufbau immer im selben Set zu finden.
+- Typischer Aufbau: N-way Associative Cache
+	- es werden N cache lines pro cache set gespeichert, gleichzeitig abgerufen und dann verglichen (mit getaggter Adresse), ob richtige Daten dabei sind
+	- größere Anzahl cache lines pro set bedeutet, dass mehr unterschiedliche Speicherbereiche mit gleicher bit Struktur im Cache Platz finden und Kollisionen verringert werden 
+	- Beispiel Zen 4: 8-way Set, 64 sets, je line 64 Bytes also 8\*64\*64 Bytes = 32KByte (Architektur Limit)
+	- Zen 5: 12-way = 48KByte
+	- Beispiel Apple M1/M2: 12-way Set, jedes Set hat also 12 Plätze je 128 Bytes (eine L2-Cache Line) = 1,5KB pro Set = ~10.900 Sets bei 16MB Cache
+	- Apple M-chips haben größere pages (64K)
+<div class="callout " data-callout="tip"><div class="callout-title"><div class="callout-title-inner"> Block sizes in code<br></div></div>
+<div class="callout-content">
+<p>
+When choosing a block size in your code (i.e. when reading a file in chunks), make it smaller than the L2 or L3 cache. This way the block will more likely stay in cache while you do operations on it. If you make the block too big, the CPU will need to continuously swap parts of it between the CPU cache and RAM making things <em>much</em> slower.<br>
+Keep in mind other stuff will be in the cache, too (like the stack of your program). 10% of smallest cache size of the target machines probably will be fine.<br>
+The best size can be determined by testing (measure performance with increasing blocks sizes), there will be a big drop once swap starts.</p>
+</div></div>
+<h2 id="pointers" tabindex="-1">Pointers</h2>
+<ul>
+<li>mindestens top 8 bits bei Intel und ARM Prozessoren sind nicht Teil der Speicheradresse (da unrealistisch großer Speicher benötigt werden würde), sondern können für andere Zwecke wie GC-flags genutzt werden. Meist werden nur 48bit für Speicheradresse genutzt
+<ul>
+<li><a href="https://youtu.be/uZEBkOrfUzM?feature=shared&amp;t=908" target="_blank" class="external-link">https://youtu.be/uZEBkOrfUzM?feature=shared&amp;t=908</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="assembly" tabindex="-1">Assembly</h2>
+<p><a href="https://uops.info/table.html" target="_blank" class="external-link">https://uops.info/table.html</a></p>
+<ul>
+<li>Liste von Assembly Instructions für verschiedene CPU-Typen und ihre Eigenschaften (entnommen aus den ISA-Dokumenten der CPUs)</li>
+<li>Latency = Anzahl Clock Cycles für Operation</li>
+<li>TP (Throughput) = Anzahl Clock Cycles Wartezeit zwischen 2 Operationen (Wert &lt; 1 = Mehrere Operationen pro Clock Cycle, bspw. 0.5 = 2 OPs/Cycle)</li>
+<li>Ports = Verfügbare Ports für Micro-OPs, Stern = Mehrere Micro-OPs auf denselben Ports, Plus = Mehrere Micro-OPs auf unterschiedlichen Ports (Bsp.: 3<em>p015+1</em>p23 = 3 µOps auf Port 0, 1 oder 5 und 1 µOp auf Port 2 oder 3)<br>
+<a href="https://godbolt.org/" target="_blank" class="external-link">https://godbolt.org/</a></li>
+<li>Zeigt Assembly für eingegebenen Programmcode und für verschiedene Architekturen und Compiler an</li>
+<li>Kann auch ESP32 und Co.</li>
+<li>Vergleich zwischen zwei Assembly möglich</li>
+<li>Mouse-Over erklärt Assembly Instruktionen</li>
+</ul>
+<h2 id="modulus" tabindex="-1">Modulus (%)</h2>
+<p><a href="https://www.youtube.com/watch?v=RrHGX1wwSYM" target="_blank" class="external-link">Language Performance Comparisons Are Junk</a></p>
+<ul>
+<li>Moderne CPUs haben keine schnelle Instruktion für Modulus-Operation (und keine SIMD-Instruktion)</li>
+<li>Modulus wird in äquivalente Instruktionen umgewandelt (z.B. Berechnung über Floats), welche ggf. mit SIMD beschleunigt werden können<br>
+-&gt; Modulus mit zur Compile-Zeit unbekanntem Divisor ist für CPU sehr aufwändig, da diese Operation nicht umgewandelt werden kann</li>
+</ul>
+<h2 id="napkin-math" tabindex="-1">Napkin Math</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th></th>
+<th>Throughput</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DDR4 RAM Read/Write (2133 MHz)</td>
+<td>17 GiB/s</td>
+</tr>
+<tr>
+<td>DDR4 RAM Read/Write (3200 MHz, 2020 Standard)</td>
+<td>25.6 GiB/s</td>
+</tr>
+<tr>
+<td>DDR5 RAM Read/Write (5500 MHz, 2025 Standard)</td>
+<td>45 GiB/s</td>
+</tr>
+<tr>
+<td>DDR5 RAM Read/Write (8800 MHz)</td>
+<td>70 GiB/s</td>
+</tr>
+<tr>
+<td>SSD Sequential Read/Write (PCI Gen. 3 - 2020 Standard)</td>
+<td>3 GiB/s</td>
+</tr>
+<tr>
+<td>SSD Sequential Read/Write (PCI Gen. 4/5 - 2025 Standard)</td>
+<td>6 GiB/s</td>
+</tr>
+<tr>
+<td>SSD Sequential Read/Write on SATA III</td>
+<td>600 MiB/s</td>
+</tr>
+<tr>
+<td>SSD Random Read/Write (depends on file size)</td>
+<td>50 - 500 MiB/s</td>
+</tr>
+<tr>
+<td>HDD Sequential Read</td>
+<td>250 MiB/s</td>
+</tr>
+<tr>
+<td>HDD Sequential Write</td>
+<td>200 MiB/s</td>
+</tr>
+<tr>
+<td>HDD Random Read</td>
+<td>&lt;20 MiB/s</td>
+</tr>
+<tr>
+<td>HDD Random Write</td>
+<td>1 MiB/s</td>
+</tr>
+<tr>
+<td>SD Card (UHS I) Sequential Read/Write</td>
+<td>150 MiB/s</td>
+</tr>
+<tr>
+<td>SD Card (UHS I) Random Read/Write</td>
+<td>&lt;5 MiB/s</td>
+</tr>
+<tr>
+<td>USB Stick (USB 3.0) Sequential Read/Write</td>
+<td>150 MiB/s</td>
+</tr>
+<tr>
+<td>USB Stick (USB 3.0) Random Read/Write</td>
+<td>&lt;5 MiB/s</td>
+</tr>
+<tr>
+<td>USB 2.0 Peak Read/Write</td>
+<td>50 MiB/s</td>
+</tr>
+<tr>
+<td>USB 3.0 Peak Read/Write</td>
+<td>330 MiB/s</td>
+</tr>
+<tr>
+<td>USB 3.1 Gen 2 / 3.2 Gen 1x2 / 3.2 Gen 2x1 Peak Read/Write (10 Gbps)</td>
+<td>800 MiB/s</td>
+</tr>
+<tr>
+<td>Home Network (1 GBit/s)</td>
+<td>100 MiB/s</td>
+</tr>
+<tr>
+<td>Fiber Internet (100 - 1000 MBit/s)</td>
+<td>20 - 100 MiB/s</td>
+</tr>
+<tr>
+<td>Notes:</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Sequential throughput means one big file (&gt;100 MiB or multiple GiB)</li>
+<li>Random throughput means many small files (each much less than 1 MiB). Random read or write throughput is highly dependent on file size: the smaller the files, the lower the speed. HDDs have to physically move the disk head, SSDs lose speed when you read files smaller than the page size (usually 4 KiB) due to overhead. It is also generally bad for caching behavior of the disk and OS.</li>
+<li>For USB the real peak throughput (values above) is about 2/3 of the raw max data rate</li>
+<li>For NVMe SSDs speed is limited by PCI lanes (the more the better), although most modules are optimized for 4x PCI Gen. 3/4 or 2x PCI Gen. 5</li>
+<li>HDDs usually have a RAM cache (often 256MB) for often/last used files, which is much faster</li>
+<li>The OS might cache often/last accessed files on RAM</li>
+</ul>
+<p>Cost of CPU operations: <a href="http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/" target="_blank" class="external-link">Infographics: Operation Costs in CPU Clock Cycles - IT Hare on Soft.ware</a></p>
+<p>GitHub repo with programming related &quot;ballpark&quot; numbers: <a href="https://github.com/sirupsen/napkin-math" target="_blank" class="external-link">GitHub - sirupsen/napkin-math: Techniques and numbers for estimating system's performance from first-principles</a></p>
+<p>Great visualization of latency numbers (with historical data): <a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html" target="_blank" class="external-link">https://colin-scott.github.io/personal_website/research/interactive_latency.html</a></p>
+
+      
+      
+      
+      
+        <script src="https://giscus.app/client.js"
+        data-repo="foxblock/foxblock.github.io"
+        data-repo-id="R_kgDOOeV4dw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOOeV4d84CpYMI"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async></script>
+
+      
+    </main>
 
     
-      <div class="search-container" id="globalsearch" onclick="toggleSearch()">
+      <aside>
+      <div class="page-panel-backdrop" data-page-panel-close></div>
+      <div class="sidebar" id="page-panel">
+            <div class="page-panel-header">
+                  <span class="page-panel-handle" aria-hidden="true"></span>
+                  <button type="button" class="page-panel-close" data-page-panel-close aria-label="Close">
+                        <i data-lucide="x"></i>
+                  </button>
+            </div>
+            <div class="sidebar-container">
+                  
+                  
+                  
+
+                  
+                        
+                        
+                              <div class="toc">
+                                    <div class="toc-title-container">
+                                          <div class="toc-title">
+                                                CPU
+                                          </div>
+                                    </div>
+                                    <div class="toc-container">
+                                          <nav class="toc">
+                <ol>
+                    
+                    <li><a href="#cache">Cache</a>
+            		</li>
+
+                    <li><a href="#pointers">Pointers</a>
+            		</li>
+
+                    <li><a href="#assembly">Assembly</a>
+            		</li>
+
+                    <li><a href="#modulus">Modulus (%)</a>
+            		</li>
+
+                    <li><a href="#napkin-math">Napkin Math</a>
+            		</li>
+                </ol>
+            </nav>
+                                    </div>
+                              </div>
+                              <script>
+                                    (function() {
+                                          const tocLinks = document.querySelectorAll('.toc-container a[href^="#"]');
+                                          if (!tocLinks.length) return;
+
+                                          const headings = Array.from(tocLinks).map(link => {
+                                                const id = decodeURIComponent(link.getAttribute('href').slice(1));
+                                                return { link, target: document.getElementById(id) };
+                                          }).filter(h => h.target);
+
+                                          function updateActive() {
+                                                let current = headings[0];
+                                                for (const h of headings) {
+                                                      if (h.target.getBoundingClientRect().top <= 100) {
+                                                            current = h;
+                                                      }
+                                                }
+                                                tocLinks.forEach(l => l.classList.remove('toc-active'));
+                                                if (current) current.link.classList.add('toc-active');
+                                          }
+
+                                          window.addEventListener('scroll', updateActive, { passive: true });
+                                          updateActive();
+                                    })();
+                              </script>
+                        
+
+                  
+
+                        
+                  
+                  
+            </div>
+      </div>
+      <script>
+            (function () {
+                  const panel = document.getElementById('page-panel');
+                  if (!panel) return;
+                  const mobile = window.matchMedia('(max-width: 1400px)');
+
+                  function setOpen(open) {
+                        panel.classList.toggle('is-open', open);
+                        document.body.classList.toggle('page-panel-open', open);
+                        document.querySelectorAll('.page-panel-toggle').forEach(btn => {
+                              btn.setAttribute('aria-expanded', String(open));
+                        });
+                        document.dispatchEvent(new CustomEvent(open ? 'page-panel:open' : 'page-panel:close'));
+                  }
+
+                  document.addEventListener('click', evt => {
+                        if (evt.target.closest('.page-panel-toggle')) {
+                              setOpen(!panel.classList.contains('is-open'));
+                              return;
+                        }
+                        if (evt.target.closest('[data-page-panel-close]')) {
+                              setOpen(false);
+                              return;
+                        }
+                        // Following a TOC entry or backlink should reveal the target, not the sheet
+                        if (mobile.matches && evt.target.closest('#page-panel a[href]')) {
+                              setOpen(false);
+                        }
+                  });
+
+                  document.addEventListener('keydown', evt => {
+                        if (evt.key === 'Escape' && panel.classList.contains('is-open')) setOpen(false);
+                  });
+
+                  // Leaving the mobile breakpoint restores the normal sidebar
+                  mobile.addEventListener('change', evt => {
+                        if (!evt.matches) setOpen(false);
+                  });
+            })();
+      </script>
+</aside>
+    
+    
+<div class="floating-actions floating-bottom-right">
+    <button type="button" class="page-panel-toggle page-panel-fab" aria-controls="page-panel" aria-expanded="false" aria-label="On this page" title="On this page">
+        <i data-lucide="panel-right"></i>
+    </button>
+    
+</div>
+
+
+        <script>
+      if (window.location.hash) {
+        document.getElementById(window.location.hash.slice(1)).classList.add('referred');
+      }
+      window.addEventListener('hashchange', (evt) => {
+        const oldParts = evt.oldURL.split("#");
+        if (oldParts[1]) {
+          document.getElementById(oldParts[1]).classList.remove('referred');
+        }
+        const newParts = evt.newURL.split("#");
+        if (newParts[1]) {
+          document.getElementById(newParts[1]).classList.add('referred');
+        }
+      }, false);
+      const url_parts = window.location.href.split("#")
+      const url = url_parts[0];
+      const referrence = url_parts[1];
+      document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function (el) {
+        el.ondblclick = function(evt) {
+          const ref_url = url + '#' + evt.target.id
+          navigator.clipboard.writeText(ref_url);
+      }
+      });
+
+      
+    </script>
+    
+
+<div class="search-container" id="globalsearch" onclick="toggleSearch()">
     <div class="search-box" onclick="event.stopPropagation()">
         <div class="search-header">
             <input type="search" id="term" placeholder="Start typing...">
@@ -1061,7 +1499,7 @@
 
     async function init() {
         // Fetch search index (browser caches based on query param)
-        const docs = await fetch('/searchIndex.json?v=2026-10-08T08:57:28.308Z').then(r => r.json());
+        const docs = await fetch('/searchIndex.json?v=2026-10-08T10:44:46.817Z').then(r => r.json());
         const index = createIndex(docs);
         window.docs = docs;
         window.index = index;
@@ -1259,368 +1697,20 @@
 
         return finalResults;
     }
+
+    // Tags rendered by the core (note content, header tags, canvas nodes)
+    // carry no inline handler — one delegated listener opens a tag search
+    // for any of them. Tags inside the search UI keep their own handlers.
+    document.addEventListener('click', function (e) {
+        const tagEl = e.target.closest('a.tag');
+        if (!tagEl || tagEl.closest('#globalsearch')) return;
+        const href = tagEl.getAttribute('href');
+        if (href && href !== 'javascript:void(0);') return;
+        window.toggleTagSearch(tagEl);
+    });
 </script>
 
 
-    
-
-    <main class="content cm-s-obsidian print ">
-      <header>
-        
-          <h1 data-note-icon="">CPU</h1>
-        
-        <div class="header-meta">
-          
-            <div class="header-tags">
-              
-                
-              
-                
-                  <a class="tag" onclick="toggleTagSearch(this)">
-                    #knowledge-base
-                  </a>
-                
-              
-                
-                  <a class="tag" onclick="toggleTagSearch(this)">
-                    #german
-                  </a>
-                
-              
-            </div>
-          <div class="timestamps"><div><i data-lucide="calendar-plus"></i> <span class="human-date" data-date="2025-11-19T16:55:16.658+01:00"></span></div><div><i data-lucide="calendar-clock"></i> <span class="human-date" data-date="2026-01-28T13:15:27.494+01:00"></span></div></div></div>
-      
-        
-      
-      
-      </header>
-      
-      
-      <h2 id="cache" tabindex="-1">Cache</h2>
-<div class="excalidraw-svg"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 362.5 694.5" width="362.5" height="694.5" class="excalidraw-svg" style="max-width: 100%; height: auto;"><metadata></metadata><defs><style class="style-fonts">      @font-face { font-family: Virgil; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="362.5" height="694.5" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(10 14) rotate(0 108.5 39.5)"><path d="M0 0 C51.53 0, 103.07 0, 217 0 M0 0 C50.03 0, 100.05 0, 217 0 M217 0 C217 25.04, 217 50.08, 217 79 M217 0 C217 16.04, 217 32.07, 217 79 M217 79 C159.99 79, 102.98 79, 0 79 M217 79 C152.16 79, 87.32 79, 0 79 M0 79 C0 57.92, 0 36.84, 0 0 M0 79 C0 57.33, 0 35.67, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(71.5600357055664 41) rotate(0 46.939964294433594 12.5)"><text x="46.939964294433594" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">CPU Core</text></g><g stroke-linecap="round" transform="translate(10 111) rotate(0 50.5 45)"><path d="M0 0 C31.28 0, 62.57 0, 101 0 M0 0 C27.67 0, 55.34 0, 101 0 M101 0 C101 21.23, 101 42.46, 101 90 M101 0 C101 30.79, 101 61.57, 101 90 M101 90 C70.68 90, 40.35 90, 0 90 M101 90 C70.91 90, 40.83 90, 0 90 M0 90 C0 57.19, 0 24.39, 0 0 M0 90 C0 62.52, 0 35.04, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(28.108009338378906 136) rotate(0 32.391990661621094 20)"><text x="32.391990661621094" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L1 Data</text><text x="32.391990661621094" y="34.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Cache</text></g><g stroke-linecap="round" transform="translate(127.5 112) rotate(0 50.5 45)"><path d="M0 0 C28.66 0, 57.33 0, 101 0 M0 0 C21.14 0, 42.27 0, 101 0 M101 0 C101 35.04, 101 70.08, 101 90 M101 0 C101 24.78, 101 49.57, 101 90 M101 90 C65.6 90, 30.19 90, 0 90 M101 90 C64.29 90, 27.58 90, 0 90 M0 90 C0 66.54, 0 43.08, 0 0 M0 90 C0 59.7, 0 29.4, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(134.60002899169922 127) rotate(0 43.39997100830078 30)"><text x="43.39997100830078" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L1</text><text x="43.39997100830078" y="34.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Instruction</text><text x="43.39997100830078" y="54.096000000000004" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Cache</text></g><g stroke-linecap="round" transform="translate(11 227) rotate(0 108.5 46.5)"><path d="M0 0 C43.85 0, 87.71 0, 217 0 M0 0 C71.33 0, 142.66 0, 217 0 M217 0 C217 18.68, 217 37.35, 217 93 M217 0 C217 27.53, 217 55.06, 217 93 M217 93 C166.89 93, 116.77 93, 0 93 M217 93 C166.33 93, 115.66 93, 0 93 M0 93 C0 63.53, 0 34.05, 0 0 M0 93 C0 66.1, 0 39.2, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(72.85002899169922 261) rotate(0 46.64997100830078 12.5)"><text x="46.64997100830078" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L2 Cache</text></g><g stroke-linecap="round" transform="translate(10.5 349.5) rotate(0 170.5 46.5)"><path d="M0 0 C75.57 0, 151.13 0, 341 0 M0 0 C117.48 0, 234.95 0, 341 0 M341 0 C341 20.52, 341 41.03, 341 93 M341 0 C341 20.04, 341 40.08, 341 93 M341 93 C259.59 93, 178.17 93, 0 93 M341 93 C269.53 93, 198.06 93, 0 93 M0 93 C0 70.44, 0 47.88, 0 0 M0 93 C0 64.08, 0 35.15, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(134.66002655029297 383.5) rotate(0 46.33997344970703 12.5)"><text x="46.33997344970703" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">L3 Cache</text></g><g stroke-linecap="round" transform="translate(10.5 469.5) rotate(0 170.5 46.5)"><path d="M0 0 C129.94 0, 259.88 0, 341 0 M0 0 C102.13 0, 204.26 0, 341 0 M341 0 C341 30.66, 341 61.31, 341 93 M341 0 C341 33.51, 341 67.01, 341 93 M341 93 C220.37 93, 99.73 93, 0 93 M341 93 C266.56 93, 192.11 93, 0 93 M0 93 C0 60.94, 0 28.88, 0 0 M0 93 C0 57.09, 0 21.17, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(120.8200454711914 503.5) rotate(0 60.179954528808594 12.5)"><text x="60.179954528808594" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Main Memory</text></g><g stroke-linecap="round" transform="translate(11.5 591.5) rotate(0 170.5 46.5)"><path d="M0 0 C115.72 0, 231.45 0, 341 0 M0 0 C70.01 0, 140.03 0, 341 0 M341 0 C341 21.53, 341 43.07, 341 93 M341 0 C341 23.27, 341 46.54, 341 93 M341 93 C231.72 93, 122.44 93, 0 93 M341 93 C250.19 93, 159.38 93, 0 93 M0 93 C0 71.11, 0 49.23, 0 0 M0 93 C0 63.06, 0 33.11, 0 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(122.12003326416016 625.5) rotate(0 59.879966735839844 12.5)"><text x="59.879966735839844" y="17.619999999999997" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">HDD / Swap</text></g><g stroke-linecap="round"><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M0 0 C0 -4.17, 0 -20.83, 0 -25 M0 0 C0 -4.17, 0 -20.83, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M4.28 -13.25 C3.26 -16.05, 2.24 -18.85, 0 -25 M4.28 -13.25 C2.73 -17.51, 1.18 -21.77, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(179 589) rotate(0 -1.7763568394002505e-15 -12.499999999999979)"><path d="M-4.28 -13.25 C-3.26 -16.05, -2.24 -18.85, 0 -25 M-4.28 -13.25 C-2.73 -17.51, -1.18 -21.77, 0 -25" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(181 467) rotate(0 0 -11)"><path d="M0 0 C0 -3.67, 0 -18.33, 0 -22 M0 0 C0 -3.67, 0 -18.33, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181 467) rotate(0 0 -11)"><path d="M3.76 -11.66 C2.86 -14.15, 1.95 -16.64, 0 -22 M3.76 -11.66 C2.74 -14.48, 1.71 -17.3, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(181 467) rotate(0 0 -11)"><path d="M-3.76 -11.66 C-2.86 -14.15, -1.95 -16.64, 0 -22 M-3.76 -11.66 C-2.74 -14.48, -1.71 -17.3, 0 -22" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M0 0 C0.33 -3.83, 1.67 -19.17, 2 -23 M0 0 C0.33 -3.83, 1.67 -19.17, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M4.99 -11.85 C4.15 -15, 3.3 -18.16, 2 -23 M4.99 -11.85 C3.95 -15.72, 2.91 -19.59, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(117 347) rotate(0 1 -11.5)"><path d="M-2.87 -12.54 C-1.5 -15.49, -0.12 -18.45, 2 -23 M-2.87 -12.54 C-1.18 -16.17, 0.51 -19.8, 2 -23" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M0 0 C0.14 -3.33, 0.72 -16.67, 0.86 -20 M0 0 C0.14 -3.33, 0.72 -16.67, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M3.88 -10.46 C2.76 -13.97, 1.65 -17.49, 0.86 -20 M3.88 -10.46 C3.06 -13.02, 2.25 -15.59, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(59.23418925931247 222.99999999999997) rotate(0 0.42973933575336076 -10)"><path d="M-2.96 -10.75 C-1.56 -14.16, -0.15 -17.57, 0.86 -20 M-2.96 -10.75 C-1.94 -13.24, -0.91 -15.72, 0.86 -20" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M0 0 C-0.25 -3.17, -1.26 -15.83, -1.52 -19 M0 0 C-0.25 -3.17, -1.26 -15.83, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M2.45 -10.33 C1.56 -12.27, 0.67 -14.21, -1.52 -19 M2.45 -10.33 C1.06 -13.36, -0.32 -16.39, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(183.01850917872352 226) rotate(0 -0.7584310284840932 -9.5)"><path d="M-4.05 -9.81 C-3.49 -11.87, -2.92 -13.92, -1.52 -19 M-4.05 -9.81 C-3.17 -13.02, -2.28 -16.23, -1.52 -19" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M0 0 C2.5 -2.33, 12.5 -11.67, 15 -14 M0 0 C2.5 -2.33, 12.5 -11.67, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M10.35 -4.86 C12.05 -8.2, 13.75 -11.54, 15 -14 M10.35 -4.86 C12.04 -8.19, 13.74 -11.52, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(57.000000000000085 110) rotate(0 7.499999999999957 -7)"><path d="M5.56 -9.99 C9.01 -11.45, 12.46 -12.92, 15 -14 M5.56 -9.99 C9 -11.45, 12.44 -12.91, 15 -14" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M0 0 C-1.33 -2.83, -6.67 -14.17, -8 -17 M0 0 C-1.33 -2.83, -6.67 -14.17, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M-1.33 -10.38 C-3.01 -12.05, -4.69 -13.72, -8 -17 M-1.33 -10.38 C-3.75 -12.78, -6.17 -15.18, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(176.99999999999997 111) rotate(0 -3.999999999999991 -8.5)"><path d="M-7.15 -7.64 C-7.36 -10, -7.58 -12.36, -8 -17 M-7.15 -7.64 C-7.46 -11.04, -7.77 -14.43, -8 -17" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g transform="translate(234 159) rotate(270 64.27995300292969 10)"><text x="0" y="14.096" font-family="Virgil, sans-serif, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">... for each core</text></g><g transform="translate(303 96) rotate(0 -13.5 -43)" stroke="none"><path fill="#1e1e1e" d="M -0.78,0 Q -0.78,0 -0.76,-1.72 -0.74,-3.44 -0.73,-7.05 -0.72,-10.66 -0.71,-13.63 -0.70,-16.60 -0.69,-20.17 -0.69,-23.73 -0.68,-27.54 -0.68,-31.36 -0.67,-34.99 -0.67,-38.62 -0.67,-40.74 -0.66,-42.86 -0.66,-45.20 -0.66,-47.54 -0.66,-48.82 -0.66,-50.10 -0.66,-51.22 -0.66,-52.34 -0.66,-53.39 -0.66,-54.44 -0.67,-55.46 -0.68,-56.48 -0.69,-57.49 -0.70,-58.50 -0.69,-60.66 -0.68,-62.81 -0.68,-64.30 -0.67,-65.79 -0.67,-67.29 -0.67,-68.78 -0.67,-70.28 -0.66,-71.78 -0.69,-72.69 -0.72,-73.61 -1.02,-74.14 -1.33,-74.68 -1.49,-75.63 -1.66,-76.58 -1.99,-77.09 -2.32,-77.60 -2.73,-78.08 -3.14,-78.56 -3.84,-79.37 -4.53,-80.18 -5.15,-80.81 -5.76,-81.44 -6.12,-82.07 -6.48,-82.71 -7.02,-83.06 -7.56,-83.41 -8.26,-83.56 -8.96,-83.71 -9.84,-83.81 -10.71,-83.91 -11.56,-84.26 -12.40,-84.61 -13.13,-84.71 -13.87,-84.81 -14.49,-84.83 -15.12,-84.86 -15.66,-84.85 -16.21,-84.84 -17.23,-84.80 -18.25,-84.76 -19.25,-84.73 -20.25,-84.69 -21.26,-84.66 -22.26,-84.63 -24.49,-84.12 -26.72,-83.61 -26.95,-83.60 -27.18,-83.59 -27.40,-83.66 -27.62,-83.72 -27.80,-83.86 -27.99,-83.99 -28.13,-84.18 -28.26,-84.36 -28.33,-84.58 -28.40,-84.80 -28.39,-85.03 -28.39,-85.26 -28.31,-85.47 -28.23,-85.69 -28.09,-85.87 -27.94,-86.04 -27.75,-86.17 -27.56,-86.29 -27.34,-86.35 -27.12,-86.40 -26.89,-86.39 -26.66,-86.37 -26.45,-86.28 -26.24,-86.19 -26.07,-86.04 -25.90,-85.89 -25.78,-85.69 -25.67,-85.49 -25.63,-85.26 -25.58,-85.04 -25.61,-84.81 -25.64,-84.59 -25.74,-84.38 -25.84,-84.17 -26.00,-84.01 -26.16,-83.85 -26.37,-83.75 -26.57,-83.64 -26.80,-83.61 -27.03,-83.58 -27.25,-83.62 -27.48,-83.67 -27.68,-83.78 -27.88,-83.89 -28.03,-84.06 -28.18,-84.23 -28.28,-84.44 -28.37,-84.65 -28.39,-84.88 -28.41,-85.10 -28.35,-85.33 -28.30,-85.55 -28.17,-85.74 -28.05,-85.94 -27.87,-86.08 -27.70,-86.22 -27.48,-86.30 -27.27,-86.38 -27.27,-86.38 -27.27,-86.38 -25.28,-86.88 -23.28,-87.38 -22.27,-87.36 -21.25,-87.33 -20.25,-87.30 -19.24,-87.26 -18.22,-87.21 -17.19,-87.15 -16.65,-87.11 -16.11,-87.07 -15.52,-87.01 -14.93,-86.96 -14.24,-86.86 -13.56,-86.77 -12.56,-86.59 -11.56,-86.42 -11.02,-86.11 -10.49,-85.80 -9.48,-85.71 -8.47,-85.62 -7.44,-85.32 -6.40,-85.03 -5.41,-83.85 -4.42,-82.68 -3.82,-82.04 -3.22,-81.40 -2.39,-80.58 -1.57,-79.76 -1.12,-79.11 -0.67,-78.46 -0.32,-77.65 0.02,-76.85 0.10,-76.08 0.18,-75.30 0.45,-74.48 0.72,-73.65 0.69,-72.72 0.66,-71.78 0.67,-70.28 0.67,-68.78 0.67,-67.29 0.67,-65.79 0.68,-64.30 0.68,-62.81 0.69,-60.66 0.70,-58.50 0.69,-57.49 0.68,-56.48 0.67,-55.46 0.66,-54.44 0.66,-53.39 0.66,-52.34 0.66,-51.22 0.66,-50.10 0.66,-48.82 0.66,-47.54 0.66,-45.20 0.66,-42.86 0.67,-40.74 0.67,-38.62 0.67,-34.99 0.68,-31.36 0.68,-27.54 0.69,-23.73 0.69,-20.17 0.70,-16.60 0.71,-13.63 0.72,-10.66 0.73,-7.05 0.74,-3.44 0.76,-1.72 0.78,0 0.76,0.09 0.75,0.18 0.72,0.27 0.69,0.36 0.63,0.44 0.58,0.51 0.51,0.58 0.44,0.64 0.36,0.68 0.27,0.73 0.18,0.75 0.09,0.77 -0.00,0.77 -0.09,0.77 -0.18,0.75 -0.27,0.73 -0.36,0.68 -0.44,0.64 -0.51,0.58 -0.58,0.51 -0.63,0.44 -0.69,0.36 -0.72,0.27 -0.75,0.18 -0.76,0.09 -0.78,-0.00 -0.78,-0.00 L -0.78,0 Z"></path></g><g transform="translate(298 241) rotate(0 -12.5 41)" stroke="none"><path fill="#1e1e1e" d="M 0.78,0 Q 0.78,0 0.76,1.43 0.74,2.87 0.73,4.06 0.72,5.25 0.41,6.68 0.11,8.12 -0.00,11.23 -0.12,14.34 -0.18,16.54 -0.24,18.75 -0.26,20.54 -0.29,22.34 -0.30,23.39 -0.31,24.44 -0.31,25.75 -0.32,27.06 -0.32,28.19 -0.33,29.32 -0.33,31.53 -0.33,33.73 -0.33,35.25 -0.33,36.76 -0.31,37.69 -0.28,38.62 -0.29,40.45 -0.29,42.29 -0.30,43.93 -0.31,45.57 -0.31,46.84 -0.32,48.11 -0.32,50.38 -0.32,52.65 -0.32,54.47 -0.33,56.30 -0.33,57.93 -0.33,59.57 -0.33,61.42 -0.33,63.27 -0.63,64.69 -0.92,66.12 -1.04,67.52 -1.16,68.92 -1.18,69.82 -1.20,70.73 -1.49,71.53 -1.79,72.34 -1.87,73.11 -1.95,73.87 -2.31,74.67 -2.67,75.46 -3.11,76.31 -3.56,77.17 -4.43,77.93 -5.31,78.70 -5.89,79.26 -6.47,79.83 -7.00,80.38 -7.54,80.92 -8.17,81.27 -8.81,81.62 -9.60,81.99 -10.38,82.35 -11.09,82.58 -11.80,82.80 -12.42,82.91 -13.04,83.02 -14.19,82.99 -15.35,82.96 -16.69,82.93 -18.04,82.89 -19.03,82.59 -20.02,82.29 -20.88,82.18 -21.74,82.07 -23.49,81.52 -25.24,80.97 -25.39,80.90 -25.53,80.84 -25.65,80.73 -25.78,80.62 -25.85,80.48 -25.93,80.34 -25.97,80.18 -26.00,80.02 -25.97,79.86 -25.95,79.70 -25.88,79.56 -25.81,79.41 -25.69,79.30 -25.58,79.18 -25.43,79.11 -25.29,79.04 -25.13,79.02 -24.97,78.99 -24.81,79.02 -24.65,79.06 -24.51,79.13 -24.37,79.21 -24.26,79.34 -24.15,79.46 -24.09,79.60 -24.02,79.75 -24.01,79.91 -24.00,80.08 -24.04,80.23 -24.08,80.39 -24.16,80.53 -24.25,80.66 -24.38,80.77 -24.50,80.87 -24.65,80.92 -24.81,80.98 -24.97,80.98 -25.13,80.99 -25.28,80.94 -25.44,80.89 -25.57,80.80 -25.70,80.70 -25.80,80.57 -25.89,80.44 -25.94,80.28 -25.99,80.13 -25.98,79.97 -25.98,79.81 -25.92,79.65 -25.87,79.50 -25.77,79.38 -25.66,79.25 -25.53,79.16 -25.39,79.08 -25.23,79.04 -25.08,79.00 -24.91,79.01 -24.75,79.02 -24.75,79.02 -24.75,79.02 -23.12,79.65 -21.48,80.27 -20.46,80.40 -19.45,80.53 -18.74,80.80 -18.02,81.06 -16.71,81.00 -15.40,80.94 -13.87,80.82 -12.34,80.71 -11.80,80.61 -11.26,80.50 -10.05,80.01 -8.84,79.51 -8.27,79.00 -7.71,78.49 -7.08,77.93 -6.44,77.37 -5.79,76.84 -5.15,76.30 -4.73,75.45 -4.31,74.60 -3.98,74.09 -3.65,73.58 -3.47,72.62 -3.29,71.67 -2.96,71.14 -2.64,70.60 -2.56,69.71 -2.47,68.81 -2.34,67.33 -2.22,65.85 -1.94,64.56 -1.66,63.26 -1.66,61.42 -1.66,59.57 -1.66,57.93 -1.66,56.30 -1.67,54.47 -1.67,52.65 -1.67,50.38 -1.67,48.11 -1.68,46.84 -1.68,45.57 -1.69,43.93 -1.70,42.29 -1.70,40.45 -1.71,38.62 -1.68,37.69 -1.66,36.76 -1.66,35.25 -1.66,33.73 -1.66,31.53 -1.66,29.32 -1.66,28.19 -1.66,27.06 -1.66,25.74 -1.66,24.43 -1.65,23.38 -1.64,22.32 -1.62,20.52 -1.60,18.71 -1.55,16.50 -1.51,14.28 -1.38,11.06 -1.26,7.83 -0.99,6.54 -0.72,5.24 -0.73,4.05 -0.74,2.87 -0.76,1.43 -0.78,0 -0.77,-0.09 -0.76,-0.18 -0.72,-0.27 -0.69,-0.36 -0.63,-0.44 -0.58,-0.51 -0.51,-0.58 -0.44,-0.64 -0.36,-0.68 -0.27,-0.73 -0.18,-0.75 -0.09,-0.77 0.00,-0.77 0.09,-0.77 0.18,-0.75 0.27,-0.73 0.36,-0.68 0.44,-0.64 0.51,-0.58 0.58,-0.51 0.63,-0.44 0.69,-0.36 0.72,-0.27 0.76,-0.18 0.77,-0.09 0.78,0.00 0.78,0.00 L 0.78,0 Z"></path></g><g stroke-linecap="round"><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M0 0 C0 -3.97, 0 -19.83, 0 -23.79 M0 0 C0 -3.97, 0 -19.83, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M4.07 -12.61 C2.68 -16.42, 1.3 -20.23, 0 -23.79 M4.07 -12.61 C3.01 -15.51, 1.96 -18.41, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(285.46893383625167 348.0948357152744) rotate(0 0 -11.895286871063746)"><path d="M-4.07 -12.61 C-2.68 -16.42, -1.3 -20.23, 0 -23.79 M-4.07 -12.61 C-3.01 -15.51, -1.96 -18.41, 0 -23.79" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask></svg></div>
-- Register <-> L1-Cache <-> L2(L3/L4)-Cache <-> Main memory (RAM)<->HDD (Swap)
-	- L1-Cache oftmals unterteilt in "data" und "instruction cache"
-	- L1 oftmals pro Core
-	- L1: Größe bei aktuellen Prozessoren <100kB (pro Kern)
-		- [5700X](https://www.techpowerup.com/cpu-specs/ryzen-7-5700x.c2755): 32KB (instruction) + 32KB (data)
-		- [9950X3D](https://www.techpowerup.com/review/amd-ryzen-9-9950x3d/2.html): 32KB (instruction) + 48KB (data)
-		- [Apple M5](https://theapplewiki.com/wiki/M5): P-Core: 192 KB (instruction) + 128 KB (data), E-Core: 128 + 64 KB
-	- L2-Cache wird unter Windows "unified cache" genannt
-	- L2 oftmals pro Core, manchmal geteilt mit mehreren Cores oder gesamter CPU
-		- bei x64: pro Core, Apple Silicon (mindestens bis M5): für gesamten Chip
-	- L2: Größe bei aktuellen Prozessoren < 1MB (pro Kern)
-		- 5700X: 512KB
-		- 9950X3D: 1MB
-		- Apple M5: P-Cores: 16 MB (geteilt), E-Cores: 6 MB (geteilt)
-	- L3/L4 cache meist für gesamte CPU, Größe < 100MB
-		- 5700X: 32MB
-		- 9950X3D: 128MB
-		- Apple M5: nicht vorhanden
-- Cache Line: Die CPU lädt immer 64 Bytes auf einmal in den L1 Cache (bei modernen x64 CPUs)
-	- ESP32: 32 Bytes
-	- ARM Cortex M0..4: kein Cache
-	- ARM Cortex M7+: 32 Bytes
-- Cache Miss: Programm fordert Daten an, welche nicht im L1+L2-Cache sind und daher aus dem RAM geladen werden müssen
-- Viele Operationen sind schneller, als das Laden aus dem RAM -> Performance wird von Nutzung des Caches dominiert
-	- [Gallery of Processor Cache Effects (igoro.com)](https://igoro.com/archive/gallery-of-processor-cache-effects/)
-		- Graphen welche den Effekt von CPU Cache, Cache Lines, Cache Aufbau, etc. verdeutlichen
-	- [Zen 1 timings](https://www.7-cpu.com/cpu/Zen.html)
-		- L1 Cache: 4-5 cycles (1ns)
-		- L2 Cache: 17 cycles (4-5ns)
-		- L3 Cache: ~40 cycles (10ns)
-		- RAM: 40 cycles + 90ns (100ns)
-		- 1 Cycle ~ 0.25ns (@4GHz)
-- (L1) Cache Aufbau 
-	- https://youtu.be/rLWeHpzAYhg?feature=shared&t=1855
-	- Cache funktioniert grundsätzlich wie hash table, wobei als key ein Teil der Speicheradresse genutzt wird
-	- Cache Line ist 64 Bytes
-	- Pointer-Adresse sind 64bit, von denen meist 48bit für Speicheradresse genutzt werden 
-	- Speicheradressen sind virtuell und müssen übersetzt werden. Virtuell, damit bspw swap funktioniert.
-	- Übersetzung läuft über anderen cache den Translation Lookaside Buffer. Dieser Cache mappt bei x64 12bit große "pages" (4096 Bytes) zwischen physischem und virtuellem Speicher.
-	- 6 LSB eines pointers sind offset in cache line
-	- 12 LSB sind offset in page
-	- wir wollen nicht auf Übersetzung der Adresse warten. Daher läuft beides parallel. Cache access ist sehr schnell (<5 cycles)
-	- zur Adressierung in Cache muss also Teil des pointers genutzt werden, welcher von Übersetzung nicht verändert wird = 12 LSB. 
-	- unteren 6 bits davon helfen nicht, da sie nur offset in cache line sind und nicht zur Unterscheidung von cache lines helfen können.
-	- Bleiben 6 bits übrig, was maximal 64 sets im Cache ergibt
-	- Daten im cache sind entweder mit virtueller oder physischer Adresse getaggt.
-	- nach Zugriff und paralleler Übersetzung wird überprüft, ob daten zu gewünschter Adresse gehören, da viele Speicherbereiche dieselben 12 LSB haben könnten 
-	- Somit sind alle Adressen mit einem ähnlichen Bit-Aufbau immer im selben Set zu finden.
-- Typischer Aufbau: N-way Associative Cache
-	- es werden N cache lines pro cache set gespeichert, gleichzeitig abgerufen und dann verglichen (mit getaggter Adresse), ob richtige Daten dabei sind
-	- größere Anzahl cache lines pro set bedeutet, dass mehr unterschiedliche Speicherbereiche mit gleicher bit Struktur im Cache Platz finden und Kollisionen verringert werden 
-	- Beispiel Zen 4: 8-way Set, 64 sets, je line 64 Bytes also 8\*64\*64 Bytes = 32KByte (Architektur Limit)
-	- Zen 5: 12-way = 48KByte
-	- Beispiel Apple M1/M2: 12-way Set, jedes Set hat also 12 Plätze je 128 Bytes (eine L2-Cache Line) = 1,5KB pro Set = ~10.900 Sets bei 16MB Cache
-	- Apple M-chips haben größere pages (64K)
-<div class="callout " data-callout="tip"><div class="callout-title"><div class="callout-title-inner"> Block sizes in code<br></div></div>
-<div class="callout-content">
-<p>
-When choosing a block size in your code (i.e. when reading a file in chunks), make it smaller than the L2 or L3 cache. This way the block will more likely stay in cache while you do operations on it. If you make the block too big, the CPU will need to continuously swap parts of it between the CPU cache and RAM making things <em>much</em> slower.<br>
-Keep in mind other stuff will be in the cache, too (like the stack of your program). 10% of smallest cache size of the target machines probably will be fine.<br>
-The best size can be determined by testing (measure performance with increasing blocks sizes), there will be a big drop once swap starts.</p>
-</div></div>
-<h2 id="pointers" tabindex="-1">Pointers</h2>
-<ul>
-<li>mindestens top 8 bits bei Intel und ARM Prozessoren sind nicht Teil der Speicheradresse (da unrealistisch großer Speicher benötigt werden würde), sondern können für andere Zwecke wie GC-flags genutzt werden. Meist werden nur 48bit für Speicheradresse genutzt
-<ul>
-<li><a href="https://youtu.be/uZEBkOrfUzM?feature=shared&amp;t=908" target="_blank" class="external-link">https://youtu.be/uZEBkOrfUzM?feature=shared&amp;t=908</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="assembly" tabindex="-1">Assembly</h2>
-<p><a href="https://uops.info/table.html" target="_blank" class="external-link">https://uops.info/table.html</a></p>
-<ul>
-<li>Liste von Assembly Instructions für verschiedene CPU-Typen und ihre Eigenschaften (entnommen aus den ISA-Dokumenten der CPUs)</li>
-<li>Latency = Anzahl Clock Cycles für Operation</li>
-<li>TP (Throughput) = Anzahl Clock Cycles Wartezeit zwischen 2 Operationen (Wert &lt; 1 = Mehrere Operationen pro Clock Cycle, bspw. 0.5 = 2 OPs/Cycle)</li>
-<li>Ports = Verfügbare Ports für Micro-OPs, Stern = Mehrere Micro-OPs auf denselben Ports, Plus = Mehrere Micro-OPs auf unterschiedlichen Ports (Bsp.: 3<em>p015+1</em>p23 = 3 µOps auf Port 0, 1 oder 5 und 1 µOp auf Port 2 oder 3)<br>
-<a href="https://godbolt.org/" target="_blank" class="external-link">https://godbolt.org/</a></li>
-<li>Zeigt Assembly für eingegebenen Programmcode und für verschiedene Architekturen und Compiler an</li>
-<li>Kann auch ESP32 und Co.</li>
-<li>Vergleich zwischen zwei Assembly möglich</li>
-<li>Mouse-Over erklärt Assembly Instruktionen</li>
-</ul>
-<h2 id="modulus" tabindex="-1">Modulus (%)</h2>
-<p><a href="https://www.youtube.com/watch?v=RrHGX1wwSYM" target="_blank" class="external-link">Language Performance Comparisons Are Junk</a></p>
-<ul>
-<li>Moderne CPUs haben keine schnelle Instruktion für Modulus-Operation (und keine SIMD-Instruktion)</li>
-<li>Modulus wird in äquivalente Instruktionen umgewandelt (z.B. Berechnung über Floats), welche ggf. mit SIMD beschleunigt werden können<br>
--&gt; Modulus mit zur Compile-Zeit unbekanntem Divisor ist für CPU sehr aufwändig, da diese Operation nicht umgewandelt werden kann</li>
-</ul>
-<h2 id="napkin-math" tabindex="-1">Napkin Math</h2>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th></th>
-<th>Throughput</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DDR4 RAM Read/Write (2133 MHz)</td>
-<td>17 GiB/s</td>
-</tr>
-<tr>
-<td>DDR4 RAM Read/Write (3200 MHz, 2020 Standard)</td>
-<td>25.6 GiB/s</td>
-</tr>
-<tr>
-<td>DDR5 RAM Read/Write (5500 MHz, 2025 Standard)</td>
-<td>45 GiB/s</td>
-</tr>
-<tr>
-<td>DDR5 RAM Read/Write (8800 MHz)</td>
-<td>70 GiB/s</td>
-</tr>
-<tr>
-<td>SSD Sequential Read/Write (PCI Gen. 3 - 2020 Standard)</td>
-<td>3 GiB/s</td>
-</tr>
-<tr>
-<td>SSD Sequential Read/Write (PCI Gen. 4/5 - 2025 Standard)</td>
-<td>6 GiB/s</td>
-</tr>
-<tr>
-<td>SSD Sequential Read/Write on SATA III</td>
-<td>600 MiB/s</td>
-</tr>
-<tr>
-<td>SSD Random Read/Write (depends on file size)</td>
-<td>50 - 500 MiB/s</td>
-</tr>
-<tr>
-<td>HDD Sequential Read</td>
-<td>250 MiB/s</td>
-</tr>
-<tr>
-<td>HDD Sequential Write</td>
-<td>200 MiB/s</td>
-</tr>
-<tr>
-<td>HDD Random Read</td>
-<td>&lt;20 MiB/s</td>
-</tr>
-<tr>
-<td>HDD Random Write</td>
-<td>1 MiB/s</td>
-</tr>
-<tr>
-<td>SD Card (UHS I) Sequential Read/Write</td>
-<td>150 MiB/s</td>
-</tr>
-<tr>
-<td>SD Card (UHS I) Random Read/Write</td>
-<td>&lt;5 MiB/s</td>
-</tr>
-<tr>
-<td>USB Stick (USB 3.0) Sequential Read/Write</td>
-<td>150 MiB/s</td>
-</tr>
-<tr>
-<td>USB Stick (USB 3.0) Random Read/Write</td>
-<td>&lt;5 MiB/s</td>
-</tr>
-<tr>
-<td>USB 2.0 Peak Read/Write</td>
-<td>50 MiB/s</td>
-</tr>
-<tr>
-<td>USB 3.0 Peak Read/Write</td>
-<td>330 MiB/s</td>
-</tr>
-<tr>
-<td>USB 3.1 Gen 2 / 3.2 Gen 1x2 / 3.2 Gen 2x1 Peak Read/Write (10 Gbps)</td>
-<td>800 MiB/s</td>
-</tr>
-<tr>
-<td>Home Network (1 GBit/s)</td>
-<td>100 MiB/s</td>
-</tr>
-<tr>
-<td>Fiber Internet (100 - 1000 MBit/s)</td>
-<td>20 - 100 MiB/s</td>
-</tr>
-<tr>
-<td>Notes:</td>
-<td></td>
-</tr>
-</tbody>
-</table></div>
-<ul>
-<li>Sequential throughput means one big file (&gt;100 MiB or multiple GiB)</li>
-<li>Random throughput means many small files (each much less than 1 MiB). Random read or write throughput is highly dependent on file size: the smaller the files, the lower the speed. HDDs have to physically move the disk head, SSDs lose speed when you read files smaller than the page size (usually 4 KiB) due to overhead. It is also generally bad for caching behavior of the disk and OS.</li>
-<li>For USB the real peak throughput (values above) is about 2/3 of the raw max data rate</li>
-<li>For NVMe SSDs speed is limited by PCI lanes (the more the better), although most modules are optimized for 4x PCI Gen. 3/4 or 2x PCI Gen. 5</li>
-<li>HDDs usually have a RAM cache (often 256MB) for often/last used files, which is much faster</li>
-<li>The OS might cache often/last accessed files on RAM</li>
-</ul>
-<p>Cost of CPU operations: <a href="http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/" target="_blank" class="external-link">Infographics: Operation Costs in CPU Clock Cycles - IT Hare on Soft.ware</a></p>
-<p>GitHub repo with programming related &quot;ballpark&quot; numbers: <a href="https://github.com/sirupsen/napkin-math" target="_blank" class="external-link">GitHub - sirupsen/napkin-math: Techniques and numbers for estimating system's performance from first-principles</a></p>
-<p>Great visualization of latency numbers (with historical data): <a href="https://colin-scott.github.io/personal_website/research/interactive_latency.html" target="_blank" class="external-link">https://colin-scott.github.io/personal_website/research/interactive_latency.html</a></p>
-
-      
-      
-        <script src="https://giscus.app/client.js"
-        data-repo="foxblock/foxblock.github.io"
-        data-repo-id="R_kgDOOeV4dw"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOOeV4d84CpYMI"
-        data-mapping="title"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="dark"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async></script>
-
-      
-    </main>
-
-    
-      <aside>
-      <div class="sidebar">
-            <div class="sidebar-container">
-                  
-                  
-
-                  
-                        
-                        
-                              <div class="toc">
-                                    <div class="toc-title-container">
-                                          <div class="toc-title">
-                                                CPU
-                                          </div>
-                                    </div>
-                                    <div class="toc-container">
-                                          <nav class="toc">
-                <ol>
-                    
-                    <li><a href="#cache">Cache</a>
-            		</li>
-
-                    <li><a href="#pointers">Pointers</a>
-            		</li>
-
-                    <li><a href="#assembly">Assembly</a>
-            		</li>
-
-                    <li><a href="#modulus">Modulus (%)</a>
-            		</li>
-
-                    <li><a href="#napkin-math">Napkin Math</a>
-            		</li>
-                </ol>
-            </nav>
-                                    </div>
-                              </div>
-                              <script>
-                                    (function() {
-                                          const tocLinks = document.querySelectorAll('.toc-container a[href^="#"]');
-                                          if (!tocLinks.length) return;
-
-                                          const headings = Array.from(tocLinks).map(link => {
-                                                const id = decodeURIComponent(link.getAttribute('href').slice(1));
-                                                return { link, target: document.getElementById(id) };
-                                          }).filter(h => h.target);
-
-                                          function updateActive() {
-                                                let current = headings[0];
-                                                for (const h of headings) {
-                                                      if (h.target.getBoundingClientRect().top <= 100) {
-                                                            current = h;
-                                                      }
-                                                }
-                                                tocLinks.forEach(l => l.classList.remove('toc-active'));
-                                                if (current) current.link.classList.add('toc-active');
-                                          }
-
-                                          window.addEventListener('scroll', updateActive, { passive: true });
-                                          updateActive();
-                                    })();
-                              </script>
-                        
-
-                  
-
-                        
-                  
-            </div>
-      </div>
-</aside>
-    
-
-    
-        <script>
-      if (window.location.hash) {
-        document.getElementById(window.location.hash.slice(1)).classList.add('referred');
-      }
-      window.addEventListener('hashchange', (evt) => {
-        const oldParts = evt.oldURL.split("#");
-        if (oldParts[1]) {
-          document.getElementById(oldParts[1]).classList.remove('referred');
-        }
-        const newParts = evt.newURL.split("#");
-        if (newParts[1]) {
-          document.getElementById(newParts[1]).classList.add('referred');
-        }
-      }, false);
-      const url_parts = window.location.href.split("#")
-      const url = url_parts[0];
-      const referrence = url_parts[1];
-      document.querySelectorAll(".cm-s-obsidian > *[id]").forEach(function (el) {
-        el.ondblclick = function(evt) {
-          const ref_url = url + '#' + evt.target.id
-          navigator.clipboard.writeText(ref_url);
-      }
-      });
-
-      
-    </script>
     <script src=" https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js "></script>
 <script defer>
   TIMESTAMP_FORMAT = "dd. MMM yyyy";
@@ -1745,6 +1835,63 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+</script>
+
+    <style>
+  .excalidraw-svg .excalidraw-embedded-note-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    /* Same theming as the link preview tooltip, so the note content is
+       styled coherently with the rest of the site */
+    background: var(--background-primary);
+    color: var(--text-normal);
+    padding: 0.5em 1em;
+    font-size: 0.8em;
+    border: 1px solid var(--background-modifier-border, #e3e3e3);
+    border-radius: 4px;
+    box-sizing: border-box;
+    unicode-bidi: plaintext;
+  }
+</style>
+<script>
+  // Embedded notes inside Excalidraw drawings are published as same-origin
+  // iframes of the note's page. Like the link preview tooltip, extract just
+  // the note content from the loaded page and show that instead of the
+  // full framed page with all its UI.
+  window.addEventListener("load", function () {
+    document
+      .querySelectorAll("iframe.excalidraw-embedded-note")
+      .forEach(function (frame) {
+        function showNoteContent() {
+          var doc;
+          try {
+            doc = frame.contentDocument;
+          } catch (e) {
+            return;
+          }
+          if (!doc) return;
+
+          var content = doc.querySelector(".content");
+          if (!content) return;
+
+          var noteDiv = document.createElement("div");
+          noteDiv.className = "excalidraw-embedded-note-content";
+          noteDiv.innerHTML = content.innerHTML;
+          frame.parentNode.replaceChild(noteDiv, frame);
+        }
+
+        if (
+          frame.contentDocument &&
+          frame.contentDocument.readyState === "complete" &&
+          frame.contentDocument.querySelector(".content")
+        ) {
+          showNoteContent();
+        } else {
+          frame.addEventListener("load", showNoteContent);
+        }
+      });
+  });
 </script>
 
   </body>
