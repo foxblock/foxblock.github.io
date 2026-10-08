@@ -1,20 +1,8 @@
-const slugify = require("@sindresorhus/slugify").default;
 const markdownIt = require("markdown-it");
 const fs = require("fs");
 const matter = require("gray-matter");
-// Obsidian writes [[Page\|Alias]] in frontmatter, but \| is an invalid YAML
-// escape sequence. This custom engine strips \| before parsing. Shared between
-// Eleventy's own frontmatter parser and the manual matter() call in
-// getAnchorAttributes so that wikilink resolution can read the permalink.
-const jsYamlForMatter = require(require.resolve("js-yaml", { paths: [require.resolve("gray-matter")] }));
-const matterOptions = {
-  engines: {
-    yaml: {
-      parse: (str) => jsYamlForMatter.load(str.replace(/\\\|/g, "|")),
-      stringify: (obj) => jsYamlForMatter.dump(obj),
-    },
-  },
-};
+// See src/helpers/matterOptions.js for why frontmatter needs a custom YAML engine.
+const matterOptions = require("./src/helpers/matterOptions");
 const faviconsPlugin = require("eleventy-plugin-gen-favicons");
 const normalizeFavicon = require("./src/site/normalize-favicon.js");
 const { convertMdHrefs } = require("./src/helpers/linkUtils");
@@ -26,16 +14,106 @@ normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
 const tocPlugin = require("eleventy-plugin-nesting-toc");
 const { parse } = require("node-html-parser");
 const htmlMinifier = require("html-minifier-terser");
-const pluginRss = require("@11ty/eleventy-plugin-rss").default;
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
-const { headerToId, namedHeadingsFilter } = require("./src/helpers/utils");
+// Minifying inline JS/CSS is the single most expensive part of the build, and
+// nearly every page carries the same inline scripts and styles from the
+// layouts. These cached wrappers mirror html-minifier-terser's built-in
+// terser/clean-css invocations (same options, same error fallbacks) but only
+// pay for each distinct input once per process. Resolve the exact terser and
+// clean-css instances html-minifier-terser itself uses.
+const htmlMinifierRequire = require("module").createRequire(
+  require.resolve("html-minifier-terser")
+);
+const terser = htmlMinifierRequire("terser");
+const CleanCSS = htmlMinifierRequire("clean-css");
+
+const MINIFY_CACHE_MAX = 2000;
+const minifyJsCache = new Map();
+const minifyCssCache = new Map();
+
+function cachePut(cache, key, value) {
+  if (cache.size >= MINIFY_CACHE_MAX) {
+    cache.clear();
+  }
+  cache.set(key, value);
+}
+
+async function cachedMinifyJS(text, inline) {
+  const key = `${inline ? 1 : 0}:${text}`;
+  if (minifyJsCache.has(key)) {
+    return minifyJsCache.get(key);
+  }
+  let result;
+  try {
+    const start = text.match(/^\s*<!--.*/);
+    const code = start
+      ? text.slice(start[0].length).replace(/\n\s*-->\s*$/, "")
+      : text;
+    const minified = await terser.minify(code, {
+      parse: { bare_returns: inline },
+    });
+    result = minified.code.replace(/;$/, "");
+  } catch {
+    result = text;
+  }
+  cachePut(minifyJsCache, key, result);
+  return result;
+}
+
+function wrapCSS(text, type) {
+  switch (type) {
+    case "inline":
+      return `*{${text}}`;
+    case "media":
+      return `@media ${text}{a{top:0}}`;
+    default:
+      return text;
+  }
+}
+
+function unwrapCSS(text, type) {
+  let matches;
+  switch (type) {
+    case "inline":
+      matches = text.match(/^\*\{([\s\S]*)\}$/);
+      break;
+    case "media":
+      matches = text.match(/^@media ([\s\S]*?)\s*{[\s\S]*}$/);
+      break;
+  }
+  return matches ? matches[1] : text;
+}
+
+function cachedMinifyCSS(text, type) {
+  const key = `${type || ""}:${text}`;
+  if (minifyCssCache.has(key)) {
+    return minifyCssCache.get(key);
+  }
+  let result;
+  const output = new CleanCSS({}).minify(wrapCSS(text, type));
+  if (output.errors.length > 0) {
+    result = text;
+  } else {
+    result = unwrapCSS(output.styles, type);
+  }
+  cachePut(minifyCssCache, key, result);
+  return result;
+}
+
+const {
+  headerToId,
+  namedHeadingsFilter,
+  cachedSlugify: slugify,
+} = require("./src/helpers/utils");
 const {
   userMarkdownSetup,
   userEleventySetup,
 } = require("./src/helpers/userSetup");
+const pluginLoader = require("./src/helpers/pluginLoader");
 const { basesPlugin } = require("./src/helpers/basesPlugin");
 
-const Image = require("@11ty/eleventy-img").default;
+const Image = require("@11ty/eleventy-img");
 const { isDecodableImage } = require("./src/helpers/imageFormat.js");
 
 // Build containers have few CPUs and little memory; the default queue
@@ -43,14 +121,32 @@ const { isDecodableImage } = require("./src/helpers/imageFormat.js");
 // finishing any faster. Sharp already parallelizes within each job.
 Image.concurrency = 2;
 
-// Generate only referenced sizes and await writes before emitting their URLs.
-async function transformImage(src, widths = [500, 700]) {
-  return Image(src, {
-    widths,
+// Image generation is started fire-and-forget during transforms (the markup
+// only needs statsSync), but every pending job is awaited in the
+// eleventy.after hook below so the build doesn't linger — or get killed —
+// doing invisible work after Eleventy reports completion.
+const pendingImageJobs = [];
+
+// Note: fillPictureSourceSets only references the first two widths; the
+// full-size original is served via the <img src> fallback, so a full
+// resolution "auto" rendition would never be referenced by the markup.
+function transformImage(src, cls, alt, sizes, widths = ["500", "700"]) {
+  let options = {
+    widths: widths,
     formats: ["webp", "jpeg"],
     outputDir: "./dist/img/optimized",
     urlPath: "/img/optimized",
-  });
+  };
+
+  // A rejection here (e.g. a corrupt file) must not become an unhandled
+  // rejection, which would fail the whole build.
+  pendingImageJobs.push(
+    Image(src, options).catch((err) => {
+      console.warn(`[image] Skipping optimization of ${src}: ${err.message}`);
+    })
+  );
+  let metadata = Image.statsSync(src, options);
+  return metadata;
 }
 
 function getAnchorLink(filePath, linkTitle) {
@@ -58,7 +154,24 @@ function getAnchorLink(filePath, linkTitle) {
   return `<a ${Object.keys(attributes).map(key => `${key}="${attributes[key]}"`).join(" ")}>${innerHTML}</a>`;
 }
 
+// Resolving a wikilink target reads and YAML-parses the target note's
+// frontmatter from disk. The same targets are linked from many notes (and the
+// same link is resolved again by the graph/backlink machinery), so cache per
+// (target, title). Cleared in eleventy.before so watch-mode rebuilds see
+// frontmatter edits.
+const anchorAttributesCache = new Map();
+
 function getAnchorAttributes(filePath, linkTitle) {
+  const cacheKey = `${filePath}\x00${linkTitle || ""}`;
+  let cached = anchorAttributesCache.get(cacheKey);
+  if (!cached) {
+    cached = computeAnchorAttributes(filePath, linkTitle);
+    anchorAttributesCache.set(cacheKey, cached);
+  }
+  return cached;
+}
+
+function computeAnchorAttributes(filePath, linkTitle) {
   let fileName = filePath.replaceAll("&amp;", "&");
   let header = "";
   let headerLinkPath = "";
@@ -71,9 +184,8 @@ function getAnchorAttributes(filePath, linkTitle) {
   const title = linkTitle ? linkTitle : fileName;
   let permalink = `/notes/${slugify(fileName)}`;
   let deadLink = false;
-  const startPath = "./src/site/notes/";
-  console.log("Adding link to file", startPath + fileName, "(filePath is", filePath, ")...");
   try {
+    const startPath = "./src/site/notes/";
     let fullPath;
     if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
       fullPath = `${startPath}${fileName}`;
@@ -94,8 +206,7 @@ function getAnchorAttributes(filePath, linkTitle) {
     if (frontMatter.data.noteIcon) {
       noteIcon = frontMatter.data.noteIcon;
     }
-  } catch (error) {
-    console.log("ERROR: dead link to file", startPath + fileName, "\n - filePath was", filePath);
+  } catch {
     deadLink = true;
   }
 
@@ -120,18 +231,12 @@ function getAnchorAttributes(filePath, linkTitle) {
   }
 }
 
-// NOTE (JS, 24.05.25): Edited this to only match double hashes in the markdown file (e.g. ##test-tag)
-// This is a workaround for https://github.com/issues/created?issue=oleeskild%7Cdigitalgarden%7C315
-// Tags as properties are unaffected
-const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 const markdownFileTypeRegex = /\.(md|markdown)$/i;
 const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
 
-module.exports = async function(eleventyConfig) {
-  // The CommonJS math plugin uses deasync; import its ESM entry to avoid
-  // blocking Eleventy's async config loader and exhausting the Node heap.
-  const { default: mathjaxPlugin } = await import("markdown-it-mathjax3");
+module.exports = function(eleventyConfig) {
   eleventyConfig.setLiquidOptions({
     dynamicPartials: true,
   });
@@ -149,32 +254,8 @@ module.exports = async function(eleventyConfig) {
     .use(require("markdown-it-footnote"))
     .use(function(md) {
       md.renderer.rules.hashtag_open = function(tokens, idx) {
-        return '<a class="tag" onclick="toggleTagSearch(this)">';
+        return '<a class="tag">';
       };
-    })
-    .use(mathjaxPlugin, {
-      tex: {
-        inlineMath: [["$", "$"]],
-      },
-      options: {
-        skipHtmlTags: { "[-]": ["pre"] },
-      },
-    })
-    .use(function(md) {
-      // mathjax-full 3.2.2 throws on characters outside its operator
-      // dictionary (e.g. "€") — a stray $...€...$ span in prose would
-      // otherwise abort the entire build. Fall back to the raw text.
-      for (const rule of ["math_inline", "math_block"]) {
-        const original = md.renderer.rules[rule];
-        if (!original) continue;
-        md.renderer.rules[rule] = function(tokens, idx, options, env, self) {
-          try {
-            return original(tokens, idx, options, env, self);
-          } catch (e) {
-            return md.utils.escapeHtml(tokens[idx].content);
-          }
-        };
-      }
     })
     .use(require("markdown-it-attrs"))
     .use(require("markdown-it-task-checkbox"), {
@@ -379,6 +460,7 @@ module.exports = async function(eleventyConfig) {
         return defaultLinkRule(tokens, idx, options, env, self);
       };
     })
+    .use((md) => pluginLoader.applyMarkdownHooks(md))
     .use(userMarkdownSetup);
 
   eleventyConfig.setLibrary("md", markdownLib);
@@ -440,34 +522,9 @@ module.exports = async function(eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        const doubleTagRemoved = tag.substring(1);
-        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
+        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
       })
     );
-  });
-
-  eleventyConfig.addFilter("stripForSearch", function(content) {
-    return content
-      .replace(/<[^>]*>/g, '')
-      .replace(/\s+/g, ' ')
-      .trim();
-  });
-
-  eleventyConfig.addFilter("searchableTags", function(str) {
-    let tags;
-    let match = str && str.match(tagRegex);
-    if (match) {
-      tags = match
-        .map((m) => {
-          return `"${m.split("##")[1]}"`;
-        })
-        .join(", ");
-    }
-    if (tags) {
-      return `${tags},`;
-    } else {
-      return "";
-    }
   });
 
   eleventyConfig.addFilter("hideDataview", function(str) {
@@ -494,11 +551,12 @@ module.exports = async function(eleventyConfig) {
     return str;
   });
 
-  eleventyConfig.addTransform("dataview-js-links", function(str) {
-    if (!isMarkdownPage(this.page.inputPath)) {
-      return str;
-    }
-    const parsed = parse(str);
+  // The dataview-js-links, callout-block, picture and table steps below used
+  // to be four separate transforms, each doing its own full HTML parse and
+  // re-serialize of every page. They are applied in the same order on a
+  // single parsed tree in the combined "obsidian-html" transform after their
+  // helper definitions.
+  function transformDataviewJsLinks(parsed) {
     for (const dataViewJsLink of parsed.querySelectorAll("a[data-href].internal-link")) {
       const notePath = dataViewJsLink.getAttribute("data-href");
       const title = dataViewJsLink.innerHTML;
@@ -508,9 +566,7 @@ module.exports = async function(eleventyConfig) {
       }
       dataViewJsLink.innerHTML = innerHTML;
     }
-
-    return str && parsed.innerHTML;
-  });
+  }
 
   // Shared helper to transform callout blockquotes - used by both callout-block transform and canvas-markdown
   const calloutMeta = /\[!([\w-]*)\|?(\s?.*)\](\+|\-){0,1}(\s?.*)/;
@@ -567,14 +623,6 @@ module.exports = async function(eleventyConfig) {
     }
   }
 
-  eleventyConfig.addTransform("callout-block", function(str) {
-    if (!isMarkdownPage(this.page.inputPath)) {
-      return str;
-    }
-    const parsed = parse(str);
-    transformCalloutBlockquotes(parsed.querySelectorAll("blockquote"));
-    return str && parsed.innerHTML;
-  });
 
   function fillPictureSourceSets(src, cls, alt, meta, width, imageTag) {
     imageTag.tagName = "picture";
@@ -611,14 +659,10 @@ module.exports = async function(eleventyConfig) {
   }
 
 
-  eleventyConfig.addTransform("picture", async function(str) {
-    if (!isMarkdownPage(this.page.inputPath)) {
-      return str;
-    }
+  async function transformPictures(parsed) {
     if (process.env.USE_FULL_RESOLUTION_IMAGES === "true") {
-      return str;
+      return;
     }
-    const parsed = parse(str);
     for (const imageTag of parsed.querySelectorAll(".cm-s-obsidian img")) {
       const src = imageTag.getAttribute("src");
       if (src && src.startsWith("/") && !src.endsWith(".svg")) {
@@ -636,24 +680,24 @@ module.exports = async function(eleventyConfig) {
         const width = imageTag.getAttribute("width") || '';
 
         try {
-          const meta = await transformImage("./src/site" + decodeURI(src));
+          const meta = transformImage(
+            "./src/site" + decodeURI(imageTag.getAttribute("src")),
+            cls.toString(),
+            alt,
+            ["(max-width: 480px)", "(max-width: 1024px)"]
+          );
 
           if (meta) {
             fillPictureSourceSets(src, cls, alt, meta, width, imageTag);
           }
-        } catch (error) {
-          console.warn(`[image] Skipping optimization of ${src}: ${error.message}`);
+        } catch {
+          // Make it fault tolarent.
         }
       }
     }
-    return str && parsed.innerHTML;
-  });
+  }
 
-  eleventyConfig.addTransform("table", function(str) {
-    if (!isMarkdownPage(this.page.inputPath)) {
-      return str;
-    }
-    const parsed = parse(str);
+  function transformTables(parsed) {
     for (const t of parsed.querySelectorAll(".cm-s-obsidian > table")) {
       let inner = t.innerHTML;
       t.tagName = "div";
@@ -675,7 +719,18 @@ module.exports = async function(eleventyConfig) {
         th.classList.add("table-view-th");
       });
     }
-    return str && parsed.innerHTML;
+  }
+
+  eleventyConfig.addTransform("obsidian-html", async function(str) {
+    if (!str || !isMarkdownPage(this.page.inputPath)) {
+      return str;
+    }
+    const parsed = parse(str);
+    transformDataviewJsLinks(parsed);
+    transformCalloutBlockquotes(parsed.querySelectorAll("blockquote"));
+    await transformPictures(parsed);
+    transformTables(parsed);
+    return parsed.innerHTML;
   });
 
   // Helper function to convert wiki-links in canvas text nodes (same logic as link filter)
@@ -697,7 +752,7 @@ module.exports = async function(eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        return `${precede}<a class="tag" onclick="toggleTagSearch(this)" data-content="${tag}">${tag}</a>`;
+        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
       })
     );
   }
@@ -750,14 +805,18 @@ module.exports = async function(eleventyConfig) {
       (this.page.outputPath || "").endsWith(".html")
     ) {
       try {
+        // preserveLineBreaks is intentionally off: its trailing-whitespace
+        // regex is quadratic on large text chunks and was one of the biggest
+        // single costs of the whole build. conservativeCollapse still keeps a
+        // whitespace character wherever there was one (a newline renders the
+        // same as a space), so output is visually identical.
         return await htmlMinifier.minify(content, {
           useShortDoctype: true,
           removeComments: true,
           collapseWhitespace: true,
           conservativeCollapse: true,
-          preserveLineBreaks: true,
-          minifyCSS: true,
-          minifyJS: true,
+          minifyCSS: cachedMinifyCSS,
+          minifyJS: cachedMinifyJS,
           keepClosingSlash: true,
         });
       } catch {
@@ -788,24 +847,20 @@ module.exports = async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/site/scripts");
   eleventyConfig.addPassthroughCopy("src/site/styles/_theme.*.css");
   eleventyConfig.addPassthroughCopy({ "src/site/logo.*": "/" });
-  let faviconPromise;
   eleventyConfig.on("eleventy.before", () => {
-    faviconPromise = undefined;
     normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
+    anchorAttributesCache.clear();
+  });
+  eleventyConfig.on("eleventy.after", async () => {
+    if (pendingImageJobs.length > 0) {
+      console.log(`[image] Waiting for ${pendingImageJobs.length} image optimization jobs...`);
+      await Promise.all(pendingImageJobs);
+      console.log(`[image] Image optimization complete`);
+      pendingImageJobs.length = 0;
+    }
   });
   eleventyConfig.addWatchTarget(FAVICON_SOURCE);
-  // All pages share one favicon. Cache the in-flight promise as well as its HTML
-  // so parallel templates cannot write the same files (EBUSY on Windows).
-  faviconsPlugin({
-    addAsyncShortcode(name, generate) {
-      eleventyConfig.addAsyncShortcode(name, function () {
-        faviconPromise ??= Promise.resolve().then(() => generate.call(this,
-          FAVICON_NORMALIZED, { appleIconBgColor: "#123" }));
-        return faviconPromise;
-      });
-    },
-  // Our per-build cache owns reuse; regenerate even if dist was cleaned.
-  }, { outputDir: "dist", skipCache: true });
+  eleventyConfig.addPlugin(faviconsPlugin, { outputDir: "dist" });
   eleventyConfig.addPlugin(tocPlugin, {
     ul: true,
     tags: ["h1", "h2", "h3", "h4", "h5", "h6"],
@@ -840,21 +895,14 @@ module.exports = async function(eleventyConfig) {
     return (arr || []).filter((item) => !item.data.hide);
   });
 
-  eleventyConfig.addFilter("validJson", function(variable) {
-    if (Array.isArray(variable)) {
-      return variable.map((x) => x.replaceAll("\\", "\\\\")).join(",");
-    } else if (typeof variable === "string") {
-      return variable.replaceAll("\\", "\\\\");
-    }
-    return variable;
-  });
-
   eleventyConfig.addPlugin(pluginRss, {
     posthtmlRenderOptions: {
       closingSingleTag: "slash",
       singleTags: ["link"],
     },
   });
+
+  pluginLoader.applyEleventyHooks(eleventyConfig);
 
   userEleventySetup(eleventyConfig);
 
