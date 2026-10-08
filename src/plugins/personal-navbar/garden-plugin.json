@@ -1,0 +1,13 @@
+{
+  "id": "personal-navbar",
+  "name": "Personal Navbar",
+  "version": "1.0.0",
+  "description": "Responsive personal navbar with built-in filetree on notes that enable it.",
+  "author": "Janek Schäfer",
+  "regions": {
+    "navigation": "templates/navigation.njk"
+  },
+  "noteSettings": [
+    "dgShowFileTree"
+  ]
+}

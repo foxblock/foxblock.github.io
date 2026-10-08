@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "dg-filetree": {
+      "enabled": false
+    },
+    "personal-navbar": {
+      "enabled": true
+    }
+  }
+}

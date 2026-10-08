@@ -1,0 +1,5 @@
+{% if settings.dgShowFileTree === true %}
+  {% include "src/plugins/dg-filetree/templates/filetree.njk" %}
+{% else %}
+  {% include "src/plugins/personal-navbar/templates/navbar.njk" %}
+{% endif %}
