@@ -1,6 +1,7 @@
 # Fix Eleventy startup GC crash: "FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory" (watch:eleventy exits with 134).
 # Import markdown-it-mathjax3 through its ESM entry to bypass the blocking CommonJS deasync bridge.
 # Await Markdown plugin hooks before user setup and rendering; include a fresh-process regression test.
+# Only necessary because we upgraded the mathjax3 plugin from 4.X to 5.X
 # Initially applied to Digital Garden template version 1.91.0.
 
 diff --git a/.eleventy.js b/.eleventy.js
