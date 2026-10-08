@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Same tag pattern as the core taggify filter (.eleventy.js).
-const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 module.exports = {
   setupEleventy(eleventyConfig, context) {
@@ -19,7 +19,7 @@ module.exports = {
       if (match) {
         tags = match
           .map((m) => {
-            return `"${m.split("#")[1]}"`;
+            return `"${m.split("##")[1]}"`;
           })
           .join(", ");
       }
