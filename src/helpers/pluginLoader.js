@@ -329,13 +329,13 @@ function requireHooks(plugin) {
   }
 }
 
-/** Called from .eleventy.js as the last markdown-it .use() before userMarkdownSetup. */
-function applyMarkdownHooks(md, options) {
+/** Await Markdown hooks in order before userMarkdownSetup and rendering. */
+async function applyMarkdownHooks(md, options) {
   for (const plugin of enabledPlugins(options)) {
     const hooks = requireHooks(plugin);
     if (!hooks || typeof hooks.setupMarkdown !== "function") continue;
     try {
-      hooks.setupMarkdown(md, hookContext(plugin));
+      await hooks.setupMarkdown(md, hookContext(plugin));
     } catch (error) {
       warn(`${plugin.id}: setupMarkdown failed (${error.message}); skipping it`);
     }

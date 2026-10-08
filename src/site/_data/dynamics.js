@@ -1,4 +1,4 @@
-const fsFileTree = require("fs-file-tree");
+const fsFileTree = require("fs-file-tree").default;
 
 const BASE_PATH = "src/site/_includes/components/user";
 const STYLE_PATH = "src/site/styles/user";
