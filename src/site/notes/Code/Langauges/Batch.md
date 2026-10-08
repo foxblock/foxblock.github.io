@@ -168,8 +168,119 @@ for /f "tokens=*" %%a in (%file%) do (echo %%a)
 :: Read file properties (see arguments above)
 for %%a in (%file%) do (echo %%~ta)
 
-:: for i in ('where cmake.exe') do (echo i in ('powershell -command "$password = Read-Host -AsSecureString -Prompt 'Enter password'; $plainPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)); Write-Output $plainPassword"') do (
-    set "password=i in (*) do set LIST=%LIST% %%i
+:: for %%i -> use in batch script
+:: for %i  -> use in command line
+```
+https://ss64.com/nt/for.html
+### goto vs call
+https://stackoverflow.com/a/34402477
+```batch
+call one
+echo "- "
+goto two
+:one
+echo "1 "
+:two
+echo "2 "
+:: Prints: 1 2 - 2
+```
+goto -> Sprung zu Label
+call -> Sprung zu Label und Rücksprung zu call wenn Dateiende oder `exit` erreicht wird. Call kann Parameter übergeben bekommen. Sinnvoll bei for loops (goto springt aus dem Loop).
+### Call external program
+`call` -> Andere batch Datei
+`"C:\path\to\a file.exe" -params` -> Aufruf des Programms (oder batch), blocking
+`start "window title" "file.exe" -params`-> Aufruf non-blocking (window title is bei manchen cmd Versionen optional)
+### Exit
+```batch
+:: exit current batch or call (usually what you want)
+exit /B
+:: exit whole cmd.exe process
+exit
+```
+### Redirect, pipes
+```batch
+:: Redirect output to file
+cl /? > compiler_options.txt
+:: N> - specify source (see N below)
+:: STDIN  = 0  Keyboard input
+:: STDOUT = 1  Text output
+:: STDERR = 2  Error text output
+:: >> - redirect and append
+:: cmd < file - read input from file
+
+:: pipe output of cmd1 into cmd2
+cmd1 | cmd2 -paramforcmd2
+```
+https://ss64.com/nt/syntax-redirection.html
+### codepage
+```batch
+:: By default cmd uses codepage 850 (DOS) on Win10
+:: This will fail to properly transmit special chars like äöü
+:: Change codepage to UTF-8
+chcp 65001
+```
+### Sequence
+```
+cmdA & cmdB 	-> Run cmdA and then run cmdB
+cmdA && cmdB 	-> Run cmdA, if it succeeds then run cmdB
+cmdA || cmdB 	-> Run cmdA, if it fails then run cmdB
+```
+## Find program, file or folder
+```batch
+where /q cmake.exe
+if ERRORLEVEL 1 (
+	echo Cannot find cmake.exe! 
+) else (
+	for /f "tokens=*" %%i in ('where cmake.exe') do (echo %%i)
+)
+
+:: Check if file exists ("" in case of spaces in filepath)
+if exists "%filepath%" (echo File exists!)
+
+:: Check if folder exists
+if not exists "Alter Ordner" mkdir "Alter Ordner"
+```
+## Handle passwords
+```
+set /p "TH_ADMIN_PW=Enter passowrd: "
+```
+- Password is shown as cleartext
+- Password is only stored for the session duration (you can use up/down to retrieve last inputs, but is cleared when cmd ends)
+```
+@echo off
+setlocal
+
+:: Call PowerShell script to get masked password input
+for /f "delims=" %%i in ('powershell -command "$password = Read-Host -AsSecureString -Prompt 'Enter password'; $plainPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)); Write-Output $plainPassword"') do (
+    set "password=%%i"
+)
+
+echo Password entered: "%password%"
+
+endlocal
+```
+- Uses powershell for the masking
+- Password is only stored in the variable
+
+In any case:
+- Be aware of the [[Code/Langauges/Batch#Execution order\|#Execution order]] and the context in which the password is used
+- Quotes around the password variable are necessary if the password contains special characters such as `<>|^`
+- You can use DelayedExpansion to work around this, but then it will break if the password contains an `!`
+## Delayed Variable Expansion
+- variables are substitued when a line is parsed
+- bracketed expressions such as `if condition (...)` count as one line even if written over multiple text lines
+- when delayed expansion is turned on all variables in `!delayed!` form are substitued at execution time
+- this also means that carets ^ and redirection chars like > in variables and echo statements are not executed
+- text coming from external sources is also treated more as-is (for why see [[Code/Langauges/Batch#Execution order\|#Execution order]])
+```batch
+set VAR=before
+if "%VAR%" == "before" (
+    set VAR=after
+    if "%VAR%" == "after" @echo This is never shown
+)
+
+set LIST=
+for %%i in (*) do set LIST=%LIST% %%i
 :: LIST is just last file found
 
 set _html=Hello^>World
