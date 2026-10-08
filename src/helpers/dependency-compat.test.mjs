@@ -1,5 +1,6 @@
 import { afterAll, expect, test } from "vitest";
 import { createRequire } from "node:module";
+import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -80,4 +81,17 @@ test("test_component_discovery_and_logo_urls", async () => {
   const meta = await require("../site/_data/meta.js")();
   expect(meta.siteLogoPath).toBe("/logo.svg");
   expect(meta.themeStyle).not.toContain("\\");
+});
+
+test("test_async_markdown_hooks_render_math_in_fresh_process", () => {
+  // A fresh process prevents the ESM import above from masking the CJS startup crash.
+  const html = execFileSync(process.execPath, ["--max-old-space-size=128", "-e", `
+    (async () => {
+      const md = require("markdown-it")();
+      await require("./src/helpers/pluginLoader").applyMarkdownHooks(md);
+      process.stdout.write(md.render("$x^2$"));
+    })().catch(error => { console.error(error); process.exitCode = 1; });
+  `], { cwd: process.cwd(), encoding: "utf8", timeout: 10000 });
+  expect(html).toContain("<mjx-container");
+  expect(html).toContain("<svg");
 });

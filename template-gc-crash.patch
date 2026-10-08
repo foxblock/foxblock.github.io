@@ -1,0 +1,96 @@
+# Fix Eleventy startup GC crash: "FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory" (watch:eleventy exits with 134).
+# Import markdown-it-mathjax3 through its ESM entry to bypass the blocking CommonJS deasync bridge.
+# Await Markdown plugin hooks before user setup and rendering; include a fresh-process regression test.
+# Initially applied to Digital Garden template version 1.91.0.
+
+diff --git a/.eleventy.js b/.eleventy.js
+--- a/.eleventy.js
++++ b/.eleventy.js
+@@ -236,7 +236,7 @@ const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+ const markdownFileTypeRegex = /\.(md|markdown)$/i;
+ const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
+ 
+-module.exports = function(eleventyConfig) {
++module.exports = async function(eleventyConfig) {
+   eleventyConfig.setLiquidOptions({
+     dynamicPartials: true,
+   });
+@@ -459,9 +459,11 @@ module.exports = function(eleventyConfig) {
+ 
+         return defaultLinkRule(tokens, idx, options, env, self);
+       };
+-    })
+-    .use((md) => pluginLoader.applyMarkdownHooks(md))
+-    .use(userMarkdownSetup);
++    });
++
++  // Markdown-it.use is synchronous; await plugin imports before user setup.
++  await pluginLoader.applyMarkdownHooks(markdownLib);
++  markdownLib.use(userMarkdownSetup);
+ 
+   eleventyConfig.setLibrary("md", markdownLib);
+ 
+diff --git a/src/helpers/dependency-compat.test.mjs b/src/helpers/dependency-compat.test.mjs
+index a32155e6..ad7f25e7 100644
+--- a/src/helpers/dependency-compat.test.mjs
++++ b/src/helpers/dependency-compat.test.mjs
+@@ -1,5 +1,6 @@
+ import { afterAll, expect, test } from "vitest";
+ import { createRequire } from "node:module";
++import { execFileSync } from "node:child_process";
+ import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+ import { rm } from "node:fs/promises";
+ import { tmpdir } from "node:os";
+@@ -81,3 +82,16 @@ test("test_component_discovery_and_logo_urls", async () => {
+   expect(meta.siteLogoPath).toBe("/logo.svg");
+   expect(meta.themeStyle).not.toContain("\\");
+ });
++
++test("test_async_markdown_hooks_render_math_in_fresh_process", () => {
++  // A fresh process prevents the ESM import above from masking the CJS startup crash.
++  const html = execFileSync(process.execPath, ["--max-old-space-size=128", "-e", `
++    (async () => {
++      const md = require("markdown-it")();
++      await require("./src/helpers/pluginLoader").applyMarkdownHooks(md);
++      process.stdout.write(md.render("$x^2$"));
++    })().catch(error => { console.error(error); process.exitCode = 1; });
++  `], { cwd: process.cwd(), encoding: "utf8", timeout: 10000 });
++  expect(html).toContain("<mjx-container");
++  expect(html).toContain("<svg");
++});
+diff --git a/src/helpers/pluginLoader.js b/src/helpers/pluginLoader.js
+index 863dfd35..7eca2930 100644
+--- a/src/helpers/pluginLoader.js
++++ b/src/helpers/pluginLoader.js
+@@ -329,13 +329,13 @@ function requireHooks(plugin) {
+   }
+ }
+ 
+-/** Called from .eleventy.js as the last markdown-it .use() before userMarkdownSetup. */
+-function applyMarkdownHooks(md, options) {
++/** Await Markdown hooks in order before userMarkdownSetup and rendering. */
++async function applyMarkdownHooks(md, options) {
+   for (const plugin of enabledPlugins(options)) {
+     const hooks = requireHooks(plugin);
+     if (!hooks || typeof hooks.setupMarkdown !== "function") continue;
+     try {
+-      hooks.setupMarkdown(md, hookContext(plugin));
++      await hooks.setupMarkdown(md, hookContext(plugin));
+     } catch (error) {
+       warn(`${plugin.id}: setupMarkdown failed (${error.message}); skipping it`);
+     }
+diff --git a/src/plugins/dg-math/index.js b/src/plugins/dg-math/index.js
+index 621c8bf9..cacd674d 100644
+--- a/src/plugins/dg-math/index.js
++++ b/src/plugins/dg-math/index.js
+@@ -1,6 +1,8 @@
+ module.exports = {
+-  setupMarkdown(md) {
+-    md.use(require("markdown-it-mathjax3"), {
++  async setupMarkdown(md) {
++    // Its CommonJS entry uses deasync, which exhausts the heap during async startup.
++    const { default: mathjaxPlugin } = await import("markdown-it-mathjax3");
++    md.use(mathjaxPlugin, {
+       tex: {
+         inlineMath: [["$", "$"]],
+       },

@@ -1,0 +1,61 @@
+# Workaround for bug in template code: require double hashes for tag-link generation
+# Single hashes would generate links from text in code blocks like "#include ..."
+# see https://github.com/oleeskild/digitalgarden/issues/315
+# Initially applied to Digital Garden template version 1.91.0.
+
+diff --git a/.eleventy.js b/.eleventy.js
+--- a/.eleventy.js
++++ b/.eleventy.js
+@@ -231,7 +231,9 @@ function computeAnchorAttributes(filePath, linkTitle) {
+   }
+ }
+ 
+-const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
++// NOTE (JS, 24.05.25): Edited this to only match double hashes in the markdown file (e.g. ##test-tag)
++// This is a workaround for https://github.com/oleeskild/digitalgarden/issues/315
++// Tags as properties are unaffected
++const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+ 
+ const markdownFileTypeRegex = /\.(md|markdown)$/i;
+ const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
+@@ -524,7 +526,8 @@ module.exports = async function(eleventyConfig) {
+     return (
+       str &&
+       str.replace(tagRegex, function(match, precede, tag) {
+-        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
++        const doubleTagRemoved = tag.substring(1);
++        return `${precede}<a class="tag" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
+       })
+     );
+   });
+@@ -754,7 +757,8 @@ module.exports = async function(eleventyConfig) {
+     return (
+       str &&
+       str.replace(tagRegex, function(match, precede, tag) {
+-        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
++        const doubleTagRemoved = tag.substring(1);
++        return `${precede}<a class="tag" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
+       })
+     );
+   }
+diff --git a/src/plugins/dg-search/index.js b/src/plugins/dg-search/index.js
+--- a/src/plugins/dg-search/index.js
++++ b/src/plugins/dg-search/index.js
+@@ -2,7 +2,7 @@ const fs = require("fs");
+ const path = require("path");
+ 
+ // Same tag pattern as the core taggify filter (.eleventy.js).
+-const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
++const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+ 
+ module.exports = {
+   setupEleventy(eleventyConfig, context) {
+@@ -19,7 +19,7 @@ module.exports = {
+       if (match) {
+         tags = match
+           .map((m) => {
+-            return `"${m.split("#")[1]}"`;
++            return `"${m.split("##")[1]}"`;
+           })
+           .join(", ");
+       }
