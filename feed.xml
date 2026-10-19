@@ -3,7 +3,7 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-10-14T22:21:07Z</updated>
+  <updated>2026-10-19T15:54:03Z</updated>
   <id>https://janek.ing</id><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
@@ -1825,6 +1825,135 @@ The best size can be determined by testing (measure performance with increasing 
 &lt;p&gt;Great visualization of latency numbers (with historical data): &lt;a href=&quot;https://colin-scott.github.io/personal_website/research/interactive_latency.html&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://colin-scott.github.io/personal_website/research/interactive_latency.html&lt;/a&gt;&lt;/p&gt;
 </content>
     <link href="https://janek.ing/tech/cpu/"/>
+  </entry><entry>
+    <title>Deadlock</title>
+    <updated>2026-10-19T15:47:41.012Z</updated>
+    <id>https://janek.ing/spiele/deadlock/</id>
+    <content type="html">&lt;p&gt;last update: 15.10.2026&lt;/p&gt;
+&lt;h3 id=&quot;general&quot; tabindex=&quot;-1&quot;&gt;General&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Damage resist means all forms of damage &lt;a href=&quot;https://deadlock.wiki/Pure_Damage&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;except &amp;quot;pure&amp;quot;&lt;/a&gt; (parts of venators abilities, execute part of talon owl and shiv ult, geist soul exchange, billy blasted amp, siphon bullets, etc.)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://deadlock.wiki/Walker#Ability_Damage_Reduction&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Some abilities do less damage to structures&lt;/a&gt; (many ults, flame dash, pulse grenade, victor aura, sinclair bolt, etc.) - the list is the same for all structures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;a-href-https-deadlock-wiki-unstable-rift-target-blank-class-external-link-rift-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Unstable_Rift&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Rift&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;effect spawns 60s before, announcement 20s before&lt;/li&gt;
+&lt;li&gt;Spawns after 11min (+-1min) and then every 7min (+-1min)&lt;/li&gt;
+&lt;li&gt;Comeback
+&lt;ul&gt;
+&lt;li&gt;scales linearly up to 15% diff in Net-Worth&lt;/li&gt;
+&lt;li&gt;updates while Rift is active&lt;/li&gt;
+&lt;li&gt;Capture time 6s (15% down), 12s (normal), 18s (15% up)&lt;/li&gt;
+&lt;li&gt;Bullet/Spirit/Debuff-Resist (at 15% down): 10% (at 0:00) to 40% (at 30:00)&lt;/li&gt;
+&lt;li&gt;More souls and rift troopers for comeback team&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;a-href-https-deadlock-wiki-midboss-target-blank-class-external-link-mid-boss-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Midboss&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Mid Boss&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HP: 13000, +195/min&lt;/li&gt;
+&lt;li&gt;Damage shield absorbs 35HP/s +5 HP/min&lt;/li&gt;
+&lt;li&gt;Bullet resist: 15%&lt;/li&gt;
+&lt;li&gt;Respawn: 7min after first death, then 6min, then 5min after 3+ deaths&lt;/li&gt;
+&lt;li&gt;Rejuvenator lasts 3min&lt;/li&gt;
+&lt;li&gt;First hero to claim rejuvenator gets healed to full&lt;/li&gt;
+&lt;li&gt;Killing team gets 3000 +50/min souls, 2 buffs / player&lt;/li&gt;
+&lt;li&gt;Does bullet damage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;a-href-https-deadlock-wiki-lane-guardian-target-blank-class-external-link-guardians-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Lane_Guardian&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Guardians&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HP: 5500&lt;/li&gt;
+&lt;li&gt;Damage Resist: 50% (at 0:00), -50% (at 12:00)&lt;/li&gt;
+&lt;li&gt;Take 25% more damage from player bullets, but also have 10% bullet resist (all applied multiplicatively)&lt;/li&gt;
+&lt;li&gt;Do Bullet damage&lt;/li&gt;
+&lt;li&gt;Take headshot damage!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;a-href-https-deadlock-wiki-walker-target-blank-class-external-link-walker-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Walker&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Walker&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HP: 6000 (all alive), 9000 (1 down), 12000 (last one)&lt;/li&gt;
+&lt;li&gt;Damage Resist: 65% (at 0:00), -65% (at 18:00)&lt;/li&gt;
+&lt;li&gt;Bullet Resist: 35% (fix)&lt;/li&gt;
+&lt;li&gt;Take less damage when more than 2 enemies are in range (-20% @ 3, -50% @ 6)&lt;/li&gt;
+&lt;li&gt;15% Bullet and Spirit Resist for friendlies in range&lt;/li&gt;
+&lt;li&gt;Do Max-HP damage (beam and stomp), fire does -10% resist&lt;/li&gt;
+&lt;li&gt;Cooldowns: 7s stomp, 10s fireballs&lt;/li&gt;
+&lt;li&gt;Backdoor protection (green aura): -65% damage reduction +65 HP/s&lt;/li&gt;
+&lt;li&gt;Do Spirit damage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;a-href-https-deadlock-wiki-base-guardian-target-blank-class-external-link-base-guardians-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Base_Guardian&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Base Guardians&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HP: 4000&lt;/li&gt;
+&lt;li&gt;Bullet Resist: 40% (-20% down to 0% for every enemy nearby)&lt;/li&gt;
+&lt;li&gt;Take 25% more bullet damage from players, +20% fixed bullet resist&lt;/li&gt;
+&lt;li&gt;Do not take headshot damage!&lt;/li&gt;
+&lt;li&gt;Do bullet damage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;a-href-https-deadlock-wiki-shrine-target-blank-class-external-link-shrines-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Shrine&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Shrines&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HP: 5000 (both alive), 10000 (last one)&lt;/li&gt;
+&lt;li&gt;Invuln until one SET of base guardians is destroyed&lt;/li&gt;
+&lt;li&gt;Bullet Resist: 60% (-20% down to 0% for every enemy nearby)&lt;/li&gt;
+&lt;li&gt;Backdoor protection (green aura): -65% damage reduction +65 HP/s&lt;/li&gt;
+&lt;li&gt;When destroyed: that lane gets super troopers (blue lane when both are dead), +60% dmg, +40% HP, -15% souls&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;a-href-https-deadlock-wiki-patron-target-blank-class-external-link-patron-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Patron&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Patron&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;HP: 12000, +400/min (until 20:00), +250/min (20:00+)&lt;/li&gt;
+&lt;li&gt;heals 120/s&lt;/li&gt;
+&lt;li&gt;50% resistance when 1 ally is in pit for more than 2s, 100% when 2 are in pit&lt;/li&gt;
+&lt;li&gt;Does max HP damage&lt;/li&gt;
+&lt;li&gt;up to -20s respawn time when first phase is defeated (min 10s respawn)&lt;/li&gt;
+&lt;li&gt;Does spirit damage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;souls&quot; tabindex=&quot;-1&quot;&gt;Souls&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Troopers and Crates have the best soul increase over time, small/medium haunts are the least effective&lt;/li&gt;
+&lt;li&gt;Trooper souls are split equally to almost 100% value total&lt;/li&gt;
+&lt;li&gt;Hero kills have diminishing returns on more assisting players (&lt;a href=&quot;https://deadlock.wiki/Souls#Soul_Distribution&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;only 48% value at 6 people&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://deadlock.wiki/Souls#Comeback_Mechanics&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Comeback&lt;/a&gt;: more souls for kills on heroes with higher net worth, more souls for everything else for behind team. Comeback souls are split with players with lowest net worth&lt;/li&gt;
+&lt;li&gt;Passive soul gain for 2 players with least net worth on each team&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    <link href="https://janek.ing/spiele/deadlock/"/>
+  </entry><entry>
+    <title>CS - Smokes</title>
+    <updated>2026-10-15T09:26:40.881Z</updated>
+    <id>https://janek.ing/spiele/cs-smokes/</id>
+    <content type="html">&lt;p&gt;Alle JUMP THROW außer wenn anders beschrieben&lt;/p&gt;
+&lt;h2 id=&quot;ancient&quot; tabindex=&quot;-1&quot;&gt;Ancient&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250824143133.png&quot; alt=&quot;Pasted image 20250824143133.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260514160753.png&quot; alt=&quot;Pasted image 20260514160753.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250824143030.png&quot; alt=&quot;Pasted image 20250824143030.png&quot; /&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250824143637.png&quot; alt=&quot;Pasted image 20250824143637.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250824211350.png&quot; alt=&quot;Pasted image 20250824211350.png&quot; /&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250824144021.png&quot; alt=&quot;Pasted image 20250824144021.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250824150216.png&quot; alt=&quot;Pasted image 20250824150216.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;dust-2&quot; tabindex=&quot;-1&quot;&gt;Dust 2&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260625154203.png&quot; alt=&quot;Pasted image 20260625154203.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260625163218.png&quot; alt=&quot;Pasted image 20260625163218.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260625163231.png&quot; alt=&quot;Pasted image 20260625163231.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260625163247.png&quot; alt=&quot;Pasted image 20260625163247.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260625163831.png&quot; alt=&quot;Pasted image 20260625163831.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260625164023.png&quot; alt=&quot;Pasted image 20260625164023.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;inferno&quot; tabindex=&quot;-1&quot;&gt;Inferno&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250827172803.png&quot; alt=&quot;Pasted image 20250827172803.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250827174357.png&quot; alt=&quot;Pasted image 20250827174357.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250827174546.png&quot; alt=&quot;Pasted image 20250827174546.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250827175156.png&quot; alt=&quot;Pasted image 20250827175156.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250827173240.png&quot; alt=&quot;Pasted image 20250827173240.png&quot; /&gt;&lt;br /&gt;
+vvv M1+M2 JUMPTHROW + STEP vvv -&amp;gt; Boost + CT&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250901214519.png&quot; alt=&quot;Pasted image 20250901214519.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250827174224.png&quot; alt=&quot;Pasted image 20250827174224.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;nuke&quot; tabindex=&quot;-1&quot;&gt;Nuke&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260606130633.png&quot; alt=&quot;Pasted image 20260606130633.png&quot; /&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260606130902.png&quot; alt=&quot;Pasted image 20260606130902.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260606131146.png&quot; alt=&quot;Pasted image 20260606131146.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260606131552.png&quot; alt=&quot;Pasted image 20260606131552.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020260606133300.png&quot; alt=&quot;Pasted image 20260606133300.png&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;overpass&quot; tabindex=&quot;-1&quot;&gt;Overpass&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250826185819.png&quot; alt=&quot;Pasted image 20250826185819.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250826184242.png&quot; alt=&quot;Pasted image 20250826184242.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250826182919.png&quot; alt=&quot;Pasted image 20250826182919.png&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250826183504.png&quot; alt=&quot;Pasted image 20250826183504.png&quot; /&gt;&lt;/p&gt;
+</content>
+    <link href="https://janek.ing/spiele/cs-smokes/"/>
   </entry><entry>
     <title>Schlaf</title>
     <updated>2026-01-26T15:03:47.121Z</updated>
