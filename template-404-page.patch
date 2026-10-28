@@ -10,7 +10,7 @@ diff --git a/src/site/404.njk b/src/site/404.njk
 +permalink: 404.html
 +---
  <!DOCTYPE html>
- <html lang="{{ meta.mainLanguage }}">
+ <html lang="{{ meta.mainLanguage }}" style="color-scheme: only {{ meta.baseTheme }}">
      <head>
 @@ -19,8 +21,9 @@
              {%-if not meta.themeStyle%}
