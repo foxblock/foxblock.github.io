@@ -9,8 +9,8 @@
     },
     "dg-timestamps": {
       "settings": {
-        "showCreated": false,
-        "showUpdated": false,
+        "showCreated": true,
+        "showUpdated": true,
         "position": "top",
         "showOnHome": false,
         "timestampFormat": "MMM dd, yyyy h:mm a",
