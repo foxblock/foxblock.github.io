@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme: only dark">
   <head>
     <title>Op-Amps</title>
     <meta charset="utf-8">
@@ -69,11 +69,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
 <script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+    <link href="/styles/obsidian-base.css" rel="stylesheet">
+    <link href="/styles/_theme.5d40cb0d.css" rel="stylesheet">
 
-<link href="/styles/obsidian-base.css" rel="stylesheet">
 <link href="/styles/digital-garden-base.css" rel="stylesheet">
 
-<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-28T16:41:32.488Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-28T16:41:32.488Z" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet"><link href="/styles/user/bolt-theme-without-callouts.css?v=2026-10-28T17:34:44.407Z" rel="stylesheet"><link href="/styles/user/layout-fixes.css?v=2026-10-28T17:34:44.407Z" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -1243,6 +1244,8 @@ $$
             const doc = parser.parseFromString(html, 'text/html');
 
             const content = doc.querySelector('.content, .cm-s-obsidian, article, main');
+            // The preview panel renders its own tag row above the body
+            content?.querySelectorAll('.header-tags').forEach(el => el.remove());
             const htmlContent = content ? content.innerHTML : '';
             previewCache.set(url, htmlContent);
             return htmlContent;
@@ -1375,7 +1378,7 @@ $$
 
     async function init() {
         // Fetch search index (browser caches based on query param)
-        const docs = await fetch('/searchIndex.json?v=2026-10-28T16:41:32.488Z').then(r => r.json());
+        const docs = await fetch('/searchIndex.json?v=2026-10-28T17:34:44.407Z').then(r => r.json());
         const index = createIndex(docs);
         window.docs = docs;
         window.index = index;
@@ -1690,6 +1693,30 @@ document.addEventListener("DOMContentLoaded", function() {
         toggle.setAttribute("aria-expanded", "false");
       });
     });
+  });
+
+  // Format date cells. The timestamps plugin formats .human-date spans with
+  // the garden's configured format when it's enabled; any left empty here
+  // get a locale format so date columns never render blank.
+  document.querySelectorAll(".obsidian-bases-views .human-date").forEach(function(el) {
+    if (el.textContent.trim() !== "") return;
+    var value = (el.getAttribute("data-date") || "").trim();
+    var dateOnly = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    // Date-only values are calendar days, not instants: build them in
+    // local time so the viewer's timezone can't shift the day
+    var date = dateOnly
+      ? new Date(Number(dateOnly[1]), Number(dateOnly[2]) - 1, Number(dateOnly[3]))
+      : new Date(value);
+    if (isNaN(date.getTime())) {
+      el.textContent = value;
+      return;
+    }
+    var options = { year: "numeric", month: "short", day: "numeric" };
+    if (!dateOnly) {
+      options.hour = "numeric";
+      options.minute = "2-digit";
+    }
+    el.textContent = date.toLocaleString(undefined, options);
   });
 
   // Fill in dynamic date placeholders (today/now)
