@@ -3,7 +3,7 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-10-28T22:36:12Z</updated>
+  <updated>2026-10-28T22:37:15Z</updated>
   <id>https://janek.ing</id><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
@@ -1828,7 +1828,7 @@ The best size can be determined by testing (measure performance with increasing 
   </entry><entry>
     <title>Deadlock</title>
     <updated>2026-10-25T15:59:43.368Z</updated>
-    <id>https://janek.ing/spiele/deadlock/</id>
+    <id>https://janek.ing/games/deadlock/</id>
     <content type="html">&lt;p&gt;last update: 15.10.2026&lt;/p&gt;
 &lt;h3 id=&quot;general&quot; tabindex=&quot;-1&quot;&gt;General&lt;/h3&gt;
 &lt;ul&gt;
@@ -1915,11 +1915,11 @@ The best size can be determined by testing (measure performance with increasing 
 &lt;li&gt;Passive soul gain for 2 players with least net worth on each team&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-    <link href="https://janek.ing/spiele/deadlock/"/>
+    <link href="https://janek.ing/games/deadlock/"/>
   </entry><entry>
     <title>CS - Smokes</title>
     <updated>2026-10-15T09:26:40.881Z</updated>
-    <id>https://janek.ing/spiele/cs-smokes/</id>
+    <id>https://janek.ing/games/cs-smokes/</id>
     <content type="html">&lt;p&gt;Alle JUMP THROW außer wenn anders beschrieben&lt;/p&gt;
 &lt;h2 id=&quot;ancient&quot; tabindex=&quot;-1&quot;&gt;Ancient&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250824143133.png&quot; alt=&quot;Pasted image 20250824143133.png&quot; /&gt;&lt;br /&gt;
@@ -1954,7 +1954,7 @@ vvv M1+M2 JUMPTHROW + STEP vvv -&amp;gt; Boost + CT&lt;br /&gt;
 &lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250826182919.png&quot; alt=&quot;Pasted image 20250826182919.png&quot; /&gt;&lt;br /&gt;
 &lt;img src=&quot;https://janek.ing/img/user/_attachments/Pasted%20image%2020250826183504.png&quot; alt=&quot;Pasted image 20250826183504.png&quot; /&gt;&lt;/p&gt;
 </content>
-    <link href="https://janek.ing/spiele/cs-smokes/"/>
+    <link href="https://janek.ing/games/cs-smokes/"/>
   </entry><entry>
     <title>Schlaf</title>
     <updated>2026-01-26T15:03:47.121Z</updated>
@@ -6154,7 +6154,7 @@ You can also draw the boundary between the different systems. Entities are only 
   </entry><entry>
     <title>Agile</title>
     <updated>2025-05-25T19:25:54.213Z</updated>
-    <id>https://janek.ing/arbeit/agile/</id>
+    <id>https://janek.ing/work/agile/</id>
     <content type="html">&lt;h2 id=&quot;eigene-erfahrung&quot; tabindex=&quot;-1&quot;&gt;Eigene Erfahrung&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Alle&lt;/strong&gt; Scrum Meetings müssen von &lt;strong&gt;allen&lt;/strong&gt; Teilnehmern gut vorbereitet sein, sonst werden sie nahezu wertlos
@@ -6217,7 +6217,7 @@ You can also draw the boundary between the different systems. Entities are only 
 &lt;p&gt;Probleme mit Scrum:&lt;br /&gt;
 &lt;a href=&quot;https://www.youtube.com/watch?v=Q25lwSfVwF8&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;https://www.youtube.com/watch?v=Q25lwSfVwF8&lt;/a&gt;&lt;/p&gt;
 </content>
-    <link href="https://janek.ing/arbeit/agile/"/>
+    <link href="https://janek.ing/work/agile/"/>
   </entry><entry>
     <title>2026-04-15 LLMs are keeping you from learning</title>
     <updated>2026-04-16T17:04:54.108Z</updated>
