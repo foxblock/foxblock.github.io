@@ -3,7 +3,7 @@
   <title>janek.ing</title>
   <link href="https://janek.ing/feed.xml" rel="self"/>
   <link href="https://janek.ing"/>
-  <updated>2026-10-28T17:43:58Z</updated>
+  <updated>2026-10-28T17:52:45Z</updated>
   <id>https://janek.ing</id><entry>
     <title>Garden Home</title>
     <updated>2026-04-16T09:54:45.755Z</updated>
@@ -1827,7 +1827,7 @@ The best size can be determined by testing (measure performance with increasing 
     <link href="https://janek.ing/tech/cpu/"/>
   </entry><entry>
     <title>Deadlock</title>
-    <updated>2026-10-19T15:47:41.012Z</updated>
+    <updated>2026-10-25T15:59:43.368Z</updated>
     <id>https://janek.ing/spiele/deadlock/</id>
     <content type="html">&lt;p&gt;last update: 15.10.2026&lt;/p&gt;
 &lt;h3 id=&quot;general&quot; tabindex=&quot;-1&quot;&gt;General&lt;/h3&gt;
@@ -1867,6 +1867,7 @@ The best size can be determined by testing (measure performance with increasing 
 &lt;li&gt;Take 25% more damage from player bullets, but also have 10% bullet resist (all applied multiplicatively)&lt;/li&gt;
 &lt;li&gt;Do Bullet damage&lt;/li&gt;
 &lt;li&gt;Take headshot damage!&lt;/li&gt;
+&lt;li&gt;Target you when you damage a hero under the tower, else target closest enemy unit&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;a-href-https-deadlock-wiki-walker-target-blank-class-external-link-walker-a&quot; tabindex=&quot;-1&quot;&gt;&lt;a href=&quot;https://deadlock.wiki/Walker&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;&gt;Walker&lt;/a&gt;&lt;/h3&gt;
 &lt;ul&gt;
