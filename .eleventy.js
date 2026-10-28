@@ -233,7 +233,10 @@ function computeAnchorAttributes(filePath, linkTitle) {
   }
 }
 
-const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+// NOTE (JS, 24.05.25): Edited this to only match double hashes in the markdown file (e.g. ##test-tag)
+// This is a workaround for https://github.com/oleeskild/digitalgarden/issues/315
+// Tags as properties are unaffected
+const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 const markdownFileTypeRegex = /\.(md|markdown)$/i;
 const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
@@ -524,7 +527,8 @@ module.exports = function(eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
+        const doubleTagRemoved = tag.substring(1);
+        return `${precede}<a class="tag" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
       })
     );
   });
@@ -754,7 +758,8 @@ module.exports = function(eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
+        const doubleTagRemoved = tag.substring(1);
+        return `${precede}<a class="tag" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
       })
     );
   }

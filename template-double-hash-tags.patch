@@ -6,7 +6,7 @@
 diff --git a/.eleventy.js b/.eleventy.js
 --- a/.eleventy.js
 +++ b/.eleventy.js
-@@ -231,7 +231,9 @@ function computeAnchorAttributes(filePath, linkTitle) {
+@@ -231,7 +231,10 @@ function computeAnchorAttributes(filePath, linkTitle) {
    }
  }
  
