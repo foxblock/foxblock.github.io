@@ -1,4 +1,4 @@
-const slugify = require("@sindresorhus/slugify");
+const slugify = require("@sindresorhus/slugify").default;
 
 // slugify rebuilds its transliteration/escape regexes on every call, which
 // makes it one of the most expensive functions in a build (it runs for every
