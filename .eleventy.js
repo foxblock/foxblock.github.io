@@ -184,9 +184,10 @@ function computeAnchorAttributes(filePath, linkTitle) {
   const title = linkTitle ? linkTitle : fileName;
   let permalink = `/notes/${slugify(fileName)}`;
   let deadLink = false;
+  const startPath = "./src/site/notes/";
+  let fullPath;
+  console.log("Adding link to file", startPath + fileName, "(filePath is", filePath, ")...");
   try {
-    const startPath = "./src/site/notes/";
-    let fullPath;
     if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
       fullPath = `${startPath}${fileName}`;
     } else {
@@ -206,7 +207,8 @@ function computeAnchorAttributes(filePath, linkTitle) {
     if (frontMatter.data.noteIcon) {
       noteIcon = frontMatter.data.noteIcon;
     }
-  } catch {
+  } catch (error) {
+    console.warn("ERROR: dead link to file", fullPath || startPath + fileName, "\n - filePath was", filePath, "\n -", error.message);
     deadLink = true;
   }
 
