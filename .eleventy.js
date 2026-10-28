@@ -241,7 +241,7 @@ const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 const markdownFileTypeRegex = /\.(md|markdown)$/i;
 const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
 
-module.exports = function(eleventyConfig) {
+module.exports = async function(eleventyConfig) {
   eleventyConfig.setLiquidOptions({
     dynamicPartials: true,
   });
@@ -464,9 +464,11 @@ module.exports = function(eleventyConfig) {
 
         return defaultLinkRule(tokens, idx, options, env, self);
       };
-    })
-    .use((md) => pluginLoader.applyMarkdownHooks(md))
-    .use(userMarkdownSetup);
+    });
+
+  // Markdown-it.use is synchronous; await plugin imports before user setup.
+  await pluginLoader.applyMarkdownHooks(markdownLib);
+  markdownLib.use(userMarkdownSetup);
 
   eleventyConfig.setLibrary("md", markdownLib);
 

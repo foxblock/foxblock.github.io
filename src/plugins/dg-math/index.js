@@ -1,6 +1,8 @@
 module.exports = {
-  setupMarkdown(md) {
-    md.use(require("markdown-it-mathjax3"), {
+  async setupMarkdown(md) {
+    // Its CommonJS entry uses deasync, which exhausts the heap during async startup.
+    const { default: mathjaxPlugin } = await import("markdown-it-mathjax3");
+    md.use(mathjaxPlugin, {
       tex: {
         inlineMath: [["$", "$"]],
       },

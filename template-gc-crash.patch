@@ -2,6 +2,7 @@
 # Import markdown-it-mathjax3 through its ESM entry to bypass the blocking CommonJS deasync bridge.
 # Await Markdown plugin hooks before user setup and rendering; include a fresh-process regression test.
 # Only necessary because we upgraded the mathjax3 plugin from 4.X to 5.X
+# Adapted for 1.96.0: fresh-process regression test already exists; retain it unchanged.
 # Initially applied to Digital Garden template version 1.91.0.
 
 diff --git a/.eleventy.js b/.eleventy.js
@@ -31,34 +32,6 @@ diff --git a/.eleventy.js b/.eleventy.js
  
    eleventyConfig.setLibrary("md", markdownLib);
  
-diff --git a/src/helpers/dependency-compat.test.mjs b/src/helpers/dependency-compat.test.mjs
-index a32155e6..ad7f25e7 100644
---- a/src/helpers/dependency-compat.test.mjs
-+++ b/src/helpers/dependency-compat.test.mjs
-@@ -1,5 +1,6 @@
- import { afterAll, expect, test } from "vitest";
- import { createRequire } from "node:module";
-+import { execFileSync } from "node:child_process";
- import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
- import { rm } from "node:fs/promises";
- import { tmpdir } from "node:os";
-@@ -81,3 +82,16 @@ test("test_component_discovery_and_logo_urls", async () => {
-   expect(meta.siteLogoPath).toBe("/logo.svg");
-   expect(meta.themeStyle).not.toContain("\\");
- });
-+
-+test("test_async_markdown_hooks_render_math_in_fresh_process", () => {
-+  // A fresh process prevents the ESM import above from masking the CJS startup crash.
-+  const html = execFileSync(process.execPath, ["--max-old-space-size=128", "-e", `
-+    (async () => {
-+      const md = require("markdown-it")();
-+      await require("./src/helpers/pluginLoader").applyMarkdownHooks(md);
-+      process.stdout.write(md.render("$x^2$"));
-+    })().catch(error => { console.error(error); process.exitCode = 1; });
-+  `], { cwd: process.cwd(), encoding: "utf8", timeout: 10000 });
-+  expect(html).toContain("<mjx-container");
-+  expect(html).toContain("<svg");
-+});
 diff --git a/src/helpers/pluginLoader.js b/src/helpers/pluginLoader.js
 index 863dfd35..7eca2930 100644
 --- a/src/helpers/pluginLoader.js
