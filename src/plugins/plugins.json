@@ -13,8 +13,8 @@
         "showUpdated": true,
         "position": "top",
         "showOnHome": false,
-        "timestampFormat": "MMM dd, yyyy h:mm a",
-        "dateFormat": "MMM dd, yyyy"
+        "timestampFormat": "dd. MMM yyyy",
+        "dateFormat": "dd. MMM yyyy"
       }
     }
   }
