@@ -1,44 +1,7 @@
-# Always load Obsidian base CSS before custom, plugin, and user styles; use the cached favicon shortcode.
+# Always load Obsidian base CSS before custom, plugin, and user styles.
 # Initially applied to Digital Garden template version 1.91.0.
 
-# Adapted for 1.96.0: restore the shortcode promise cache and invalidate it before rebuilds.
-
-diff --git a/.eleventy.js b/.eleventy.js
-index 009a55fc..20cc50fa 100644
---- a/.eleventy.js
-+++ b/.eleventy.js
-@@ -847,7 +856,9 @@ module.exports = function(eleventyConfig) {
-   eleventyConfig.addPassthroughCopy("src/site/scripts");
-   eleventyConfig.addPassthroughCopy("src/site/styles/_theme.*.css");
-   eleventyConfig.addPassthroughCopy({ "src/site/logo.*": "/" });
-+  let faviconPromise;
-   eleventyConfig.on("eleventy.before", () => {
-+    faviconPromise = undefined;
-     normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
-     anchorAttributesCache.clear();
-   });
-@@ -860,7 +871,18 @@ module.exports = function(eleventyConfig) {
-     }
-   });
-   eleventyConfig.addWatchTarget(FAVICON_SOURCE);
--  eleventyConfig.addPlugin(faviconsPlugin, { outputDir: "dist" });
-+  // All pages share one favicon. Cache the in-flight promise as well as its HTML
-+  // so parallel templates cannot write the same files (EBUSY on Windows).
-+  faviconsPlugin({
-+    addAsyncShortcode(name, generate) {
-+      eleventyConfig.addAsyncShortcode(name, function () {
-+        faviconPromise ??= Promise.resolve().then(() => generate.call(this,
-+          FAVICON_NORMALIZED, { appleIconBgColor: "#123" }));
-+        return faviconPromise;
-+      });
-+    },
-+  // Our per-build cache owns reuse; regenerate even if dist was cleaned.
-+  }, { outputDir: "dist", skipCache: true });
-   eleventyConfig.addPlugin(tocPlugin, {
-     ul: true,
-     tags: ["h1", "h2", "h3", "h4", "h5", "h6"],
 diff --git a/src/site/_includes/components/pageheader.njk b/src/site/_includes/components/pageheader.njk
-index 208b7690..a45eaf86 100644
 --- a/src/site/_includes/components/pageheader.njk
 +++ b/src/site/_includes/components/pageheader.njk
 @@ -38,12 +38,7 @@
@@ -55,12 +18,3 @@ index 208b7690..a45eaf86 100644
  <link href="/styles/digital-garden-base.css" rel="stylesheet">
  
  <link href="/styles/custom-style.css" rel="stylesheet">
-@@ -58,7 +53,7 @@
- <script defer src="{{script}}?v={{meta.buildDate|isoDate}}"></script>
- {%- endfor -%}
- 
--{% favicons './.cache/favicon.normalized.svg', appleIconBgColor='#123' %}
-+{% favicons %}
- 
- {% if meta.styleSettingsCss %}
-     <style>
