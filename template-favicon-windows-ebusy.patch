@@ -1,8 +1,6 @@
 # Fix Windows EBUSY build errors by sharing one in-flight favicon generation per build.
 # Reset the promise before rebuilds and regenerate files even after dist is cleaned.
 # Initially applied to Digital Garden template version 1.91.0.
-# Adapted for 1.96.0: restore the shortcode promise cache and invalidate it before rebuilds.
-# Includes the matching no-argument favicon shortcode; independent of the stylesheet patch.
 
 diff --git a/.eleventy.js b/.eleventy.js
 --- a/.eleventy.js
