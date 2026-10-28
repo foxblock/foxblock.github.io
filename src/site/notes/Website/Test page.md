@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-09-08T20:17:24.898+02:00","dg-note-properties":{"title":"Template test page"}}
+{"dg-publish":true,"dg-path":"Test page.md","dg-permalink":"test","permalink":"/test/","title":"Template test page","hide":true,"dgShowFileTree":"false","dgShowToc":"false","created":"2026-07-09T11:24:01.307+02:00","updated":"2026-10-28T18:02:07.319+01:00","dg-note-properties":{"title":"Template test page"}}
 ---
 
 [[Non-existent page\|Non-existent page]]
@@ -53,10 +53,10 @@ Expected: Working link to external page with custom text
 > Expected: Working link to external page with custom text
 
 
-Testing impact of inline triple-backtick code-block: ``` `json:"..."` ``` foo.
+Testing impact of inline triple-backtick code-block: ```json:"..."``` foo.
 
 > [!IMPORTANT]
-> [[Website/Test page#A more complicated / heading (with symbols)\|Regression after inline code]]
+> [[Website/Test page#A more complicated / heading (with symbols)\|Regression after inline code]] - This link is broken (unless the bug got fixed)
 
 ```go
 var example = 1 // ending the code-block now

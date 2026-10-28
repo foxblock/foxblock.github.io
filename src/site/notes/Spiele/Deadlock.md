@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/spiele/deadlock/","tags":["knowledge-base"],"created":"2026-10-11T15:14:23.152+02:00","updated":"2026-10-19T17:47:41.012+02:00","dg-note-properties":{"tags":["knowledge-base"]}}
+{"dg-publish":true,"permalink":"/spiele/deadlock/","tags":["knowledge-base"],"created":"2026-10-11T15:14:23.152+02:00","updated":"2026-10-25T16:59:43.368+01:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 last update: 15.10.2026
@@ -30,6 +30,7 @@ last update: 15.10.2026
 - Take 25% more damage from player bullets, but also have 10% bullet resist (all applied multiplicatively)
 - Do Bullet damage
 - Take headshot damage!
+- Target you when you damage a hero under the tower, else target closest enemy unit
 ### [Walker](https://deadlock.wiki/Walker)
 - HP: 6000 (all alive), 9000 (1 down), 12000 (last one)
 - Damage Resist: 65% (at 0:00), -65% (at 18:00)
