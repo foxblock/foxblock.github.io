@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/spiele/cs-smokes/","tags":["knowledge-base","german"],"created":"2025-08-24T14:21:12.588+02:00","updated":"2026-10-15T11:26:40.881+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
+{"dg-publish":true,"dg-path":"Games/CS - Smokes.md","permalink":"/games/cs-smokes/","tags":["knowledge-base","german"],"created":"2025-08-24T14:21:12.588+02:00","updated":"2026-10-15T11:26:40.881+02:00","dg-note-properties":{"tags":["knowledge-base","german"]}}
 ---
 
 Alle JUMP THROW außer wenn anders beschrieben

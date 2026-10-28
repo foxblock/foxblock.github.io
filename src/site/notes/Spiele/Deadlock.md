@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/spiele/deadlock/","tags":["knowledge-base"],"created":"2026-10-11T15:14:23.152+02:00","updated":"2026-10-25T16:59:43.368+01:00","dg-note-properties":{"tags":["knowledge-base"]}}
+{"dg-publish":true,"dg-path":"Games/Deadlock.md","permalink":"/games/deadlock/","tags":["knowledge-base"],"created":"2026-10-11T15:14:23.152+02:00","updated":"2026-10-25T16:59:43.368+01:00","dg-note-properties":{"tags":["knowledge-base"]}}
 ---
 
 last update: 15.10.2026
