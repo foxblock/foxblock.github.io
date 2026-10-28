@@ -14,7 +14,7 @@ normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
 const tocPlugin = require("eleventy-plugin-nesting-toc");
 const { parse } = require("node-html-parser");
 const htmlMinifier = require("html-minifier-terser");
-const pluginRss = require("@11ty/eleventy-plugin-rss").default;
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 // Minifying inline JS/CSS is the single most expensive part of the build, and
 // nearly every page carries the same inline scripts and styles from the
@@ -113,7 +113,7 @@ const {
 const pluginLoader = require("./src/helpers/pluginLoader");
 const { basesPlugin } = require("./src/helpers/basesPlugin");
 
-const Image = require("@11ty/eleventy-img").default;
+const Image = require("@11ty/eleventy-img");
 const { isDecodableImage } = require("./src/helpers/imageFormat.js");
 
 // Build containers have few CPUs and little memory; the default queue
@@ -184,10 +184,9 @@ function computeAnchorAttributes(filePath, linkTitle) {
   const title = linkTitle ? linkTitle : fileName;
   let permalink = `/notes/${slugify(fileName)}`;
   let deadLink = false;
-  const startPath = "./src/site/notes/";
-  let fullPath;
-  console.log("Adding link to file", startPath + fileName, "(filePath is", filePath, ")...");
   try {
+    const startPath = "./src/site/notes/";
+    let fullPath;
     if (fileName.endsWith(".md") || fileName.endsWith(".canvas")) {
       fullPath = `${startPath}${fileName}`;
     } else {
@@ -207,8 +206,7 @@ function computeAnchorAttributes(filePath, linkTitle) {
     if (frontMatter.data.noteIcon) {
       noteIcon = frontMatter.data.noteIcon;
     }
-  } catch (error) {
-    console.warn("ERROR: dead link to file", fullPath || startPath + fileName, "\n - filePath was", filePath, "\n -", error.message);
+  } catch {
     deadLink = true;
   }
 
@@ -233,14 +231,12 @@ function computeAnchorAttributes(filePath, linkTitle) {
   }
 }
 
-// Only double hashes create inline tags; single hashes in code stay literal.
-// Tags in frontmatter properties are unaffected.
-const tagRegex = /(^|\s|\>)(##[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
+const tagRegex = /(^|\s|\>)(#[^\s!@#$%^&*()=+\.,\[{\]};:'"?><]+)(?!([^<]*>))/g;
 
 const markdownFileTypeRegex = /\.(md|markdown)$/i;
 const isMarkdownPage = (inputPath) => inputPath && inputPath.match(markdownFileTypeRegex);
 
-module.exports = async function(eleventyConfig) {
+module.exports = function(eleventyConfig) {
   eleventyConfig.setLiquidOptions({
     dynamicPartials: true,
   });
@@ -463,11 +459,9 @@ module.exports = async function(eleventyConfig) {
 
         return defaultLinkRule(tokens, idx, options, env, self);
       };
-    });
-
-  // Markdown-it.use is synchronous; await plugin imports before user setup.
-  await pluginLoader.applyMarkdownHooks(markdownLib);
-  markdownLib.use(userMarkdownSetup);
+    })
+    .use((md) => pluginLoader.applyMarkdownHooks(md))
+    .use(userMarkdownSetup);
 
   eleventyConfig.setLibrary("md", markdownLib);
 
@@ -528,8 +522,7 @@ module.exports = async function(eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        const doubleTagRemoved = tag.substring(1);
-        return `${precede}<a class="tag" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
+        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
       })
     );
   });
@@ -759,8 +752,7 @@ module.exports = async function(eleventyConfig) {
     return (
       str &&
       str.replace(tagRegex, function(match, precede, tag) {
-        const doubleTagRemoved = tag.substring(1);
-        return `${precede}<a class="tag" data-content="${doubleTagRemoved}">${doubleTagRemoved}</a>`;
+        return `${precede}<a class="tag" data-content="${tag}">${tag}</a>`;
       })
     );
   }
@@ -855,9 +847,7 @@ module.exports = async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/site/scripts");
   eleventyConfig.addPassthroughCopy("src/site/styles/_theme.*.css");
   eleventyConfig.addPassthroughCopy({ "src/site/logo.*": "/" });
-  let faviconPromise;
   eleventyConfig.on("eleventy.before", () => {
-    faviconPromise = undefined;
     normalizeFavicon(FAVICON_SOURCE, FAVICON_NORMALIZED);
     anchorAttributesCache.clear();
   });
@@ -870,18 +860,7 @@ module.exports = async function(eleventyConfig) {
     }
   });
   eleventyConfig.addWatchTarget(FAVICON_SOURCE);
-  // All pages share one favicon. Cache the in-flight promise as well as its HTML
-  // so parallel templates cannot write the same files (EBUSY on Windows).
-  faviconsPlugin({
-    addAsyncShortcode(name, generate) {
-      eleventyConfig.addAsyncShortcode(name, function () {
-        faviconPromise ??= Promise.resolve().then(() => generate.call(this,
-          FAVICON_NORMALIZED, { appleIconBgColor: "#123" }));
-        return faviconPromise;
-      });
-    },
-  // Our per-build cache owns reuse; regenerate even if dist was cleaned.
-  }, { outputDir: "dist", skipCache: true });
+  eleventyConfig.addPlugin(faviconsPlugin, { outputDir: "dist" });
   eleventyConfig.addPlugin(tocPlugin, {
     ul: true,
     tags: ["h1", "h2", "h3", "h4", "h5", "h6"],

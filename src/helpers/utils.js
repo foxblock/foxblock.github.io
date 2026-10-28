@@ -1,4 +1,4 @@
-const slugify = require("@sindresorhus/slugify").default;
+const slugify = require("@sindresorhus/slugify");
 
 // slugify rebuilds its transliteration/escape regexes on every call, which
 // makes it one of the most expensive functions in a build (it runs for every
@@ -32,7 +32,9 @@ function namedHeadings(md, state) {
 
     state.tokens.forEach(function(token, i) {
         if (token.type === 'heading_open') {
-            var text = md.renderer.render(state.tokens[i + 1].children, md.options)
+            // Pass env through: renderers like markdown-it-footnote read
+            // env.docId and crash on a footnote inside a heading without it
+            var text = md.renderer.render(state.tokens[i + 1].children, md.options, state.env)
             var id = headerToId(text);
             var uniqId = uncollide(ids, id)
             ids[uniqId] = true
